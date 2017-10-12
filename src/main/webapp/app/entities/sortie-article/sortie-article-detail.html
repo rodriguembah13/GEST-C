@@ -1,0 +1,59 @@
+
+<div>
+    <h2><span data-translate="gestCApp.sortieArticle.detail.title">Sortie Article</span> {{vm.sortieArticle.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="gestCApp.sortieArticle.numsortie">Numsortie</span></dt>
+        <dd>
+            <span>{{vm.sortieArticle.numsortie}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.sortieArticle.libelle">Libelle</span></dt>
+        <dd>
+            <span>{{vm.sortieArticle.libelle}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.sortieArticle.datesortie">Datesortie</span></dt>
+        <dd>
+            <span>{{vm.sortieArticle.datesortie | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.sortieArticle.montanttotal">Montanttotal</span></dt>
+        <dd>
+            <span>{{vm.sortieArticle.montanttotal}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.sortieArticle.montanttva">Montanttva</span></dt>
+        <dd>
+            <span>{{vm.sortieArticle.montanttva}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.sortieArticle.montantttc">Montantttc</span></dt>
+        <dd>
+            <span>{{vm.sortieArticle.montantttc}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.sortieArticle.destinataire">Destinataire</span></dt>
+        <dd>
+            <span>{{vm.sortieArticle.destinataire}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.sortieArticle.agent">Agent</span></dt>
+        <dd>
+            {{vm.sortieArticle.agent.login}}
+        </dd>
+        <dt><span data-translate="gestCApp.sortieArticle.magasin">Magasin</span></dt>
+        <dd>
+            <a ui-sref="magasin-detail({id:vm.sortieArticle.magasin.id})">{{vm.sortieArticle.magasin.id}}</a>
+        </dd>
+        <dt><span data-translate="gestCApp.sortieArticle.client">Client</span></dt>
+        <dd>
+            <a ui-sref="client-detail({id:vm.sortieArticle.client.id})">{{vm.sortieArticle.client.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="sortie-article-detail.edit({id:vm.sortieArticle.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

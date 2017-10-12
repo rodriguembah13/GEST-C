@@ -1,0 +1,31 @@
+
+<div>
+    <h2><span data-translate="gestCApp.etiquette.detail.title">Etiquette</span> {{vm.etiquette.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="gestCApp.etiquette.etiquette">Etiquette</span></dt>
+        <dd>
+            <span>{{vm.etiquette.etiquette}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.etiquette.codeBare">Code Bare</span></dt>
+        <dd>
+            <span>{{vm.etiquette.codeBare}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.etiquette.article">Article</span></dt>
+        <dd>
+            <a ui-sref="article-detail({id:vm.etiquette.article.id})">{{vm.etiquette.article.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="etiquette-detail.edit({id:vm.etiquette.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

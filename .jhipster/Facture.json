@@ -1,0 +1,79 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "client",
+            "otherEntityName": "client",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "caisse",
+            "otherEntityName": "caisse",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "facture"
+        },
+        {
+            "relationshipName": "magasin",
+            "otherEntityName": "magasin",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "numfacture",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "montanttotalht",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "montanttva",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "reduction",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "codebarre",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "libellefacture",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateedition",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "datefacturation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "montanttotalttc",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "observation",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171006065447",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "facture",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

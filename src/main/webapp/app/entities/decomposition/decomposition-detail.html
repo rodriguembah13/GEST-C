@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="gestCApp.decomposition.detail.title">Decomposition</span> {{vm.decomposition.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="gestCApp.decomposition.articledepart">Articledepart</span></dt>
+        <dd>
+            <span>{{vm.decomposition.articledepart}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.decomposition.articlefin">Articlefin</span></dt>
+        <dd>
+            <span>{{vm.decomposition.articlefin}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.decomposition.quantite">Quantite</span></dt>
+        <dd>
+            <span>{{vm.decomposition.quantite}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.decomposition.etat">Etat</span></dt>
+        <dd>
+            <span>{{vm.decomposition.etat}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.decomposition.article">Article</span></dt>
+        <dd>
+            <a ui-sref="article-detail({id:vm.decomposition.article.id})">{{vm.decomposition.article.y}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="decomposition-detail.edit({id:vm.decomposition.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

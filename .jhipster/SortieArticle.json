@@ -1,0 +1,61 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "agent",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "sortieArticle"
+        },
+        {
+            "relationshipName": "magasin",
+            "otherEntityName": "magasin",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "client",
+            "otherEntityName": "client",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "numsortie",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "libelle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "datesortie",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "montanttotal",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "montanttva",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "montantttc",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "destinataire",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171006070544",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "sortie_article",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

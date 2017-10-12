@@ -1,0 +1,55 @@
+
+<div>
+    <h2><span data-translate="gestCApp.article.detail.title">Article</span> {{vm.article.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="gestCApp.article.numArticle">Num Article</span></dt>
+        <dd>
+            <span>{{vm.article.numArticle}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.article.poids">Poids</span></dt>
+        <dd>
+            <span>{{vm.article.poids}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.article.codebarre">Codebarre</span></dt>
+        <dd>
+            <span>{{vm.article.codebarre}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.article.marque">Marque</span></dt>
+        <dd>
+            <span>{{vm.article.marque}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.article.datecreation">Datecreation</span></dt>
+        <dd>
+            <span>{{vm.article.datecreation | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.article.nomarticle">Nomarticle</span></dt>
+        <dd>
+            <span>{{vm.article.nomarticle}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.article.prixCourant">Prix Courant</span></dt>
+        <dd>
+            <span>{{vm.article.prixCourant}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.article.familleArticle">Famille Article</span></dt>
+        <dd>
+            <a ui-sref="famille-article-detail({id:vm.article.familleArticle.id})">{{vm.article.familleArticle.id}}</a>
+        </dd>
+        <dt><span data-translate="gestCApp.article.formeArticle">Forme Article</span></dt>
+        <dd>
+            <a ui-sref="forme-article-detail({id:vm.article.formeArticle.id})">{{vm.article.formeArticle.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="article-detail.edit({id:vm.article.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

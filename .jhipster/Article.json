@@ -1,0 +1,63 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "familleArticle",
+            "otherEntityName": "familleArticle",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "formeArticle",
+            "otherEntityName": "formeArticle",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "etiquette",
+            "otherEntityName": "etiquette",
+            "relationshipType": "one-to-one",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "article"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "numArticle",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "poids",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "codebarre",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "marque",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "datecreation",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "nomarticle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "prixCourant",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20171006055829",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "article",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

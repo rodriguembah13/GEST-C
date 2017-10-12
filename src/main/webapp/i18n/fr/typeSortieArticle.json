@@ -1,0 +1,22 @@
+{
+    "gestCApp": {
+        "typeSortieArticle" : {
+            "home": {
+                "title": "TypeSortieArticles",
+                "createLabel": "Créer un nouveau Type Sortie Article",
+                "createOrEditLabel": "Créer ou éditer un Type Sortie Article",
+                "search": "Recherche pour Type Sortie Article"
+            },
+            "created": "Un nouveau Type Sortie Article a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Type Sortie Article avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Type Sortie Article avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Type Sortie Article {{ id }} ?"
+            },
+            "detail": {
+                "title": "Type Sortie Article"
+            },
+            "libelle": "Libelle"
+        }
+    }
+}

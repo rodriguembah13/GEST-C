@@ -1,0 +1,23 @@
+{
+    "gestCApp": {
+        "formeArticle" : {
+            "home": {
+                "title": "FormeArticles",
+                "createLabel": "Créer un nouveau Forme Article",
+                "createOrEditLabel": "Créer ou éditer un Forme Article",
+                "search": "Recherche pour Forme Article"
+            },
+            "created": "Un nouveau Forme Article a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Forme Article avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Forme Article avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Forme Article {{ id }} ?"
+            },
+            "detail": {
+                "title": "Forme Article"
+            },
+            "nomForme": "Nom Forme",
+            "quantite": "Quantite"
+        }
+    }
+}

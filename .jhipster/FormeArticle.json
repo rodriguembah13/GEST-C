@@ -1,0 +1,20 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "nomForme",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "quantite",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20171006060449",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "forme_article",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pager"
+}

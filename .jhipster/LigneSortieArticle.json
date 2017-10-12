@@ -1,0 +1,57 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "sortieArticle",
+            "otherEntityName": "sortieArticle",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "article",
+            "otherEntityName": "article",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "client",
+            "otherEntityName": "client",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "typeSortieArticle",
+            "otherEntityName": "typeSortieArticle",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "designation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "quantite",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "montantht",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "montanttva",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "montantttc",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20171006071155",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "ligne_sortie_article",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

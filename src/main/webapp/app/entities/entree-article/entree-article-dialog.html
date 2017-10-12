@@ -1,0 +1,66 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myEntreeArticleLabel" data-translate="gestCApp.entreeArticle.home.createOrEditLabel">Create or edit a Entree Article</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.entreeArticle.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.entreeArticle.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.entreeArticle.titre" for="field_titre">Titre</label>
+            <input type="text" class="form-control" name="titre" id="field_titre"
+                    ng-model="vm.entreeArticle.titre"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.entreeArticle.dateentre" for="field_dateentre">Dateentre</label>
+                <div class="input-group">
+                    <input id="field_dateentre" type="text" class="form-control" name="dateentre" uib-datepicker-popup="{{dateformat}}" ng-model="vm.entreeArticle.dateentre" is-open="vm.datePickerOpenStatus.dateentre"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateentre')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.entreeArticle.montant_ht" for="field_montant_ht">Montant Ht</label>
+            <input type="number" class="form-control" name="montant_ht" id="field_montant_ht"
+                    ng-model="vm.entreeArticle.montant_ht"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.entreeArticle.montant_ttc" for="field_montant_ttc">Montant Ttc</label>
+            <input type="number" class="form-control" name="montant_ttc" id="field_montant_ttc"
+                    ng-model="vm.entreeArticle.montant_ttc"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.entreeArticle.observation" for="field_observation">Observation</label>
+            <input type="text" class="form-control" name="observation" id="field_observation"
+                    ng-model="vm.entreeArticle.observation"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="gestCApp.entreeArticle.agent" for="field_agent">Agent</label>
+            <select class="form-control" id="field_agent" name="agent" ng-model="vm.entreeArticle.agent" ng-options="user as user.login for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,31 @@
+{
+    "gestCApp": {
+        "article" : {
+            "home": {
+                "title": "Articles",
+                "createLabel": "Créer un nouveau Article",
+                "createOrEditLabel": "Créer ou éditer un Article",
+                "search": "Recherche pour Article"
+            },
+            "created": "Un nouveau Article a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Article avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Article avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Article {{ id }} ?"
+            },
+            "detail": {
+                "title": "Article"
+            },
+            "numArticle": "Num Article",
+            "poids": "Poids",
+            "codebarre": "Codebarre",
+            "marque": "Marque",
+            "datecreation": "Datecreation",
+            "nomarticle": "Nomarticle",
+            "prixCourant": "Prix Courant",
+            "familleArticle": "Famille Article",
+            "formeArticle": "Forme Article",
+            "etiquette": "Etiquette"
+        }
+    }
+}

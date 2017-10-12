@@ -1,0 +1,75 @@
+
+<div>
+    <h2><span data-translate="gestCApp.facture.detail.title">Facture</span> {{vm.facture.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="gestCApp.facture.numfacture">Numfacture</span></dt>
+        <dd>
+            <span>{{vm.facture.numfacture}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.facture.montanttotalht">Montanttotalht</span></dt>
+        <dd>
+            <span>{{vm.facture.montanttotalht}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.facture.montanttva">Montanttva</span></dt>
+        <dd>
+            <span>{{vm.facture.montanttva}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.facture.reduction">Reduction</span></dt>
+        <dd>
+            <span>{{vm.facture.reduction}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.facture.codebarre">Codebarre</span></dt>
+        <dd>
+            <span>{{vm.facture.codebarre}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.facture.libellefacture">Libellefacture</span></dt>
+        <dd>
+            <span>{{vm.facture.libellefacture}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.facture.dateedition">Dateedition</span></dt>
+        <dd>
+            <span>{{vm.facture.dateedition | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.facture.datefacturation">Datefacturation</span></dt>
+        <dd>
+            <span>{{vm.facture.datefacturation | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.facture.montanttotalttc">Montanttotalttc</span></dt>
+        <dd>
+            <span>{{vm.facture.montanttotalttc}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.facture.observation">Observation</span></dt>
+        <dd>
+            <span>{{vm.facture.observation}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.facture.client">Client</span></dt>
+        <dd>
+            <a ui-sref="client-detail({id:vm.facture.client.id})">{{vm.facture.client.id}}</a>
+        </dd>
+        <dt><span data-translate="gestCApp.facture.caisse">Caisse</span></dt>
+        <dd>
+            <a ui-sref="caisse-detail({id:vm.facture.caisse.id})">{{vm.facture.caisse.id}}</a>
+        </dd>
+        <dt><span data-translate="gestCApp.facture.user">User</span></dt>
+        <dd>
+            {{vm.facture.user.login}}
+        </dd>
+        <dt><span data-translate="gestCApp.facture.magasin">Magasin</span></dt>
+        <dd>
+            <a ui-sref="magasin-detail({id:vm.facture.magasin.id})">{{vm.facture.magasin.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="facture-detail.edit({id:vm.facture.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

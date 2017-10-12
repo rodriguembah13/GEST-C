@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "article",
+            "otherEntityName": "article",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "etiquette"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "etiquette",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "codeBare",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171006061103",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "etiquette",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pager"
+}

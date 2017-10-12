@@ -1,0 +1,33 @@
+{
+    "gestCApp": {
+        "stock" : {
+            "home": {
+                "title": "Stocks",
+                "createLabel": "Créer un nouveau Stock",
+                "createOrEditLabel": "Créer ou éditer un Stock",
+                "search": "Recherche pour Stock"
+            },
+            "created": "Un nouveau Stock a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Stock avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Stock avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Stock {{ id }} ?"
+            },
+            "detail": {
+                "title": "Stock"
+            },
+            "quantite": "Quantite",
+            "quantiteAlerte": "Quantite Alerte",
+            "prixArticle": "Prix Article",
+            "dateperemption": "Dateperemption",
+            "actif": "Actif",
+            "prixAchat": "Prix Achat",
+            "observation": "Observation",
+            "taxeTVA": "Taxe TVA",
+            "quantiteGros": "Quantite Gros",
+            "quantiteAlerteGros": "Quantite Alerte Gros",
+            "closed": "Closed",
+            "article": "Article"
+        }
+    }
+}

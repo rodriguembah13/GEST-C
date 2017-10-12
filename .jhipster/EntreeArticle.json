@@ -1,0 +1,41 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "agent",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "entreeArticle"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "titre",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateentre",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "montant_ht",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "montant_ttc",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "observation",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171006072649",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "entree_article",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

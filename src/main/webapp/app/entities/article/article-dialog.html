@@ -1,0 +1,90 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myArticleLabel" data-translate="gestCApp.article.home.createOrEditLabel">Create or edit a Article</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.article.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.article.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.article.numArticle" for="field_numArticle">Num Article</label>
+            <input type="text" class="form-control" name="numArticle" id="field_numArticle"
+                    ng-model="vm.article.numArticle"
+                    required/>
+            <div ng-show="editForm.numArticle.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.numArticle.$error.required" data-translate="entity.validation.required">
+                    This field is required.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.article.poids" for="field_poids">Poids</label>
+            <input type="number" class="form-control" name="poids" id="field_poids"
+                    ng-model="vm.article.poids"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.article.codebarre" for="field_codebarre">Codebarre</label>
+            <input type="text" class="form-control" name="codebarre" id="field_codebarre"
+                    ng-model="vm.article.codebarre"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.article.marque" for="field_marque">Marque</label>
+            <input type="text" class="form-control" name="marque" id="field_marque"
+                    ng-model="vm.article.marque"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.article.datecreation" for="field_datecreation">Datecreation</label>
+                <div class="input-group">
+                    <input id="field_datecreation" type="text" class="form-control" name="datecreation" uib-datepicker-popup="{{dateformat}}" ng-model="vm.article.datecreation" is-open="vm.datePickerOpenStatus.datecreation"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('datecreation')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.article.nomarticle" for="field_nomarticle">Nomarticle</label>
+            <input type="text" class="form-control" name="nomarticle" id="field_nomarticle"
+                    ng-model="vm.article.nomarticle"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.article.prixCourant" for="field_prixCourant">Prix Courant</label>
+            <input type="number" class="form-control" name="prixCourant" id="field_prixCourant"
+                    ng-model="vm.article.prixCourant"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="gestCApp.article.familleArticle" for="field_familleArticle">Famille Article</label>
+            <select class="form-control" id="field_familleArticle" name="familleArticle" ng-model="vm.article.familleArticle" ng-options="familleArticle as familleArticle.id for familleArticle in vm.famillearticles track by familleArticle.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="gestCApp.article.formeArticle" for="field_formeArticle">Forme Article</label>
+            <select class="form-control" id="field_formeArticle" name="formeArticle" ng-model="vm.article.formeArticle" ng-options="formeArticle as formeArticle.id for formeArticle in vm.formearticles track by formeArticle.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

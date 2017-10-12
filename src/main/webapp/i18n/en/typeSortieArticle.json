@@ -1,0 +1,22 @@
+{
+    "gestCApp": {
+        "typeSortieArticle" : {
+            "home": {
+                "title": "Type Sortie Articles",
+                "createLabel": "Create a new Type Sortie Article",
+                "createOrEditLabel": "Create or edit a Type Sortie Article",
+                "search": "Search for Type Sortie Article"
+            },
+            "created": "A new Type Sortie Article is created with identifier {{ param }}",
+            "updated": "A Type Sortie Article is updated with identifier {{ param }}",
+            "deleted": "A Type Sortie Article is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Type Sortie Article {{ id }}?"
+            },
+            "detail": {
+                "title": "Type Sortie Article"
+            },
+            "libelle": "Libelle"
+        }
+    }
+}

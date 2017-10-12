@@ -1,0 +1,67 @@
+
+<div>
+    <h2><span data-translate="gestCApp.stock.detail.title">Stock</span> {{vm.stock.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="gestCApp.stock.quantite">Quantite</span></dt>
+        <dd>
+            <span>{{vm.stock.quantite}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.stock.quantiteAlerte">Quantite Alerte</span></dt>
+        <dd>
+            <span>{{vm.stock.quantiteAlerte}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.stock.prixArticle">Prix Article</span></dt>
+        <dd>
+            <span>{{vm.stock.prixArticle}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.stock.dateperemption">Dateperemption</span></dt>
+        <dd>
+            <span>{{vm.stock.dateperemption | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.stock.actif">Actif</span></dt>
+        <dd>
+            <span>{{vm.stock.actif}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.stock.prixAchat">Prix Achat</span></dt>
+        <dd>
+            <span>{{vm.stock.prixAchat}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.stock.observation">Observation</span></dt>
+        <dd>
+            <span>{{vm.stock.observation}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.stock.taxeTVA">Taxe TVA</span></dt>
+        <dd>
+            <span>{{vm.stock.taxeTVA}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.stock.quantiteGros">Quantite Gros</span></dt>
+        <dd>
+            <span>{{vm.stock.quantiteGros}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.stock.quantiteAlerteGros">Quantite Alerte Gros</span></dt>
+        <dd>
+            <span>{{vm.stock.quantiteAlerteGros}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.stock.closed">Closed</span></dt>
+        <dd>
+            <span>{{vm.stock.closed}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.stock.article">Article</span></dt>
+        <dd>
+            <a ui-sref="article-detail({id:vm.stock.article.id})">{{vm.stock.article.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="stock-detail.edit({id:vm.stock.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

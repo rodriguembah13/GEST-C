@@ -1,0 +1,32 @@
+{
+    "gestCApp": {
+        "ligneEntreeArticle" : {
+            "home": {
+                "title": "Ligne Entree Articles",
+                "createLabel": "Create a new Ligne Entree Article",
+                "createOrEditLabel": "Create or edit a Ligne Entree Article",
+                "search": "Search for Ligne Entree Article"
+            },
+            "created": "A new Ligne Entree Article is created with identifier {{ param }}",
+            "updated": "A Ligne Entree Article is updated with identifier {{ param }}",
+            "deleted": "A Ligne Entree Article is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Ligne Entree Article {{ id }}?"
+            },
+            "detail": {
+                "title": "Ligne Entree Article"
+            },
+            "designation": "Designation",
+            "quantite": "Quantite",
+            "montanttotalht": "Montanttotalht",
+            "montanttotalttc": "Montanttotalttc",
+            "prix_unitaire": "Prix Unitaire",
+            "taxeTVA": "Taxe TVA",
+            "dateperemption": "Dateperemption",
+            "prixAchat": "Prix Achat",
+            "agent": "Agent",
+            "article": "Article",
+            "entreeArticle": "Entree Article"
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "gestCApp": {
+        "ligneSortieArticle" : {
+            "home": {
+                "title": "Ligne Sortie Articles",
+                "createLabel": "Create a new Ligne Sortie Article",
+                "createOrEditLabel": "Create or edit a Ligne Sortie Article",
+                "search": "Search for Ligne Sortie Article"
+            },
+            "created": "A new Ligne Sortie Article is created with identifier {{ param }}",
+            "updated": "A Ligne Sortie Article is updated with identifier {{ param }}",
+            "deleted": "A Ligne Sortie Article is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Ligne Sortie Article {{ id }}?"
+            },
+            "detail": {
+                "title": "Ligne Sortie Article"
+            },
+            "designation": "Designation",
+            "quantite": "Quantite",
+            "montantht": "Montantht",
+            "montanttva": "Montanttva",
+            "montantttc": "Montantttc",
+            "sortieArticle": "Sortie Article",
+            "article": "Article",
+            "client": "Client",
+            "typeSortieArticle": "Type Sortie Article"
+        }
+    }
+}

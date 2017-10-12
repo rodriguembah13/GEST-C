@@ -1,0 +1,35 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "article",
+            "otherEntityName": "article",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "y"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "articledepart",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "articlefin",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "quantite",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "etat",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20171006061547",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "decomposition",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

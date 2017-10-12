@@ -1,0 +1,65 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "agent",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "ligneEntreeArticle"
+        },
+        {
+            "relationshipName": "article",
+            "otherEntityName": "article",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "entreeArticle",
+            "otherEntityName": "entreeArticle",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "designation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "quantite",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "montanttotalht",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "montanttotalttc",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "prix_unitaire",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "taxeTVA",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "dateperemption",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "prixAchat",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20171006073151",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "ligne_entree_article",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

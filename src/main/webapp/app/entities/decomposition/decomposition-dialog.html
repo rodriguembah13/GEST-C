@@ -1,0 +1,55 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myDecompositionLabel" data-translate="gestCApp.decomposition.home.createOrEditLabel">Create or edit a Decomposition</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.decomposition.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.decomposition.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.decomposition.articledepart" for="field_articledepart">Articledepart</label>
+            <input type="text" class="form-control" name="articledepart" id="field_articledepart"
+                    ng-model="vm.decomposition.articledepart"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.decomposition.articlefin" for="field_articlefin">Articlefin</label>
+            <input type="text" class="form-control" name="articlefin" id="field_articlefin"
+                    ng-model="vm.decomposition.articlefin"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.decomposition.quantite" for="field_quantite">Quantite</label>
+            <input type="number" class="form-control" name="quantite" id="field_quantite"
+                    ng-model="vm.decomposition.quantite"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.decomposition.etat" for="field_etat">Etat</label>
+                <input type="checkbox" name="etat" id="field_etat"
+                          ng-model="vm.decomposition.etat"/>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="gestCApp.decomposition.article" for="field_article">Article</label>
+            <select class="form-control" id="field_article" name="article" ng-model="vm.decomposition.article" ng-options="article as article.y for article in vm.articles track by article.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

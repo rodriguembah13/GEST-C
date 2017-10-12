@@ -1,0 +1,53 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "agent",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "commande"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "numcommande",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "montanttotalht",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "codebarre",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "libelle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "montanttotalttc",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "datelimitlivraison",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "datecommande",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "etat",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20171006073939",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "commande",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

@@ -1,0 +1,80 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myLigneCommandeLabel" data-translate="gestCApp.ligneCommande.home.createOrEditLabel">Create or edit a Ligne Commande</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.ligneCommande.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.ligneCommande.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.ligneCommande.designation" for="field_designation">Designation</label>
+            <input type="text" class="form-control" name="designation" id="field_designation"
+                    ng-model="vm.ligneCommande.designation"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.ligneCommande.quantite" for="field_quantite">Quantite</label>
+            <input type="number" class="form-control" name="quantite" id="field_quantite"
+                    ng-model="vm.ligneCommande.quantite"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.ligneCommande.montanttotalht" for="field_montanttotalht">Montanttotalht</label>
+            <input type="number" class="form-control" name="montanttotalht" id="field_montanttotalht"
+                    ng-model="vm.ligneCommande.montanttotalht"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.ligneCommande.montanttotalttc" for="field_montanttotalttc">Montanttotalttc</label>
+            <input type="number" class="form-control" name="montanttotalttc" id="field_montanttotalttc"
+                    ng-model="vm.ligneCommande.montanttotalttc"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.ligneCommande.prix" for="field_prix">Prix</label>
+            <input type="number" class="form-control" name="prix" id="field_prix"
+                    ng-model="vm.ligneCommande.prix"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="gestCApp.ligneCommande.agent" for="field_agent">Agent</label>
+            <select class="form-control" id="field_agent" name="agent" ng-model="vm.ligneCommande.agent" ng-options="user as user.login for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="gestCApp.ligneCommande.article" for="field_article">Article</label>
+            <select class="form-control" id="field_article" name="article" ng-model="vm.ligneCommande.article" ng-options="article as article.id for article in vm.articles track by article.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="gestCApp.ligneCommande.commande" for="field_commande">Commande</label>
+            <select class="form-control" id="field_commande" name="commande" ng-model="vm.ligneCommande.commande" ng-options="commande as commande.id for commande in vm.commandes track by commande.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="gestCApp.ligneCommande.fournisseur" for="field_fournisseur">Fournisseur</label>
+            <select class="form-control" id="field_fournisseur" name="fournisseur" ng-model="vm.ligneCommande.fournisseur" ng-options="fournisseur as fournisseur.id for fournisseur in vm.fournisseurs track by fournisseur.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

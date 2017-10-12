@@ -1,0 +1,63 @@
+
+<div>
+    <h2><span data-translate="gestCApp.ligneEntreeArticle.detail.title">Ligne Entree Article</span> {{vm.ligneEntreeArticle.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="gestCApp.ligneEntreeArticle.designation">Designation</span></dt>
+        <dd>
+            <span>{{vm.ligneEntreeArticle.designation}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneEntreeArticle.quantite">Quantite</span></dt>
+        <dd>
+            <span>{{vm.ligneEntreeArticle.quantite}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneEntreeArticle.montanttotalht">Montanttotalht</span></dt>
+        <dd>
+            <span>{{vm.ligneEntreeArticle.montanttotalht}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneEntreeArticle.montanttotalttc">Montanttotalttc</span></dt>
+        <dd>
+            <span>{{vm.ligneEntreeArticle.montanttotalttc}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneEntreeArticle.prix_unitaire">Prix Unitaire</span></dt>
+        <dd>
+            <span>{{vm.ligneEntreeArticle.prix_unitaire}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneEntreeArticle.taxeTVA">Taxe TVA</span></dt>
+        <dd>
+            <span>{{vm.ligneEntreeArticle.taxeTVA}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneEntreeArticle.dateperemption">Dateperemption</span></dt>
+        <dd>
+            <span>{{vm.ligneEntreeArticle.dateperemption | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneEntreeArticle.prixAchat">Prix Achat</span></dt>
+        <dd>
+            <span>{{vm.ligneEntreeArticle.prixAchat}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneEntreeArticle.agent">Agent</span></dt>
+        <dd>
+            {{vm.ligneEntreeArticle.agent.login}}
+        </dd>
+        <dt><span data-translate="gestCApp.ligneEntreeArticle.article">Article</span></dt>
+        <dd>
+            <a ui-sref="article-detail({id:vm.ligneEntreeArticle.article.id})">{{vm.ligneEntreeArticle.article.id}}</a>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneEntreeArticle.entreeArticle">Entree Article</span></dt>
+        <dd>
+            <a ui-sref="entree-article-detail({id:vm.ligneEntreeArticle.entreeArticle.id})">{{vm.ligneEntreeArticle.entreeArticle.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="ligne-entree-article-detail.edit({id:vm.ligneEntreeArticle.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

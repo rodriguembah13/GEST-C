@@ -1,0 +1,31 @@
+{
+    "gestCApp": {
+        "sortieArticle" : {
+            "home": {
+                "title": "Sortie Articles",
+                "createLabel": "Create a new Sortie Article",
+                "createOrEditLabel": "Create or edit a Sortie Article",
+                "search": "Search for Sortie Article"
+            },
+            "created": "A new Sortie Article is created with identifier {{ param }}",
+            "updated": "A Sortie Article is updated with identifier {{ param }}",
+            "deleted": "A Sortie Article is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Sortie Article {{ id }}?"
+            },
+            "detail": {
+                "title": "Sortie Article"
+            },
+            "numsortie": "Numsortie",
+            "libelle": "Libelle",
+            "datesortie": "Datesortie",
+            "montanttotal": "Montanttotal",
+            "montanttva": "Montanttva",
+            "montantttc": "Montantttc",
+            "destinataire": "Destinataire",
+            "agent": "Agent",
+            "magasin": "Magasin",
+            "client": "Client"
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "gestCApp": {
+        "ligneSortieArticle" : {
+            "home": {
+                "title": "LigneSortieArticles",
+                "createLabel": "Créer un nouveau Ligne Sortie Article",
+                "createOrEditLabel": "Créer ou éditer un Ligne Sortie Article",
+                "search": "Recherche pour Ligne Sortie Article"
+            },
+            "created": "Un nouveau Ligne Sortie Article a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Ligne Sortie Article avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Ligne Sortie Article avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Ligne Sortie Article {{ id }} ?"
+            },
+            "detail": {
+                "title": "Ligne Sortie Article"
+            },
+            "designation": "Designation",
+            "quantite": "Quantite",
+            "montantht": "Montantht",
+            "montanttva": "Montanttva",
+            "montantttc": "Montantttc",
+            "sortieArticle": "Sortie Article",
+            "article": "Article",
+            "client": "Client",
+            "typeSortieArticle": "Type Sortie Article"
+        }
+    }
+}

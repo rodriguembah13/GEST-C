@@ -1,0 +1,24 @@
+{
+    "gestCApp": {
+        "familleArticle" : {
+            "home": {
+                "title": "Famille Articles",
+                "createLabel": "Create a new Famille Article",
+                "createOrEditLabel": "Create or edit a Famille Article",
+                "search": "Search for Famille Article"
+            },
+            "created": "A new Famille Article is created with identifier {{ param }}",
+            "updated": "A Famille Article is updated with identifier {{ param }}",
+            "deleted": "A Famille Article is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Famille Article {{ id }}?"
+            },
+            "detail": {
+                "title": "Famille Article"
+            },
+            "libelle": "Libelle",
+            "code": "Code",
+            "description": "Description"
+        }
+    }
+}

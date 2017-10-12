@@ -1,0 +1,39 @@
+
+<div>
+    <h2><span data-translate="gestCApp.client.detail.title">Client</span> {{vm.client.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="gestCApp.client.nom">Nom</span></dt>
+        <dd>
+            <span>{{vm.client.nom}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.client.civilite">Civilite</span></dt>
+        <dd>
+            <span>{{vm.client.civilite}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.client.reduction">Reduction</span></dt>
+        <dd>
+            <span>{{vm.client.reduction}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.client.telephone">Telephone</span></dt>
+        <dd>
+            <span>{{vm.client.telephone}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.client.email">Email</span></dt>
+        <dd>
+            <span>{{vm.client.email}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="client-detail.edit({id:vm.client.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

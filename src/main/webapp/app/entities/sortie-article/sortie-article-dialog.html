@@ -1,0 +1,90 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="mySortieArticleLabel" data-translate="gestCApp.sortieArticle.home.createOrEditLabel">Create or edit a Sortie Article</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.sortieArticle.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.sortieArticle.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.sortieArticle.numsortie" for="field_numsortie">Numsortie</label>
+            <input type="text" class="form-control" name="numsortie" id="field_numsortie"
+                    ng-model="vm.sortieArticle.numsortie"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.sortieArticle.libelle" for="field_libelle">Libelle</label>
+            <input type="text" class="form-control" name="libelle" id="field_libelle"
+                    ng-model="vm.sortieArticle.libelle"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.sortieArticle.datesortie" for="field_datesortie">Datesortie</label>
+                <div class="input-group">
+                    <input id="field_datesortie" type="text" class="form-control" name="datesortie" uib-datepicker-popup="{{dateformat}}" ng-model="vm.sortieArticle.datesortie" is-open="vm.datePickerOpenStatus.datesortie"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('datesortie')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.sortieArticle.montanttotal" for="field_montanttotal">Montanttotal</label>
+            <input type="number" class="form-control" name="montanttotal" id="field_montanttotal"
+                    ng-model="vm.sortieArticle.montanttotal"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.sortieArticle.montanttva" for="field_montanttva">Montanttva</label>
+            <input type="number" class="form-control" name="montanttva" id="field_montanttva"
+                    ng-model="vm.sortieArticle.montanttva"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.sortieArticle.montantttc" for="field_montantttc">Montantttc</label>
+            <input type="number" class="form-control" name="montantttc" id="field_montantttc"
+                    ng-model="vm.sortieArticle.montantttc"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.sortieArticle.destinataire" for="field_destinataire">Destinataire</label>
+            <input type="text" class="form-control" name="destinataire" id="field_destinataire"
+                    ng-model="vm.sortieArticle.destinataire"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="gestCApp.sortieArticle.agent" for="field_agent">Agent</label>
+            <select class="form-control" id="field_agent" name="agent" ng-model="vm.sortieArticle.agent" ng-options="user as user.login for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="gestCApp.sortieArticle.magasin" for="field_magasin">Magasin</label>
+            <select class="form-control" id="field_magasin" name="magasin" ng-model="vm.sortieArticle.magasin" ng-options="magasin as magasin.id for magasin in vm.magasins track by magasin.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="gestCApp.sortieArticle.client" for="field_client">Client</label>
+            <select class="form-control" id="field_client" name="client" ng-model="vm.sortieArticle.client" ng-options="client as client.id for client in vm.clients track by client.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

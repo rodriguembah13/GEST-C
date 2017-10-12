@@ -1,0 +1,87 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myCommandeLabel" data-translate="gestCApp.commande.home.createOrEditLabel">Create or edit a Commande</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.commande.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.commande.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.commande.numcommande" for="field_numcommande">Numcommande</label>
+            <input type="text" class="form-control" name="numcommande" id="field_numcommande"
+                    ng-model="vm.commande.numcommande"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.commande.montanttotalht" for="field_montanttotalht">Montanttotalht</label>
+            <input type="number" class="form-control" name="montanttotalht" id="field_montanttotalht"
+                    ng-model="vm.commande.montanttotalht"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.commande.codebarre" for="field_codebarre">Codebarre</label>
+            <input type="text" class="form-control" name="codebarre" id="field_codebarre"
+                    ng-model="vm.commande.codebarre"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.commande.libelle" for="field_libelle">Libelle</label>
+            <input type="text" class="form-control" name="libelle" id="field_libelle"
+                    ng-model="vm.commande.libelle"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.commande.montanttotalttc" for="field_montanttotalttc">Montanttotalttc</label>
+            <input type="number" class="form-control" name="montanttotalttc" id="field_montanttotalttc"
+                    ng-model="vm.commande.montanttotalttc"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.commande.datelimitlivraison" for="field_datelimitlivraison">Datelimitlivraison</label>
+                <div class="input-group">
+                    <input id="field_datelimitlivraison" type="text" class="form-control" name="datelimitlivraison" uib-datepicker-popup="{{dateformat}}" ng-model="vm.commande.datelimitlivraison" is-open="vm.datePickerOpenStatus.datelimitlivraison"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('datelimitlivraison')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.commande.datecommande" for="field_datecommande">Datecommande</label>
+                <div class="input-group">
+                    <input id="field_datecommande" type="text" class="form-control" name="datecommande" uib-datepicker-popup="{{dateformat}}" ng-model="vm.commande.datecommande" is-open="vm.datePickerOpenStatus.datecommande"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('datecommande')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.commande.etat" for="field_etat">Etat</label>
+                <input type="checkbox" name="etat" id="field_etat"
+                          ng-model="vm.commande.etat"/>
+        </div>
+
+        <div class="form-group">
+            <label data-translate="gestCApp.commande.agent" for="field_agent">Agent</label>
+            <select class="form-control" id="field_agent" name="agent" ng-model="vm.commande.agent" ng-options="user as user.login for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

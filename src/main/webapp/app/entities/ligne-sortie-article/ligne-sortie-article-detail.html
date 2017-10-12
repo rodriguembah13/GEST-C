@@ -1,0 +1,55 @@
+
+<div>
+    <h2><span data-translate="gestCApp.ligneSortieArticle.detail.title">Ligne Sortie Article</span> {{vm.ligneSortieArticle.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="gestCApp.ligneSortieArticle.designation">Designation</span></dt>
+        <dd>
+            <span>{{vm.ligneSortieArticle.designation}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneSortieArticle.quantite">Quantite</span></dt>
+        <dd>
+            <span>{{vm.ligneSortieArticle.quantite}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneSortieArticle.montantht">Montantht</span></dt>
+        <dd>
+            <span>{{vm.ligneSortieArticle.montantht}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneSortieArticle.montanttva">Montanttva</span></dt>
+        <dd>
+            <span>{{vm.ligneSortieArticle.montanttva}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneSortieArticle.montantttc">Montantttc</span></dt>
+        <dd>
+            <span>{{vm.ligneSortieArticle.montantttc}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneSortieArticle.sortieArticle">Sortie Article</span></dt>
+        <dd>
+            <a ui-sref="sortie-article-detail({id:vm.ligneSortieArticle.sortieArticle.id})">{{vm.ligneSortieArticle.sortieArticle.id}}</a>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneSortieArticle.article">Article</span></dt>
+        <dd>
+            <a ui-sref="article-detail({id:vm.ligneSortieArticle.article.id})">{{vm.ligneSortieArticle.article.id}}</a>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneSortieArticle.client">Client</span></dt>
+        <dd>
+            <a ui-sref="client-detail({id:vm.ligneSortieArticle.client.id})">{{vm.ligneSortieArticle.client.id}}</a>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneSortieArticle.typeSortieArticle">Type Sortie Article</span></dt>
+        <dd>
+            <a ui-sref="type-sortie-article-detail({id:vm.ligneSortieArticle.typeSortieArticle.id})">{{vm.ligneSortieArticle.typeSortieArticle.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="ligne-sortie-article-detail.edit({id:vm.ligneSortieArticle.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,41 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "caisse"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "numcaisse",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dateOuverture",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "dateFermeture",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "fondcaisse",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "active",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20171006063206",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "caisse",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pager"
+}

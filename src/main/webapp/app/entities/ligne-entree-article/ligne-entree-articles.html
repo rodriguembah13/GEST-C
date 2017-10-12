@@ -1,0 +1,103 @@
+<div>
+    <h2 data-translate="gestCApp.ligneEntreeArticle.home.title">Ligne Entree Articles</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="ligne-entree-article.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs-down"  data-translate="gestCApp.ligneEntreeArticle.home.createLabel">
+                        Create new Ligne Entree Article
+                    </span>
+                </button>
+            </div>
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'gestCApp.ligneEntreeArticle.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="designation"><span data-translate="gestCApp.ligneEntreeArticle.designation">Designation</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="quantite"><span data-translate="gestCApp.ligneEntreeArticle.quantite">Quantite</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="montanttotalht"><span data-translate="gestCApp.ligneEntreeArticle.montanttotalht">Montanttotalht</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="montanttotalttc"><span data-translate="gestCApp.ligneEntreeArticle.montanttotalttc">Montanttotalttc</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prix_unitaire"><span data-translate="gestCApp.ligneEntreeArticle.prix_unitaire">Prix Unitaire</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="taxeTVA"><span data-translate="gestCApp.ligneEntreeArticle.taxeTVA">Taxe TVA</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dateperemption"><span data-translate="gestCApp.ligneEntreeArticle.dateperemption">Dateperemption</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prixAchat"><span data-translate="gestCApp.ligneEntreeArticle.prixAchat">Prix Achat</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="agent.login"><span data-translate="gestCApp.ligneEntreeArticle.agent">Agent</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="article.id"><span data-translate="gestCApp.ligneEntreeArticle.article">Article</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="entreeArticle.id"><span data-translate="gestCApp.ligneEntreeArticle.entreeArticle">Entree Article</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ligneEntreeArticle in vm.ligneEntreeArticles track by ligneEntreeArticle.id">
+                    <td><a ui-sref="ligne-entree-article-detail({id:ligneEntreeArticle.id})">{{ligneEntreeArticle.id}}</a></td>
+                    <td>{{ligneEntreeArticle.designation}}</td>
+                    <td>{{ligneEntreeArticle.quantite}}</td>
+                    <td>{{ligneEntreeArticle.montanttotalht}}</td>
+                    <td>{{ligneEntreeArticle.montanttotalttc}}</td>
+                    <td>{{ligneEntreeArticle.prix_unitaire}}</td>
+                    <td>{{ligneEntreeArticle.taxeTVA}}</td>
+                        <td>{{ligneEntreeArticle.dateperemption | date:'mediumDate'}}</td>
+                    <td>{{ligneEntreeArticle.prixAchat}}</td>
+                    <td>
+                        {{ligneEntreeArticle.agent.login}}
+                    </td>
+                    <td>
+                        <a ui-sref="article-detail({id:ligneEntreeArticle.article.id})">{{ligneEntreeArticle.article.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="entree-article-detail({id:ligneEntreeArticle.entreeArticle.id})">{{ligneEntreeArticle.entreeArticle.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="ligne-entree-article-detail({id:ligneEntreeArticle.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="ligne-entree-article.edit({id:ligneEntreeArticle.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="ligne-entree-article.delete({id:ligneEntreeArticle.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

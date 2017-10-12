@@ -1,0 +1,63 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "article",
+            "otherEntityName": "article",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "quantite",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "quantiteAlerte",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "prixArticle",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "dateperemption",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "actif",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "prixAchat",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "observation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "taxeTVA",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "quantiteGros",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "quantiteAlerteGros",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "closed",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20171006062738",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "stock",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

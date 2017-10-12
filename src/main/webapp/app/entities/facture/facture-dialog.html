@@ -1,0 +1,118 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myFactureLabel" data-translate="gestCApp.facture.home.createOrEditLabel">Create or edit a Facture</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.facture.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.facture.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.facture.numfacture" for="field_numfacture">Numfacture</label>
+            <input type="text" class="form-control" name="numfacture" id="field_numfacture"
+                    ng-model="vm.facture.numfacture"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.facture.montanttotalht" for="field_montanttotalht">Montanttotalht</label>
+            <input type="number" class="form-control" name="montanttotalht" id="field_montanttotalht"
+                    ng-model="vm.facture.montanttotalht"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.facture.montanttva" for="field_montanttva">Montanttva</label>
+            <input type="number" class="form-control" name="montanttva" id="field_montanttva"
+                    ng-model="vm.facture.montanttva"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.facture.reduction" for="field_reduction">Reduction</label>
+            <input type="number" class="form-control" name="reduction" id="field_reduction"
+                    ng-model="vm.facture.reduction"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.facture.codebarre" for="field_codebarre">Codebarre</label>
+            <input type="text" class="form-control" name="codebarre" id="field_codebarre"
+                    ng-model="vm.facture.codebarre"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.facture.libellefacture" for="field_libellefacture">Libellefacture</label>
+            <input type="text" class="form-control" name="libellefacture" id="field_libellefacture"
+                    ng-model="vm.facture.libellefacture"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.facture.dateedition" for="field_dateedition">Dateedition</label>
+                <div class="input-group">
+                    <input id="field_dateedition" type="text" class="form-control" name="dateedition" uib-datepicker-popup="{{dateformat}}" ng-model="vm.facture.dateedition" is-open="vm.datePickerOpenStatus.dateedition"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateedition')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.facture.datefacturation" for="field_datefacturation">Datefacturation</label>
+                <div class="input-group">
+                    <input id="field_datefacturation" type="text" class="form-control" name="datefacturation" uib-datepicker-popup="{{dateformat}}" ng-model="vm.facture.datefacturation" is-open="vm.datePickerOpenStatus.datefacturation"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('datefacturation')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.facture.montanttotalttc" for="field_montanttotalttc">Montanttotalttc</label>
+            <input type="number" class="form-control" name="montanttotalttc" id="field_montanttotalttc"
+                    ng-model="vm.facture.montanttotalttc"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.facture.observation" for="field_observation">Observation</label>
+            <input type="text" class="form-control" name="observation" id="field_observation"
+                    ng-model="vm.facture.observation"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="gestCApp.facture.client" for="field_client">Client</label>
+            <select class="form-control" id="field_client" name="client" ng-model="vm.facture.client" ng-options="client as client.id for client in vm.clients track by client.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="gestCApp.facture.caisse" for="field_caisse">Caisse</label>
+            <select class="form-control" id="field_caisse" name="caisse" ng-model="vm.facture.caisse" ng-options="caisse as caisse.id for caisse in vm.caisses track by caisse.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="gestCApp.facture.user" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.facture.user" ng-options="user as user.login for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="gestCApp.facture.magasin" for="field_magasin">Magasin</label>
+            <select class="form-control" id="field_magasin" name="magasin" ng-model="vm.facture.magasin" ng-options="magasin as magasin.id for magasin in vm.magasins track by magasin.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>

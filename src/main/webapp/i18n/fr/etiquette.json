@@ -1,0 +1,24 @@
+{
+    "gestCApp": {
+        "etiquette" : {
+            "home": {
+                "title": "Etiquettes",
+                "createLabel": "Créer un nouveau Etiquette",
+                "createOrEditLabel": "Créer ou éditer un Etiquette",
+                "search": "Recherche pour Etiquette"
+            },
+            "created": "Un nouveau Etiquette a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Etiquette avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Etiquette avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Etiquette {{ id }} ?"
+            },
+            "detail": {
+                "title": "Etiquette"
+            },
+            "etiquette": "Etiquette",
+            "codeBare": "Code Bare",
+            "article": "Article"
+        }
+    }
+}

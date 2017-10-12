@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity LigneEntreeArticle.
+    -->
+    <changeSet id="20171006073151-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="agent_id"
+                                 baseTableName="ligne_entree_article"
+                                 constraintName="fk_ligne_entree_article_agent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="article_id"
+                                 baseTableName="ligne_entree_article"
+                                 constraintName="fk_ligne_entree_article_article_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="article"/>
+
+        <addForeignKeyConstraint baseColumnNames="entree_article_id"
+                                 baseTableName="ligne_entree_article"
+                                 constraintName="fk_ligne_entree_article_entree_article_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="entree_article"/>
+
+    </changeSet>
+</databaseChangeLog>

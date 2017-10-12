@@ -1,0 +1,23 @@
+{
+    "gestCApp": {
+        "formeArticle" : {
+            "home": {
+                "title": "Forme Articles",
+                "createLabel": "Create a new Forme Article",
+                "createOrEditLabel": "Create or edit a Forme Article",
+                "search": "Search for Forme Article"
+            },
+            "created": "A new Forme Article is created with identifier {{ param }}",
+            "updated": "A Forme Article is updated with identifier {{ param }}",
+            "deleted": "A Forme Article is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Forme Article {{ id }}?"
+            },
+            "detail": {
+                "title": "Forme Article"
+            },
+            "nomForme": "Nom Forme",
+            "quantite": "Quantite"
+        }
+    }
+}

@@ -1,0 +1,32 @@
+{
+    "gestCApp": {
+        "ligneEntreeArticle" : {
+            "home": {
+                "title": "LigneEntreeArticles",
+                "createLabel": "Créer un nouveau Ligne Entree Article",
+                "createOrEditLabel": "Créer ou éditer un Ligne Entree Article",
+                "search": "Recherche pour Ligne Entree Article"
+            },
+            "created": "Un nouveau Ligne Entree Article a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Ligne Entree Article avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Ligne Entree Article avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Ligne Entree Article {{ id }} ?"
+            },
+            "detail": {
+                "title": "Ligne Entree Article"
+            },
+            "designation": "Designation",
+            "quantite": "Quantite",
+            "montanttotalht": "Montanttotalht",
+            "montanttotalttc": "Montanttotalttc",
+            "prix_unitaire": "Prix Unitaire",
+            "taxeTVA": "Taxe TVA",
+            "dateperemption": "Dateperemption",
+            "prixAchat": "Prix Achat",
+            "agent": "Agent",
+            "article": "Article",
+            "entreeArticle": "Entree Article"
+        }
+    }
+}

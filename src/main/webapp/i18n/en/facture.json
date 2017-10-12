@@ -1,0 +1,35 @@
+{
+    "gestCApp": {
+        "facture" : {
+            "home": {
+                "title": "Factures",
+                "createLabel": "Create a new Facture",
+                "createOrEditLabel": "Create or edit a Facture",
+                "search": "Search for Facture"
+            },
+            "created": "A new Facture is created with identifier {{ param }}",
+            "updated": "A Facture is updated with identifier {{ param }}",
+            "deleted": "A Facture is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Facture {{ id }}?"
+            },
+            "detail": {
+                "title": "Facture"
+            },
+            "numfacture": "Numfacture",
+            "montanttotalht": "Montanttotalht",
+            "montanttva": "Montanttva",
+            "reduction": "Reduction",
+            "codebarre": "Codebarre",
+            "libellefacture": "Libellefacture",
+            "dateedition": "Dateedition",
+            "datefacturation": "Datefacturation",
+            "montanttotalttc": "Montanttotalttc",
+            "observation": "Observation",
+            "client": "Client",
+            "caisse": "Caisse",
+            "user": "User",
+            "magasin": "Magasin"
+        }
+    }
+}

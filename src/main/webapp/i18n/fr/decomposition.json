@@ -1,0 +1,26 @@
+{
+    "gestCApp": {
+        "decomposition" : {
+            "home": {
+                "title": "Decompositions",
+                "createLabel": "Créer un nouveau Decomposition",
+                "createOrEditLabel": "Créer ou éditer un Decomposition",
+                "search": "Recherche pour Decomposition"
+            },
+            "created": "Un nouveau Decomposition a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Decomposition avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Decomposition avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Decomposition {{ id }} ?"
+            },
+            "detail": {
+                "title": "Decomposition"
+            },
+            "articledepart": "Articledepart",
+            "articlefin": "Articlefin",
+            "quantite": "Quantite",
+            "etat": "Etat",
+            "article": "Article"
+        }
+    }
+}

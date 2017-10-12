@@ -1,0 +1,55 @@
+
+<div>
+    <h2><span data-translate="gestCApp.ligneCommande.detail.title">Ligne Commande</span> {{vm.ligneCommande.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="gestCApp.ligneCommande.designation">Designation</span></dt>
+        <dd>
+            <span>{{vm.ligneCommande.designation}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneCommande.quantite">Quantite</span></dt>
+        <dd>
+            <span>{{vm.ligneCommande.quantite}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneCommande.montanttotalht">Montanttotalht</span></dt>
+        <dd>
+            <span>{{vm.ligneCommande.montanttotalht}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneCommande.montanttotalttc">Montanttotalttc</span></dt>
+        <dd>
+            <span>{{vm.ligneCommande.montanttotalttc}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneCommande.prix">Prix</span></dt>
+        <dd>
+            <span>{{vm.ligneCommande.prix}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneCommande.agent">Agent</span></dt>
+        <dd>
+            {{vm.ligneCommande.agent.login}}
+        </dd>
+        <dt><span data-translate="gestCApp.ligneCommande.article">Article</span></dt>
+        <dd>
+            <a ui-sref="article-detail({id:vm.ligneCommande.article.id})">{{vm.ligneCommande.article.id}}</a>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneCommande.commande">Commande</span></dt>
+        <dd>
+            <a ui-sref="commande-detail({id:vm.ligneCommande.commande.id})">{{vm.ligneCommande.commande.id}}</a>
+        </dd>
+        <dt><span data-translate="gestCApp.ligneCommande.fournisseur">Fournisseur</span></dt>
+        <dd>
+            <a ui-sref="fournisseur-detail({id:vm.ligneCommande.fournisseur.id})">{{vm.ligneCommande.fournisseur.id}}</a>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="ligne-commande-detail.edit({id:vm.ligneCommande.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

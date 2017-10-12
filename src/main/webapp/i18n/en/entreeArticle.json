@@ -1,0 +1,27 @@
+{
+    "gestCApp": {
+        "entreeArticle" : {
+            "home": {
+                "title": "Entree Articles",
+                "createLabel": "Create a new Entree Article",
+                "createOrEditLabel": "Create or edit a Entree Article",
+                "search": "Search for Entree Article"
+            },
+            "created": "A new Entree Article is created with identifier {{ param }}",
+            "updated": "A Entree Article is updated with identifier {{ param }}",
+            "deleted": "A Entree Article is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Entree Article {{ id }}?"
+            },
+            "detail": {
+                "title": "Entree Article"
+            },
+            "titre": "Titre",
+            "dateentre": "Dateentre",
+            "montant_ht": "Montant Ht",
+            "montant_ttc": "Montant Ttc",
+            "observation": "Observation",
+            "agent": "Agent"
+        }
+    }
+}

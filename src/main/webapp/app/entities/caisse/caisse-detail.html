@@ -1,0 +1,43 @@
+
+<div>
+    <h2><span data-translate="gestCApp.caisse.detail.title">Caisse</span> {{vm.caisse.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="gestCApp.caisse.numcaisse">Numcaisse</span></dt>
+        <dd>
+            <span>{{vm.caisse.numcaisse}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.caisse.dateOuverture">Date Ouverture</span></dt>
+        <dd>
+            <span>{{vm.caisse.dateOuverture | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.caisse.dateFermeture">Date Fermeture</span></dt>
+        <dd>
+            <span>{{vm.caisse.dateFermeture | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.caisse.fondcaisse">Fondcaisse</span></dt>
+        <dd>
+            <span>{{vm.caisse.fondcaisse}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.caisse.active">Active</span></dt>
+        <dd>
+            <span>{{vm.caisse.active}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.caisse.user">User</span></dt>
+        <dd>
+            {{vm.caisse.user.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="caisse-detail.edit({id:vm.caisse.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

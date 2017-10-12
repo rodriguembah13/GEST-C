@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006055829_added_entity_Article.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006063206_added_entity_Caisse.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006064233_added_entity_Client.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006073939_added_entity_Commande.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006061547_added_entity_Decomposition.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006072649_added_entity_EntreeArticle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006061103_added_entity_Etiquette.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006065447_added_entity_Facture.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006060833_added_entity_FamilleArticle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006060449_added_entity_FormeArticle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006074754_added_entity_Fournisseur.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006074446_added_entity_LigneCommande.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006073151_added_entity_LigneEntreeArticle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006071155_added_entity_LigneSortieArticle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006063642_added_entity_Magasin.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006070544_added_entity_SortieArticle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006062738_added_entity_Stock.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006065718_added_entity_TypeSortieArticle.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20171006055829_added_entity_constraints_Article.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006063206_added_entity_constraints_Caisse.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006073939_added_entity_constraints_Commande.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006061547_added_entity_constraints_Decomposition.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006072649_added_entity_constraints_EntreeArticle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006061103_added_entity_constraints_Etiquette.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006065447_added_entity_constraints_Facture.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006074446_added_entity_constraints_LigneCommande.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006073151_added_entity_constraints_LigneEntreeArticle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006071155_added_entity_constraints_LigneSortieArticle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006070544_added_entity_constraints_SortieArticle.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20171006062738_added_entity_constraints_Stock.xml" relativeToChangelogFile="false"/>
+    <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+</databaseChangeLog>

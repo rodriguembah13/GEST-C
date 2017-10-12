@@ -1,0 +1,16 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "libelle",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20171006065718",
+    "dto": "no",
+    "service": "no",
+    "entityTableName": "type_sortie_article",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pager"
+}

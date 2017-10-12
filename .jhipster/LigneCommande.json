@@ -1,0 +1,59 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "agent",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "ligneCommande"
+        },
+        {
+            "relationshipName": "article",
+            "otherEntityName": "article",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "commande",
+            "otherEntityName": "commande",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "fournisseur",
+            "otherEntityName": "fournisseur",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "designation",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "quantite",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "montanttotalht",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "montanttotalttc",
+            "fieldType": "Double"
+        },
+        {
+            "fieldName": "prix",
+            "fieldType": "Double"
+        }
+    ],
+    "changelogDate": "20171006074446",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "ligne_commande",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

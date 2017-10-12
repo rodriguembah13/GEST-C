@@ -1,0 +1,31 @@
+{
+    "gestCApp": {
+        "sortieArticle" : {
+            "home": {
+                "title": "SortieArticles",
+                "createLabel": "Créer un nouveau Sortie Article",
+                "createOrEditLabel": "Créer ou éditer un Sortie Article",
+                "search": "Recherche pour Sortie Article"
+            },
+            "created": "Un nouveau Sortie Article a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Sortie Article avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Sortie Article avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Sortie Article {{ id }} ?"
+            },
+            "detail": {
+                "title": "Sortie Article"
+            },
+            "numsortie": "Numsortie",
+            "libelle": "Libelle",
+            "datesortie": "Datesortie",
+            "montanttotal": "Montanttotal",
+            "montanttva": "Montanttva",
+            "montantttc": "Montantttc",
+            "destinataire": "Destinataire",
+            "agent": "Agent",
+            "magasin": "Magasin",
+            "client": "Client"
+        }
+    }
+}

@@ -1,0 +1,96 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myLigneEntreeArticleLabel" data-translate="gestCApp.ligneEntreeArticle.home.createOrEditLabel">Create or edit a Ligne Entree Article</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.ligneEntreeArticle.id">
+            <label for="id" data-translate="global.field.id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.ligneEntreeArticle.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.ligneEntreeArticle.designation" for="field_designation">Designation</label>
+            <input type="text" class="form-control" name="designation" id="field_designation"
+                    ng-model="vm.ligneEntreeArticle.designation"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.ligneEntreeArticle.quantite" for="field_quantite">Quantite</label>
+            <input type="number" class="form-control" name="quantite" id="field_quantite"
+                    ng-model="vm.ligneEntreeArticle.quantite"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.ligneEntreeArticle.montanttotalht" for="field_montanttotalht">Montanttotalht</label>
+            <input type="number" class="form-control" name="montanttotalht" id="field_montanttotalht"
+                    ng-model="vm.ligneEntreeArticle.montanttotalht"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.ligneEntreeArticle.montanttotalttc" for="field_montanttotalttc">Montanttotalttc</label>
+            <input type="number" class="form-control" name="montanttotalttc" id="field_montanttotalttc"
+                    ng-model="vm.ligneEntreeArticle.montanttotalttc"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.ligneEntreeArticle.prix_unitaire" for="field_prix_unitaire">Prix Unitaire</label>
+            <input type="number" class="form-control" name="prix_unitaire" id="field_prix_unitaire"
+                    ng-model="vm.ligneEntreeArticle.prix_unitaire"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.ligneEntreeArticle.taxeTVA" for="field_taxeTVA">Taxe TVA</label>
+            <input type="number" class="form-control" name="taxeTVA" id="field_taxeTVA"
+                    ng-model="vm.ligneEntreeArticle.taxeTVA"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.ligneEntreeArticle.dateperemption" for="field_dateperemption">Dateperemption</label>
+                <div class="input-group">
+                    <input id="field_dateperemption" type="text" class="form-control" name="dateperemption" uib-datepicker-popup="{{dateformat}}" ng-model="vm.ligneEntreeArticle.dateperemption" is-open="vm.datePickerOpenStatus.dateperemption"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateperemption')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.ligneEntreeArticle.prixAchat" for="field_prixAchat">Prix Achat</label>
+            <input type="number" class="form-control" name="prixAchat" id="field_prixAchat"
+                    ng-model="vm.ligneEntreeArticle.prixAchat"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label data-translate="gestCApp.ligneEntreeArticle.agent" for="field_agent">Agent</label>
+            <select class="form-control" id="field_agent" name="agent" ng-model="vm.ligneEntreeArticle.agent" ng-options="user as user.login for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="gestCApp.ligneEntreeArticle.article" for="field_article">Article</label>
+            <select class="form-control" id="field_article" name="article" ng-model="vm.ligneEntreeArticle.article" ng-options="article as article.id for article in vm.articles track by article.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="gestCApp.ligneEntreeArticle.entreeArticle" for="field_entreeArticle">Entree Article</label>
+            <select class="form-control" id="field_entreeArticle" name="entreeArticle" ng-model="vm.ligneEntreeArticle.entreeArticle" ng-options="entreeArticle as entreeArticle.id for entreeArticle in vm.entreearticles track by entreeArticle.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span data-translate="entity.action.cancel">Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span data-translate="entity.action.save">Save</span>
+        </button>
+    </div>
+</form>
