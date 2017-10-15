@@ -3,14 +3,14 @@
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
-<!--             <div class="col-xs-4 no-padding-left">
+            <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="commande.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs-down"  data-translate="gestCApp.commande.home.createLabel">
                         Create new Commande
                     </span>
                 </button>
-            </div> -->
+            </div>
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right" >
@@ -44,7 +44,10 @@
                     <th jh-sort-by="datelimitlivraison"><span data-translate="gestCApp.commande.datelimitlivraison">Datelimitlivraison</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="datecommande"><span data-translate="gestCApp.commande.datecommande">Datecommande</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="etat"><span data-translate="gestCApp.commande.etat">Etat</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="soldee"><span data-translate="gestCApp.commande.soldee">Soldee</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="agent.login"><span data-translate="gestCApp.commande.agent">Agent</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="fournisseur.id"><span data-translate="gestCApp.commande.fournisseur">Fournisseur</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="magasin.id"><span data-translate="gestCApp.commande.magasin">Magasin</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -59,8 +62,15 @@
                         <td>{{commande.datelimitlivraison | date:'mediumDate'}}</td>
                         <td>{{commande.datecommande | date:'mediumDate'}}</td>
                     <td>{{commande.etat}}</td>
+                    <td>{{commande.soldee}}</td>
                     <td>
                         {{commande.agent.login}}
+                    </td>
+                    <td>
+                        <a ui-sref="fournisseur-detail({id:commande.fournisseur.id})">{{commande.fournisseur.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="magasin-detail({id:commande.magasin.id})">{{commande.magasin.id}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

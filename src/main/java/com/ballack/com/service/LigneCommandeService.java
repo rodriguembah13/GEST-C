@@ -23,10 +23,11 @@ public class LigneCommandeService {
     private final Logger log = LoggerFactory.getLogger(LigneCommandeService.class);
 
     private final LigneCommandeRepository ligneCommandeRepository;
-
+    private final UserService userService;
     private final LigneCommandeSearchRepository ligneCommandeSearchRepository;
-    public LigneCommandeService(LigneCommandeRepository ligneCommandeRepository, LigneCommandeSearchRepository ligneCommandeSearchRepository) {
+    public LigneCommandeService(LigneCommandeRepository ligneCommandeRepository, UserService userService, LigneCommandeSearchRepository ligneCommandeSearchRepository) {
         this.ligneCommandeRepository = ligneCommandeRepository;
+        this.userService = userService;
         this.ligneCommandeSearchRepository = ligneCommandeSearchRepository;
     }
 
@@ -37,6 +38,9 @@ public class LigneCommandeService {
      * @return the persisted entity
      */
     public LigneCommande save(LigneCommande ligneCommande) {
+        ligneCommande.setMontanttotalht(ligneCommande.getPrix()*ligneCommande.getQuantite());
+        ligneCommande.setMontanttotalttc((ligneCommande.getMontanttotalht()*ligneCommande.getTaxeTva())*0.01+ligneCommande.getMontanttotalht());
+        ligneCommande.setAgent(userService.getUserWithAuthorities());
         log.debug("Request to save LigneCommande : {}", ligneCommande);
         LigneCommande result = ligneCommandeRepository.save(ligneCommande);
         ligneCommandeSearchRepository.save(result);

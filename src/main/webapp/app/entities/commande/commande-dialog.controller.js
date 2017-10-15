@@ -5,9 +5,9 @@
         .module('gestCApp')
         .controller('CommandeDialogController', CommandeDialogController);
 
-    CommandeDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Commande', 'User'];
+    CommandeDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Commande', 'User', 'Fournisseur', 'Magasin'];
 
-    function CommandeDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Commande, User) {
+    function CommandeDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Commande, User, Fournisseur, Magasin) {
         var vm = this;
 
         vm.commande = entity;
@@ -16,6 +16,8 @@
         vm.openCalendar = openCalendar;
         vm.save = save;
         vm.users = User.query();
+        vm.fournisseurs = Fournisseur.query();
+        vm.magasins = Magasin.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

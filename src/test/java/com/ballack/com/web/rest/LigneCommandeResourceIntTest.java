@@ -54,6 +54,9 @@ public class LigneCommandeResourceIntTest {
     private static final Double DEFAULT_PRIX = 1D;
     private static final Double UPDATED_PRIX = 2D;
 
+    private static final Double DEFAULT_TAXE_TVA = 1D;
+    private static final Double UPDATED_TAXE_TVA = 2D;
+
     @Autowired
     private LigneCommandeRepository ligneCommandeRepository;
 
@@ -101,7 +104,8 @@ public class LigneCommandeResourceIntTest {
             .quantite(DEFAULT_QUANTITE)
             .montanttotalht(DEFAULT_MONTANTTOTALHT)
             .montanttotalttc(DEFAULT_MONTANTTOTALTTC)
-            .prix(DEFAULT_PRIX);
+            .prix(DEFAULT_PRIX)
+            .taxeTva(DEFAULT_TAXE_TVA);
         return ligneCommande;
     }
 
@@ -131,6 +135,7 @@ public class LigneCommandeResourceIntTest {
         assertThat(testLigneCommande.getMontanttotalht()).isEqualTo(DEFAULT_MONTANTTOTALHT);
         assertThat(testLigneCommande.getMontanttotalttc()).isEqualTo(DEFAULT_MONTANTTOTALTTC);
         assertThat(testLigneCommande.getPrix()).isEqualTo(DEFAULT_PRIX);
+        assertThat(testLigneCommande.getTaxeTva()).isEqualTo(DEFAULT_TAXE_TVA);
 
         // Validate the LigneCommande in Elasticsearch
         LigneCommande ligneCommandeEs = ligneCommandeSearchRepository.findOne(testLigneCommande.getId());
@@ -171,7 +176,8 @@ public class LigneCommandeResourceIntTest {
             .andExpect(jsonPath("$.[*].quantite").value(hasItem(DEFAULT_QUANTITE)))
             .andExpect(jsonPath("$.[*].montanttotalht").value(hasItem(DEFAULT_MONTANTTOTALHT.doubleValue())))
             .andExpect(jsonPath("$.[*].montanttotalttc").value(hasItem(DEFAULT_MONTANTTOTALTTC.doubleValue())))
-            .andExpect(jsonPath("$.[*].prix").value(hasItem(DEFAULT_PRIX.doubleValue())));
+            .andExpect(jsonPath("$.[*].prix").value(hasItem(DEFAULT_PRIX.doubleValue())))
+            .andExpect(jsonPath("$.[*].taxeTva").value(hasItem(DEFAULT_TAXE_TVA.doubleValue())));
     }
 
     @Test
@@ -189,7 +195,8 @@ public class LigneCommandeResourceIntTest {
             .andExpect(jsonPath("$.quantite").value(DEFAULT_QUANTITE))
             .andExpect(jsonPath("$.montanttotalht").value(DEFAULT_MONTANTTOTALHT.doubleValue()))
             .andExpect(jsonPath("$.montanttotalttc").value(DEFAULT_MONTANTTOTALTTC.doubleValue()))
-            .andExpect(jsonPath("$.prix").value(DEFAULT_PRIX.doubleValue()));
+            .andExpect(jsonPath("$.prix").value(DEFAULT_PRIX.doubleValue()))
+            .andExpect(jsonPath("$.taxeTva").value(DEFAULT_TAXE_TVA.doubleValue()));
     }
 
     @Test
@@ -215,7 +222,8 @@ public class LigneCommandeResourceIntTest {
             .quantite(UPDATED_QUANTITE)
             .montanttotalht(UPDATED_MONTANTTOTALHT)
             .montanttotalttc(UPDATED_MONTANTTOTALTTC)
-            .prix(UPDATED_PRIX);
+            .prix(UPDATED_PRIX)
+            .taxeTva(UPDATED_TAXE_TVA);
 
         restLigneCommandeMockMvc.perform(put("/api/ligne-commandes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -231,6 +239,7 @@ public class LigneCommandeResourceIntTest {
         assertThat(testLigneCommande.getMontanttotalht()).isEqualTo(UPDATED_MONTANTTOTALHT);
         assertThat(testLigneCommande.getMontanttotalttc()).isEqualTo(UPDATED_MONTANTTOTALTTC);
         assertThat(testLigneCommande.getPrix()).isEqualTo(UPDATED_PRIX);
+        assertThat(testLigneCommande.getTaxeTva()).isEqualTo(UPDATED_TAXE_TVA);
 
         // Validate the LigneCommande in Elasticsearch
         LigneCommande ligneCommandeEs = ligneCommandeSearchRepository.findOne(testLigneCommande.getId());
@@ -292,7 +301,8 @@ public class LigneCommandeResourceIntTest {
             .andExpect(jsonPath("$.[*].quantite").value(hasItem(DEFAULT_QUANTITE)))
             .andExpect(jsonPath("$.[*].montanttotalht").value(hasItem(DEFAULT_MONTANTTOTALHT.doubleValue())))
             .andExpect(jsonPath("$.[*].montanttotalttc").value(hasItem(DEFAULT_MONTANTTOTALTTC.doubleValue())))
-            .andExpect(jsonPath("$.[*].prix").value(hasItem(DEFAULT_PRIX.doubleValue())));
+            .andExpect(jsonPath("$.[*].prix").value(hasItem(DEFAULT_PRIX.doubleValue())))
+            .andExpect(jsonPath("$.[*].taxeTva").value(hasItem(DEFAULT_TAXE_TVA.doubleValue())));
     }
 
     @Test

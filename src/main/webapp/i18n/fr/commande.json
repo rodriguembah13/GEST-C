@@ -24,7 +24,10 @@
             "datelimitlivraison": "Datelimitlivraison",
             "datecommande": "Datecommande",
             "etat": "Etat",
-            "agent": "Agent"
+            "soldee": "Soldee",
+            "agent": "Agent",
+            "fournisseur": "Fournisseur",
+            "magasin": "Magasin"
         }
     }
 }

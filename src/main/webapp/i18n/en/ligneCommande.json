@@ -21,6 +21,7 @@
             "montanttotalht": "Montanttotalht",
             "montanttotalttc": "Montanttotalttc",
             "prix": "Prix",
+            "taxeTva": "Taxe Tva",
             "agent": "Agent",
             "article": "Article",
             "commande": "Commande",

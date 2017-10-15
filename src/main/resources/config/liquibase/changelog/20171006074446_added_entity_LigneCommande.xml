@@ -42,6 +42,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="taxe_tva" type="double">
+                <constraints nullable="true" />
+            </column>
+
             <column name="agent_id" type="bigint">
                 <constraints nullable="true" />
             </column>

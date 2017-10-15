@@ -132,6 +132,7 @@
                                 datelimitlivraison: null,
                                 datecommande: null,
                                 etat: null,
+                                soldee: null,
                                 id: null
                             };
                         }

@@ -38,6 +38,9 @@ public class LigneCommande implements Serializable {
     @Column(name = "prix")
     private Double prix;
 
+    @Column(name = "taxe_tva")
+    private Double taxeTva;
+
     @ManyToOne
     private User agent;
 
@@ -124,6 +127,19 @@ public class LigneCommande implements Serializable {
         this.prix = prix;
     }
 
+    public Double getTaxeTva() {
+        return taxeTva;
+    }
+
+    public LigneCommande taxeTva(Double taxeTva) {
+        this.taxeTva = taxeTva;
+        return this;
+    }
+
+    public void setTaxeTva(Double taxeTva) {
+        this.taxeTva = taxeTva;
+    }
+
     public User getAgent() {
         return agent;
     }
@@ -206,6 +222,7 @@ public class LigneCommande implements Serializable {
             ", montanttotalht='" + getMontanttotalht() + "'" +
             ", montanttotalttc='" + getMontanttotalttc() + "'" +
             ", prix='" + getPrix() + "'" +
+            ", taxeTva='" + getTaxeTva() + "'" +
             "}";
     }
 }

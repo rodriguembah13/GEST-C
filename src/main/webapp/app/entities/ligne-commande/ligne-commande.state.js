@@ -129,6 +129,7 @@
                                 montanttotalht: null,
                                 montanttotalttc: null,
                                 prix: null,
+                                taxeTva: null,
                                 id: null
                             };
                         }

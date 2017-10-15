@@ -1,0 +1,67 @@
+<div ng-cloak>
+    <!-- table -->
+    <h3> Commande Fournisseur </h3>
+    <table class="table table-hover table-condensed">
+ <tr style="font-weight: bold">
+                <td >Article</td>
+                <td>Prix</td>
+                <td >Quantite</td>
+                
+                <td>TaxeTVA</td>
+                
+                <td ><span ng-show="tableform.$visible">Action</span></td>
+            </tr>
+      </tr>
+      <tr ng-repeat="user in commandes | filter:filterUser">
+        <td>
+          <span editable-ui-select="user.article" data-e-ng-model="state" e-form="tableform" data-e-style="min-width:auto;max-height:22px">
+            {{user.article.nomarticle}}
+            <editable-ui-select-match placeholder="Choisir Article">
+              {{$select.selected.nomarticle}}
+            </editable-ui-select-match>
+            <editable-ui-select-choices repeat="state in vm.articles | filter: $select.search track by $index">
+              <div>{{state.nomarticle}}</div>
+            </editable-ui-select-choices>
+          </span>
+        </td>
+                <td>
+                  <span editable-text="user.prix " e-form="tableform" edit-disabled="true" >
+                    {{user.prix}}
+                  </span>
+                </td>
+                <td>
+                  <span editable-text="user.quantite" e-form="tableform" >
+                    {{ user.quantite}}
+                  </span>
+                </td>
+                <td>
+
+                  <span editable-text="user.taxeTva" e-form="tableform" >
+                    {{user.taxeTva}}
+                  </span>
+                </td> 
+                <td >
+                   
+                    <form editable-form name="tableform" onaftersave="saveUser($data)" ng-show="tableform.$visible"
+                          class="form-buttons form-inline" shown="inserted == user">
+                        <button type="submit" ng-disabled="tableform$waiting" class="btn-sm btn-primary">
+                            <span class="glyphicon glyphicon-plus"></span>
+                        </button>
+                        <button type="button" ng-disabled="tableform.$waiting" ng-click="tableform.$cancel()"
+                                class="btn-sm btn-default">
+                            <span class="glyphicon glyphicon-move"></span>
+                        </button>
+                    </form>
+                    <div class="buttons" ng-show="!tableform.$visible">
+                        <button type="button" class="btn-sm btn-info" ng-click="tableform.$show()">edit</button>
+                        <button type="button" class="btn-sm btn-danger" ng-click="removeCommande($index)">del</button>
+                    </div>
+                </td>
+      </tr>
+    </table>
+      <button type="button" ng-disabled="tableform.$waiting" ng-click="addLineCommande()" class="btn btn-default btn-raised">add row</button>
+      <div class="btn-form pull-right">
+                <button type="button" class="btn btn-primary btn-raised" ng-click="saveCommande()">Valider</button>
+                <button type="button" class="btn btn-danger btn-raised" ng-click="cancelC()">cancel</button>
+    </div> 
+</div>

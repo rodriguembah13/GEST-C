@@ -1,17 +1,17 @@
 {
     "home": {
-        "title": "Welcome To Gest-c, Commerce Application !",
+        "title": "Welcome to Gest-c, Business Management Application!",
         "subtitle": "",
         "logged": {
             "message": "You are logged in as user \"{{username}}\"."
         },
-        "question": "you can with Gest-c:",
+        "question": "Grace a Gest-c You can now:",
         "link": {
             "homepage": "",
-            "stackoverflow": "",
-            "bugtracker": "",
-            "chat": "",
-            "follow": ""
+            "stackoverflow": "Optimize your inventory and supplies(stock mini/maxi, cost of production, management of multiple deposits…)",
+            "bugtracker": "Reduce customer risk",
+            "chat": "Guarantee the traceability of your products",
+            "follow": "Calculate your tariffs as accurately as possible"
         },
         "like": "",
         "github": ""

@@ -48,8 +48,17 @@ public class Commande implements Serializable {
     @Column(name = "etat")
     private Boolean etat;
 
+    @Column(name = "soldee")
+    private Boolean soldee;
+
     @ManyToOne
     private User agent;
+
+    @ManyToOne
+    private Fournisseur fournisseur;
+
+    @ManyToOne
+    private Magasin magasin;
 
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
@@ -164,6 +173,19 @@ public class Commande implements Serializable {
         this.etat = etat;
     }
 
+    public Boolean isSoldee() {
+        return soldee;
+    }
+
+    public Commande soldee(Boolean soldee) {
+        this.soldee = soldee;
+        return this;
+    }
+
+    public void setSoldee(Boolean soldee) {
+        this.soldee = soldee;
+    }
+
     public User getAgent() {
         return agent;
     }
@@ -175,6 +197,32 @@ public class Commande implements Serializable {
 
     public void setAgent(User user) {
         this.agent = user;
+    }
+
+    public Fournisseur getFournisseur() {
+        return fournisseur;
+    }
+
+    public Commande fournisseur(Fournisseur fournisseur) {
+        this.fournisseur = fournisseur;
+        return this;
+    }
+
+    public void setFournisseur(Fournisseur fournisseur) {
+        this.fournisseur = fournisseur;
+    }
+
+    public Magasin getMagasin() {
+        return magasin;
+    }
+
+    public Commande magasin(Magasin magasin) {
+        this.magasin = magasin;
+        return this;
+    }
+
+    public void setMagasin(Magasin magasin) {
+        this.magasin = magasin;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 
@@ -210,6 +258,7 @@ public class Commande implements Serializable {
             ", datelimitlivraison='" + getDatelimitlivraison() + "'" +
             ", datecommande='" + getDatecommande() + "'" +
             ", etat='" + isEtat() + "'" +
+            ", soldee='" + isSoldee() + "'" +
             "}";
     }
 }

@@ -1,5 +1,6 @@
 package com.ballack.com.web.rest;
 
+import com.ballack.com.domain.LigneCommande;
 import com.codahale.metrics.annotation.Timed;
 import com.ballack.com.domain.Commande;
 import com.ballack.com.service.CommandeService;
@@ -21,6 +22,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -45,18 +47,15 @@ public class CommandeResource {
     /**
      * POST  /commandes : Create a new commande.
      *
-     * @param commande the commande to create
+     *
      * @return the ResponseEntity with status 201 (Created) and with body the new commande, or with status 400 (Bad Request) if the commande has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/commandes")
     @Timed
-    public ResponseEntity<Commande> createCommande(@RequestBody Commande commande) throws URISyntaxException {
-        log.debug("REST request to save Commande : {}", commande);
-        if (commande.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new commande cannot already have an ID")).body(null);
-        }
-        Commande result = commandeService.save(commande);
+    public ResponseEntity<Commande> createCommande(@RequestBody Set<LigneCommande>ligneCommandes) throws URISyntaxException {
+        log.debug("REST request to save Commande : {}", ligneCommandes);
+        Commande result = commandeService.save(ligneCommandes);
         return ResponseEntity.created(new URI("/api/commandes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -75,9 +74,6 @@ public class CommandeResource {
     @Timed
     public ResponseEntity<Commande> updateCommande(@RequestBody Commande commande) throws URISyntaxException {
         log.debug("REST request to update Commande : {}", commande);
-        if (commande.getId() == null) {
-            return createCommande(commande);
-        }
         Commande result = commandeService.save(commande);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, commande.getId().toString()))

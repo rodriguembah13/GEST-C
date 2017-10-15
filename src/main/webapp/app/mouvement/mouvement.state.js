@@ -16,7 +16,20 @@
             },
             views: {
                 'content@': {
-                    templateUrl: 'app/mouvement/mouvement.html',
+                   templateUrl: 'app/mouvement/mouvement.html',
+                    controller: 'MouvementController',
+                    controllerAs: 'vm'
+                }
+            }
+        }).state('mouv', {
+            parent: 'app',
+            url: '/mouvementcommande',
+            data: {
+                authorities: []
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/mouvement/mouvementCommande.html',
                     controller: 'MouvementController',
                     controllerAs: 'vm'
                 }

@@ -68,10 +68,27 @@
                 <input type="checkbox" name="etat" id="field_etat"
                           ng-model="vm.commande.etat"/>
         </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.commande.soldee" for="field_soldee">Soldee</label>
+                <input type="checkbox" name="soldee" id="field_soldee"
+                          ng-model="vm.commande.soldee"/>
+        </div>
 
         <div class="form-group">
             <label data-translate="gestCApp.commande.agent" for="field_agent">Agent</label>
             <select class="form-control" id="field_agent" name="agent" ng-model="vm.commande.agent" ng-options="user as user.login for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="gestCApp.commande.fournisseur" for="field_fournisseur">Fournisseur</label>
+            <select class="form-control" id="field_fournisseur" name="fournisseur" ng-model="vm.commande.fournisseur" ng-options="fournisseur as fournisseur.id for fournisseur in vm.fournisseurs track by fournisseur.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label data-translate="gestCApp.commande.magasin" for="field_magasin">Magasin</label>
+            <select class="form-control" id="field_magasin" name="magasin" ng-model="vm.commande.magasin" ng-options="magasin as magasin.id for magasin in vm.magasins track by magasin.id">
                 <option value=""></option>
             </select>
         </div>

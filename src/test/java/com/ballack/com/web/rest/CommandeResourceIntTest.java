@@ -65,6 +65,9 @@ public class CommandeResourceIntTest {
     private static final Boolean DEFAULT_ETAT = false;
     private static final Boolean UPDATED_ETAT = true;
 
+    private static final Boolean DEFAULT_SOLDEE = false;
+    private static final Boolean UPDATED_SOLDEE = true;
+
     @Autowired
     private CommandeRepository commandeRepository;
 
@@ -115,7 +118,8 @@ public class CommandeResourceIntTest {
             .montanttotalttc(DEFAULT_MONTANTTOTALTTC)
             .datelimitlivraison(DEFAULT_DATELIMITLIVRAISON)
             .datecommande(DEFAULT_DATECOMMANDE)
-            .etat(DEFAULT_ETAT);
+            .etat(DEFAULT_ETAT)
+            .soldee(DEFAULT_SOLDEE);
         return commande;
     }
 
@@ -148,6 +152,7 @@ public class CommandeResourceIntTest {
         assertThat(testCommande.getDatelimitlivraison()).isEqualTo(DEFAULT_DATELIMITLIVRAISON);
         assertThat(testCommande.getDatecommande()).isEqualTo(DEFAULT_DATECOMMANDE);
         assertThat(testCommande.isEtat()).isEqualTo(DEFAULT_ETAT);
+        assertThat(testCommande.isSoldee()).isEqualTo(DEFAULT_SOLDEE);
 
         // Validate the Commande in Elasticsearch
         Commande commandeEs = commandeSearchRepository.findOne(testCommande.getId());
@@ -191,7 +196,8 @@ public class CommandeResourceIntTest {
             .andExpect(jsonPath("$.[*].montanttotalttc").value(hasItem(DEFAULT_MONTANTTOTALTTC.doubleValue())))
             .andExpect(jsonPath("$.[*].datelimitlivraison").value(hasItem(DEFAULT_DATELIMITLIVRAISON.toString())))
             .andExpect(jsonPath("$.[*].datecommande").value(hasItem(DEFAULT_DATECOMMANDE.toString())))
-            .andExpect(jsonPath("$.[*].etat").value(hasItem(DEFAULT_ETAT.booleanValue())));
+            .andExpect(jsonPath("$.[*].etat").value(hasItem(DEFAULT_ETAT.booleanValue())))
+            .andExpect(jsonPath("$.[*].soldee").value(hasItem(DEFAULT_SOLDEE.booleanValue())));
     }
 
     @Test
@@ -212,7 +218,8 @@ public class CommandeResourceIntTest {
             .andExpect(jsonPath("$.montanttotalttc").value(DEFAULT_MONTANTTOTALTTC.doubleValue()))
             .andExpect(jsonPath("$.datelimitlivraison").value(DEFAULT_DATELIMITLIVRAISON.toString()))
             .andExpect(jsonPath("$.datecommande").value(DEFAULT_DATECOMMANDE.toString()))
-            .andExpect(jsonPath("$.etat").value(DEFAULT_ETAT.booleanValue()));
+            .andExpect(jsonPath("$.etat").value(DEFAULT_ETAT.booleanValue()))
+            .andExpect(jsonPath("$.soldee").value(DEFAULT_SOLDEE.booleanValue()));
     }
 
     @Test
@@ -241,7 +248,8 @@ public class CommandeResourceIntTest {
             .montanttotalttc(UPDATED_MONTANTTOTALTTC)
             .datelimitlivraison(UPDATED_DATELIMITLIVRAISON)
             .datecommande(UPDATED_DATECOMMANDE)
-            .etat(UPDATED_ETAT);
+            .etat(UPDATED_ETAT)
+            .soldee(UPDATED_SOLDEE);
 
         restCommandeMockMvc.perform(put("/api/commandes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -260,6 +268,7 @@ public class CommandeResourceIntTest {
         assertThat(testCommande.getDatelimitlivraison()).isEqualTo(UPDATED_DATELIMITLIVRAISON);
         assertThat(testCommande.getDatecommande()).isEqualTo(UPDATED_DATECOMMANDE);
         assertThat(testCommande.isEtat()).isEqualTo(UPDATED_ETAT);
+        assertThat(testCommande.isSoldee()).isEqualTo(UPDATED_SOLDEE);
 
         // Validate the Commande in Elasticsearch
         Commande commandeEs = commandeSearchRepository.findOne(testCommande.getId());
@@ -324,7 +333,8 @@ public class CommandeResourceIntTest {
             .andExpect(jsonPath("$.[*].montanttotalttc").value(hasItem(DEFAULT_MONTANTTOTALTTC.doubleValue())))
             .andExpect(jsonPath("$.[*].datelimitlivraison").value(hasItem(DEFAULT_DATELIMITLIVRAISON.toString())))
             .andExpect(jsonPath("$.[*].datecommande").value(hasItem(DEFAULT_DATECOMMANDE.toString())))
-            .andExpect(jsonPath("$.[*].etat").value(hasItem(DEFAULT_ETAT.booleanValue())));
+            .andExpect(jsonPath("$.[*].etat").value(hasItem(DEFAULT_ETAT.booleanValue())))
+            .andExpect(jsonPath("$.[*].soldee").value(hasItem(DEFAULT_SOLDEE.booleanValue())));
     }
 
     @Test

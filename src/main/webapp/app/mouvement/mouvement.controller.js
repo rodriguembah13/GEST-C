@@ -10,6 +10,7 @@
     function MouvementController ($scope, Principal, LoginService, $state,Article,$http,$q) {
         var vm = this;
         $scope.lines=[];
+        $scope.commandes=[];
        
         loadAllArticle ();
       		function loadAllArticle () {
@@ -26,6 +27,14 @@
             $scope.lines.splice(i, 1);
             
       };
+    };  $scope.removeCommande = function(index) {
+      $scope.commandes.splice(index, 1);
+    };
+     $scope.cancelC = function() {
+      for (var i = $scope.lines.length; i--;) {
+            $scope.commandes.splice(i, 1);
+            
+      };
     };  $scope.removeUser = function(index) {
       $scope.lines.splice(index, 1);
     };
@@ -33,7 +42,7 @@
               $scope.lines.push({
         		article: null,
         		quantite: null,
-        		prix_unitaire: null,
+        		prix: null,
         		taxeTVA: null,
         		dateperemption:null,
         		prixAchat:null
@@ -44,6 +53,14 @@
 
 		$scope.opened[elementOpened] = !$scope.opened[elementOpened];
 	};;
+          }
+            $scope.addLineCommande=function () {
+              $scope.commandes.push({
+            article: null,
+            quantite: null,
+            prix: null,
+            taxeTva: null
+                          })
           }
     $scope.getTotal = function(){
       var total = 0;
@@ -75,6 +92,21 @@
                         .error(function(err){
                         console.log(err);
                         AlertService.error(err.message);
+                        })
+                        );
+      return $q.all(results);
+    };
+
+        $scope.saveCommande = function() {
+      var results = [];
+      results.push($http.post('/api/commandes',$scope.commandes)
+         .success(function(data){
+                          $scope.venteR=data;
+                          // $scope.PrintRecu($scope.venteE);
+                        })
+                        .error(function(err){
+                        console.log(err);
+                        //AlertService.error(err.message);
                         })
                         );
       return $q.all(results);

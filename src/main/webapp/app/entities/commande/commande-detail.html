@@ -36,9 +36,21 @@
         <dd>
             <span>{{vm.commande.etat}}</span>
         </dd>
+        <dt><span data-translate="gestCApp.commande.soldee">Soldee</span></dt>
+        <dd>
+            <span>{{vm.commande.soldee}}</span>
+        </dd>
         <dt><span data-translate="gestCApp.commande.agent">Agent</span></dt>
         <dd>
             {{vm.commande.agent.login}}
+        </dd>
+        <dt><span data-translate="gestCApp.commande.fournisseur">Fournisseur</span></dt>
+        <dd>
+            <a ui-sref="fournisseur-detail({id:vm.commande.fournisseur.id})">{{vm.commande.fournisseur.id}}</a>
+        </dd>
+        <dt><span data-translate="gestCApp.commande.magasin">Magasin</span></dt>
+        <dd>
+            <a ui-sref="magasin-detail({id:vm.commande.magasin.id})">{{vm.commande.magasin.id}}</a>
         </dd>
     </dl>
 

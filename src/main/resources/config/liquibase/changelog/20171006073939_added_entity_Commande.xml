@@ -54,7 +54,19 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="soldee" type="bit">
+                <constraints nullable="true" />
+            </column>
+
             <column name="agent_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="fournisseur_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="magasin_id" type="bigint">
                 <constraints nullable="true" />
             </column>
 

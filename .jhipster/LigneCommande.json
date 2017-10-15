@@ -48,6 +48,10 @@
         {
             "fieldName": "prix",
             "fieldType": "Double"
+        },
+        {
+            "fieldName": "taxeTva",
+            "fieldType": "Double"
         }
     ],
     "changelogDate": "20171006074446",

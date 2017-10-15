@@ -1,6 +1,7 @@
 package com.ballack.com.service;
 
 import com.ballack.com.domain.Commande;
+import com.ballack.com.domain.LigneCommande;
 import com.ballack.com.repository.CommandeRepository;
 import com.ballack.com.repository.search.CommandeSearchRepository;
 import org.slf4j.Logger;
@@ -10,6 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.time.LocalDate;
+import java.util.Set;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -23,26 +27,52 @@ public class CommandeService {
     private final Logger log = LoggerFactory.getLogger(CommandeService.class);
 
     private final CommandeRepository commandeRepository;
-
+    private final LigneCommandeService ligneCommandeService;
     private final CommandeSearchRepository commandeSearchRepository;
-    public CommandeService(CommandeRepository commandeRepository, CommandeSearchRepository commandeSearchRepository) {
+    private final UserService userService;
+    public CommandeService(CommandeRepository commandeRepository, LigneCommandeService ligneCommandeService, CommandeSearchRepository commandeSearchRepository, UserService userService) {
         this.commandeRepository = commandeRepository;
+        this.ligneCommandeService = ligneCommandeService;
         this.commandeSearchRepository = commandeSearchRepository;
+        this.userService = userService;
     }
 
     /**
      * Save a commande.
      *
-     * @param commande the entity to save
+     * @param ligneCommandes the entity to save
      * @return the persisted entity
      */
-    public Commande save(Commande commande) {
-        log.debug("Request to save Commande : {}", commande);
+    public Commande save(Set<LigneCommande> ligneCommandes) {
+        log.debug("Request to save Commande : {}", ligneCommandes);
+        Commande commande=new Commande();
+        commande.setDatecommande(LocalDate.now());
+        commande.setDatelimitlivraison(LocalDate.now().plusMonths(2));
+        commande.setAgent(userService.getUserWithAuthorities());
+        Commande commande1 = commandeRepository.save(commande);
+        double montantht=0.0;
+        double montantttc=0.0;
+        for (LigneCommande ligneCommande:ligneCommandes){
+            ligneCommande.setDesignation("LNC/"+"CMD"+commande1.getId());
+            ligneCommande.setCommande(commande1);
+            LigneCommande ligneCommande1= ligneCommandeService.save(ligneCommande);
+            montantht+=ligneCommande1.getMontanttotalht();
+            montantttc+=ligneCommande1.getMontanttotalttc();
+
+        }
+        commande1.setNumcommande("CMD"+commande1.getId());
+        commande1.setMontanttotalttc(montantttc);
+        commande1.setMontanttotalht(montantht);
         Commande result = commandeRepository.save(commande);
         commandeSearchRepository.save(result);
         return result;
     }
+public Commande save(Commande commande){
 
+    Commande result = commandeRepository.save(commande);
+    commandeSearchRepository.save(result);
+    return result;
+}
     /**
      *  Get all the commandes.
      *

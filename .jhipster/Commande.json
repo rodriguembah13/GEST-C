@@ -8,6 +8,18 @@
             "otherEntityField": "login",
             "ownerSide": true,
             "otherEntityRelationshipName": "commande"
+        },
+        {
+            "relationshipName": "fournisseur",
+            "otherEntityName": "fournisseur",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "magasin",
+            "otherEntityName": "magasin",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [
@@ -41,6 +53,10 @@
         },
         {
             "fieldName": "etat",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "soldee",
             "fieldType": "Boolean"
         }
     ],

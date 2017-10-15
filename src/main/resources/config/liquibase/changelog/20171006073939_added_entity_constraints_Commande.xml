@@ -14,5 +14,17 @@
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 
+        <addForeignKeyConstraint baseColumnNames="fournisseur_id"
+                                 baseTableName="commande"
+                                 constraintName="fk_commande_fournisseur_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="fournisseur"/>
+
+        <addForeignKeyConstraint baseColumnNames="magasin_id"
+                                 baseTableName="commande"
+                                 constraintName="fk_commande_magasin_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="magasin"/>
+
     </changeSet>
 </databaseChangeLog>

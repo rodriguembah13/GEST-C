@@ -5,13 +5,13 @@
         "logged": {
             "message": "Vous êtes connecté en tant que \"{{username}}\"."
         },
-        "question": "Grace a Gest-c Vous pouvez  :",
+        "question": "Grace a Gest-c Vous pourrez désormais :",
         "link": {
             "homepage": "",
-            "stackoverflow": "",
-            "bugtracker": "",
-            "chat": "",
-            "follow": ""
+            "stackoverflow": "Optimiser vos stocks et vos approvisionnements (stock mini/maxi, coût de revient, gestion de plusieurs dépôts…)",
+            "bugtracker": "Réduire le risque client",
+            "chat": "Garantir la traçabilité de vos produits",
+            "follow": "Calculer vos tarifs au plus juste"
         },
         "like": "",
         "github": " "

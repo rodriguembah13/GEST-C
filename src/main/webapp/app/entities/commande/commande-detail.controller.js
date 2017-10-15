@@ -5,9 +5,9 @@
         .module('gestCApp')
         .controller('CommandeDetailController', CommandeDetailController);
 
-    CommandeDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Commande', 'User'];
+    CommandeDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Commande', 'User', 'Fournisseur', 'Magasin'];
 
-    function CommandeDetailController($scope, $rootScope, $stateParams, previousState, entity, Commande, User) {
+    function CommandeDetailController($scope, $rootScope, $stateParams, previousState, entity, Commande, User, Fournisseur, Magasin) {
         var vm = this;
 
         vm.commande = entity;
