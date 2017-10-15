@@ -1,6 +1,8 @@
 package com.ballack.com.repository;
 
 import com.ballack.com.domain.Facture;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
@@ -14,6 +16,6 @@ import java.util.List;
 public interface FactureRepository extends JpaRepository<Facture, Long> {
 
     @Query("select facture from Facture facture where facture.user.login = ?#{principal.username}")
-    List<Facture> findByUserIsCurrentUser();
+    Page<Facture> findByUserIsCurrentUser(Pageable  pageable);
 
 }

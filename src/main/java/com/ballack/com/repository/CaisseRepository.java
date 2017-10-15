@@ -15,5 +15,6 @@ public interface CaisseRepository extends JpaRepository<Caisse, Long> {
 
     @Query("select caisse from Caisse caisse where caisse.user.login = ?#{principal.username}")
     List<Caisse> findByUserIsCurrentUser();
-
+    @Query("select caisse from Caisse caisse where caisse.user.login = ?#{principal.username} and caisse.active=true")
+    Caisse findByUserIsCurrentActif();
 }

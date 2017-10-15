@@ -1,6 +1,7 @@
 package com.ballack.com.service;
 
 import com.ballack.com.domain.EntreeArticle;
+import com.ballack.com.domain.LigneEntreeArticle;
 import com.ballack.com.repository.EntreeArticleRepository;
 import com.ballack.com.repository.search.EntreeArticleSearchRepository;
 import org.slf4j.Logger;
@@ -10,6 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.time.LocalDate;
+import java.util.Set;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -23,13 +27,47 @@ public class EntreeArticleService {
     private final Logger log = LoggerFactory.getLogger(EntreeArticleService.class);
 
     private final EntreeArticleRepository entreeArticleRepository;
+    private final LigneEntreeArticleService ligneEntreeArticleService;
+    private final UserService userService;
 
     private final EntreeArticleSearchRepository entreeArticleSearchRepository;
-    public EntreeArticleService(EntreeArticleRepository entreeArticleRepository, EntreeArticleSearchRepository entreeArticleSearchRepository) {
+    public EntreeArticleService(EntreeArticleRepository entreeArticleRepository, LigneEntreeArticleService ligneEntreeArticleService, UserService userService, EntreeArticleSearchRepository entreeArticleSearchRepository) {
         this.entreeArticleRepository = entreeArticleRepository;
+        this.ligneEntreeArticleService = ligneEntreeArticleService;
+        this.userService = userService;
         this.entreeArticleSearchRepository = entreeArticleSearchRepository;
     }
 
+    /**
+     * Save a entreeArticle.
+     *
+     * @param ligneEntreeArticleSet the entity to save
+     * @return the persisted entity
+     */
+    public EntreeArticle saveAll(Set<LigneEntreeArticle> ligneEntreeArticleSet) {
+        log.debug("Request to save EntreeArticle : {}", ligneEntreeArticleSet);
+        EntreeArticle entreeArticle=new EntreeArticle();
+        entreeArticle.setDateentre(LocalDate.now());
+        entreeArticle.setAgent(userService.getUserWithAuthorities());
+        entreeArticle.setTitre("Bordereau D entre");
+        EntreeArticle entreeArticle1 = entreeArticleRepository.save(entreeArticle);
+        double montantht=0.0;
+        double montantttc=0.0;
+        int ite=1;
+        for (LigneEntreeArticle ligneEntreeArticle:ligneEntreeArticleSet){
+            ligneEntreeArticle.setDesignation("LE/"+entreeArticle1.getTitre()+"/"+ite);
+            ite++;
+            ligneEntreeArticle.setEntreeArticle(entreeArticle1);
+            LigneEntreeArticle ligneEntreeArticle1=ligneEntreeArticleService.save(ligneEntreeArticle);
+            montantht+=ligneEntreeArticle1.getMontanttotalht();
+            montantttc+=ligneEntreeArticle1.getMontanttotalttc();
+        }
+        entreeArticle1.setMontant_ht(montantht);
+        entreeArticle1.setMontant_ttc(montantttc);
+        EntreeArticle result = entreeArticleRepository.save(entreeArticle);
+        entreeArticleSearchRepository.save(result);
+        return result;
+    }
     /**
      * Save a entreeArticle.
      *
@@ -42,7 +80,6 @@ public class EntreeArticleService {
         entreeArticleSearchRepository.save(result);
         return result;
     }
-
     /**
      *  Get all the entreeArticles.
      *

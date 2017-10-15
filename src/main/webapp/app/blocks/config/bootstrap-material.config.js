@@ -5,7 +5,7 @@
         .module('gestCApp')
         .config(bootstrapMaterialDesignConfig);
 
-    compileServiceConfig.$inject = [];
+    /*compileServiceConfig.$inject = [];*/bootstrapMaterialDesignConfig.$inject = [];
 
     function bootstrapMaterialDesignConfig() {
         $.material.init();

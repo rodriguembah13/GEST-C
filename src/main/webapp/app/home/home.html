@@ -1,10 +1,8 @@
 <div ng-cloak>
     <div class="row">
-        <div class="col-md-4">
-            <span class="hipster img-responsive img-rounded"></span>
-        </div>
+       
         <div class="col-md-8">
-            <h1 data-translate="home.title">Welcome, Java Hipster!</h1>
+            <h1 data-translate="home.title">Welcome, Gest-c!</h1>
             <p class="lead" data-translate="home.subtitle">This is your homepage</p>
 
             <div ng-switch="vm.isAuthenticated()">
@@ -36,6 +34,18 @@
             <p>
              <span data-translate="home.like">If you like JHipster, don't forget to give us a star on </span>&nbsp;<a href="https://github.com/jhipster/generator-jhipster" target="_blank" rel="noopener" data-translate="home.github">GitHub</a>!
             </p>
+        </div>
+         <div class="col-md-4">
+ <div class="panel pull-right">
+     <div class="panel-body">
+         <ul class="list-inline">
+    <li class="item" ><a ui-sref="rupstock"><span class=" label label-danger">Produits en rupture de stock</span>&nbsp;<span class="badge label-info">{{vm.stockAlerte.length}}</span></a></li><br>
+    <li class="item"><span class=" label label-danger">Produits Périmés </span>&nbsp;<span class="badge label-danger">{{vm.stockPerem.length}}</span></li>
+    <br>
+    <li class="item"><span class=" label label-warning">Produits en voix de péremption</span>&nbsp;<span class="badge label-info">{{vm.stockPerem2.length}}</span></li>
+</ul>
+     </div>
+ </div>
         </div>
     </div>
 </div>

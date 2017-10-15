@@ -1,0 +1,74 @@
+<div>
+    <h2 data-translate="gestCApp.facture.home.title">Factures</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="numfacture"><span data-translate="gestCApp.facture.numfacture">Numfacture</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="montanttotalht"><span data-translate="gestCApp.facture.montanttotalht">Montanttotalht</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="montanttva"><span data-translate="gestCApp.facture.montanttva">Montanttva</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="reduction"><span data-translate="gestCApp.facture.reduction">Reduction</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="codebarre"><span data-translate="gestCApp.facture.codebarre">Codebarre</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="libellefacture"><span data-translate="gestCApp.facture.libellefacture">Libellefacture</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dateedition"><span data-translate="gestCApp.facture.dateedition">Dateedition</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="datefacturation"><span data-translate="gestCApp.facture.datefacturation">Datefacturation</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="montanttotalttc"><span data-translate="gestCApp.facture.montanttotalttc">Montanttotalttc</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="observation"><span data-translate="gestCApp.facture.observation">Observation</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="client.id"><span data-translate="gestCApp.facture.client">Client</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="caisse.id"><span data-translate="gestCApp.facture.caisse">Caisse</span> <span class="glyphicon glyphicon-sort"></span></th>
+                
+                    <th jh-sort-by="magasin.id"><span data-translate="gestCApp.facture.magasin">Magasin</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="facture in vm.facturesuser track by facture.id">
+                    <td><a ui-sref="facture-detail({id:facture.id})">{{facture.id}}</a></td>
+                    <td>{{facture.numfacture}}</td>
+                    <td>{{facture.montanttotalht}}</td>
+                    <td>{{facture.montanttva}}</td>
+                    <td>{{facture.reduction}}</td>
+                    <td>{{facture.codebarre}}</td>
+                    <td>{{facture.libellefacture}}</td>
+                        <td>{{facture.dateedition | date:'mediumDate'}}</td>
+                        <td>{{facture.datefacturation | date:'mediumDate'}}</td>
+                    <td>{{facture.montanttotalttc}}</td>
+                    <td>{{facture.observation}}</td>
+                    <td>
+                        <a ui-sref="client-detail({id:facture.client.id})">{{facture.client.nom}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="caisse-detail({id:facture.caisse.id})">{{facture.caisse.id}}</a>
+                    </td>
+                
+                    <td>
+                        <a ui-sref="magasin-detail({id:facture.magasin.id})">{{facture.magasin.id}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="facture-detail({id:facture.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="facture.edit({id:facture.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-print"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.print"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

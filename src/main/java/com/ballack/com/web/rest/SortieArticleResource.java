@@ -1,5 +1,6 @@
 package com.ballack.com.web.rest;
 
+import com.ballack.com.domain.LigneSortieArticle;
 import com.codahale.metrics.annotation.Timed;
 import com.ballack.com.domain.SortieArticle;
 import com.ballack.com.service.SortieArticleService;
@@ -21,6 +22,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -49,7 +51,7 @@ public class SortieArticleResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new sortieArticle, or with status 400 (Bad Request) if the sortieArticle has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/sortie-articles")
+    @PostMapping("/sortie-article1")
     @Timed
     public ResponseEntity<SortieArticle> createSortieArticle(@RequestBody SortieArticle sortieArticle) throws URISyntaxException {
         log.debug("REST request to save SortieArticle : {}", sortieArticle);
@@ -61,7 +63,22 @@ public class SortieArticleResource {
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
-
+    /**
+     * POST  /sortie-articles : Create a new sortieArticle.
+     *
+     * @param ligneSortieArticles the sortieArticle to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new sortieArticle, or with status 400 (Bad Request) if the sortieArticle has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/sortie-articles")
+    @Timed
+    public ResponseEntity<SortieArticle> createSortieArticleA(@RequestBody Set<LigneSortieArticle> ligneSortieArticles) throws URISyntaxException {
+        log.debug("REST request to save SortieArticle : {}", ligneSortieArticles);
+        SortieArticle result = sortieArticleService.saveAll(ligneSortieArticles);
+        return ResponseEntity.created(new URI("/api/sortie-articles/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
     /**
      * PUT  /sortie-articles : Updates an existing sortieArticle.
      *
@@ -96,6 +113,20 @@ public class SortieArticleResource {
         log.debug("REST request to get a page of SortieArticles");
         Page<SortieArticle> page = sortieArticleService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/sortie-articles");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    /**
+     * GET  /sortie-articles : get all the sortieArticles by user.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of sortieArticles in body
+     */
+    @GetMapping("/sortie-articleuser")
+    @Timed
+    public ResponseEntity<List<SortieArticle>> getAllSortieArticlesUser(@ApiParam Pageable pageable) {
+        log.debug("REST request to get a page of SortieArticles");
+        Page<SortieArticle> page = sortieArticleService.findAllbyUser(pageable);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "sortie-articleuser");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

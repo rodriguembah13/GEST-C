@@ -43,7 +43,7 @@
                     ng-model="vm.article.marque"
                     />
         </div>
-        <div class="form-group">
+<!--         <div class="form-group">
             <label class="control-label" data-translate="gestCApp.article.datecreation" for="field_datecreation">Datecreation</label>
                 <div class="input-group">
                     <input id="field_datecreation" type="text" class="form-control" name="datecreation" uib-datepicker-popup="{{dateformat}}" ng-model="vm.article.datecreation" is-open="vm.datePickerOpenStatus.datecreation"
@@ -52,29 +52,29 @@
                         <button type="button" class="btn btn-default" ng-click="vm.openCalendar('datecreation')"><i class="glyphicon glyphicon-calendar"></i></button>
                     </span>
                 </div>
-        </div>
+        </div> -->
         <div class="form-group">
             <label class="control-label" data-translate="gestCApp.article.nomarticle" for="field_nomarticle">Nomarticle</label>
             <input type="text" class="form-control" name="nomarticle" id="field_nomarticle"
                     ng-model="vm.article.nomarticle"
                     />
         </div>
-        <div class="form-group">
+<!--         <div class="form-group">
             <label class="control-label" data-translate="gestCApp.article.prixCourant" for="field_prixCourant">Prix Courant</label>
             <input type="number" class="form-control" name="prixCourant" id="field_prixCourant"
                     ng-model="vm.article.prixCourant"
                     />
-        </div>
+        </div> -->
 
         <div class="form-group">
             <label data-translate="gestCApp.article.familleArticle" for="field_familleArticle">Famille Article</label>
-            <select class="form-control" id="field_familleArticle" name="familleArticle" ng-model="vm.article.familleArticle" ng-options="familleArticle as familleArticle.id for familleArticle in vm.famillearticles track by familleArticle.id">
+            <select class="form-control" id="field_familleArticle" name="familleArticle" ng-model="vm.article.familleArticle" ng-options="familleArticle as familleArticle.libelle for familleArticle in vm.famillearticles track by familleArticle.id">
                 <option value=""></option>
             </select>
         </div>
         <div class="form-group">
             <label data-translate="gestCApp.article.formeArticle" for="field_formeArticle">Forme Article</label>
-            <select class="form-control" id="field_formeArticle" name="formeArticle" ng-model="vm.article.formeArticle" ng-options="formeArticle as formeArticle.id for formeArticle in vm.formearticles track by formeArticle.id">
+            <select class="form-control" id="field_formeArticle" name="formeArticle" ng-model="vm.article.formeArticle" ng-options="formeArticle as formeArticle.nomForme for formeArticle in vm.formearticles track by formeArticle.id">
                 <option value=""></option>
             </select>
         </div>

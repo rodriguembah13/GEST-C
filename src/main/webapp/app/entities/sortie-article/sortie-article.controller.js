@@ -5,9 +5,9 @@
         .module('gestCApp')
         .controller('SortieArticleController', SortieArticleController);
 
-    SortieArticleController.$inject = ['$state', 'SortieArticle', 'SortieArticleSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    SortieArticleController.$inject = ['$state','$scope','$http','SortieArticle', 'SortieArticleSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','SortieArticleU'];
 
-    function SortieArticleController($state, SortieArticle, SortieArticleSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function SortieArticleController($state,$scope,$http, SortieArticle, SortieArticleSearch, ParseLinks, AlertService, paginationConstants, pagingParams,SortieArticleU) {
 
         var vm = this;
 
@@ -23,7 +23,10 @@
         vm.currentSearch = pagingParams.search;
 
         loadAll();
-
+        vm.sorties=SortieArticleU.query({
+                    page: pagingParams.page - 1,
+                    size: vm.itemsPerPage
+                });
         function loadAll () {
             if (pagingParams.search) {
                 SortieArticleSearch.query({
@@ -38,6 +41,13 @@
                     size: vm.itemsPerPage,
                     sort: sort()
                 }, onSuccess, onError);
+            }
+            function sort() {
+                var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+                if (vm.predicate !== 'id') {
+                    result.push('id');
+                }
+                return result;
             }
             function sort() {
                 var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
@@ -90,6 +100,20 @@
             vm.reverse = true;
             vm.currentSearch = null;
             vm.transition();
-        }
+        }  
+          $scope.PrintFacture=function(vente){
+      $scope.clas=vente;  
+        $http.get("/api/PrintFacture/"+$scope.clas,{responseType:'arraybuffer'})
+        .success(function(data){
+          var file=new Blob([data],{type:'application/pdf'});
+          var fileUrl=URL.createObjectURL(file);
+          var des = window.open(fileUrl,'_blank','');
+
+        })
+        .error(function(err){
+          AlertService.error(err.message);
+        });            
+
+   }
     }
 })();

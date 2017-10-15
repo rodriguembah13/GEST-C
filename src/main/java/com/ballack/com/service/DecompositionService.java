@@ -1,7 +1,11 @@
 package com.ballack.com.service;
 
+import com.ballack.com.domain.Article;
 import com.ballack.com.domain.Decomposition;
+import com.ballack.com.domain.Stock;
+import com.ballack.com.repository.ArticleRepository;
 import com.ballack.com.repository.DecompositionRepository;
+import com.ballack.com.repository.StockRepository;
 import com.ballack.com.repository.search.DecompositionSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,10 +27,13 @@ public class DecompositionService {
     private final Logger log = LoggerFactory.getLogger(DecompositionService.class);
 
     private final DecompositionRepository decompositionRepository;
-
+    private final ArticleRepository articleRepository;
+    private final StockRepository stockRepository;
     private final DecompositionSearchRepository decompositionSearchRepository;
-    public DecompositionService(DecompositionRepository decompositionRepository, DecompositionSearchRepository decompositionSearchRepository) {
+    public DecompositionService(DecompositionRepository decompositionRepository, ArticleRepository articleRepository, StockRepository stockRepository, DecompositionSearchRepository decompositionSearchRepository) {
         this.decompositionRepository = decompositionRepository;
+        this.articleRepository = articleRepository;
+        this.stockRepository = stockRepository;
         this.decompositionSearchRepository = decompositionSearchRepository;
     }
 
@@ -38,6 +45,32 @@ public class DecompositionService {
      */
     public Decomposition save(Decomposition decomposition) {
         log.debug("Request to save Decomposition : {}", decomposition);
+        Decomposition result = decompositionRepository.save(decomposition);
+        decompositionSearchRepository.save(result);
+        return result;
+    }
+    /**
+     * Save a decomposition.
+     *
+     * @param article the entity to save
+     * @return the persisted entity
+     */
+    public Decomposition decomposition(Article article) {
+        Decomposition decomposition=new Decomposition();
+        log.debug("Request to save Decomposition : {}", article);
+        Stock stock=stockRepository.findStockactif(article);
+        decomposition.setArticledepart("Art/DEP"+article.getNomarticle()+"/"+stock.getQuantite()+"/"+stock.getQuantiteGros());
+        decomposition.setArticle(article);
+        int nbre=article.getFormeArticle().getQuantite();
+        if (stock.getQuantiteGros()-1>0){
+            stock.setQuantite(stock.getQuantite()+nbre);
+            stock.setQuantiteGros(stock.getQuantiteGros()-1);
+            stockRepository.saveAndFlush(stock);
+        }else {
+            stock.setQuantite(stock.getQuantite());
+            stock.setQuantiteGros(stock.getQuantiteGros());
+        }
+        decomposition.setArticlefin("Art/FIN"+article.getNomarticle()+"/"+(stock.getQuantite()+nbre)+"/"+(stock.getQuantiteGros()-1)+"/");
         Decomposition result = decompositionRepository.save(decomposition);
         decompositionSearchRepository.save(result);
         return result;

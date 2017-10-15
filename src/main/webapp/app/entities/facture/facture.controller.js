@@ -5,9 +5,9 @@
         .module('gestCApp')
         .controller('FactureController', FactureController);
 
-    FactureController.$inject = ['$state', 'Facture', 'FactureSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    FactureController.$inject = ['$state', 'Facture', 'FactureSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','FactureU'];
 
-    function FactureController($state, Facture, FactureSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function FactureController($state, Facture, FactureSearch, ParseLinks, AlertService, paginationConstants, pagingParams,FactureU) {
 
         var vm = this;
 
@@ -21,7 +21,10 @@
         vm.loadAll = loadAll;
         vm.searchQuery = pagingParams.search;
         vm.currentSearch = pagingParams.search;
-
+        vm.facturesuser=FactureU.query({
+                    page: pagingParams.page - 1,
+                    size: vm.itemsPerPage
+                });
         loadAll();
 
         function loadAll () {

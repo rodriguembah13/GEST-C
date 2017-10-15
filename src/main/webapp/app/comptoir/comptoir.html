@@ -1,0 +1,175 @@
+<div ng-cloak>
+
+    <div class="well">
+        <h2>Comptoir Vente en detail</h2>
+        <div class="btn-group" uib-dropdown>
+            <!--          <button type="button" class="btn dropdown pointer"uib-dropdown-toggle style="background-color: #00897B">Caisse</button> -->
+            <button class="btn btn-primary" uib-dropdown-toggle>Caisse</button>
+            <ul class="dropdown-menu" uib-dropdown-menu>
+                <li><a ng-click="vm.active()">Ouverture</a></li>
+                <li><a ng-click="vm.desactive()">Fermeture</a></li>
+            </ul>
+        </div>
+        <uib-alert type="{{alert.type}}" class="col-lg-3" ng-show="vm.caisseatif.active" close="closeAlert()"
+                   ng-if="show">
+            {{vm.caisseatif.numcaisse}} ouvert: date ouverture: "{{vm.caisseatif.dateOuverture}}".
+        </uib-alert>
+        <uib-alert class="col-lg-3" ng-show="!vm.caisseatif.active" close="closeAlert()" ng-if="show">
+            Caisse Ferme.
+        </uib-alert>
+
+    </div>
+    <div class="well" ng-show="vm.caisseatif.active">
+    <jhi-alert></jhi-alert>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="panel">
+                    <div class="panel-body">
+                        
+
+                        <div class="form-group">
+                            <div class="input-group bmd-collapse-inline">
+                                <ui-select  ng-model="vm.client">
+                                    <ui-select-match placeholder="Select or search a client in the list...">
+                                        {{$select.selected.nom}}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item in vm.clients | filter: $select.search">
+                                        <span>{{item.nom }}</span>
+
+                                    </ui-select-choices>
+                                </ui-select>
+                                <span class="input-group-btn">
+              <button type="button" ui-sref="client.new" class="btn btn-default" uib-tooltip="new client">
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+            </span>
+                            </div>
+                        </div>
+                        <table class="table table-hover table-condensed ">
+                            <tr style="font-weight: bold">
+                                <td>Article</td>
+                                <td>Quantite</td>
+                                <td><span ng-show="tableform.$visible">Action</span></td>
+                            </tr>
+                            <tr ng-repeat="user in lines | filter:filterUser">
+                                <td>
+    <span editable-ui-select="user.article" data-e-ng-model="state" data-e-style="min-width:200px;"
+          e-form="tableform" ng-click="vm.getStockActif(state)">
+      {{user.article.nomarticle}}
+      <editable-ui-select-match placeholder="Choisir Article">
+        {{$select.selected.nomarticle}}
+      </editable-ui-select-match>
+      <editable-ui-select-choices repeat="state in vm.articles | filter: $select.search track by $index">
+        <div ng-bind-html="state.nomarticle" class="bmd-collapse-inline">{{state.nomarticle}}</div>
+      <small>
+        prix: {{state.prixCourant}}
+      </small>
+      </editable-ui-select-choices>
+    </span>
+                                </td>
+                                <p>{{errortext}}</p>
+                                <td>
+          <span editable-text="user.quantite" e-form="tableform" data-e-style="max-width:110px;">
+            {{ user.quantite}}
+          </span>
+                                </td>
+                                <td style="white-space: nowrap">
+                                    <!-- form -->
+                                    <form editable-form name="tableform" onaftersave="saveUser($data)"
+                                          ng-show="tableform.$visible"
+                                          class="form-buttons form-inline" shown="inserted == user">
+                                        <button type="submit" ng-disabled="tableform$waiting" class="btn btn-primary">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </button>
+                                        <button type="button" ng-disabled="tableform.$waiting"
+                                                ng-click="tableform.$cancel()"
+                                                class="btn btn-default">
+                                            <span class="glyphicon glyphicon-move"></span>
+                                        </button>
+                                    </form>
+                                    <div class="buttons" ng-show="!tableform.$visible">
+                                        <button type="button" class="btn btn-primary" ng-click="tableform.$show()">
+                                            edit
+                                        </button>
+                                        <button type="button" class="btn btn-danger" ng-click="removeUser($index)">del
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <button class="btn btn-primary btn-raised" ng-click="addLine()">Add</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" style="border: 2px">
+                <div class="panel">
+
+                    <div class="panel-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th>Prix</th>
+                                <th>Quantite</th>
+                                <th>Taxe</th>
+
+                                <th>Montant Ht</th>
+                                <th>Montant ttc</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat=" user in lines">
+                                <td>{{ user.article.nomarticle}}</td>
+                                <td>{{ user.article.prixCourant}}</td>
+                                <td>{{ user.quantite}}</td>
+                                <td>{{ user.taxeTVA}}</td>
+                                <td>{{ user.article.prixCourant*user.quantite}}</td>
+                                <td>{{ (user.prix_unitaire*user.quantite)+(user.prix_unitaire*user.taxeTVA *0.01)}}</td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>TOTAL</td>
+                                <td><span class="badge btn-danger">{{getTotal()}}</span></td>
+                                <td><span class="badge btn-danger">{{getTotalTTC()}}</span></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-info btn-raised" ng-click="saveTable()">Valider</button>
+                        <button type="button" class="btn btn-danger btn-raised" ng-click="cancel()">cancel</button>
+                    </div>
+                </div>
+                <div class="panel" ng-if="paie">
+                    <div class="panel-body">
+                        <form class="form-inline" role="form" ng-submit="PrintFacture(facture)">
+
+                            <div class="form-group">
+                                <!-- <label>Mode Payement:</label> -->
+                                <select id="mode" class="form-control" required ng-model="mode">
+                                    <option value="">Mode Payement:</option>
+                                    <option value="caisse">Caisse</option>
+                                    <option value="cheque">Cheque</option>
+                                    <option value="mtn">MTN/ORANGE</option>
+                                </select>
+                            </div>{{modeA}}{{facture}}
+                            <div class="form-group" ng-if="mode=='caisse'">
+                                <label for="pwd">Montant:</label>
+                                <input type="number" class="form-control" id="mtn">
+                            </div>
+                            <div class="form-group">
+                                <!--  <label>Facture:</label> -->
+                                <select id="facture" class="form-control" required ng-model="facture">
+                                    <option value="">Facture:</option>
+                                    <option value="fact1">FactureA4</option>
+                                    <option value="fact2">Tichet</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

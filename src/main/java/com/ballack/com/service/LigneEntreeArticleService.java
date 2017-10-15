@@ -1,7 +1,9 @@
 package com.ballack.com.service;
 
 import com.ballack.com.domain.LigneEntreeArticle;
+import com.ballack.com.domain.Stock;
 import com.ballack.com.repository.LigneEntreeArticleRepository;
+import com.ballack.com.repository.StockRepository;
 import com.ballack.com.repository.search.LigneEntreeArticleSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,10 +25,13 @@ public class LigneEntreeArticleService {
     private final Logger log = LoggerFactory.getLogger(LigneEntreeArticleService.class);
 
     private final LigneEntreeArticleRepository ligneEntreeArticleRepository;
-
+    private final UserService userService;
+    private final StockRepository stockRepository;
     private final LigneEntreeArticleSearchRepository ligneEntreeArticleSearchRepository;
-    public LigneEntreeArticleService(LigneEntreeArticleRepository ligneEntreeArticleRepository, LigneEntreeArticleSearchRepository ligneEntreeArticleSearchRepository) {
+    public LigneEntreeArticleService(LigneEntreeArticleRepository ligneEntreeArticleRepository, UserService userService, StockRepository stockRepository, LigneEntreeArticleSearchRepository ligneEntreeArticleSearchRepository) {
         this.ligneEntreeArticleRepository = ligneEntreeArticleRepository;
+        this.userService = userService;
+        this.stockRepository = stockRepository;
         this.ligneEntreeArticleSearchRepository = ligneEntreeArticleSearchRepository;
     }
 
@@ -38,6 +43,24 @@ public class LigneEntreeArticleService {
      */
     public LigneEntreeArticle save(LigneEntreeArticle ligneEntreeArticle) {
         log.debug("Request to save LigneEntreeArticle : {}", ligneEntreeArticle);
+        ligneEntreeArticle.setAgent(userService.getUserWithAuthorities());
+        Stock stock=new Stock();
+        stock.setQuantite(ligneEntreeArticle.getQuantite());
+        stock.setQuantiteGros(ligneEntreeArticle.getQuantite());
+        stock.setArticle(ligneEntreeArticle.getArticle());
+        stock.setPrixAchat(ligneEntreeArticle.getPrix_unitaire());
+        stock.setTaxeTVA(ligneEntreeArticle.getTaxeTVA());
+        System.out.println(ligneEntreeArticle.getDateperemption());
+        stock.setQuantiteAlerte(10);
+        stock.setClosed(false);
+        stock.setQuantiteAlerteGros(5);
+        stock.setActif(false);
+        stock.setPrixArticle(ligneEntreeArticle.getPrix_unitaire());
+        stock.setPrixAchat(ligneEntreeArticle.getPrixAchat());
+        stock.setDateperemption(ligneEntreeArticle.getDateperemption());
+        ligneEntreeArticle.setMontanttotalht(ligneEntreeArticle.getPrix_unitaire()*ligneEntreeArticle.getQuantite());
+        ligneEntreeArticle.setMontanttotalttc(ligneEntreeArticle.getTaxeTVA()*ligneEntreeArticle.getPrix_unitaire()*0.01+ligneEntreeArticle.getMontanttotalht());
+        stockRepository.save(stock);
         LigneEntreeArticle result = ligneEntreeArticleRepository.save(ligneEntreeArticle);
         ligneEntreeArticleSearchRepository.save(result);
         return result;

@@ -1,7 +1,9 @@
 package com.ballack.com.service;
 
 import com.ballack.com.domain.LigneSortieArticle;
+import com.ballack.com.domain.Stock;
 import com.ballack.com.repository.LigneSortieArticleRepository;
+import com.ballack.com.repository.StockRepository;
 import com.ballack.com.repository.search.LigneSortieArticleSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +12,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.time.LocalDate;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -23,10 +27,13 @@ public class LigneSortieArticleService {
     private final Logger log = LoggerFactory.getLogger(LigneSortieArticleService.class);
 
     private final LigneSortieArticleRepository ligneSortieArticleRepository;
+    private final StockRepository stockRepository;
 
     private final LigneSortieArticleSearchRepository ligneSortieArticleSearchRepository;
-    public LigneSortieArticleService(LigneSortieArticleRepository ligneSortieArticleRepository, LigneSortieArticleSearchRepository ligneSortieArticleSearchRepository) {
+
+    public LigneSortieArticleService(LigneSortieArticleRepository ligneSortieArticleRepository, StockRepository stockRepository, LigneSortieArticleSearchRepository ligneSortieArticleSearchRepository) {
         this.ligneSortieArticleRepository = ligneSortieArticleRepository;
+        this.stockRepository = stockRepository;
         this.ligneSortieArticleSearchRepository = ligneSortieArticleSearchRepository;
     }
 
@@ -38,16 +45,31 @@ public class LigneSortieArticleService {
      */
     public LigneSortieArticle save(LigneSortieArticle ligneSortieArticle) {
         log.debug("Request to save LigneSortieArticle : {}", ligneSortieArticle);
-        LigneSortieArticle result = ligneSortieArticleRepository.save(ligneSortieArticle);
-        ligneSortieArticleSearchRepository.save(result);
+        Stock stock = stockRepository.findStockactif(ligneSortieArticle.getArticle());
+        LigneSortieArticle result;
+        if (stock.getQuantite() >= ligneSortieArticle.getQuantite()) {
+
+            stock.setQuantite(stock.getQuantite() - ligneSortieArticle.getQuantite());
+            stockRepository.saveAndFlush(stock);
+
+            ligneSortieArticle.setMontantht(stock.getPrixArticle() * ligneSortieArticle.getQuantite());
+            ligneSortieArticle.setDesignation("LS "+ LocalDate.now()+"/A:"+ligneSortieArticle.getArticle().getNomarticle()+"C:"+ligneSortieArticle.getClient().getNom());
+            ligneSortieArticle.setMontantttc((stock.getTaxeTVA() * ligneSortieArticle.getMontantht())*0.01 + ligneSortieArticle.getMontantht());
+            ligneSortieArticle.setMontanttva(stock.getTaxeTVA());
+            result = ligneSortieArticleRepository.save(ligneSortieArticle);
+            ligneSortieArticleSearchRepository.save(result);
+        } else {
+            result = null;
+        }
+
         return result;
     }
 
     /**
-     *  Get all the ligneSortieArticles.
+     * Get all the ligneSortieArticles.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<LigneSortieArticle> findAll(Pageable pageable) {
@@ -56,10 +78,10 @@ public class LigneSortieArticleService {
     }
 
     /**
-     *  Get one ligneSortieArticle by id.
+     * Get one ligneSortieArticle by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Transactional(readOnly = true)
     public LigneSortieArticle findOne(Long id) {
@@ -68,9 +90,9 @@ public class LigneSortieArticleService {
     }
 
     /**
-     *  Delete the  ligneSortieArticle by id.
+     * Delete the  ligneSortieArticle by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     public void delete(Long id) {
         log.debug("Request to delete LigneSortieArticle : {}", id);
@@ -81,9 +103,9 @@ public class LigneSortieArticleService {
     /**
      * Search for the ligneSortieArticle corresponding to the query.
      *
-     *  @param query the query of the search
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param query    the query of the search
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<LigneSortieArticle> search(String query, Pageable pageable) {

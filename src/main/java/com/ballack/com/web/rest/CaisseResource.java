@@ -45,6 +45,31 @@ public class CaisseResource {
     /**
      * POST  /caisses : Create a new caisse.
      *
+     *
+     * @return the ResponseEntity with status 201 (Created) and with body the new caisse, or with status 400 (Bad Request) if the caisse has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/caisses1")
+    @Timed
+    public ResponseEntity<Caisse> createCaisse1() throws URISyntaxException {
+
+        Caisse result = caisseService.create();
+        return ResponseEntity.created(new URI("/api/caisses1/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+    @PostMapping("/caisses2")
+    @Timed
+    public ResponseEntity<Caisse> createCaisse2() throws URISyntaxException {
+
+        Caisse result = caisseService.ferme();
+        return ResponseEntity.created(new URI("/api/caisses2/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+    /**
+     * POST  /caisses : Create a new caisse.
+     *
      * @param caisse the caisse to create
      * @return the ResponseEntity with status 201 (Created) and with body the new caisse, or with status 400 (Bad Request) if the caisse has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
@@ -112,7 +137,19 @@ public class CaisseResource {
         Caisse caisse = caisseService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(caisse));
     }
-
+    /**
+     * GET  /caisse : get the  caisse actif.
+     *
+     *  the id of the caisse to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the caisse, or with status 404 (Not Found)
+     */
+    @GetMapping("/caisse")
+    @Timed
+    public ResponseEntity<Caisse> getCaisseActif() {
+        log.debug("REST request to get Caisse : {}");
+        Caisse caisse = caisseService.findCaisseActif();
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(caisse));
+    }
     /**
      * DELETE  /caisses/:id : delete the "id" caisse.
      *

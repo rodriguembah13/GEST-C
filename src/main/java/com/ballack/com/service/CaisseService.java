@@ -1,6 +1,7 @@
 package com.ballack.com.service;
 
 import com.ballack.com.domain.Caisse;
+import com.ballack.com.domain.User;
 import com.ballack.com.repository.CaisseRepository;
 import com.ballack.com.repository.search.CaisseSearchRepository;
 import org.slf4j.Logger;
@@ -10,6 +11,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
+import java.time.LocalDate;
+import java.util.List;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -23,10 +27,11 @@ public class CaisseService {
     private final Logger log = LoggerFactory.getLogger(CaisseService.class);
 
     private final CaisseRepository caisseRepository;
-
+    private final UserService userService;
     private final CaisseSearchRepository caisseSearchRepository;
-    public CaisseService(CaisseRepository caisseRepository, CaisseSearchRepository caisseSearchRepository) {
+    public CaisseService(CaisseRepository caisseRepository, UserService userService, CaisseSearchRepository caisseSearchRepository) {
         this.caisseRepository = caisseRepository;
+        this.userService = userService;
         this.caisseSearchRepository = caisseSearchRepository;
     }
 
@@ -38,11 +43,51 @@ public class CaisseService {
      */
     public Caisse save(Caisse caisse) {
         log.debug("Request to save Caisse : {}", caisse);
+        caisse.setDateOuverture(LocalDate.now());
+
         Caisse result = caisseRepository.save(caisse);
         caisseSearchRepository.save(result);
         return result;
     }
+    /**
+     * Save a caisse.
+     *
+     * @return the persisted entity
+     */
+    public Caisse create() {
+        User user=userService.getUserWithAuthorities();
+        log.debug("Request to save Caisse : {}", user);
+        int te=0;//compte les caisse de l'user actif
+        List<Caisse> caisseList=caisseRepository.findByUserIsCurrentUser();
+        for (Caisse caisse:caisseList){
+            if (caisse.isActive()){
+                te+=1;
+            }
+        }
+        Caisse result = new Caisse();
+        if (te<=0){
+            Caisse caisse=new Caisse();
+            caisse.setUser(user);
+            caisse.setDateOuverture(LocalDate.now());
+            caisse.setNumcaisse("CAISSE_"+arrondi2(Math.random(),4));
+            caisse.setActive(true);
+            result = caisseRepository.save(caisse);
+            caisseSearchRepository.save(result);
+        }
+        return result;
+    }
+    public Caisse ferme() {
 
+        Caisse caisse=caisseRepository.findByUserIsCurrentActif();
+        caisse.setDateFermeture(LocalDate.now());
+        caisse.setActive(false);
+        Caisse result = caisseRepository.saveAndFlush(caisse);
+        caisseSearchRepository.save(result);
+        return result;
+    }
+    public static int arrondi2(double A, int B) {
+        return ((int) (A * Math.pow(10, B) + .5));
+    }
     /**
      *  Get all the caisses.
      *
@@ -66,7 +111,17 @@ public class CaisseService {
         log.debug("Request to get Caisse : {}", id);
         return caisseRepository.findOne(id);
     }
-
+    /**
+     *  Get one caisse by id.
+     *
+     *
+     *  @return the entity
+     */
+    @Transactional(readOnly = true)
+    public Caisse findCaisseActif() {
+        log.debug("Request to get Caisse : {}");
+        return caisseRepository.findByUserIsCurrentActif();
+    }
     /**
      *  Delete the  caisse by id.
      *

@@ -40,3 +40,51 @@
         });
     }
 })();
+(function() {
+    'use strict';
+    angular
+        .module('gestCApp')
+        .factory('StockA', StockA);
+
+    StockA.$inject = ['$resource', 'DateUtils'];
+
+    function StockA ($resource, DateUtils) {
+        var resourceUrl =  'api/stocksA/:id';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET', isArray: true}
+        });
+    }
+})();
+(function() {
+    'use strict';
+    angular
+        .module('gestCApp')
+        .factory('StockP', StockP);
+
+    StockP.$inject = ['$resource', 'DateUtils'];
+
+    function StockP ($resource, DateUtils) {
+        var resourceUrl =  'api/stocksP/:id';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET', isArray: true}
+        });
+    }
+})();
+(function() {
+    'use strict';
+    angular
+        .module('gestCApp')
+        .factory('StockP2', StockP2);
+
+    StockP2.$inject = ['$resource', 'DateUtils'];
+
+    function StockP2 ($resource, DateUtils) {
+        var resourceUrl =  'api/stocksP2/:id';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET', isArray: true}
+        });
+    }
+})();

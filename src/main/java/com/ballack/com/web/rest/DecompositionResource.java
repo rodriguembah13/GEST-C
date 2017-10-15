@@ -1,5 +1,6 @@
 package com.ballack.com.web.rest;
 
+import com.ballack.com.domain.Article;
 import com.codahale.metrics.annotation.Timed;
 import com.ballack.com.domain.Decomposition;
 import com.ballack.com.service.DecompositionService;
@@ -49,7 +50,7 @@ public class DecompositionResource {
      * @return the ResponseEntity with status 201 (Created) and with body the new decomposition, or with status 400 (Bad Request) if the decomposition has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
-    @PostMapping("/decompositions")
+    @PostMapping("/decomposition")
     @Timed
     public ResponseEntity<Decomposition> createDecomposition(@RequestBody Decomposition decomposition) throws URISyntaxException {
         log.debug("REST request to save Decomposition : {}", decomposition);
@@ -83,7 +84,26 @@ public class DecompositionResource {
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, decomposition.getId().toString()))
             .body(result);
     }
+    /**
+     * PUT  /decompositions : Updates an existing decomposition.
+     *
+     * @param article the decomposition to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated decomposition,
+     * or with status 400 (Bad Request) if the decomposition is not valid,
+     * or with status 500 (Internal Server Error) if the decomposition couldn't be updated
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/decompositions")
+    @Timed
+    public ResponseEntity<Decomposition> decomposition(@RequestBody Article article) throws URISyntaxException {
+        log.debug("REST request to update Decomposition : {}", article);
+        Decomposition decomposition = decompositionService.decomposition(article);
 
+        Decomposition result = decompositionService.save(decomposition);
+        return ResponseEntity.created(new URI("/api/decompositions/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
     /**
      * GET  /decompositions : get all the decompositions.
      *

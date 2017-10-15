@@ -40,3 +40,19 @@
         });
     }
 })();
+(function() {
+    'use strict';
+    angular
+        .module('gestCApp')
+        .factory('SortieArticleU', SortieArticleU);
+
+    SortieArticleU.$inject = ['$resource', 'DateUtils'];
+
+    function SortieArticleU ($resource, DateUtils) {
+        var resourceUrl =  'api/sortie-articleuser/:id';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET', isArray: true}
+        });
+    }
+})();

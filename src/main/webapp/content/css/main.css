@@ -347,3 +347,15 @@ Fix error field display
 }
 
 /* jhipster-needle-css-add-main JHipster will add new css style */
+
+.navbar .dropdown-menu li > a,
+.navbar.navbar-default .dropdown-menu li > a {
+  font-size: 14px;
+  padding: 10px 10px;
+}
+.dropdown-menu .divider {
+  height: 1px;
+  margin: 3px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}

@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-xs-4 no-padding-left">
-                <button class="btn btn-primary" ui-sref="article.new" >
+                <button class="btn-raised btn btn-primary" ui-sref="article.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs-down"  data-translate="gestCApp.article.home.createLabel">
                         Create new Article
@@ -59,10 +59,10 @@
                     <td>{{article.nomarticle}}</td>
                     <td>{{article.prixCourant}}</td>
                     <td>
-                        <a ui-sref="famille-article-detail({id:article.familleArticle.id})">{{article.familleArticle.id}}</a>
+                        <a ui-sref="famille-article-detail({id:article.familleArticle.id})">{{article.familleArticle.libelle}}</a>
                     </td>
                     <td>
-                        <a ui-sref="forme-article-detail({id:article.formeArticle.id})">{{article.formeArticle.id}}</a>
+                        <a ui-sref="forme-article-detail({id:article.formeArticle.id})">{{article.formeArticle.nomForme}}</a>
                     </td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

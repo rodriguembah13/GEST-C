@@ -43,3 +43,19 @@
         });
     }
 })();
+(function() {
+    'use strict';
+    angular
+        .module('gestCApp')
+        .factory('FactureU', FactureU);
+
+    FactureU.$inject = ['$resource', 'DateUtils'];
+
+    function FactureU ($resource, DateUtils) {
+        var resourceUrl =  'api/factures/:id';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET', isArray: true}
+        });
+    }
+})();

@@ -98,7 +98,7 @@ public class ArticleResource {
         if ("etiquette-is-null".equals(filter)) {
             log.debug("REST request to get all Articles where etiquette is null");
             return new ResponseEntity<>(articleService.findAllWhereEtiquetteIsNull(),
-                    HttpStatus.OK);
+                HttpStatus.OK);
         }
         log.debug("REST request to get a page of Articles");
         Page<Article> page = articleService.findAll(pageable);

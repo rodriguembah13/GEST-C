@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -41,7 +42,15 @@ public class ArticleService {
      */
     public Article save(Article article) {
         log.debug("Request to save Article : {}", article);
+        article.setDatecreation(LocalDate.now());
+        article.setNumArticle(""+article.getId());
         Article result = articleRepository.save(article);
+        articleSearchRepository.save(result);
+        return result;
+    }
+    public Article saveAndFluch(Article article) {
+        log.debug("Request to save Article : {}", article);
+        Article result = articleRepository.saveAndFlush(article);
         articleSearchRepository.save(result);
         return result;
     }
@@ -63,7 +72,7 @@ public class ArticleService {
      *  get all the articles where Etiquette is null.
      *  @return the list of entities
      */
-    @Transactional(readOnly = true) 
+    @Transactional(readOnly = true)
     public List<Article> findAllWhereEtiquetteIsNull() {
         log.debug("Request to get all articles where Etiquette is null");
         return StreamSupport

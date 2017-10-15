@@ -1,0 +1,129 @@
+<style>
+     .Red {
+       color: black;
+       background-color: Red;
+     }
+     .Yellow {
+       background-color: Yellow;
+     }
+      .Blue {
+       background-color: Blue;
+     }
+      .Green {
+       background-color: Green;
+     }
+     .Gray {
+       background-color: Gray;
+       color: black;
+     }
+      .b{
+        font-weight: bold;
+   </style>
+<div>
+    <h2 data-translate="gestCApp.stock.home.title">Stocks</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+<!--             <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="stock.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span class="hidden-xs-down"  data-translate="gestCApp.stock.home.createLabel">
+                        Create new Stock
+                    </span>
+                </button>
+            </div> -->
+            <div class="col-xs-8 no-padding-right">
+                <form name="searchForm" class="form-inline">
+                    <div class="input-group pull-right" >
+                        <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'gestCApp.stock.home.search' | translate }}">
+                        <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                        <span class="input-group-btn width-min" ng-if="vm.currentSearch">
+                            <button class="btn btn-info" ng-click="vm.clear()">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="quantite"><span data-translate="gestCApp.stock.quantite">Quantite</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="quantiteAlerte"><span data-translate="gestCApp.stock.quantiteAlerte">Quantite Alerte</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prixArticle"><span data-translate="gestCApp.stock.prixArticle">Prix Article</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="dateperemption"><span data-translate="gestCApp.stock.dateperemption">Date peremption</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="actif"><span data-translate="gestCApp.stock.actif">Actif</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="prixAchat"><span data-translate="gestCApp.stock.prixAchat">Prix Achat</span> <span class="glyphicon glyphicon-sort"></span></th>
+                   <!--  <th jh-sort-by="observation"><span data-translate="gestCApp.stock.observation">Observation</span> <span class="glyphicon glyphicon-sort"></span></th> -->
+                    <th jh-sort-by="taxeTVA"><span data-translate="gestCApp.stock.taxeTVA">Taxe TVA</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="quantiteGros"><span data-translate="gestCApp.stock.quantiteGros">Quantite Gros</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="quantiteAlerteGros"><span data-translate="gestCApp.stock.quantiteAlerteGros">Quantite Alerte Gros</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="closed"><span data-translate="gestCApp.stock.closed">Closed</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="article.id"><span data-translate="gestCApp.stock.article">Article</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="stock in vm.stocks track by stock.id" >
+                    <td><a ui-sref="stock-detail({id:stock.id})">{{stock.id}}</a></td>
+                    <td>{{stock.quantite}}</td>
+                    <td>{{stock.quantiteAlerte}}</td>
+                    <td>{{stock.prixArticle}}</td>
+                        <td>{{stock.dateperemption | date:'mediumDate'}}</td>
+                    <td >{{stock.actif}}</td>
+                    <td>{{stock.prixAchat}}</td>
+                   <!--  <td>{{stock.observation}}</td>
+ -->                    <td>{{stock.taxeTVA}}</td>
+                    <td>{{stock.quantiteGros}}</td>
+                    <td>{{stock.quantiteAlerteGros}}</td>
+                    <td>{{stock.closed}}</td>
+                    <td>
+                        <a ui-sref="article-detail({id:stock.article.id})">{{stock.article.nomarticle}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="stock-detail({id:stock.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>                             <div class="btn-group" uib-dropdown>
+         <button type="button" class="btn dropdown pointer"uib-dropdown-toggle style="background-color: #00897B">Action</button>
+         <ul class="dropdown-menu" uib-dropdown-menu>
+             <li><a ng-click="vm.active(stock.id)">Active/desactif</a></li>
+             <li><a  ng-click="vm.save(stock.article)">Decomposition</a></li>
+             <li><a  ng-click="vm.save(stock.article)">Recomposition</a></li>
+             <li><a  ng-click="vm.save(stock.article)">Ferme/ouvrir</a></li>
+         </ul></div>
+<!--                             <button type="submit"
+                                    ui-sref="stock.edit({id:stock.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button> -->
+                            <button type="submit"
+                                    ui-sref="stock.delete({id:stock.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+</div>

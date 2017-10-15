@@ -76,11 +76,11 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
-                            <button type="submit"
-                                    ui-sref="sortie-article.edit({id:sortieArticle.id})"
-                                    class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            <button type="button"
+                                    
+                                    class="btn btn-primary btn-sm" ng-click="PrintFacture(sortieArticle.id)">
+                                <span class="glyphicon glyphicon-print"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.print"></span>
                             </button>
                             <button type="submit"
                                     ui-sref="sortie-article.delete({id:sortieArticle.id})"

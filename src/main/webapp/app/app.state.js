@@ -15,6 +15,10 @@
                     templateUrl: 'app/layouts/navbar/navbar.html',
                     controller: 'NavbarController',
                     controllerAs: 'vm'
+                },'menubar@': {
+                    templateUrl: 'app/layouts/menubar/menubar.html',
+                    controller: 'MenubarController',
+                    controllerAs: 'vm'
                 }
             },
             resolve: {

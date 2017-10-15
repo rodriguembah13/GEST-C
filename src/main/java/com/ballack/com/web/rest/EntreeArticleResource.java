@@ -1,5 +1,6 @@
 package com.ballack.com.web.rest;
 
+import com.ballack.com.domain.LigneEntreeArticle;
 import com.codahale.metrics.annotation.Timed;
 import com.ballack.com.domain.EntreeArticle;
 import com.ballack.com.service.EntreeArticleService;
@@ -21,6 +22,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -45,18 +47,16 @@ public class EntreeArticleResource {
     /**
      * POST  /entree-articles : Create a new entreeArticle.
      *
-     * @param entreeArticle the entreeArticle to create
+     * @param ligneEntreeArticles the entreeArticle to create
      * @return the ResponseEntity with status 201 (Created) and with body the new entreeArticle, or with status 400 (Bad Request) if the entreeArticle has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/entree-articles")
     @Timed
-    public ResponseEntity<EntreeArticle> createEntreeArticle(@RequestBody EntreeArticle entreeArticle) throws URISyntaxException {
-        log.debug("REST request to save EntreeArticle : {}", entreeArticle);
-        if (entreeArticle.getId() != null) {
-            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new entreeArticle cannot already have an ID")).body(null);
-        }
-        EntreeArticle result = entreeArticleService.save(entreeArticle);
+    public ResponseEntity<EntreeArticle> createEntreeArticle(@RequestBody Set<LigneEntreeArticle> ligneEntreeArticles) throws URISyntaxException {
+        log.debug("REST request to save EntreeArticle : {}", ligneEntreeArticles);
+
+        EntreeArticle result = entreeArticleService.saveAll(ligneEntreeArticles);
         return ResponseEntity.created(new URI("/api/entree-articles/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -75,9 +75,6 @@ public class EntreeArticleResource {
     @Timed
     public ResponseEntity<EntreeArticle> updateEntreeArticle(@RequestBody EntreeArticle entreeArticle) throws URISyntaxException {
         log.debug("REST request to update EntreeArticle : {}", entreeArticle);
-        if (entreeArticle.getId() == null) {
-            return createEntreeArticle(entreeArticle);
-        }
         EntreeArticle result = entreeArticleService.save(entreeArticle);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, entreeArticle.getId().toString()))

@@ -5,9 +5,9 @@
         .module('gestCApp')
         .controller('StockController', StockController);
 
-    StockController.$inject = ['$state', 'Stock', 'StockSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    StockController.$inject = ['$state', 'Stock', 'StockSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','$http','$scope','Decomposition'];
 
-    function StockController($state, Stock, StockSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function StockController($state, Stock, StockSearch, ParseLinks, AlertService, paginationConstants, pagingParams,$http,$scope,Decomposition) {
 
         var vm = this;
 
@@ -17,13 +17,35 @@
         vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.clear = clear;
+        vm.active = active;
+        vm.save = save;
         vm.search = search;
         vm.loadAll = loadAll;
         vm.searchQuery = pagingParams.search;
         vm.currentSearch = pagingParams.search;
 
         loadAll();
+                function save1 (article) {
 
+                Decomposition.save(article);
+    
+        }
+        function save (article) {$http.post('/api/decompositions',article)
+                      .success(function(data){
+                         vm.stockDecomp=data;
+                          loadAll();
+                      })
+                      .error(function(err){
+                      console.log(err);
+                      });}
+        function active(st){ $http.put('/api/stocksA?stock='+st)
+                      .success(function(data){
+                         vm.stockActif=data;
+                          vm.loadAll();
+                      })
+                      .error(function(err){
+                      console.log(err);
+                      });}
         function loadAll () {
             if (pagingParams.search) {
                 StockSearch.query({
@@ -82,7 +104,12 @@
             vm.currentSearch = searchQuery;
             vm.transition();
         }
-
+             $scope.getClass = function (strValue,alerteValue) {
+                          if (strValue <= alerteValue)
+                            return "Red";
+                            else
+                               return "";
+                         }
         function clear() {
             vm.links = null;
             vm.page = 1;
@@ -91,5 +118,11 @@
             vm.currentSearch = null;
             vm.transition();
         }
+                  $scope.getClass = function (strValue) {
+                          if (strValue)
+                            return "Green";
+                            else
+                               return "";
+                         };
     }
 })();

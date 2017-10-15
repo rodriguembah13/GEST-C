@@ -336,7 +336,14 @@
                     <artifactId>spring-boot-starter-tomcat</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>        <!-- Jasper Report Specific Jars START -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>5.2.0</version>
         </dependency>
+        <!-- for report in xls format -->
+
         <!-- Spring Cloud -->
         <dependency>
             <groupId>net.logstash.logback</groupId>
