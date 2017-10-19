@@ -5,9 +5,9 @@
         .module('gestCApp')
         .controller('EntreeArticleController', EntreeArticleController);
 
-    EntreeArticleController.$inject = ['$state', 'EntreeArticle', 'EntreeArticleSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    EntreeArticleController.$inject = ['$scope','$state', 'EntreeArticle', 'EntreeArticleSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','$http','$q'];
 
-    function EntreeArticleController($state, EntreeArticle, EntreeArticleSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function EntreeArticleController($scope,$state, EntreeArticle, EntreeArticleSearch, ParseLinks, AlertService, paginationConstants, pagingParams,$http,$q) {
 
         var vm = this;
 
@@ -91,5 +91,19 @@
             vm.currentSearch = null;
             vm.transition();
         }
+         $scope.PrintBordoreauR=function(cmd){
+      //$scope.clas=$scope.venteE.id;
+        $http.get("/api/printBdReception/"+cmd.id,{responseType:'arraybuffer'})
+        .success(function(data){
+          var file=new Blob([data],{type:'application/pdf'});
+          var fileUrl=URL.createObjectURL(file);
+          var des = window.open(fileUrl,'_blank','');
+         // $scope.paie = false;
+        })
+        .error(function(err){
+          AlertService.error(err.message);
+        });             
+
+   }
     }
 })();

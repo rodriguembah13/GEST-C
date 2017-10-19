@@ -56,7 +56,7 @@
                     <td>
                         {{entreeArticle.agent.login}}
                     </td>
-                    <td class="text-right">
+                    <td class="text-right" has-authority="ROLE_ADMIN" >
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="entree-article-detail({id:entreeArticle.id})"
@@ -65,7 +65,7 @@
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="entree-article.edit({id:entreeArticle.id})"
+                                     ng-click="PrintBordoreauR(entreeArticle)"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span>

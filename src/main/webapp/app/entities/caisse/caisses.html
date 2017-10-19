@@ -56,7 +56,7 @@
                     <td>
                         {{caisse.user.login}}
                     </td>
-                    <td class="text-right">
+                    <td class="text-right" has-authority="ROLE_ADMIN" >
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="caisse-detail({id:caisse.id})"

@@ -3,14 +3,14 @@
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-4 no-padding-left">
+          <!--   <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="ligne-commande.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs-down"  data-translate="gestCApp.ligneCommande.home.createLabel">
                         Create new Ligne Commande
                     </span>
                 </button>
-            </div>
+            </div> -->
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right" >
@@ -62,15 +62,15 @@
                         {{ligneCommande.agent.login}}
                     </td>
                     <td>
-                        <a ui-sref="article-detail({id:ligneCommande.article.id})">{{ligneCommande.article.id}}</a>
+                        <a ui-sref="article-detail({id:ligneCommande.article.id})">{{ligneCommande.article.nomarticle}}</a>
                     </td>
                     <td>
-                        <a ui-sref="commande-detail({id:ligneCommande.commande.id})">{{ligneCommande.commande.id}}</a>
+                        <a ui-sref="commande-detail({id:ligneCommande.commande.id})">{{ligneCommande.commande.numcommande}}</a>
                     </td>
                     <td>
-                        <a ui-sref="fournisseur-detail({id:ligneCommande.fournisseur.id})">{{ligneCommande.fournisseur.id}}</a>
+                        <a ui-sref="fournisseur-detail({id:ligneCommande.fournisseur.id})">{{ligneCommande.fournisseur.nomcomplet}}</a>
                     </td>
-                    <td class="text-right">
+                    <td class="text-right" has-authority="ROLE_ADMIN" >
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="ligne-commande-detail({id:ligneCommande.id})"

@@ -50,7 +50,7 @@
                     <td>{{magasin.nomMagasin}}</td>
                     <td>{{magasin.ville}}</td>
                     <td>{{magasin.telephone}}</td>
-                    <td class="text-right">
+                    <td class="text-right" has-authority="ROLE_ADMIN" >
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="magasin-detail({id:magasin.id})"

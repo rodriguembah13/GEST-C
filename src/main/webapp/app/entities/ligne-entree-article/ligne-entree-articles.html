@@ -65,12 +65,12 @@
                         {{ligneEntreeArticle.agent.login}}
                     </td>
                     <td>
-                        <a ui-sref="article-detail({id:ligneEntreeArticle.article.id})">{{ligneEntreeArticle.article.id}}</a>
+                        <a ui-sref="article-detail({id:ligneEntreeArticle.article.id})">{{ligneEntreeArticle.article.nomarticle}}</a>
                     </td>
                     <td>
                         <a ui-sref="entree-article-detail({id:ligneEntreeArticle.entreeArticle.id})">{{ligneEntreeArticle.entreeArticle.id}}</a>
                     </td>
-                    <td class="text-right">
+                    <td class="text-right" has-authority="ROLE_ADMIN" >
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="ligne-entree-article-detail({id:ligneEntreeArticle.id})"

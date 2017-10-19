@@ -184,7 +184,7 @@
                                 <span data-translate="global.menu.account.login">Sign in</span>
                             </a>
                         </li>
-                        <li ui-sref-active="active" ng-switch-when="false">
+                        <li ui-sref-active="active" ng-switch-when="false"  has-authority="ROLE_ADMIN">
                             <a ui-sref="register" ng-click="vm.collapseNavbar()">
                                 <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;
                                 <span data-translate="global.menu.account.register">Register</span>
@@ -192,7 +192,7 @@
                         </li>
                     </ul>
                 </li>
-                <li ng-class="{active: vm.$state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown dropdown>
+<!--                 <li ng-class="{active: vm.$state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown dropdown>
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="admin-menu">
                         <span>
                             <span class="glyphicon glyphicon-tower"></span>
@@ -243,9 +243,8 @@
                                 <span data-translate="global.menu.admin.apidocs">API</span>
                             </a>
                         </li>
-                        <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
-                    </ul>
-                </li>
+                       </ul>
+                </li>  -->
                 <li ui-sref-active="active" uib-dropdown dropdown ng-controller="JhiLanguageController as languageVm">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" ng-if="languageVm.languages.length > 1">
                         <span>

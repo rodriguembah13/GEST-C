@@ -30,6 +30,7 @@ public class DecompositionService {
     private final ArticleRepository articleRepository;
     private final StockRepository stockRepository;
     private final DecompositionSearchRepository decompositionSearchRepository;
+
     public DecompositionService(DecompositionRepository decompositionRepository, ArticleRepository articleRepository, StockRepository stockRepository, DecompositionSearchRepository decompositionSearchRepository) {
         this.decompositionRepository = decompositionRepository;
         this.articleRepository = articleRepository;
@@ -49,6 +50,7 @@ public class DecompositionService {
         decompositionSearchRepository.save(result);
         return result;
     }
+
     /**
      * Save a decomposition.
      *
@@ -56,31 +58,43 @@ public class DecompositionService {
      * @return the persisted entity
      */
     public Decomposition decomposition(Article article) {
-        Decomposition decomposition=new Decomposition();
+        Decomposition decomposition = new Decomposition();
         log.debug("Request to save Decomposition : {}", article);
-        Stock stock=stockRepository.findStockactif(article);
-        decomposition.setArticledepart("Art/DEP"+article.getNomarticle()+"/"+stock.getQuantite()+"/"+stock.getQuantiteGros());
+        Stock stock = stockRepository.findStockactif(article);
+        decomposition.setArticledepart("Art/DEP" + article.getNomarticle() + "/" + stock.getQuantite() + "/" + stock.getQuantiteGros());
         decomposition.setArticle(article);
-        int nbre=article.getFormeArticle().getQuantite();
-        if (stock.getQuantiteGros()-1>0){
-            stock.setQuantite(stock.getQuantite()+nbre);
-            stock.setQuantiteGros(stock.getQuantiteGros()-1);
-            stockRepository.saveAndFlush(stock);
-        }else {
-            stock.setQuantite(stock.getQuantite());
-            stock.setQuantiteGros(stock.getQuantiteGros());
+        int nbre = article.getFormeArticle().getQuantite();
+        if (article.getFormeArticle().getNomForme().equals("simple")) {
+            if (stock.getQuantiteGros() - 1 > 0) {
+                stock.setQuantite(stock.getQuantiteGros());
+                stock.setQuantiteGros(0);
+                stockRepository.saveAndFlush(stock);
+            } else {
+                stock.setQuantite(stock.getQuantite());
+                stock.setQuantiteGros(stock.getQuantiteGros());
+            }
+        } else {
+
+            if (stock.getQuantiteGros() - 1 > 0) {
+                stock.setQuantite(stock.getQuantite() + nbre);
+                stock.setQuantiteGros(stock.getQuantiteGros() - 1);
+                stockRepository.saveAndFlush(stock);
+            } else {
+                stock.setQuantite(stock.getQuantite());
+                stock.setQuantiteGros(stock.getQuantiteGros());
+            }
         }
-        decomposition.setArticlefin("Art/FIN"+article.getNomarticle()+"/"+(stock.getQuantite()+nbre)+"/"+(stock.getQuantiteGros()-1)+"/");
+        decomposition.setArticlefin("Art/FIN" + article.getNomarticle() + "/" + (stock.getQuantite() + nbre) + "/" + (stock.getQuantiteGros() - 1) + "/");
         Decomposition result = decompositionRepository.save(decomposition);
         decompositionSearchRepository.save(result);
         return result;
     }
 
     /**
-     *  Get all the decompositions.
+     * Get all the decompositions.
      *
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<Decomposition> findAll(Pageable pageable) {
@@ -89,10 +103,10 @@ public class DecompositionService {
     }
 
     /**
-     *  Get one decomposition by id.
+     * Get one decomposition by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Transactional(readOnly = true)
     public Decomposition findOne(Long id) {
@@ -101,9 +115,9 @@ public class DecompositionService {
     }
 
     /**
-     *  Delete the  decomposition by id.
+     * Delete the  decomposition by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     public void delete(Long id) {
         log.debug("Request to delete Decomposition : {}", id);
@@ -114,9 +128,9 @@ public class DecompositionService {
     /**
      * Search for the decomposition corresponding to the query.
      *
-     *  @param query the query of the search
-     *  @param pageable the pagination information
-     *  @return the list of entities
+     * @param query    the query of the search
+     * @param pageable the pagination information
+     * @return the list of entities
      */
     @Transactional(readOnly = true)
     public Page<Decomposition> search(String query, Pageable pageable) {

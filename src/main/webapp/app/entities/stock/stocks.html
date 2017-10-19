@@ -32,7 +32,13 @@
                     </span>
                 </button>
             </div> -->
-            <div class="col-xs-8 no-padding-right">
+               <div class="col-xs-6 ">
+                <div class="btn-group">
+                <span class="label">stock actif</span>
+                     <span class="label Green">stock inactif</span> <span class="label Red">stock cloture</span>          
+                </div>
+            </div>
+            <div class="col-xs-6">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right" >
                         <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'gestCApp.stock.home.search' | translate }}">
@@ -61,31 +67,31 @@
                     <th jh-sort-by="quantiteAlerte"><span data-translate="gestCApp.stock.quantiteAlerte">Quantite Alerte</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="prixArticle"><span data-translate="gestCApp.stock.prixArticle">Prix Article</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="dateperemption"><span data-translate="gestCApp.stock.dateperemption">Date peremption</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="actif"><span data-translate="gestCApp.stock.actif">Actif</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!-- <th jh-sort-by="actif"><span data-translate="gestCApp.stock.actif">Actif</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                     <th jh-sort-by="prixAchat"><span data-translate="gestCApp.stock.prixAchat">Prix Achat</span> <span class="glyphicon glyphicon-sort"></span></th>
                    <!--  <th jh-sort-by="observation"><span data-translate="gestCApp.stock.observation">Observation</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                     <th jh-sort-by="taxeTVA"><span data-translate="gestCApp.stock.taxeTVA">Taxe TVA</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="quantiteGros"><span data-translate="gestCApp.stock.quantiteGros">Quantite Gros</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="quantiteAlerteGros"><span data-translate="gestCApp.stock.quantiteAlerteGros">Quantite Alerte Gros</span> <span class="glyphicon glyphicon-sort"></span></th>
-                    <th jh-sort-by="closed"><span data-translate="gestCApp.stock.closed">Closed</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <!-- <th jh-sort-by="closed"><span data-translate="gestCApp.stock.closed">Closed</span> <span class="glyphicon glyphicon-sort"></span></th> -->
                     <th jh-sort-by="article.id"><span data-translate="gestCApp.stock.article">Article</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="stock in vm.stocks track by stock.id" >
+                <tr ng-repeat="stock in vm.stocks track by stock.id" ng-class="[getClass(stock.actif,stock.closed), 'b']">
                     <td><a ui-sref="stock-detail({id:stock.id})">{{stock.id}}</a></td>
                     <td>{{stock.quantite}}</td>
                     <td>{{stock.quantiteAlerte}}</td>
                     <td>{{stock.prixArticle}}</td>
                         <td>{{stock.dateperemption | date:'mediumDate'}}</td>
-                    <td ng-class="[getClass(stock.actif), 'b']">{{stock.actif}}</td>
-                    <td>{{stock.prixAchat}}</td>
+                   <!--  <td ng-class="[getClass(stock.actif,stock.closed), 'b']">{{stock.actif}}</td>
+ -->                    <td>{{stock.prixAchat}}</td>
                    <!--  <td>{{stock.observation}}</td>
  -->                    <td>{{stock.taxeTVA}}</td>
                     <td>{{stock.quantiteGros}}</td>
                     <td>{{stock.quantiteAlerteGros}}</td>
-                    <td>{{stock.closed}}</td>
+                   <!--  <td>{{stock.closed}}</td> -->
                     <td>
                         <a ui-sref="article-detail({id:stock.article.id})">{{stock.article.nomarticle}}</a>
                     </td>
@@ -94,12 +100,12 @@
                             <button type="submit"
                                     ui-sref="stock-detail({id:stock.id})"
                                     class="btn btn-info btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="glyphicon glyphicon-eye-open" has-authority="ROLE_ADMIN" ></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>                             <div class="btn-group" uib-dropdown>
-         <button type="button" class="btn dropdown pointer"uib-dropdown-toggle style="background-color: #00897B">Action</button>
+         <button type="button" class="btn dropdown pointer"uib-dropdown-toggle style="background-color: #00897B" has-authority="ROLE_ADMIN" >Action</button>
          <ul class="dropdown-menu" uib-dropdown-menu>
-             <li><a ng-click="vm.active(stock.id)">Active/desactif</a></li>
+             <li><a ng-click="vm.active(stock)">Active/desactif</a></li>
              <li><a  ng-click="vm.save(stock.article)">Decomposition</a></li>
              <li><a  ng-click="vm.save(stock.article)">Recomposition</a></li>
              <li><a  ng-click="vm.save(stock.article)">Ferme/ouvrir</a></li>
@@ -112,7 +118,7 @@
                             </button> -->
                             <button type="submit"
                                     ui-sref="stock.delete({id:stock.id})"
-                                    class="btn btn-danger btn-sm">
+                                    class="btn btn-danger btn-sm" has-authority="ROLE_ADMIN" >
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
                             </button>

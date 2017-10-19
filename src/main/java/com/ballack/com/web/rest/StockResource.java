@@ -96,7 +96,7 @@ public class StockResource {
      */
     @PutMapping("/stocksA")
     @Timed
-    public ResponseEntity<Stock> updateStockActive(Stock stock) {
+    public ResponseEntity<Stock> updateStockActive(@RequestBody Stock stock) {
         log.debug("REST request to update Stock : {}", stock);
 
         Stock result = stockService.activeStock(stock.getId());

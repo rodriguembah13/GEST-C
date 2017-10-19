@@ -38,7 +38,7 @@
                       .error(function(err){
                       console.log(err);
                       });}
-        function active(st){ $http.put('/api/stocksA?stock='+st)
+        function active(st){ $http.put('/api/stocksA',st)
                       .success(function(data){
                          vm.stockActif=data;
                           vm.loadAll();
@@ -118,11 +118,15 @@
             vm.currentSearch = null;
             vm.transition();
         }
-                  $scope.getClass = function (strValue) {
-                          if (strValue)
-                            return "Green";
-                            else
-                               return "";
+                  $scope.getClass = function (actif,close) {
+                          if (actif && !close){
+                            return "";
+                        }                          
+                            else if (!actif && !close){return "Green";
+                        } else{
+                           return "Red" ; 
+                        } 
+                            
                          };
     }
 })();

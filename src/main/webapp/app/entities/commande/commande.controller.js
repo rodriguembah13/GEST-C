@@ -5,9 +5,9 @@
         .module('gestCApp')
         .controller('CommandeController', CommandeController);
 
-    CommandeController.$inject = ['$state', 'Commande', 'CommandeSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    CommandeController.$inject = ['$scope','$state', 'Commande', 'CommandeSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','$http','$q'];
 
-    function CommandeController($state, Commande, CommandeSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function CommandeController($scope,$state, Commande, CommandeSearch, ParseLinks, AlertService, paginationConstants, pagingParams,$http,$q) {
 
         var vm = this;
 
@@ -91,5 +91,19 @@
             vm.currentSearch = null;
             vm.transition();
         }
+        $scope.PrintBordoreau=function(cmd){
+      //$scope.clas=$scope.venteE.id;
+        $http.get("/api/printBdCmde/"+cmd.id,{responseType:'arraybuffer'})
+        .success(function(data){
+          var file=new Blob([data],{type:'application/pdf'});
+          var fileUrl=URL.createObjectURL(file);
+          var des = window.open(fileUrl,'_blank','');
+         // $scope.paie = false;
+        })
+        .error(function(err){
+          AlertService.error(err.message);
+        });             
+
+   }
     }
 })();

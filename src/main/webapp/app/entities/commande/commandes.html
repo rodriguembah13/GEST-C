@@ -3,14 +3,14 @@
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-4 no-padding-left">
+<!--             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="commande.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs-down"  data-translate="gestCApp.commande.home.createLabel">
                         Create new Commande
                     </span>
                 </button>
-            </div>
+            </div> -->
             <div class="col-xs-8 no-padding-right">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group pull-right" >
@@ -67,12 +67,12 @@
                         {{commande.agent.login}}
                     </td>
                     <td>
-                        <a ui-sref="fournisseur-detail({id:commande.fournisseur.id})">{{commande.fournisseur.id}}</a>
+                        <a ui-sref="fournisseur-detail({id:commande.fournisseur.id})">{{commande.fournisseur.numfournisseur}}</a>
                     </td>
                     <td>
-                        <a ui-sref="magasin-detail({id:commande.magasin.id})">{{commande.magasin.id}}</a>
+                        <a ui-sref="magasin-detail({id:commande.magasin.id})">{{commande.magasin.nomMagasin}}</a>
                     </td>
-                    <td class="text-right">
+                    <td class="text-right" has-authority="ROLE_ADMIN" >
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="commande-detail({id:commande.id})"
@@ -81,7 +81,7 @@
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
                             <button type="submit"
-                                    ui-sref="commande.edit({id:commande.id})"
+                                     ng-click="PrintBordoreau(commande)"
                                     class="btn btn-primary btn-sm">
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span>

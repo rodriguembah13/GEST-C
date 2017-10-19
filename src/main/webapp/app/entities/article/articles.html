@@ -64,7 +64,7 @@
                     <td>
                         <a ui-sref="forme-article-detail({id:article.formeArticle.id})">{{article.formeArticle.nomForme}}</a>
                     </td>
-                    <td class="text-right">
+                    <td class="text-right" has-authority="ROLE_ADMIN" >
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="article-detail({id:article.id})"

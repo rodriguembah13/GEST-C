@@ -1,5 +1,6 @@
 package com.ballack.com.service;
 
+import com.ballack.com.config.ApplicationProperties;
 import com.ballack.com.domain.Commande;
 import com.ballack.com.domain.LigneCommande;
 import com.ballack.com.repository.CommandeRepository;
@@ -30,11 +31,13 @@ public class CommandeService {
     private final LigneCommandeService ligneCommandeService;
     private final CommandeSearchRepository commandeSearchRepository;
     private final UserService userService;
-    public CommandeService(CommandeRepository commandeRepository, LigneCommandeService ligneCommandeService, CommandeSearchRepository commandeSearchRepository, UserService userService) {
+    private final ApplicationProperties applicationProperties;
+    public CommandeService(CommandeRepository commandeRepository, LigneCommandeService ligneCommandeService, CommandeSearchRepository commandeSearchRepository, UserService userService, ApplicationProperties applicationProperties) {
         this.commandeRepository = commandeRepository;
         this.ligneCommandeService = ligneCommandeService;
         this.commandeSearchRepository = commandeSearchRepository;
         this.userService = userService;
+        this.applicationProperties = applicationProperties;
     }
 
     /**
@@ -47,13 +50,14 @@ public class CommandeService {
         log.debug("Request to save Commande : {}", ligneCommandes);
         Commande commande=new Commande();
         commande.setDatecommande(LocalDate.now());
-        commande.setDatelimitlivraison(LocalDate.now().plusMonths(2));
+        commande.setDatelimitlivraison(LocalDate.now().plusMonths(applicationProperties.getCommande().getDatelimite()));
         commande.setAgent(userService.getUserWithAuthorities());
         Commande commande1 = commandeRepository.save(commande);
         double montantht=0.0;
         double montantttc=0.0;
         for (LigneCommande ligneCommande:ligneCommandes){
             ligneCommande.setDesignation("LNC/"+"CMD"+commande1.getId());
+
             ligneCommande.setCommande(commande1);
             LigneCommande ligneCommande1= ligneCommandeService.save(ligneCommande);
             montantht+=ligneCommande1.getMontanttotalht();

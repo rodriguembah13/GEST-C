@@ -144,3 +144,6 @@ jhipster:
 # ===================================================================
 
 application:
+       # path.reports: resources/jasper/
+       commande:
+                datelimite: 2

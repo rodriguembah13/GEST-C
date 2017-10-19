@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -171,7 +172,7 @@ public class FactureResource {
     }
     @GetMapping(value = "/PrintFacture/{id}")
     @Timed
-    void printBulletinTPdf(@PathVariable Long id, HttpServletResponse httpServletResponse) throws SQLException, FileNotFoundException {
+    void printFacturePdf(@PathVariable Long id, HttpServletResponse httpServletResponse) throws SQLException, FileNotFoundException {
         Connection connection = null;
         try {
             // - Connexion à la base grace au fichier properties
@@ -180,6 +181,7 @@ public class FactureResource {
             String login1 =context.getEnvironment().getProperty("spring.datasource.username");
             String password1 =context.getEnvironment().getProperty("spring.datasource.password");
             String lg="C:\\TempJasper\\imagepharma";
+            //Resource jasper=context.getResource("application.path.reports");
             connection = DriverManager.getConnection(url1, login1, password1);
             //InputStream inputStream= new FileInputStream(new File("C:\\TempJasper\\bulletinT.jrxml"));
 
@@ -210,7 +212,7 @@ public class FactureResource {
     }
     @GetMapping(value = "/PrintTicket/{id}")
     @Timed
-    void printFacturePdf(@PathVariable Long id, HttpServletResponse httpServletResponse) throws SQLException, FileNotFoundException {
+    void printTicketPdf(@PathVariable Long id, HttpServletResponse httpServletResponse) throws SQLException, FileNotFoundException {
         Connection connection = null;
         try {
             // - Connexion à la base grace au fichier properties
@@ -231,6 +233,84 @@ public class FactureResource {
             parameterMap.put("idVente",id);
             parameterMap.put("logo",lg);
             parameterMap.put("codebare",id);
+            //System.out.println(nom);
+            JasperPrint jasperPrint= JasperFillManager.fillReport(fis,parameterMap,connection);
+            httpServletResponse.setContentType("application/pdf");
+            httpServletResponse.setHeader("Content-Disposition","inline:filename=bulletin.pdf");
+            httpServletResponse.getStatus();
+            final OutputStream outputStream=httpServletResponse.getOutputStream();
+            JasperExportManager.exportReportToPdfStream(jasperPrint,outputStream);
+        } catch (JRException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    @GetMapping(value = "/printBdReception/{id}")
+    @Timed
+    void printBdReceptionPdf(@PathVariable Long id, HttpServletResponse httpServletResponse) throws SQLException, FileNotFoundException {
+        Connection connection = null;
+        try {
+            // - Connexion à la base grace au fichier properties
+
+            String url1 =context.getEnvironment().getProperty("spring.datasource.url");
+            String login1 =context.getEnvironment().getProperty("spring.datasource.username");
+            String password1 =context.getEnvironment().getProperty("spring.datasource.password");
+            String lg="C:\\TempJasper\\imagepharma";
+            connection = DriverManager.getConnection(url1, login1, password1);
+            //InputStream inputStream= new FileInputStream(new File("C:\\TempJasper\\bulletinT.jrxml"));
+
+            File file = new File("C:\\Users\\ballack\\JaspersoftWorkspace\\gest-c");
+            FileInputStream fis = new FileInputStream(new File(file, "bordereaureception.jasper"));
+
+            Map<String,Object> parameterMap= new HashedMap();
+
+            //Long ida=id;
+            parameterMap.put("id_re",id);
+/*            parameterMap.put("logo",lg);
+            parameterMap.put("codebare",id);*/
+            //System.out.println(nom);
+            JasperPrint jasperPrint= JasperFillManager.fillReport(fis,parameterMap,connection);
+            httpServletResponse.setContentType("application/pdf");
+            httpServletResponse.setHeader("Content-Disposition","inline:filename=bulletin.pdf");
+            httpServletResponse.getStatus();
+            final OutputStream outputStream=httpServletResponse.getOutputStream();
+            JasperExportManager.exportReportToPdfStream(jasperPrint,outputStream);
+        } catch (JRException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    @GetMapping(value = "/printBdCmde/{id}")
+    @Timed
+    void printBdCmdePdf(@PathVariable Long id, HttpServletResponse httpServletResponse) throws SQLException, FileNotFoundException {
+        Connection connection = null;
+        try {
+            // - Connexion à la base grace au fichier properties
+
+            String url1 =context.getEnvironment().getProperty("spring.datasource.url");
+            String login1 =context.getEnvironment().getProperty("spring.datasource.username");
+            String password1 =context.getEnvironment().getProperty("spring.datasource.password");
+            String lg="C:\\TempJasper\\imagepharma";
+            connection = DriverManager.getConnection(url1, login1, password1);
+            //InputStream inputStream= new FileInputStream(new File("C:\\TempJasper\\bulletinT.jrxml"));
+
+            File file = new File("C:\\Users\\ballack\\JaspersoftWorkspace\\gest-c");
+            FileInputStream fis = new FileInputStream(new File(file, "bordereaucmde.jasper"));
+
+            Map<String,Object> parameterMap= new HashedMap();
+
+            //Long ida=id;
+            parameterMap.put("id_cmde",id);
+/*            parameterMap.put("logo",lg);
+            parameterMap.put("codebare",id);*/
             //System.out.println(nom);
             JasperPrint jasperPrint= JasperFillManager.fillReport(fis,parameterMap,connection);
             httpServletResponse.setContentType("application/pdf");

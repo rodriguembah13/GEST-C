@@ -5,13 +5,15 @@
         .module('gestCApp')
         .controller('MouvementController',MouvementController);
 
-    MouvementController.$inject = ['$scope', 'Principal', 'LoginService', '$state','Article','$http','$q'];
+    MouvementController.$inject = ['$scope', 'Principal', 'LoginService', '$state','Article','$http','$q','Fournisseur'];
 
-    function MouvementController ($scope, Principal, LoginService, $state,Article,$http,$q) {
+    function MouvementController ($scope, Principal, LoginService, $state,Article,$http,$q,Fournisseur) {
         var vm = this;
         $scope.lines=[];
         $scope.commandes=[];
-       
+       $scope.cmde = false;
+       vm.fournisseur = {};
+       vm.fournisseurs= Fournisseur.query();
         loadAllArticle ();
       		function loadAllArticle () {
               Article.query({
@@ -59,7 +61,8 @@
             article: null,
             quantite: null,
             prix: null,
-            taxeTva: null
+            taxeTva: null,
+            fournisseur:vm.fournisseur
                           })
           }
     $scope.getTotal = function(){
@@ -88,6 +91,7 @@
       	 .success(function(data){
                           $scope.venteE=data;
                           // $scope.PrintRecu($scope.venteE);
+                          $scope.PrintBordoreauR($scope.venteE);
                         })
                         .error(function(err){
                         console.log(err);
@@ -103,6 +107,7 @@
          .success(function(data){
                           $scope.venteR=data;
                           // $scope.PrintRecu($scope.venteE);
+                          $scope.PrintBordoreau($scope.venteR);
                         })
                         .error(function(err){
                         console.log(err);
@@ -135,6 +140,34 @@
 		window.console.log("data = "+ data);
 		window.console.log("value changed");
 	};
+      $scope.PrintBordoreau=function(cmd){
+      //$scope.clas=$scope.venteE.id;
+        $http.get("/api/printBdCmde/"+cmd.id,{responseType:'arraybuffer'})
+        .success(function(data){
+          var file=new Blob([data],{type:'application/pdf'});
+          var fileUrl=URL.createObjectURL(file);
+          var des = window.open(fileUrl,'_blank','');
+         // $scope.paie = false;
+        })
+        .error(function(err){
+          AlertService.error(err.message);
+        });             
+
+   };
+         $scope.PrintBordoreauR=function(cmd){
+      //$scope.clas=$scope.venteE.id;
+        $http.get("/api/printBdReception/"+cmd.id,{responseType:'arraybuffer'})
+        .success(function(data){
+          var file=new Blob([data],{type:'application/pdf'});
+          var fileUrl=URL.createObjectURL(file);
+          var des = window.open(fileUrl,'_blank','');
+         // $scope.paie = false;
+        })
+        .error(function(err){
+          AlertService.error(err.message);
+        });             
+
+   }
     }
     // 
 

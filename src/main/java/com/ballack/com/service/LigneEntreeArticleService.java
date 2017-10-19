@@ -45,7 +45,7 @@ public class LigneEntreeArticleService {
         log.debug("Request to save LigneEntreeArticle : {}", ligneEntreeArticle);
         ligneEntreeArticle.setAgent(userService.getUserWithAuthorities());
         Stock stock=new Stock();
-        stock.setQuantite(ligneEntreeArticle.getQuantite());
+        stock.setQuantite(0);
         stock.setQuantiteGros(ligneEntreeArticle.getQuantite());
         stock.setArticle(ligneEntreeArticle.getArticle());
         stock.setPrixAchat(ligneEntreeArticle.getPrix_unitaire());

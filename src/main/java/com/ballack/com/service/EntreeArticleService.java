@@ -49,7 +49,7 @@ public class EntreeArticleService {
         EntreeArticle entreeArticle=new EntreeArticle();
         entreeArticle.setDateentre(LocalDate.now());
         entreeArticle.setAgent(userService.getUserWithAuthorities());
-        entreeArticle.setTitre("Bordereau D entre");
+        entreeArticle.setObservation("Bordereau D'ENTRÉ");
         EntreeArticle entreeArticle1 = entreeArticleRepository.save(entreeArticle);
         double montantht=0.0;
         double montantttc=0.0;
@@ -64,7 +64,8 @@ public class EntreeArticleService {
         }
         entreeArticle1.setMontant_ht(montantht);
         entreeArticle1.setMontant_ttc(montantttc);
-        EntreeArticle result = entreeArticleRepository.save(entreeArticle);
+        entreeArticle1.setTitre("BD/EA"+entreeArticle.getId());
+        EntreeArticle result = entreeArticleRepository.save(entreeArticle1);
         entreeArticleSearchRepository.save(result);
         return result;
     }

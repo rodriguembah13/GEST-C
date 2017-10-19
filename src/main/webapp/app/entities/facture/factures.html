@@ -78,7 +78,7 @@
                     <td>
                         <a ui-sref="magasin-detail({id:facture.magasin.id})">{{facture.magasin.id}}</a>
                     </td>
-                    <td class="text-right">
+                    <td class="text-right" has-authority="ROLE_ADMIN" >
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="facture-detail({id:facture.id})"

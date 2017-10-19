@@ -1,6 +1,24 @@
 <div ng-cloak>
     <!-- table -->
     <h3> Commande Fournisseur </h3>
+                            <div class="form-group col-lg-3">
+                            <div class="input-group bmd-collapse-inline">
+                                <ui-select  ng-model="vm.fournisseur">
+                                    <ui-select-match placeholder="Select or search a fournisseur  in the list...">
+                                        {{$select.selected.nomcomplet}}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item in vm.fournisseurs | filter: $select.search">
+                                        <span>{{item.nomcomplet }}</span>
+
+                                    </ui-select-choices>
+                                </ui-select>
+                                <span class="input-group-btn">
+              <button type="button" ui-sref="fournisseur.new" class="btn btn-default" uib-tooltip="new fournisseur">
+                <span class="glyphicon glyphicon-plus"></span>
+              </button>
+            </span>
+                            </div>
+                        </div>
     <table class="table table-hover table-condensed">
  <tr style="font-weight: bold">
                 <td >Article</td>
@@ -64,4 +82,34 @@
                 <button type="button" class="btn btn-primary btn-raised" ng-click="saveCommande()">Valider</button>
                 <button type="button" class="btn btn-danger btn-raised" ng-click="cancelC()">cancel</button>
     </div> 
+
+                  <div class="panel" ng-if="cmde">
+                    <div class="panel-body">
+                        <form class="form-inline" role="form" ng-submit="PrintFacture(facture)">
+
+                            <div class="form-group">
+                                <!-- <label>Mode Payement:</label> -->
+                                <select id="mode" class="form-control" required ng-model="mode">
+                                    <option value="">Mode Payement:</option>
+                                    <option value="caisse">Caisse</option>
+                                    <option value="cheque">Cheque</option>
+                                    <option value="mtn">MTN/ORANGE</option>
+                                </select>
+                            </div>{{modeA}}{{facture}}
+                            <div class="form-group" ng-if="mode=='caisse'">
+                                <label for="pwd">Montant:</label>
+                                <input type="number" class="form-control" id="mtn">
+                            </div>
+                            <div class="form-group">
+                                <!--  <label>Facture:</label> -->
+                                <select id="facture" class="form-control" required ng-model="facture">
+                                    <option value="">Facture:</option>
+                                    <option value="fact1">FactureA4</option>
+                                    <option value="fact2">Tichet</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-default">Submit</button>
+                        </form>
+                    </div>
+                </div>
 </div>

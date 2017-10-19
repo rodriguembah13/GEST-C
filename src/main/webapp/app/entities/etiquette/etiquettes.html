@@ -50,7 +50,7 @@
                     <td>
                         <a ui-sref="article-detail({id:etiquette.article.id})">{{etiquette.article.id}}</a>
                     </td>
-                    <td class="text-right">
+                    <td class="text-right" has-authority="ROLE_ADMIN" >
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="etiquette-detail({id:etiquette.id})"

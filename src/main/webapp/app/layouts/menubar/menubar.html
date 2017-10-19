@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" role="navigation" >
+<nav class="navbar navbar-default" role="navigation" ng-switch="vm.isAuthenticated()">
     <div class="container">
     <div class="navbar-header">
             <button type="button" class="navbar-toggle" ng-click="vm.toggleNavbar()">
@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
-        <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" ng-switch="vm.isAuthenticated()">
+        <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" >
             <ul class="nav navbar-nav">
                            <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown dropdown>
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
@@ -48,18 +48,18 @@
                  <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown dropdown>
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                         <span>
-                           <i class="fa fa-credit-card" aria-hidden="true"></i>
+                           
                             <span class="hidden-sm" data-translate="">
-                                Achats
+                            <i class="fa fa-credit-card" aria-hidden="true"></i>  Achats
                             </span>
                             <b class="caret"></b>
                         </span>
                     </a>
                <ul class="dropdown-menu" uib-dropdown-menu>
                        <li ui-sref-active="active">
-                                <a ui-sref="mouvement" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="">Historique</span>
+                                <a ui-sref="commande" ng-click="vm.collapseNavbar()">
+                                    <span class=""></span>&nbsp;
+                                    <span data-translate=""><i class="fa fa-history" aria-hidden="true"></i>Historique</span>
                                 </a>
                             <div class="divider"></div>
                         </li>
@@ -71,9 +71,9 @@
                             <div class="divider"></div>
                         </li>
                               <li ui-sref-active="active">
-                                <a ui-sref="mouvement" ng-click="vm.collapseNavbar()">
+                                <a ui-sref="ligne-commande" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="">Liste Commande</span>
+                                    <span data-translate="">Liste Commandes</span>
                                 </a>
                             <div class="divider"></div>
                         </li>
@@ -120,7 +120,7 @@
                             <div class="divider"></div>
                         </li>
                               <li ui-sref-active="active">
-                                <a ui-sref="mouvement" ng-click="vm.collapseNavbar()">
+                                <a ui-sref="facture" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="">Facture</span>
                                 </a>
@@ -196,7 +196,7 @@
                     </a>
                <ul class="dropdown-menu" uib-dropdown-menu>
                        <li ui-sref-active="active">
-                                <a ui-sref="mouvement" ng-click="vm.collapseNavbar()">
+                                <a ui-sref="caisse" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="">caisse</span>
                                 </a>
@@ -291,7 +291,60 @@
                                 </a>
                             </li>     
                </ul>
-               </li>
+               </li>                <li ng-class="{active: vm.$state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown dropdown>
+                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="admin-menu">
+                        <span>
+                            <span class="glyphicon glyphicon-tower"></span>
+                            <span class="hidden-sm" data-translate="global.menu.admin.main">Administration</span>
+                            <b class="caret"></b>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu" uib-dropdown-menu>
+                        <li ui-sref-active="active">
+                            <a ui-sref="user-management" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-user"></span>&nbsp;
+                                <span data-translate="global.menu.admin.userManagement">User management</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="jhi-metrics" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-dashboard"></span>&nbsp;
+                                <span data-translate="global.menu.admin.metrics">Metrics</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="jhi-health" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-heart"></span>&nbsp;
+                                <span data-translate="global.menu.admin.health">Health</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="jhi-configuration" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-list-alt"></span>&nbsp;
+                                <span data-translate="global.menu.admin.configuration">Configuration</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="audits" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-bell"></span>&nbsp;
+                                <span data-translate="global.menu.admin.audits">Audits</span>
+                            </a>
+                        </li>
+                        <li ui-sref-active="active">
+                            <a ui-sref="logs" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-tasks"></span>&nbsp;
+                                <span data-translate="global.menu.admin.logs">Logs</span>
+                            </a>
+                        </li>
+                        <li ng-show="vm.swaggerEnabled" ui-sref-active="active">
+                            <a ui-sref="docs" ng-click="vm.collapseNavbar()">
+                                <span class="glyphicon glyphicon-book"></span>&nbsp;
+                                <span data-translate="global.menu.admin.apidocs">API</span>
+                            </a>
+                        </li>
+                        <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>

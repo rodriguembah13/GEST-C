@@ -68,7 +68,7 @@
                     <td>
                         <a ui-sref="type-sortie-article-detail({id:ligneSortieArticle.typeSortieArticle.id})">{{ligneSortieArticle.typeSortieArticle.id}}</a>
                     </td>
-                    <td class="text-right">
+                    <td class="text-right" has-authority="ROLE_ADMIN" >
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="ligne-sortie-article-detail({id:ligneSortieArticle.id})"
