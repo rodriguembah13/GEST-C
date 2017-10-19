@@ -19,6 +19,7 @@
         vm.clear = clear;
         vm.active = active;
         vm.save = save;
+        vm.closed=closed;
         vm.search = search;
         vm.loadAll = loadAll;
         vm.searchQuery = pagingParams.search;
@@ -41,6 +42,14 @@
         function active(st){ $http.put('/api/stocksA',st)
                       .success(function(data){
                          vm.stockActif=data;
+                          vm.loadAll();
+                      })
+                      .error(function(err){
+                      console.log(err);
+                      });}
+            function closed(st){ $http.put('/api/stocksC',st)
+                      .success(function(data){
+                         vm.stockClosed=data;
                           vm.loadAll();
                       })
                       .error(function(err){
@@ -104,12 +113,12 @@
             vm.currentSearch = searchQuery;
             vm.transition();
         }
-             $scope.getClass = function (strValue,alerteValue) {
+           /*  $scope.getClass = function (strValue,alerteValue) {
                           if (strValue <= alerteValue)
                             return "Red";
                             else
                                return "";
-                         }
+                         }*/
         function clear() {
             vm.links = null;
             vm.page = 1;

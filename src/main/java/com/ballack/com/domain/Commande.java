@@ -6,7 +6,9 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
@@ -43,7 +45,7 @@ public class Commande implements Serializable {
     private LocalDate datelimitlivraison;
 
     @Column(name = "datecommande")
-    private LocalDate datecommande;
+    private Instant datecommande;
 
     @Column(name = "etat")
     private Boolean etat;
@@ -147,16 +149,16 @@ public class Commande implements Serializable {
         this.datelimitlivraison = datelimitlivraison;
     }
 
-    public LocalDate getDatecommande() {
+    public Instant getDatecommande() {
         return datecommande;
     }
 
-    public Commande datecommande(LocalDate datecommande) {
+    public Commande datecommande(Instant datecommande) {
         this.datecommande = datecommande;
         return this;
     }
 
-    public void setDatecommande(LocalDate datecommande) {
+    public void setDatecommande(Instant datecommande) {
         this.datecommande = datecommande;
     }
 

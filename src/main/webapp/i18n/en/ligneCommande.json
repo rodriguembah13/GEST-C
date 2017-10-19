@@ -25,7 +25,8 @@
             "agent": "Agent",
             "article": "Article",
             "commande": "Commande",
-            "fournisseur": "Fournisseur"
+            "fournisseur": "Fournisseur",
+            "magasin": "Magasin"
         }
     }
 }

@@ -104,6 +104,17 @@ public class StockResource {
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, stock.getId().toString()))
             .body(result);
     }
+    @PutMapping("/stocksC")
+    @Timed
+    public ResponseEntity<Stock> updateStockClose(@RequestBody Stock stock) {
+        log.debug("REST request to update Stock : {}", stock);
+
+        Stock result = stockService.closedStock(stock.getId());
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, stock.getId().toString()))
+            .body(result);
+    }
+
     /**
      * GET  /stocks : get all the stocks.
      *

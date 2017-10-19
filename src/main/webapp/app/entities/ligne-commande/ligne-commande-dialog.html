@@ -74,6 +74,12 @@
                 <option value=""></option>
             </select>
         </div>
+        <div class="form-group">
+            <label data-translate="gestCApp.ligneCommande.magasin" for="field_magasin">Magasin</label>
+            <select class="form-control" id="field_magasin" name="magasin" ng-model="vm.ligneCommande.magasin" ng-options="magasin as magasin.id for magasin in vm.magasins track by magasin.id">
+                <option value=""></option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

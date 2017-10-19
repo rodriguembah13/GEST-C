@@ -26,6 +26,13 @@
             "otherEntityName": "fournisseur",
             "relationshipType": "many-to-one",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "magasin",
+            "otherEntityName": "magasin",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [],
+            "otherEntityField": "id"
         }
     ],
     "fields": [

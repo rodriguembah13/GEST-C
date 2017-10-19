@@ -5,9 +5,9 @@
         .module('gestCApp')
         .controller('LigneCommandeDetailController', LigneCommandeDetailController);
 
-    LigneCommandeDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'LigneCommande', 'User', 'Article', 'Commande', 'Fournisseur'];
+    LigneCommandeDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'LigneCommande', 'User', 'Article', 'Commande', 'Fournisseur', 'Magasin'];
 
-    function LigneCommandeDetailController($scope, $rootScope, $stateParams, previousState, entity, LigneCommande, User, Article, Commande, Fournisseur) {
+    function LigneCommandeDetailController($scope, $rootScope, $stateParams, previousState, entity, LigneCommande, User, Article, Commande, Fournisseur, Magasin) {
         var vm = this;
 
         vm.ligneCommande = entity;

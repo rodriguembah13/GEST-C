@@ -2,6 +2,8 @@
     <!-- table -->
     <h3> Commande Fournisseur </h3>
                             <div class="form-group col-lg-3">
+                            <fieldset>
+                       <legend>Chosir Fournisseur</legend>
                             <div class="input-group bmd-collapse-inline">
                                 <ui-select  ng-model="vm.fournisseur">
                                     <ui-select-match placeholder="Select or search a fournisseur  in the list...">
@@ -12,12 +14,27 @@
 
                                     </ui-select-choices>
                                 </ui-select>
-                                <span class="input-group-btn">
+<!--                                 <span class="input-group-btn">
               <button type="button" ui-sref="fournisseur.new" class="btn btn-default" uib-tooltip="new fournisseur">
                 <span class="glyphicon glyphicon-plus"></span>
               </button>
-            </span>
-                            </div>
+            </span> -->
+                            </div></fieldset>
+                        </div>
+                       <div class="form-group col-lg-3">
+                       <fieldset>
+                       <legend>Chosir Magasin</legend>
+                            <div class="input-group bmd-collapse-inline">
+                                <ui-select  ng-model="vm.magasin">
+                                    <ui-select-match placeholder="Select or search a Magasin  in the list...">
+                                        {{$select.selected.nomMagasin}}
+                                    </ui-select-match>
+                                    <ui-select-choices repeat="item in vm.magasins | filter: $select.search">
+                                        <span>{{item.nomMagasin }}</span>
+
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div></fieldset>
                         </div>
     <table class="table table-hover table-condensed">
  <tr style="font-weight: bold">
@@ -32,7 +49,7 @@
       </tr>
       <tr ng-repeat="user in commandes | filter:filterUser">
         <td>
-          <span editable-ui-select="user.article" data-e-ng-model="state" e-form="tableform" data-e-style="min-width:auto;max-height:22px">
+          <span editable-ui-select="user.article" data-e-ng-model="state" e-form="tableform" data-e-style="min-width:240px;max-height:22px">
             {{user.article.nomarticle}}
             <editable-ui-select-match placeholder="Choisir Article">
               {{$select.selected.nomarticle}}
@@ -95,7 +112,7 @@
                                     <option value="cheque">Cheque</option>
                                     <option value="mtn">MTN/ORANGE</option>
                                 </select>
-                            </div>{{modeA}}{{facture}}
+                            </div>
                             <div class="form-group" ng-if="mode=='caisse'">
                                 <label for="pwd">Montant:</label>
                                 <input type="number" class="form-control" id="mtn">

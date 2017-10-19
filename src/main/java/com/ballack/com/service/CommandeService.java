@@ -13,7 +13,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -49,7 +52,14 @@ public class CommandeService {
     public Commande save(Set<LigneCommande> ligneCommandes) {
         log.debug("Request to save Commande : {}", ligneCommandes);
         Commande commande=new Commande();
-        commande.setDatecommande(LocalDate.now());
+/*        LocalDateTime now=LocalDateTime.now();
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S a");
+        String fomat=now.format(formatter);*/
+        //LocalDateTime formatDateTime = LocalDateTime.parse(iso8601);
+        commande.setDatecommande(Instant.now());
+        System.out.println(/*##########################################################################################*/);
+        System.out.println(LocalDateTime.now());
         commande.setDatelimitlivraison(LocalDate.now().plusMonths(applicationProperties.getCommande().getDatelimite()));
         commande.setAgent(userService.getUserWithAuthorities());
         Commande commande1 = commandeRepository.save(commande);
@@ -57,12 +67,16 @@ public class CommandeService {
         double montantttc=0.0;
         for (LigneCommande ligneCommande:ligneCommandes){
             ligneCommande.setDesignation("LNC/"+"CMD"+commande1.getId());
-
             ligneCommande.setCommande(commande1);
             LigneCommande ligneCommande1= ligneCommandeService.save(ligneCommande);
             montantht+=ligneCommande1.getMontanttotalht();
             montantttc+=ligneCommande1.getMontanttotalttc();
-
+            if(commande1.getFournisseur()==null){
+                commande1.setFournisseur(ligneCommande1.getFournisseur());
+            }
+            if(commande1.getMagasin()==null){
+                commande1.setMagasin(ligneCommande1.getMagasin());
+            }
         }
         commande1.setNumcommande("CMD"+commande1.getId());
         commande1.setMontanttotalttc(montantttc);

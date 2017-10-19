@@ -32,5 +32,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="fournisseur"/>
 
+        <addForeignKeyConstraint baseColumnNames="magasin_id"
+                                 baseTableName="ligne_commande"
+                                 constraintName="fk_ligne_commande_magasin_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="magasin"/>
+
     </changeSet>
 </databaseChangeLog>

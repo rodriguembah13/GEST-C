@@ -26,8 +26,8 @@ public class Article implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Column(name = "num_article", nullable = false)
+
+    @Column(name = "num_article")
     private String numArticle;
 
     @Column(name = "poids")

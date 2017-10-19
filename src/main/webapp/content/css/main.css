@@ -108,7 +108,7 @@ Main page styles
     display: inline-block;
     width: 347px;
     height: 497px;
-    background: url("../images/hipster.png") no-repeat center top;
+    background: url("../images/logo.png") no-repeat center top;
     background-size: contain;
 }
 
@@ -359,3 +359,26 @@ Fix error field display
   overflow: hidden;
   background-color: #e5e5e5;
 }
+    fieldset
+	{
+		border: 1px solid #ddd !important;
+		margin: 0;
+		xmin-width: 0;
+		padding: 10px;
+		position: relative;
+		border-radius:4px;
+		background-color:#f5f5f5;
+		padding-left:10px!important;
+	}
+
+		legend
+		{
+			font-size:14px;
+			font-weight:bold;
+			margin-bottom: 0px;
+			width: 100%;
+			border: 0px solid #ddd;
+			border-radius: 4px;
+			padding: 5px 5px 5px 10px;
+			/*background-color: #f5f5f5;*/
+		}

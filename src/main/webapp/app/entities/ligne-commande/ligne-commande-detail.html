@@ -44,6 +44,10 @@
         <dd>
             <a ui-sref="fournisseur-detail({id:vm.ligneCommande.fournisseur.id})">{{vm.ligneCommande.fournisseur.id}}</a>
         </dd>
+        <dt><span data-translate="gestCApp.ligneCommande.magasin">Magasin</span></dt>
+        <dd>
+            <a ui-sref="magasin-detail({id:vm.ligneCommande.magasin.id})">{{vm.ligneCommande.magasin.id}}</a>
+        </dd>
     </dl>
 
     <button type="submit"

@@ -23,8 +23,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.*;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -59,8 +58,8 @@ public class CommandeResourceIntTest {
     private static final LocalDate DEFAULT_DATELIMITLIVRAISON = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DATELIMITLIVRAISON = LocalDate.now(ZoneId.systemDefault());
 
-    private static final LocalDate DEFAULT_DATECOMMANDE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATECOMMANDE = LocalDate.now(ZoneId.systemDefault());
+    private static final Instant DEFAULT_DATECOMMANDE = Instant.now();
+    private static final Instant UPDATED_DATECOMMANDE = Instant.now(Clock.system(ZoneId.systemDefault()));
 
     private static final Boolean DEFAULT_ETAT = false;
     private static final Boolean UPDATED_ETAT = true;

@@ -134,6 +134,16 @@ public class StockService {
         }
         return stockRepository.saveAndFlush(stock);
     }
+    public Stock closedStock(Long id) {
+        log.debug("Request to get Stock : {}", id);
+        Stock stock=stockRepository.findOne(id);
+        if(!stock.isClosed()){
+            stock.setClosed(true);
+        }else {
+            stock.setClosed(false);
+        }
+        return stockRepository.saveAndFlush(stock);
+    }
     /**
      *  Get one stock by article where active.
      *

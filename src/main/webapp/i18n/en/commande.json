@@ -16,13 +16,13 @@
             "detail": {
                 "title": "Commande"
             },
-            "numcommande": "Numcommande",
-            "montanttotalht": "Montanttotalht",
+            "numcommande": "N°commande",
+            "montanttotalht": "Montant totalht",
             "codebarre": "Codebarre",
             "libelle": "Libelle",
-            "montanttotalttc": "Montanttotalttc",
-            "datelimitlivraison": "Datelimitlivraison",
-            "datecommande": "Datecommande",
+            "montanttotalttc": "Montant totalttc",
+            "datelimitlivraison": "Date limitlivraison",
+            "datecommande": "Date commande",
             "etat": "Etat",
             "soldee": "Soldee",
             "agent": "Agent",

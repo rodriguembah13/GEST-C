@@ -270,8 +270,8 @@ public class FactureResource {
 
             //Long ida=id;
             parameterMap.put("id_re",id);
-/*            parameterMap.put("logo",lg);
-            parameterMap.put("codebare",id);*/
+           parameterMap.put("logo",lg);
+         /*    parameterMap.put("codebare",id);*/
             //System.out.println(nom);
             JasperPrint jasperPrint= JasperFillManager.fillReport(fis,parameterMap,connection);
             httpServletResponse.setContentType("application/pdf");
@@ -309,8 +309,8 @@ public class FactureResource {
 
             //Long ida=id;
             parameterMap.put("id_cmde",id);
-/*            parameterMap.put("logo",lg);
-            parameterMap.put("codebare",id);*/
+            parameterMap.put("logo",lg);
+          /*  parameterMap.put("codebare",id);*/
             //System.out.println(nom);
             JasperPrint jasperPrint= JasperFillManager.fillReport(fis,parameterMap,connection);
             httpServletResponse.setContentType("application/pdf");

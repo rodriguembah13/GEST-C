@@ -5,9 +5,9 @@
         .module('gestCApp')
         .controller('LigneCommandeDialogController', LigneCommandeDialogController);
 
-    LigneCommandeDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'LigneCommande', 'User', 'Article', 'Commande', 'Fournisseur'];
+    LigneCommandeDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'LigneCommande', 'User', 'Article', 'Commande', 'Fournisseur', 'Magasin'];
 
-    function LigneCommandeDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, LigneCommande, User, Article, Commande, Fournisseur) {
+    function LigneCommandeDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, LigneCommande, User, Article, Commande, Fournisseur, Magasin) {
         var vm = this;
 
         vm.ligneCommande = entity;
@@ -17,6 +17,7 @@
         vm.articles = Article.query();
         vm.commandes = Commande.query();
         vm.fournisseurs = Fournisseur.query();
+        vm.magasins = Magasin.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

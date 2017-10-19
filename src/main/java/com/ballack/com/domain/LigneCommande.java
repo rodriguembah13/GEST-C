@@ -53,6 +53,9 @@ public class LigneCommande implements Serializable {
     @ManyToOne
     private Fournisseur fournisseur;
 
+    @ManyToOne
+    private Magasin magasin;
+
     // jhipster-needle-entity-add-field - Jhipster will add fields here, do not remove
     public Long getId() {
         return id;
@@ -190,6 +193,19 @@ public class LigneCommande implements Serializable {
 
     public void setFournisseur(Fournisseur fournisseur) {
         this.fournisseur = fournisseur;
+    }
+
+    public Magasin getMagasin() {
+        return magasin;
+    }
+
+    public LigneCommande magasin(Magasin magasin) {
+        this.magasin = magasin;
+        return this;
+    }
+
+    public void setMagasin(Magasin magasin) {
+        this.magasin = magasin;
     }
     // jhipster-needle-entity-add-getters-setters - Jhipster will add getters and setters here, do not remove
 

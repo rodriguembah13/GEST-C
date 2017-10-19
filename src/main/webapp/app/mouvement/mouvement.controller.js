@@ -5,15 +5,17 @@
         .module('gestCApp')
         .controller('MouvementController',MouvementController);
 
-    MouvementController.$inject = ['$scope', 'Principal', 'LoginService', '$state','Article','$http','$q','Fournisseur'];
+    MouvementController.$inject = ['$scope', 'Principal', 'LoginService', '$state','Article','$http','$q','Fournisseur','Magasin'];
 
-    function MouvementController ($scope, Principal, LoginService, $state,Article,$http,$q,Fournisseur) {
+    function MouvementController ($scope, Principal, LoginService, $state,Article,$http,$q,Fournisseur,Magasin) {
         var vm = this;
         $scope.lines=[];
         $scope.commandes=[];
        $scope.cmde = false;
        vm.fournisseur = {};
+       vm.magasin = {};
        vm.fournisseurs= Fournisseur.query();
+       vm.magasins=Magasin.query();
         loadAllArticle ();
       		function loadAllArticle () {
               Article.query({
@@ -62,7 +64,8 @@
             quantite: null,
             prix: null,
             taxeTva: null,
-            fournisseur:vm.fournisseur
+            fournisseur:vm.fournisseur,
+            magasin:vm.magasin
                           })
           }
     $scope.getTotal = function(){

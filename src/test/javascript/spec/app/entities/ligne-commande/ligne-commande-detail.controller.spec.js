@@ -4,7 +4,7 @@ describe('Controller Tests', function() {
 
     describe('LigneCommande Management Detail Controller', function() {
         var $scope, $rootScope;
-        var MockEntity, MockPreviousState, MockLigneCommande, MockUser, MockArticle, MockCommande, MockFournisseur;
+        var MockEntity, MockPreviousState, MockLigneCommande, MockUser, MockArticle, MockCommande, MockFournisseur, MockMagasin;
         var createController;
 
         beforeEach(inject(function($injector) {
@@ -17,6 +17,7 @@ describe('Controller Tests', function() {
             MockArticle = jasmine.createSpy('MockArticle');
             MockCommande = jasmine.createSpy('MockCommande');
             MockFournisseur = jasmine.createSpy('MockFournisseur');
+            MockMagasin = jasmine.createSpy('MockMagasin');
             
 
             var locals = {
@@ -28,7 +29,8 @@ describe('Controller Tests', function() {
                 'User': MockUser,
                 'Article': MockArticle,
                 'Commande': MockCommande,
-                'Fournisseur': MockFournisseur
+                'Fournisseur': MockFournisseur,
+                'Magasin': MockMagasin
             };
             createController = function() {
                 $injector.get('$controller')("LigneCommandeDetailController", locals);

@@ -1,7 +1,7 @@
 <style>
      .Red {
        color: black;
-       background-color: Red;
+       background-color: #D50000;
      }
      .Yellow {
        background-color: Yellow;
@@ -108,7 +108,7 @@
              <li><a ng-click="vm.active(stock)">Active/desactif</a></li>
              <li><a  ng-click="vm.save(stock.article)">Decomposition</a></li>
              <li><a  ng-click="vm.save(stock.article)">Recomposition</a></li>
-             <li><a  ng-click="vm.save(stock.article)">Ferme/ouvrir</a></li>
+             <li><a  ng-click="vm.closed(stock.article)">Ferme/ouvrir</a></li>
          </ul></div>
 <!--                             <button type="submit"
                                     ui-sref="stock.edit({id:stock.id})"

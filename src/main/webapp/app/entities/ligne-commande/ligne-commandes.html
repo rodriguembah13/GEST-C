@@ -3,7 +3,7 @@
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
-          <!--   <div class="col-xs-4 no-padding-left">
+<!--             <div class="col-xs-4 no-padding-left">
                 <button class="btn btn-primary" ui-sref="ligne-commande.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs-down"  data-translate="gestCApp.ligneCommande.home.createLabel">
@@ -46,6 +46,7 @@
                     <th jh-sort-by="article.id"><span data-translate="gestCApp.ligneCommande.article">Article</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="commande.id"><span data-translate="gestCApp.ligneCommande.commande">Commande</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th jh-sort-by="fournisseur.id"><span data-translate="gestCApp.ligneCommande.fournisseur">Fournisseur</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="magasin.id"><span data-translate="gestCApp.ligneCommande.magasin">Magasin</span> <span class="glyphicon glyphicon-sort"></span></th>
                     <th></th>
                 </tr>
             </thead>
@@ -70,7 +71,10 @@
                     <td>
                         <a ui-sref="fournisseur-detail({id:ligneCommande.fournisseur.id})">{{ligneCommande.fournisseur.nomcomplet}}</a>
                     </td>
-                    <td class="text-right" has-authority="ROLE_ADMIN" >
+                    <td>
+                        <a ui-sref="magasin-detail({id:ligneCommande.magasin.id})">{{ligneCommande.magasin.nomMagasin}}</a>
+                    </td>
+                    <td class="text-right">
                         <div class="btn-group flex-btn-group-container">
                             <button type="submit"
                                     ui-sref="ligne-commande-detail({id:ligneCommande.id})"
