@@ -26,7 +26,6 @@ public class Article implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @Column(name = "num_article")
     private String numArticle;
 
@@ -47,6 +46,9 @@ public class Article implements Serializable {
 
     @Column(name = "prix_courant")
     private Double prixCourant;
+
+    @Column(name = "taxe_tva")
+    private Double taxeTva;
 
     @ManyToOne
     private FamilleArticle familleArticle;
@@ -158,6 +160,19 @@ public class Article implements Serializable {
         this.prixCourant = prixCourant;
     }
 
+    public Double getTaxeTva() {
+        return taxeTva;
+    }
+
+    public Article taxeTva(Double taxeTva) {
+        this.taxeTva = taxeTva;
+        return this;
+    }
+
+    public void setTaxeTva(Double taxeTva) {
+        this.taxeTva = taxeTva;
+    }
+
     public FamilleArticle getFamilleArticle() {
         return familleArticle;
     }
@@ -229,6 +244,7 @@ public class Article implements Serializable {
             ", datecreation='" + getDatecreation() + "'" +
             ", nomarticle='" + getNomarticle() + "'" +
             ", prixCourant='" + getPrixCourant() + "'" +
+            ", taxeTva='" + getTaxeTva() + "'" +
             "}";
     }
 }

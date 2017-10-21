@@ -49,8 +49,8 @@
                 <tr ng-repeat="caisse in vm.caisses track by caisse.id">
                     <td><a ui-sref="caisse-detail({id:caisse.id})">{{caisse.id}}</a></td>
                     <td>{{caisse.numcaisse}}</td>
-                        <td>{{caisse.dateOuverture | date:'mediumDate'}}</td>
-                        <td>{{caisse.dateFermeture | date:'mediumDate'}}</td>
+                        <td>{{caisse.dateOuverture | date:'medium'}}</td>
+                        <td>{{caisse.dateFermeture | date:'medium'}}</td>
                     <td>{{caisse.fondcaisse}}</td>
                     <td>{{caisse.active}}</td>
                     <td>

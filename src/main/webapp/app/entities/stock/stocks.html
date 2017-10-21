@@ -59,7 +59,7 @@
     </div>
     <br/>
     <div class="table-responsive">
-        <table class="jh-table table table-striped">
+        <table class="jh-table table ">
             <thead>
                 <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
                     <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
@@ -81,7 +81,7 @@
             <tbody>
                 <tr ng-repeat="stock in vm.stocks track by stock.id" ng-class="[getClass(stock.actif,stock.closed), 'b']">
                     <td><a ui-sref="stock-detail({id:stock.id})">{{stock.id}}</a></td>
-                    <td>{{stock.quantite}}</td>
+                    <td >{{stock.quantite}}</td>
                     <td>{{stock.quantiteAlerte}}</td>
                     <td>{{stock.prixArticle}}</td>
                         <td>{{stock.dateperemption | date:'mediumDate'}}</td>
@@ -108,7 +108,7 @@
              <li><a ng-click="vm.active(stock)">Active/desactif</a></li>
              <li><a  ng-click="vm.save(stock.article)">Decomposition</a></li>
              <li><a  ng-click="vm.save(stock.article)">Recomposition</a></li>
-             <li><a  ng-click="vm.closed(stock.article)">Ferme/ouvrir</a></li>
+             <li><a  ng-click="vm.closed(stock)">Ferme/ouvrir</a></li>
          </ul></div>
 <!--                             <button type="submit"
                                     ui-sref="stock.edit({id:stock.id})"

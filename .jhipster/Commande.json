@@ -49,7 +49,7 @@
         },
         {
             "fieldName": "datecommande",
-            "fieldType": "LocalDate"
+            "fieldType": "Instant"
         },
         {
             "fieldName": "etat",

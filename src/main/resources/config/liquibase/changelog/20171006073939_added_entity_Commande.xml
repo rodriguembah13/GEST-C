@@ -46,7 +46,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="datecommande" type="date">
+            <column name="datecommande" type="timestamp">
                 <constraints nullable="true" />
             </column>
 
@@ -72,7 +72,7 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

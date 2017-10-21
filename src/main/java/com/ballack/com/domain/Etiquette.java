@@ -6,6 +6,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Objects;
 
 /**
@@ -28,6 +30,12 @@ public class Etiquette implements Serializable {
 
     @Column(name = "code_bare")
     private String codeBare;
+
+    @Column(name = "date_creation")
+    private Instant dateCreation;
+
+    @Column(name = "date_crea")
+    private ZonedDateTime dateCrea;
 
     @OneToOne
     @JoinColumn(unique = true)
@@ -66,6 +74,32 @@ public class Etiquette implements Serializable {
 
     public void setCodeBare(String codeBare) {
         this.codeBare = codeBare;
+    }
+
+    public Instant getDateCreation() {
+        return dateCreation;
+    }
+
+    public Etiquette dateCreation(Instant dateCreation) {
+        this.dateCreation = dateCreation;
+        return this;
+    }
+
+    public void setDateCreation(Instant dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public ZonedDateTime getDateCrea() {
+        return dateCrea;
+    }
+
+    public Etiquette dateCrea(ZonedDateTime dateCrea) {
+        this.dateCrea = dateCrea;
+        return this;
+    }
+
+    public void setDateCrea(ZonedDateTime dateCrea) {
+        this.dateCrea = dateCrea;
     }
 
     public Article getArticle() {
@@ -108,6 +142,8 @@ public class Etiquette implements Serializable {
             "id=" + getId() +
             ", etiquette='" + getEtiquette() + "'" +
             ", codeBare='" + getCodeBare() + "'" +
+            ", dateCreation='" + getDateCreation() + "'" +
+            ", dateCrea='" + getDateCrea() + "'" +
             "}";
     }
 }

@@ -52,6 +52,10 @@
         {
             "fieldName": "prixCourant",
             "fieldType": "Double"
+        },
+        {
+            "fieldName": "taxeTva",
+            "fieldType": "Double"
         }
     ],
     "changelogDate": "20171006055829",

@@ -63,6 +63,7 @@ public class DecompositionService {
         Stock stock = stockRepository.findStockactif(article);
         decomposition.setArticledepart("Art/DEP" + article.getNomarticle() + "/" + stock.getQuantite() + "/" + stock.getQuantiteGros());
         decomposition.setArticle(article);
+
         int nbre = article.getFormeArticle().getQuantite();
         if (article.getFormeArticle().getNomForme().equals("simple")) {
             if (stock.getQuantiteGros() - 1 > 0) {

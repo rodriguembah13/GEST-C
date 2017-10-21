@@ -17,7 +17,7 @@
                     if (data) {
                         data = angular.fromJson(data);
                         data.datelimitlivraison = DateUtils.convertLocalDateFromServer(data.datelimitlivraison);
-                        data.datecommande = DateUtils.convertLocalDateFromServer(data.datecommande);
+                        data.datecommande = DateUtils.convertDateTimeFromServer(data.datecommande);
                     }
                     return data;
                 }

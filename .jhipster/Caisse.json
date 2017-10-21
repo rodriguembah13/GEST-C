@@ -17,7 +17,7 @@
         },
         {
             "fieldName": "dateOuverture",
-            "fieldType": "LocalDate"
+            "fieldType": "Instant"
         },
         {
             "fieldName": "dateFermeture",

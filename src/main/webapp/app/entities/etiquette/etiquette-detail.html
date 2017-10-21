@@ -12,6 +12,14 @@
         <dd>
             <span>{{vm.etiquette.codeBare}}</span>
         </dd>
+        <dt><span data-translate="gestCApp.etiquette.dateCreation">Date Creation</span></dt>
+        <dd>
+            <span>{{vm.etiquette.dateCreation | date:'medium'}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.etiquette.dateCrea">Date Crea</span></dt>
+        <dd>
+            <span>{{vm.etiquette.dateCrea | date:'medium'}}</span>
+        </dd>
         <dt><span data-translate="gestCApp.etiquette.article">Article</span></dt>
         <dd>
             <a ui-sref="article-detail({id:vm.etiquette.article.id})">{{vm.etiquette.article.id}}</a>

@@ -1,5 +1,6 @@
-<nav class="navbar navbar-default" role="navigation" ng-switch="vm.isAuthenticated()">
-    <div class="container">
+<div ng-switch="vm.isAuthenticated()">
+<nav class="navbar navbar-default" role="navigation" ng-switch-when="true">
+    <div class="container-fluid">
     <div class="navbar-header">
             <button type="button" class="navbar-toggle" ng-click="vm.toggleNavbar()">
                 <span class="sr-only">Toggle navigation</span>
@@ -10,7 +11,7 @@
         </div>
         <div class="navbar-collapse" uib-collapse="vm.isNavbarCollapsed" >
             <ul class="nav navbar-nav">
-                           <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown dropdown>
+                           <li ng-class="{active: vm.$state.includes('entity')}" uib-dropdown dropdown>
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                         <span>
                             <i class="fa fa-tasks" aria-hidden="true"></i>
@@ -45,12 +46,12 @@
                              
                </ul>
                </li>
-                 <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown dropdown>
+                 <li ng-class="{active: vm.$state.includes('entity')}" uib-dropdown dropdown>
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                         <span>
-                           
-                            <span class="hidden-sm" data-translate="">
-                            <i class="fa fa-credit-card" aria-hidden="true"></i>  Achats
+                           <i class="fa fa-credit-card" aria-hidden="true"></i>
+
+                            <span class="hidden-sm" data-translate="">  Achats
                             </span>
                             <b class="caret"></b>
                         </span>
@@ -58,35 +59,36 @@
                <ul class="dropdown-menu" uib-dropdown-menu>
                        <li ui-sref-active="active">
                                 <a ui-sref="commande" ng-click="vm.collapseNavbar()">
-                                    <span class=""></span>&nbsp;
-                                    <span data-translate=""><i class="fa fa-history" aria-hidden="true"></i>Historique</span>
+                                    <i class="fa fa-history" aria-hidden="true"></i>
+
+                                    <span data-translate="">Historique Commande</span>
                                 </a>
                             <div class="divider"></div>
                         </li>
                               <li ui-sref-active="active">
                                 <a ui-sref="mouv" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                   <i class="fa fa-expand" aria-hidden="true"></i>
                                     <span data-translate="">Commande</span>
                                 </a>
                             <div class="divider"></div>
                         </li>
                               <li ui-sref-active="active">
                                 <a ui-sref="ligne-commande" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <i class="fa fa-list" aria-hidden="true"></i>
                                     <span data-translate="">Liste Commandes</span>
                                 </a>
                             <div class="divider"></div>
                         </li>
                               <li ui-sref-active="active">
                                 <a ui-sref="mouvement" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <i class="fa fa-building" aria-hidden="true"></i>
                                     <span data-translate="">Facture</span>
                                 </a>
                             
                         </li>
                </ul>
                </li>
-                                         <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown dropdown>
+                                         <li ng-class="{active: vm.$state.includes('entity')}" uib-dropdown dropdown>
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                         <span>
                            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
@@ -99,7 +101,7 @@
                <ul class="dropdown-menu" uib-dropdown-menu>
                        <li ui-sref-active="active">
                                 <a ui-sref="comptoir" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                  <i class="fa fa-desktop" aria-hidden="true"></i>
                                     <span data-translate="">Comptoir Détail </span>
                                 </a>
                             <div class="divider"></div>
@@ -114,14 +116,14 @@
                           </li>
                               <li ui-sref-active="active">
                                 <a ui-sref="sortie-article-user" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
                                     <span data-translate="">Mes ventes</span>
                                 </a>
                             <div class="divider"></div>
                         </li>
                               <li ui-sref-active="active">
                                 <a ui-sref="facture" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <i class="fa fa-building" aria-hidden="true"></i>
                                     <span data-translate="">Facture</span>
                                 </a>
                             <div class="divider"></div>
@@ -143,7 +145,7 @@
                         </li>
                </ul>
                </li>
-             <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown dropdown >
+             <li ng-class="{active: vm.$state.includes('entity')}"  uib-dropdown dropdown >
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                         <span>
                             <i class="fa fa-database" aria-hidden="true"></i>
@@ -156,35 +158,36 @@
                <ul class="dropdown-menu" uib-dropdown-menu>
                        <li ui-sref-active="active">
                                 <a ui-sref="stock" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <i class="fa fa-list" aria-hidden="true"></i>
+
                                     <span data-translate="">stock</span>
                                 </a>
                             <div class="divider"></div>
                         </li>
                               <li ui-sref-active="active">
                                 <a ui-sref="mouvement" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <i class="fa fa-compress" aria-hidden="true"></i>
                                     <span data-translate="">Approvisionnement </span>
                                 </a>
                             <div class="divider"></div>
                         </li>
                               <li ui-sref-active="active">
                                 <a ui-sref="entree-article" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <i class="fa fa-share" aria-hidden="true"></i>
                                     <span data-translate="">Entree Article</span>
                                 </a>
                             <div class="divider"></div>
                         </li>
                               <li ui-sref-active="active">
                                 <a ui-sref="ligne-entree-article" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                   <i class="fa fa-tasks" aria-hidden="true"></i>
                                     <span data-translate="">Ligne Entree</span>
                                 </a>
                             
                         </li>
                </ul>
                </li>
-               <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown dropdown >
+               <li ng-class="{active: vm.$state.includes('entity')}"  uib-dropdown dropdown >
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                         <span>
                            <i class="fa fa-archive" aria-hidden="true"></i>
@@ -197,14 +200,14 @@
                <ul class="dropdown-menu" uib-dropdown-menu>
                        <li ui-sref-active="active">
                                 <a ui-sref="caisse" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <i class="fa fa-list" aria-hidden="true"></i>
                                     <span data-translate="">caisse</span>
                                 </a>
                             <div class="divider"></div>
                         </li>
                               <li ui-sref-active="active">
                                 <a ui-sref="mouvement" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <i class="fa fa-share-alt-square" aria-hidden="true"></i>
                                     <span data-translate="">creance</span>
                                 </a>
                             <div class="divider"></div>
@@ -218,14 +221,14 @@
                         </li>
                               <li ui-sref-active="active">
                                 <a ui-sref="mouvement" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                   <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
                                     <span data-translate="">Achat</span>
                                 </a>
                             
                         </li>
                </ul>
                </li>
-               <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown dropdown >
+               <li ng-class="{active: vm.$state.includes('entity')}"  uib-dropdown dropdown >
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                         <span>
                             <i class="fa fa-users" aria-hidden="true"></i>
@@ -237,25 +240,50 @@
                     </a>
                <ul class="dropdown-menu" uib-dropdown-menu>
                               <li ui-sref-active="active">
-                                <a ui-sref="fournisseur" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                <a ui-sref="fournisseur" ng-click="vm.collapseNavbar()"><i class="fa fa-list" aria-hidden="true"></i>
                                     <span data-translate="">Fournisseur</span>
                                 </a>
                             <div class="divider"></div>
                         </li>
                               <li ui-sref-active="active">
                                 <a ui-sref="client" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                    <i class="fa fa-list" aria-hidden="true"></i>
                                     <span data-translate="">Client</span>
                                 </a>
                             
                         </li>
                </ul>
                </li>
-               <li ng-class="{active: vm.$state.includes('entity')}" ng-switch-when="true" uib-dropdown dropdown class="pull-right" >
+                              <li ng-class="{active: vm.$state.includes('entity')}"  uib-dropdown dropdown >
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
                         <span>
-                           <i class="fa fa-wrench" aria-hidden="true"></i>
+                            <i class="fa fa-area-chart" aria-hidden="true"></i>
+                            <span class="hidden-sm" data-translate="">
+                             Statistiques
+                            </span>
+                            <b class="caret"></b>
+                        </span>
+                    </a>
+               <ul class="dropdown-menu" uib-dropdown-menu>
+                              <li ui-sref-active="active">
+                                <a ui-sref="stat_vente" ng-click="vm.collapseNavbar()"><i class="fa fa-pie-chart" aria-hidden="true"></i>
+                                    <span data-translate="">Statistique vente</span>
+                                </a>
+                            <div class="divider"></div>
+                        </li>
+                              <li ui-sref-active="active">
+                                <a ui-sref="client" ng-click="vm.collapseNavbar()">
+                                    <i class="fa fa-line-chart" aria-hidden="true"></i>
+                                    <span data-translate="">Client</span>
+                                </a>
+                            
+                        </li>
+               </ul>
+               </li>
+               <li ng-class="{active: vm.$state.includes('entity')}"  uib-dropdown dropdown>
+                    <a class="dropdown-toggle" uib-dropdown-toggle href="" id="entity-menu">
+                        <span>
+                           <i class="fa fa-cogs" aria-hidden="true"></i>
                             <span class="hidden-sm" data-translate="">
                                 Parametre
                             </span>
@@ -291,10 +319,10 @@
                                 </a>
                             </li>     
                </ul>
-               </li>                <li ng-class="{active: vm.$state.includes('admin')}"  ng-switch-when="true" has-authority="ROLE_ADMIN" uib-dropdown dropdown>
+               </li>                <li ng-class="{active: vm.$state.includes('admin')}"  has-authority="ROLE_ADMIN" uib-dropdown dropdown class="pull-right">
                     <a class="dropdown-toggle" uib-dropdown-toggle href="" id="admin-menu">
                         <span>
-                            <span class="glyphicon glyphicon-tower"></span>
+                            <i class="fa fa-wrench" aria-hidden="true"></i>
                             <span class="hidden-sm" data-translate="global.menu.admin.main">Administration</span>
                             <b class="caret"></b>
                         </span>
@@ -349,3 +377,4 @@
         </div>
     </div>
 </nav>
+</div>

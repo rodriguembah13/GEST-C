@@ -104,7 +104,23 @@
         );
       return $q.all(results);
     };   
-
+    $scope.getTotal = function(){
+      var total = 0;
+      for(var i = 0; i < $scope.lines.length; i++){
+          var user = $scope.lines[i];
+          total += (user.article.prixCourant * user.quantite);
+      }
+      return total;
+  }
+      $scope.getTotalTTC = function(){
+      var total = 0;
+      for(var i = 0; i < $scope.lines.length; i++){
+          var user = $scope.lines[i];
+          var st=(user.article.prixCourant*user.article.taxeTva)*0.01
+          total += (st+user.quantite*user.article.prixCourant);
+      }
+      return total;
+  }
     $scope.mode = null;
     $scope.PrintFacture=function(etat){
       $scope.clas=$scope.venteE.id;
@@ -127,7 +143,7 @@
         var file=new Blob([data],{type:'application/pdf'});
         var fileUrl=URL.createObjectURL(file);
         var des = window.open(fileUrl,'_blank','');
-                                                       })
+             $scope.paie = false;                                          })
        .error(function(err){
         AlertService.error(err.message);
       });

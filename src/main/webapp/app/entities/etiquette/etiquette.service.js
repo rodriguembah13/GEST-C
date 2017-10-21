@@ -4,9 +4,9 @@
         .module('gestCApp')
         .factory('Etiquette', Etiquette);
 
-    Etiquette.$inject = ['$resource'];
+    Etiquette.$inject = ['$resource', 'DateUtils'];
 
-    function Etiquette ($resource) {
+    function Etiquette ($resource, DateUtils) {
         var resourceUrl =  'api/etiquettes/:id';
 
         return $resource(resourceUrl, {}, {
@@ -16,6 +16,8 @@
                 transformResponse: function (data) {
                     if (data) {
                         data = angular.fromJson(data);
+                        data.dateCreation = DateUtils.convertDateTimeFromServer(data.dateCreation);
+                        data.dateCrea = DateUtils.convertDateTimeFromServer(data.dateCrea);
                     }
                     return data;
                 }

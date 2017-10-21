@@ -26,11 +26,11 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="date_ouverture" type="date">
+            <column name="date_ouverture" type="timestamp">
                 <constraints nullable="true" />
             </column>
 
-            <column name="date_fermeture" type="date">
+            <column name="date_fermeture" type="timestamp">
                 <constraints nullable="true" />
             </column>
 
@@ -48,7 +48,7 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        
+
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 </databaseChangeLog>

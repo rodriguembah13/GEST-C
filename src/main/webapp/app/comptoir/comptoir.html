@@ -10,9 +10,9 @@
                 <li><a ng-click="vm.desactive()">Fermeture</a></li>
             </ul>
         </div>
-        <uib-alert type="{{alert.type}}" class="col-lg-3" ng-show="vm.caisseatif.active" close="closeAlert()"
+        <uib-alert type="{{alert.type}}" class="col-lg-4" ng-show="vm.caisseatif.active" close="closeAlert()"
                    ng-if="show">
-            {{vm.caisseatif.numcaisse}} ouvert: date ouverture: "{{vm.caisseatif.dateOuverture}}".
+            {{vm.caisseatif.numcaisse}} ouvert: date ouverture: "{{vm.caisseatif.dateOuverture| date:'medium'}}", Fonds de caisse :{{vm.caisseatif.fondcaisse}}.
         </uib-alert>
         <uib-alert class="col-lg-3" ng-show="!vm.caisseatif.active" close="closeAlert()" ng-if="show">
             Caisse Ferme.
@@ -27,7 +27,7 @@
                     <div class="panel-body">
                         
  <fieldset >        
-                    <legend>Comptoir</legend>
+                    <legend>Choisir Client</legend>
                         <div class="form-group">
                             <div class="input-group bmd-collapse-inline">
                                 <ui-select  ng-model="vm.client">
@@ -123,9 +123,9 @@
                                 <td>{{ user.article.nomarticle}}</td>
                                 <td>{{ user.article.prixCourant}}</td>
                                 <td>{{ user.quantite}}</td>
-                                <td>{{ user.taxeTVA}}</td>
+                                <td>{{ user.article.taxeTva}}</td>
                                 <td>{{ user.article.prixCourant*user.quantite}}</td>
-                                <td>{{ (user.prix_unitaire*user.quantite)+(user.prix_unitaire*user.taxeTVA *0.01)}}</td>
+                                <td>{{ (user.article.prixCourant*user.quantite)+(user.article.prixCourant*user.article.taxeTva *0.01)}}</td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -144,7 +144,8 @@
                 <div class="panel" ng-if="paie">
                     <div class="panel-body">
                         <form class="form-inline" role="form" ng-submit="PrintFacture(facture)">
-
+                        <fieldset>
+                            <legend>Paiement</legend>
                             <div class="form-group">
                                 <!-- <label>Mode Payement:</label> -->
                                 <select id="mode" class="form-control" required ng-model="mode">
@@ -153,7 +154,7 @@
                                     <option value="cheque">Cheque</option>
                                     <option value="mtn">MTN/ORANGE</option>
                                 </select>
-                            </div>{{modeA}}{{facture}}
+                            </div>
                             <div class="form-group" ng-if="mode=='caisse'">
                                 <label for="pwd">Montant:</label>
                                 <input type="number" class="form-control" id="mtn">
@@ -167,6 +168,7 @@
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-default">Submit</button>
+                            </fieldset>
                         </form>
                     </div>
                 </div>

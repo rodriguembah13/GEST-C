@@ -30,12 +30,14 @@ public class SortieArticleService {
     private final LigneSortieArticleService ligneSortieArticleService;
     private final UserService userService;
     private final FactureService factureService;
+    private final CaisseService caisseService;
     private final SortieArticleSearchRepository sortieArticleSearchRepository;
-    public SortieArticleService(SortieArticleRepository sortieArticleRepository, LigneSortieArticleService ligneSortieArticleService, UserService userService, FactureService factureService, SortieArticleSearchRepository sortieArticleSearchRepository) {
+    public SortieArticleService(SortieArticleRepository sortieArticleRepository, LigneSortieArticleService ligneSortieArticleService, UserService userService, FactureService factureService, CaisseService caisseService, SortieArticleSearchRepository sortieArticleSearchRepository) {
         this.sortieArticleRepository = sortieArticleRepository;
         this.ligneSortieArticleService = ligneSortieArticleService;
         this.userService = userService;
         this.factureService = factureService;
+        this.caisseService = caisseService;
         this.sortieArticleSearchRepository = sortieArticleSearchRepository;
     }
 
@@ -71,6 +73,7 @@ public class SortieArticleService {
         sortieArticle1.setNumsortie("N°VM/"+sortieArticle1.getId());
         SortieArticle result = sortieArticleRepository.saveAndFlush(sortieArticle1);
         sortieArticleSearchRepository.save(result);
+        caisseService.update(montantttc);
         factureService.saveFactureSortie(result);
         return result;
     }

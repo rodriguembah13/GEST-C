@@ -18,6 +18,14 @@
         {
             "fieldName": "codeBare",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "dateCreation",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "dateCrea",
+            "fieldType": "ZonedDateTime"
         }
     ],
     "changelogDate": "20171006061103",

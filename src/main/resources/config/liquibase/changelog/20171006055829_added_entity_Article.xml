@@ -50,6 +50,10 @@
                 <constraints nullable="true" />
             </column>
 
+            <column name="taxe_tva" type="double">
+                <constraints nullable="true" />
+            </column>
+
             <column name="famille_article_id" type="bigint">
                 <constraints nullable="true" />
             </column>

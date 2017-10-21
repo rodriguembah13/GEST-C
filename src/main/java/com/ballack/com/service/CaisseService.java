@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class CaisseService {
      */
     public Caisse save(Caisse caisse) {
         log.debug("Request to save Caisse : {}", caisse);
-        caisse.setDateOuverture(LocalDate.now());
+        caisse.setDateOuverture(Instant.now());
 
         Caisse result = caisseRepository.save(caisse);
         caisseSearchRepository.save(result);
@@ -68,7 +69,8 @@ public class CaisseService {
         if (te<=0){
             Caisse caisse=new Caisse();
             caisse.setUser(user);
-            caisse.setDateOuverture(LocalDate.now());
+            caisse.setFondcaisse(0.0);
+            caisse.setDateOuverture(Instant.now());
             caisse.setNumcaisse("CAISSE_"+arrondi2(Math.random(),4));
             caisse.setActive(true);
             result = caisseRepository.save(caisse);
@@ -79,7 +81,7 @@ public class CaisseService {
     public Caisse ferme() {
 
         Caisse caisse=caisseRepository.findByUserIsCurrentActif();
-        caisse.setDateFermeture(LocalDate.now());
+        caisse.setDateFermeture(Instant.now());
         caisse.setActive(false);
         Caisse result = caisseRepository.saveAndFlush(caisse);
         caisseSearchRepository.save(result);
@@ -99,7 +101,11 @@ public class CaisseService {
         log.debug("Request to get all Caisses");
         return caisseRepository.findAll(pageable);
     }
-
+    public Caisse update(Double fond) {
+       Caisse caisse=caisseRepository.findByUserIsCurrentActif();
+        caisse.setFondcaisse(caisse.getFondcaisse()+fond);
+        return caisseRepository.saveAndFlush(caisse);
+    }
     /**
      *  Get one caisse by id.
      *

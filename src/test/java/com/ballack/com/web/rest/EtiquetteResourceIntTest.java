@@ -22,8 +22,14 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
+import java.time.ZonedDateTime;
+import java.time.ZoneOffset;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import static com.ballack.com.web.rest.TestUtil.sameInstant;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -43,6 +49,12 @@ public class EtiquetteResourceIntTest {
 
     private static final String DEFAULT_CODE_BARE = "AAAAAAAAAA";
     private static final String UPDATED_CODE_BARE = "BBBBBBBBBB";
+
+    private static final Instant DEFAULT_DATE_CREATION = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATE_CREATION = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+
+    private static final ZonedDateTime DEFAULT_DATE_CREA = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
+    private static final ZonedDateTime UPDATED_DATE_CREA = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     @Autowired
     private EtiquetteRepository etiquetteRepository;
@@ -85,7 +97,9 @@ public class EtiquetteResourceIntTest {
     public static Etiquette createEntity(EntityManager em) {
         Etiquette etiquette = new Etiquette()
             .etiquette(DEFAULT_ETIQUETTE)
-            .codeBare(DEFAULT_CODE_BARE);
+            .codeBare(DEFAULT_CODE_BARE)
+            .dateCreation(DEFAULT_DATE_CREATION)
+            .dateCrea(DEFAULT_DATE_CREA);
         return etiquette;
     }
 
@@ -112,6 +126,8 @@ public class EtiquetteResourceIntTest {
         Etiquette testEtiquette = etiquetteList.get(etiquetteList.size() - 1);
         assertThat(testEtiquette.getEtiquette()).isEqualTo(DEFAULT_ETIQUETTE);
         assertThat(testEtiquette.getCodeBare()).isEqualTo(DEFAULT_CODE_BARE);
+        assertThat(testEtiquette.getDateCreation()).isEqualTo(DEFAULT_DATE_CREATION);
+        assertThat(testEtiquette.getDateCrea()).isEqualTo(DEFAULT_DATE_CREA);
 
         // Validate the Etiquette in Elasticsearch
         Etiquette etiquetteEs = etiquetteSearchRepository.findOne(testEtiquette.getId());
@@ -149,7 +165,9 @@ public class EtiquetteResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(etiquette.getId().intValue())))
             .andExpect(jsonPath("$.[*].etiquette").value(hasItem(DEFAULT_ETIQUETTE.toString())))
-            .andExpect(jsonPath("$.[*].codeBare").value(hasItem(DEFAULT_CODE_BARE.toString())));
+            .andExpect(jsonPath("$.[*].codeBare").value(hasItem(DEFAULT_CODE_BARE.toString())))
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
+            .andExpect(jsonPath("$.[*].dateCrea").value(hasItem(sameInstant(DEFAULT_DATE_CREA))));
     }
 
     @Test
@@ -164,7 +182,9 @@ public class EtiquetteResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(etiquette.getId().intValue()))
             .andExpect(jsonPath("$.etiquette").value(DEFAULT_ETIQUETTE.toString()))
-            .andExpect(jsonPath("$.codeBare").value(DEFAULT_CODE_BARE.toString()));
+            .andExpect(jsonPath("$.codeBare").value(DEFAULT_CODE_BARE.toString()))
+            .andExpect(jsonPath("$.dateCreation").value(DEFAULT_DATE_CREATION.toString()))
+            .andExpect(jsonPath("$.dateCrea").value(sameInstant(DEFAULT_DATE_CREA)));
     }
 
     @Test
@@ -187,7 +207,9 @@ public class EtiquetteResourceIntTest {
         Etiquette updatedEtiquette = etiquetteRepository.findOne(etiquette.getId());
         updatedEtiquette
             .etiquette(UPDATED_ETIQUETTE)
-            .codeBare(UPDATED_CODE_BARE);
+            .codeBare(UPDATED_CODE_BARE)
+            .dateCreation(UPDATED_DATE_CREATION)
+            .dateCrea(UPDATED_DATE_CREA);
 
         restEtiquetteMockMvc.perform(put("/api/etiquettes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -200,6 +222,8 @@ public class EtiquetteResourceIntTest {
         Etiquette testEtiquette = etiquetteList.get(etiquetteList.size() - 1);
         assertThat(testEtiquette.getEtiquette()).isEqualTo(UPDATED_ETIQUETTE);
         assertThat(testEtiquette.getCodeBare()).isEqualTo(UPDATED_CODE_BARE);
+        assertThat(testEtiquette.getDateCreation()).isEqualTo(UPDATED_DATE_CREATION);
+        assertThat(testEtiquette.getDateCrea()).isEqualTo(UPDATED_DATE_CREA);
 
         // Validate the Etiquette in Elasticsearch
         Etiquette etiquetteEs = etiquetteSearchRepository.findOne(testEtiquette.getId());
@@ -259,7 +283,9 @@ public class EtiquetteResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(etiquette.getId().intValue())))
             .andExpect(jsonPath("$.[*].etiquette").value(hasItem(DEFAULT_ETIQUETTE.toString())))
-            .andExpect(jsonPath("$.[*].codeBare").value(hasItem(DEFAULT_CODE_BARE.toString())));
+            .andExpect(jsonPath("$.[*].codeBare").value(hasItem(DEFAULT_CODE_BARE.toString())))
+            .andExpect(jsonPath("$.[*].dateCreation").value(hasItem(DEFAULT_DATE_CREATION.toString())))
+            .andExpect(jsonPath("$.[*].dateCrea").value(hasItem(sameInstant(DEFAULT_DATE_CREA))));
     }
 
     @Test

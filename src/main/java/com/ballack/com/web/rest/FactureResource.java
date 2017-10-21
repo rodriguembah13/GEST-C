@@ -180,7 +180,7 @@ public class FactureResource {
             String url1 =context.getEnvironment().getProperty("spring.datasource.url");
             String login1 =context.getEnvironment().getProperty("spring.datasource.username");
             String password1 =context.getEnvironment().getProperty("spring.datasource.password");
-            String lg="C:\\TempJasper\\imagepharma";
+            String lg="C:\\TempJasper\\imageCom";
             //Resource jasper=context.getResource("application.path.reports");
             connection = DriverManager.getConnection(url1, login1, password1);
             //InputStream inputStream= new FileInputStream(new File("C:\\TempJasper\\bulletinT.jrxml"));
@@ -220,7 +220,7 @@ public class FactureResource {
             String url1 =context.getEnvironment().getProperty("spring.datasource.url");
             String login1 =context.getEnvironment().getProperty("spring.datasource.username");
             String password1 =context.getEnvironment().getProperty("spring.datasource.password");
-            String lg="C:\\TempJasper\\imagepharma";
+            String lg="C:\\TempJasper\\imageCom";
             connection = DriverManager.getConnection(url1, login1, password1);
             //InputStream inputStream= new FileInputStream(new File("C:\\TempJasper\\bulletinT.jrxml"));
 
@@ -259,7 +259,7 @@ public class FactureResource {
             String url1 =context.getEnvironment().getProperty("spring.datasource.url");
             String login1 =context.getEnvironment().getProperty("spring.datasource.username");
             String password1 =context.getEnvironment().getProperty("spring.datasource.password");
-            String lg="C:\\TempJasper\\imagepharma";
+            String lg="C:\\TempJasper\\imageCom";
             connection = DriverManager.getConnection(url1, login1, password1);
             //InputStream inputStream= new FileInputStream(new File("C:\\TempJasper\\bulletinT.jrxml"));
 
@@ -298,7 +298,7 @@ public class FactureResource {
             String url1 =context.getEnvironment().getProperty("spring.datasource.url");
             String login1 =context.getEnvironment().getProperty("spring.datasource.username");
             String password1 =context.getEnvironment().getProperty("spring.datasource.password");
-            String lg="C:\\TempJasper\\imagepharma";
+            String lg="C:\\TempJasper\\imageCom";
             connection = DriverManager.getConnection(url1, login1, password1);
             //InputStream inputStream= new FileInputStream(new File("C:\\TempJasper\\bulletinT.jrxml"));
 

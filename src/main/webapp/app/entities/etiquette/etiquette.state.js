@@ -126,6 +126,8 @@
                             return {
                                 etiquette: null,
                                 codeBare: null,
+                                dateCreation: null,
+                                dateCrea: null,
                                 id: null
                             };
                         }

@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css">
     <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css">
     <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css">
+     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
     <!-- endinject -->
     <!-- endbuild -->
     <!-- build:css content/css/main.css -->
@@ -31,7 +32,7 @@
     <![endif]-->
     <page-ribbon></page-ribbon>
     <div ui-view="navbar" ng-cloak></div>
-    <div ui-view="menubar" class="container"></div>
+    <div ui-view="menubar" class="container-fluid"></div>
     <div class="container-fluid">
         <div class="well" ui-view="content">
             <!-- Angular views -->
@@ -70,6 +71,7 @@
     <script src="bower_components/json3/lib/json3.js"></script>
     <script src="bower_components/arrive/src/arrive.js"></script>
     <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
+    <script src="bower_components/chart.js/dist/Chart.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
@@ -92,12 +94,15 @@
     <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
     <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
     <script src="bower_components/angular-ui-select/dist/select.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
     <!-- endinject -->
     <!-- endbuild -->
 
     <!-- build:js app/app.js  -->
     <!-- inject:js -->
     <script src="app/app.module.js"></script>
+    <script src="app/statistique/statistique.state.js"></script>
+    <script src="app/statistique/statistique.controller.js"></script>
     <script src="app/services/user/user.service.js"></script>
     <script src="app/services/profiles/profile.service.js"></script>
     <script src="app/services/profiles/page-ribbon.directive.js"></script>

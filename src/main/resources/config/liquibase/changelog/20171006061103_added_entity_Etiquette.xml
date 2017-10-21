@@ -29,11 +29,21 @@
             <column name="code_bare" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
+
+            <column name="date_creation" type="timestamp">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="date_crea" type="timestamp">
+                <constraints nullable="true" />
+            </column>
             <column name="article_id" type="bigint">
                 <constraints unique="true" nullable="true" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
+        <dropDefaultValue tableName="etiquette" columnName="date_creation" columnDataType="datetime"/>
+        <dropDefaultValue tableName="etiquette" columnName="date_crea" columnDataType="datetime"/>
         
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->

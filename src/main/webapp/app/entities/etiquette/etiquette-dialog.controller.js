@@ -12,6 +12,8 @@
 
         vm.etiquette = entity;
         vm.clear = clear;
+        vm.datePickerOpenStatus = {};
+        vm.openCalendar = openCalendar;
         vm.save = save;
         vm.articles = Article.query({filter: 'etiquette-is-null'});
         $q.all([vm.etiquette.$promise, vm.articles.$promise]).then(function() {
@@ -50,6 +52,11 @@
             vm.isSaving = false;
         }
 
+        vm.datePickerOpenStatus.dateCreation = false;
+        vm.datePickerOpenStatus.dateCrea = false;
 
+        function openCalendar (date) {
+            vm.datePickerOpenStatus[date] = true;
+        }
     }
 })();

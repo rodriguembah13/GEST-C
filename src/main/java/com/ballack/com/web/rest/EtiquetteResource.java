@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -61,6 +62,7 @@ public class EtiquetteResource {
         if (etiquette.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new etiquette cannot already have an ID")).body(null);
         }
+        etiquette.setDateCreation(Instant.now());
         Etiquette result = etiquetteRepository.save(etiquette);
         etiquetteSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/etiquettes/" + result.getId()))

@@ -13,7 +13,7 @@
             <input type="text" class="form-control" id="id" name="id"
                     ng-model="vm.article.id" readonly />
         </div>
-        <div class="form-group">
+<!--         <div class="form-group">
             <label class="control-label" data-translate="gestCApp.article.numArticle" for="field_numArticle">Num Article</label>
             <input type="text" class="form-control" name="numArticle" id="field_numArticle"
                     ng-model="vm.article.numArticle"
@@ -24,20 +24,26 @@
                     This field is required.
                 </p>
             </div>
+        </div> --> 
+               <div class="form-group col-md-6 col-sm-6 col-xs-12 has-feedback">
+            <label class="control-label" data-translate="gestCApp.article.nomarticle" for="field_nomarticle">Nomarticle</label>
+            <input type="text" class="form-control" name="nomarticle" id="field_nomarticle"
+                    ng-model="vm.article.nomarticle"
+                    />
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-6 col-sm-6 col-xs-12 has-feedback">
             <label class="control-label" data-translate="gestCApp.article.poids" for="field_poids">Poids</label>
             <input type="number" class="form-control" name="poids" id="field_poids"
                     ng-model="vm.article.poids"
                     />
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-6 col-sm-6 col-xs-12 has-feedback">
             <label class="control-label" data-translate="gestCApp.article.codebarre" for="field_codebarre">Codebarre</label>
             <input type="text" class="form-control" name="codebarre" id="field_codebarre"
                     ng-model="vm.article.codebarre"
                     />
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-6 col-sm-6 col-xs-12 has-feedback">
             <label class="control-label" data-translate="gestCApp.article.marque" for="field_marque">Marque</label>
             <input type="text" class="form-control" name="marque" id="field_marque"
                     ng-model="vm.article.marque"
@@ -53,12 +59,7 @@
                     </span>
                 </div>
         </div> -->
-        <div class="form-group">
-            <label class="control-label" data-translate="gestCApp.article.nomarticle" for="field_nomarticle">Nomarticle</label>
-            <input type="text" class="form-control" name="nomarticle" id="field_nomarticle"
-                    ng-model="vm.article.nomarticle"
-                    />
-        </div>
+
 <!--         <div class="form-group">
             <label class="control-label" data-translate="gestCApp.article.prixCourant" for="field_prixCourant">Prix Courant</label>
             <input type="number" class="form-control" name="prixCourant" id="field_prixCourant"
@@ -66,13 +67,13 @@
                     />
         </div> -->
 
-        <div class="form-group">
+        <div class="form-group col-md-6 col-sm-6 col-xs-12 has-feedback">
             <label data-translate="gestCApp.article.familleArticle" for="field_familleArticle">Famille Article</label>
             <select class="form-control" id="field_familleArticle" name="familleArticle" ng-model="vm.article.familleArticle" ng-options="familleArticle as familleArticle.libelle for familleArticle in vm.famillearticles track by familleArticle.id">
                 <option value=""></option>
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-group col-md-6 col-sm-6 col-xs-12 has-feedback">
             <label data-translate="gestCApp.article.formeArticle" for="field_formeArticle">Forme Article</label>
             <select class="form-control" id="field_formeArticle" name="formeArticle" ng-model="vm.article.formeArticle" ng-options="formeArticle as formeArticle.nomForme for formeArticle in vm.formearticles track by formeArticle.id">
                 <option value=""></option>

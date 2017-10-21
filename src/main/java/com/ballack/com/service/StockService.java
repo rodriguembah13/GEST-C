@@ -128,6 +128,7 @@ public class StockService {
             stock.setActif(true);
             Article article=articleService.findOne(stock.getArticle().getId());
             article.setPrixCourant(stock.getPrixArticle());
+            article.setTaxeTva(stock.getTaxeTVA());
             articleService.saveAndFluch(article);
         }else {
             stock.setActif(false);

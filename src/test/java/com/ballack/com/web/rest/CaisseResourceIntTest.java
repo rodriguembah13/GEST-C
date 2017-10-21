@@ -23,8 +23,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -44,11 +46,11 @@ public class CaisseResourceIntTest {
     private static final String DEFAULT_NUMCAISSE = "AAAAAAAAAA";
     private static final String UPDATED_NUMCAISSE = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_DATE_OUVERTURE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_OUVERTURE = LocalDate.now(ZoneId.systemDefault());
+    private static final Instant DEFAULT_DATE_OUVERTURE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATE_OUVERTURE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
-    private static final LocalDate DEFAULT_DATE_FERMETURE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_DATE_FERMETURE = LocalDate.now(ZoneId.systemDefault());
+    private static final Instant DEFAULT_DATE_FERMETURE = Instant.ofEpochMilli(0L);
+    private static final Instant UPDATED_DATE_FERMETURE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
 
     private static final Double DEFAULT_FONDCAISSE = 1D;
     private static final Double UPDATED_FONDCAISSE = 2D;

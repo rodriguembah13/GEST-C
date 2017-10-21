@@ -25,6 +25,26 @@
                     ng-model="vm.etiquette.codeBare"
                     />
         </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.etiquette.dateCreation" for="field_dateCreation">Date Creation</label>
+                <div class="input-group">
+                    <input id="field_dateCreation" type="text" class="form-control" name="dateCreation" datetime-picker="{{dateformat}}" ng-model="vm.etiquette.dateCreation" is-open="vm.datePickerOpenStatus.dateCreation"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateCreation')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" data-translate="gestCApp.etiquette.dateCrea" for="field_dateCrea">Date Crea</label>
+                <div class="input-group">
+                    <input id="field_dateCrea" type="text" class="form-control" name="dateCrea" datetime-picker="{{dateformat}}" ng-model="vm.etiquette.dateCrea" is-open="vm.datePickerOpenStatus.dateCrea"
+                    />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('dateCrea')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </div>
+        </div>
 
         <div class="form-group">
             <label data-translate="gestCApp.etiquette.article" for="field_article">Article</label>

@@ -6,6 +6,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -28,10 +29,10 @@ public class Caisse implements Serializable {
     private String numcaisse;
 
     @Column(name = "date_ouverture")
-    private LocalDate dateOuverture;
+    private Instant dateOuverture;
 
     @Column(name = "date_fermeture")
-    private LocalDate dateFermeture;
+    private Instant dateFermeture;
 
     @Column(name = "fondcaisse")
     private Double fondcaisse;
@@ -64,29 +65,29 @@ public class Caisse implements Serializable {
         this.numcaisse = numcaisse;
     }
 
-    public LocalDate getDateOuverture() {
+    public Instant getDateOuverture() {
         return dateOuverture;
     }
 
-    public Caisse dateOuverture(LocalDate dateOuverture) {
+    public Caisse dateOuverture(Instant dateOuverture) {
         this.dateOuverture = dateOuverture;
         return this;
     }
 
-    public void setDateOuverture(LocalDate dateOuverture) {
+    public void setDateOuverture(Instant dateOuverture) {
         this.dateOuverture = dateOuverture;
     }
 
-    public LocalDate getDateFermeture() {
+    public Instant getDateFermeture() {
         return dateFermeture;
     }
 
-    public Caisse dateFermeture(LocalDate dateFermeture) {
+    public Caisse dateFermeture(Instant dateFermeture) {
         this.dateFermeture = dateFermeture;
         return this;
     }
 
-    public void setDateFermeture(LocalDate dateFermeture) {
+    public void setDateFermeture(Instant dateFermeture) {
         this.dateFermeture = dateFermeture;
     }
 
