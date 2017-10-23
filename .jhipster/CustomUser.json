@@ -1,0 +1,66 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "one-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "customUser"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "isaduUser",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "isVendre",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "isApprovStock",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "commander",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "isPrintFac",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "isupdateCmde",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "isupdateStck",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "photo",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "telephone",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "viewVente",
+            "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "viewCmde",
+            "fieldType": "Boolean"
+        }
+    ],
+    "changelogDate": "20171023121425",
+    "dto": "no",
+    "service": "serviceClass",
+    "entityTableName": "custom_user",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

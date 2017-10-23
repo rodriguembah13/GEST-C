@@ -25,6 +25,7 @@
                 "sortieArticle": "Sortie Article",
                 "stock": "Stock",
                 "typeSortieArticle": "Type Sortie Article",
+                "customUser": "Custom User",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

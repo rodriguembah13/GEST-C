@@ -59,7 +59,7 @@ public class SortieArticleResource {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new sortieArticle cannot already have an ID")).body(null);
         }
         SortieArticle result = sortieArticleService.save(sortieArticle);
-        return ResponseEntity.created(new URI("/api/sortie-articles/" + result.getId()))
+        return ResponseEntity.created(new URI("/api/sortie-articles1/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }

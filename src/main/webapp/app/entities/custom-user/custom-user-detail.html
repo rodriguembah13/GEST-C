@@ -1,0 +1,70 @@
+
+<div>
+    <h2><span data-translate="gestCApp.customUser.detail.title">Custom User</span> {{vm.customUser.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span data-translate="gestCApp.customUser.isaduUser">Isadu User</span></dt>
+        <dd>
+            <span>{{vm.customUser.isaduUser}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.customUser.isVendre">Is Vendre</span></dt>
+        <dd>
+            <span>{{vm.customUser.isVendre}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.customUser.isApprovStock">Is Approv Stock</span></dt>
+        <dd>
+            <span>{{vm.customUser.isApprovStock}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.customUser.commander">Commander</span></dt>
+        <dd>
+            <span>{{vm.customUser.commander}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.customUser.isPrintFac">Is Print Fac</span></dt>
+        <dd>
+            <span>{{vm.customUser.isPrintFac}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.customUser.isupdateCmde">Isupdate Cmde</span></dt>
+        <dd>
+            <span>{{vm.customUser.isupdateCmde}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.customUser.isupdateStck">Isupdate Stck</span></dt>
+        <dd>
+            <span>{{vm.customUser.isupdateStck}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.customUser.photo">Photo</span></dt>
+        <dd>
+            <div ng-if="vm.customUser.photo">
+                <a ng-click="vm.openFile(vm.customUser.photoContentType, vm.customUser.photo)" data-translate="entity.action.open">open</a>
+                {{vm.customUser.photoContentType}}, {{vm.byteSize(vm.customUser.photo)}}
+            </div>
+        </dd>
+        <dt><span data-translate="gestCApp.customUser.telephone">Telephone</span></dt>
+        <dd>
+            <span>{{vm.customUser.telephone}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.customUser.viewVente">View Vente</span></dt>
+        <dd>
+            <span>{{vm.customUser.viewVente}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.customUser.viewCmde">View Cmde</span></dt>
+        <dd>
+            <span>{{vm.customUser.viewCmde}}</span>
+        </dd>
+        <dt><span data-translate="gestCApp.customUser.user">User</span></dt>
+        <dd>
+            {{vm.customUser.user.login}}
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button" ui-sref="custom-user-detail.edit({id:vm.customUser.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+    </button>
+</div>

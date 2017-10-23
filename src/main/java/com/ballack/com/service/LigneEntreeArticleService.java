@@ -50,7 +50,7 @@ public class LigneEntreeArticleService {
         stock.setArticle(ligneEntreeArticle.getArticle());
         stock.setPrixAchat(ligneEntreeArticle.getPrix_unitaire());
         stock.setTaxeTVA(ligneEntreeArticle.getTaxeTVA());
-        System.out.println(ligneEntreeArticle.getDateperemption());
+
         stock.setQuantiteAlerte(10);
         stock.setClosed(false);
         stock.setQuantiteAlerteGros(5);

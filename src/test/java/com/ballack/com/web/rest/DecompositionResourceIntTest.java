@@ -113,7 +113,7 @@ public class DecompositionResourceIntTest {
         int databaseSizeBeforeCreate = decompositionRepository.findAll().size();
 
         // Create the Decomposition
-        restDecompositionMockMvc.perform(post("/api/decompositions")
+        restDecompositionMockMvc.perform(post("/api/decomposition")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(decomposition)))
             .andExpect(status().isCreated());
@@ -141,7 +141,7 @@ public class DecompositionResourceIntTest {
         decomposition.setId(1L);
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restDecompositionMockMvc.perform(post("/api/decompositions")
+        restDecompositionMockMvc.perform(post("/api/decomposition")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(decomposition)))
             .andExpect(status().isBadRequest());

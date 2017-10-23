@@ -58,11 +58,12 @@ public class CommandeService {
         String fomat=now.format(formatter);*/
         //LocalDateTime formatDateTime = LocalDateTime.parse(iso8601);
         commande.setDatecommande(Instant.now());
-        System.out.println(/*##########################################################################################*/);
-        System.out.println(LocalDateTime.now());
         commande.setDatelimitlivraison(LocalDate.now().plusMonths(applicationProperties.getCommande().getDatelimite()));
         commande.setAgent(userService.getUserWithAuthorities());
+        commande.setEtat(false);
+        commande.setSoldee(false);
         Commande commande1 = commandeRepository.save(commande);
+
         double montantht=0.0;
         double montantttc=0.0;
         for (LigneCommande ligneCommande:ligneCommandes){

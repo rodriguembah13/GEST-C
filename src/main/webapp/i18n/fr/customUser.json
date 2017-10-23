@@ -1,0 +1,33 @@
+{
+    "gestCApp": {
+        "customUser" : {
+            "home": {
+                "title": "CustomUsers",
+                "createLabel": "Créer un nouveau Custom User",
+                "createOrEditLabel": "Créer ou éditer un Custom User",
+                "search": "Recherche pour Custom User"
+            },
+            "created": "Un nouveau Custom User a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Custom User avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Custom User avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Custom User {{ id }} ?"
+            },
+            "detail": {
+                "title": "Custom User"
+            },
+            "isaduUser": "Isadu User",
+            "isVendre": "Is Vendre",
+            "isApprovStock": "Is Approv Stock",
+            "commander": "Commander",
+            "isPrintFac": "Is Print Fac",
+            "isupdateCmde": "Isupdate Cmde",
+            "isupdateStck": "Isupdate Stck",
+            "photo": "Photo",
+            "telephone": "Telephone",
+            "viewVente": "View Vente",
+            "viewCmde": "View Cmde",
+            "user": "User"
+        }
+    }
+}

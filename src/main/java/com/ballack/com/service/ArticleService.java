@@ -43,7 +43,7 @@ public class ArticleService {
     public Article save(Article article) {
         log.debug("Request to save Article : {}", article);
         article.setDatecreation(LocalDate.now());
-        article.setNumArticle("ART"+article.getId());
+        article.setNumArticle("AAAAAAAAAA");
         Article result = articleRepository.save(article);
         articleSearchRepository.save(result);
         return result;

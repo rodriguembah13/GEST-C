@@ -44,7 +44,7 @@ public class DecompositionResource {
     }
 
     /**
-     * POST  /decompositions : Create a new decomposition.
+     * POST  /decomposition : Create a new decomposition.
      *
      * @param decomposition the decomposition to create
      * @return the ResponseEntity with status 201 (Created) and with body the new decomposition, or with status 400 (Bad Request) if the decomposition has already an ID
