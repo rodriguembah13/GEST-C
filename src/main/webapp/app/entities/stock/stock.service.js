@@ -44,15 +44,38 @@
     'use strict';
     angular
         .module('gestCApp')
-        .factory('StockA', StockA);
+        .factory('StockA', StockA)
+        .factory('Stockclosed', Stockclosed);
 
     StockA.$inject = ['$resource', 'DateUtils'];
-
+    Stockclosed.$inject = ['$resource', 'DateUtils'];
     function StockA ($resource, DateUtils) {
         var resourceUrl =  'api/stocksA/:id';
 
         return $resource(resourceUrl, {}, {
-            'query': { method: 'GET', isArray: true}
+            'query': { method: 'GET', isArray: true},
+            'update': {
+                method: 'PUT',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                    //copy.dateperemption = DateUtils.convertLocalDateToServer(copy.dateperemption);
+                    return angular.toJson(copy);
+                }
+            }
+        });
+    }
+function Stockclosed ($resource, DateUtils) {
+        var resourceUrl =  'api/stocksC/:id';
+
+        return $resource(resourceUrl, {}, {
+             'update': {
+                method: 'PUT',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                    //copy.dateperemption = DateUtils.convertLocalDateToServer(copy.dateperemption);
+                    return angular.toJson(copy);
+                }
+            }
         });
     }
 })();

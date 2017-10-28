@@ -3,7 +3,9 @@ package com.ballack.com.service;
 import com.ballack.com.config.ApplicationProperties;
 import com.ballack.com.domain.Commande;
 import com.ballack.com.domain.LigneCommande;
+import com.ballack.com.domain.LigneSortieArticle;
 import com.ballack.com.repository.CommandeRepository;
+import com.ballack.com.repository.LigneCommandeRepository;
 import com.ballack.com.repository.search.CommandeSearchRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Set;
+import java.util.*;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -34,12 +34,14 @@ public class CommandeService {
     private final LigneCommandeService ligneCommandeService;
     private final CommandeSearchRepository commandeSearchRepository;
     private final UserService userService;
+    private final LigneCommandeRepository ligneCommandeRepository;
     private final ApplicationProperties applicationProperties;
-    public CommandeService(CommandeRepository commandeRepository, LigneCommandeService ligneCommandeService, CommandeSearchRepository commandeSearchRepository, UserService userService, ApplicationProperties applicationProperties) {
+    public CommandeService(CommandeRepository commandeRepository, LigneCommandeService ligneCommandeService, CommandeSearchRepository commandeSearchRepository, UserService userService, LigneCommandeRepository ligneCommandeRepository, ApplicationProperties applicationProperties) {
         this.commandeRepository = commandeRepository;
         this.ligneCommandeService = ligneCommandeService;
         this.commandeSearchRepository = commandeSearchRepository;
         this.userService = userService;
+        this.ligneCommandeRepository = ligneCommandeRepository;
         this.applicationProperties = applicationProperties;
     }
 
@@ -83,7 +85,7 @@ public class CommandeService {
         commande1.setMontanttotalttc(montantttc);
         commande1.setMontanttotalht(montantht);
         Commande result = commandeRepository.save(commande);
-        commandeSearchRepository.save(result);
+        //commandeSearchRepository.save(result);
         return result;
     }
 public Commande save(Commande commande){
@@ -103,7 +105,33 @@ public Commande save(Commande commande){
         log.debug("Request to get all Commandes");
         return commandeRepository.findAll(pageable);
     }
+    public HashMap statCommande() {
+        HashMap<String,Integer> hashMap=new HashMap();
+        log.debug("Request to get all SortieArticles");
+        List<LigneCommande> ligneCommandeList=ligneCommandeRepository.findAll();
+        List<HashMap<String,Integer>>hashMapList=new ArrayList<>();
+        Comparator<Integer> valueComparator = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer s1, Integer s2) {
+                return s1.compareTo(s2);
+            }
+        };
 
+        for (LigneCommande ligneCommande:ligneCommandeList){
+            if (!hashMap.containsKey(ligneCommande.getArticle().getNomarticle())){
+                hashMap.putIfAbsent(ligneCommande.getArticle().getNomarticle(),ligneCommande.getQuantite());
+                hashMapList.add(hashMap);
+            }else {
+
+                hashMap.replace(ligneCommande.getArticle().getNomarticle(),hashMap.get(ligneCommande.getArticle().getNomarticle())+ligneCommande.getQuantite());
+            }
+
+        }
+        //MapValueComparator<Article,Integer> mapComparator = new MapValueComparator<Article, Integer>(hashMap, valueComparator);
+
+
+        return hashMap;
+    }
     /**
      *  Get one commande by id.
      *

@@ -21,7 +21,7 @@
                     controllerAs: 'vm'
                 }
             }
-        }).state('mouv', {
+        }).state('mouve', {
             parent: 'app',
             url: '/mouvementcommande',
             data: {

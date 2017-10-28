@@ -5,9 +5,11 @@
   .module('gestCApp')
   .controller('ComptoirController', ComptoirController);
 
-  ComptoirController.$inject = ['$scope', 'Principal', 'LoginService','AlertService', '$state','Article','$http','$q','Caisse','CaisseA','Client'];
+  ComptoirController.$inject = ['$scope', 'Principal', 'LoginService','AlertService', '$state','Article','$http','$q',
+  'Caisse','CaisseA','Client','SortieArticle','SortieArticlePrint','CaisseActived','CaisseDesactived'];
 
-  function ComptoirController ($scope, Principal, LoginService,AlertService, $state,Article,$http,$q,Caisse,CaisseA,Client) {
+  function ComptoirController ($scope, Principal, LoginService,AlertService, $state,Article,$http,$q,Caisse,
+    CaisseA,Client,SortieArticle,SortieArticlePrint,CaisseActived,CaisseDesactived) {
     var vm = this;
     $scope.lines=[];
     vm.$state = $state;
@@ -16,7 +18,7 @@
     vm.caisseatif=CaisseA.query();
     vm.clients=Client.query();
     loadAllArticle ();
-    vm.client = {};
+    vm.client = {}; 
         //loadCaisse ();
         function loadAllArticle () {
           Article.query({
@@ -43,22 +45,25 @@
            };
 
            $scope.alert = {type: 'success', msg: 'Something gone wrong'};
-           function active(){ $http.post('/api/caisses1')
-           .success(function(data){
-             vm.caisse=data;
+
+           function active(){ 
+            CaisseActived.save({},onSuccess,onError);
+            function onSuccess(data) {
+            vm.caisse=data;
              $state.reload();
-           })
-           .error(function(err){                       
-            console.log(err);
-          });}
-           function desactive(){ $http.post('/api/caisses2')
-           .success(function(data){
-             vm.caisse2=data;
+          }function onError(error) {
+               console.log(err);
+                }
+           }
+           function desactive(){ 
+              CaisseDesactived.save({},onSuccess,onError)
+              function onSuccess(data) {
+           vm.caisse2=data;
              $state.reload();
-           })
-           .error(function(err){
-            console.log(err);                      
-          });}
+          }function onError(error) {
+               console.log(err);
+                }
+           }
            $scope.cancel = function() {
             for (var i = $scope.lines.length; i--;) {
               $scope.lines.splice(i, 1);
@@ -89,21 +94,14 @@
     }
     $scope.venteE=null;
     $scope.venteR=null;
-    // save edits
-    $scope.saveTable = function() {
-      var results = [];
-      results.push($http.post('/api/sortie-articles',$scope.lines)
-        .success(function(data){
-          $scope.venteE=data;
-                          $scope.paie = true;
-                        })
-        .error(function(err){
-          console.log(err);
-          AlertService.error(err.message);
-        })
-        );
-      return $q.all(results);
-    };   
+  $scope.saveTable = function() {
+            SortieArticle.save($scope.lines, onSaveSuccess);
+
+    }; 
+function onSaveSuccess (result) {
+           $scope.venteE=result;$scope.paie = true;
+                    } 
+
     $scope.getTotal = function(){
       var total = 0;
       for(var i = 0; i < $scope.lines.length; i++){
@@ -121,12 +119,30 @@
       }
       return total;
   }
-    $scope.mode = null;
+    $scope.mode = null;  
+       function PFSuccess (data) {
+           var file=new Blob([data],{type:'application/pdf'});
+          var fileUrl=URL.createObjectURL(file);
+          var des = window.open(fileUrl,'_blank','');
+          $scope.paie = false;
+                    } 
+/*    var PrintF = $resource('/api/PrintFacture/':id,
+             {
+            'query': { method: 'GET', isArray: true,
+                transformResponse: function (data) {
+                    if (data) {
+                        data = angular.arraybuffer(data);
+                    }
+                    return data;
+                }}
+        }
+        );*/
     $scope.PrintFacture=function(etat){
       $scope.clas=$scope.venteE.id;
+
       if (etat=="fact1") {
-         
-        $http.get("/api/PrintFacture/"+$scope.clas,{responseType:'arraybuffer'})
+         SortieArticlePrint.query({id: $scope.clas},PFSuccess)
+/*       $http.get("/api/PrintFacture/"+$scope.clas,{responseType:'arraybuffer'})
         .success(function(data){
           var file=new Blob([data],{type:'application/pdf'});
           var fileUrl=URL.createObjectURL(file);
@@ -135,7 +151,7 @@
         })
         .error(function(err){
           AlertService.error(err.message);
-        });
+        });*/
       }else{
 
        $http.get("/api/PrintTicket/"+$scope.clas,{responseType:'arraybuffer'})

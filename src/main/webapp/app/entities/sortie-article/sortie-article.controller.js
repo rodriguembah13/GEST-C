@@ -5,9 +5,11 @@
         .module('gestCApp')
         .controller('SortieArticleController', SortieArticleController);
 
-    SortieArticleController.$inject = ['$state','$scope','$http','SortieArticle', 'SortieArticleSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','SortieArticleU'];
+    SortieArticleController.$inject = ['$state','$scope','$http','SortieArticle', 'SortieArticleSearch', 'ParseLinks', 'AlertService', 
+    'paginationConstants', 'pagingParams','SortieArticleU','SortieArticlePrint'];
 
-    function SortieArticleController($state,$scope,$http, SortieArticle, SortieArticleSearch, ParseLinks, AlertService, paginationConstants, pagingParams,SortieArticleU) {
+    function SortieArticleController($state,$scope,$http, SortieArticle, SortieArticleSearch, ParseLinks, AlertService,
+     paginationConstants, pagingParams,SortieArticleU,SortieArticlePrint) {
 
         var vm = this;
 
@@ -103,7 +105,14 @@
         }  
           $scope.PrintFacture=function(vente){
       $scope.clas=vente;  
-        $http.get("/api/PrintFacture/"+$scope.clas,{responseType:'arraybuffer'})
+       function PFSuccess (data) {
+           //var file=new Blob([data],{type:'application/pdf'});
+          var fileUrl=URL.createObjectURL(data);
+          var des = window.open(fileUrl,'_blank','');
+          
+                    }
+      SortieArticlePrint.query({id: $scope.clas},PFSuccess)
+       /* $http.get("/api/PrintFacture/"+$scope.clas)
         .success(function(data){
           var file=new Blob([data],{type:'application/pdf'});
           var fileUrl=URL.createObjectURL(file);
@@ -112,7 +121,7 @@
         })
         .error(function(err){
           AlertService.error(err.message);
-        });            
+        })*/;            
 
    }
     }

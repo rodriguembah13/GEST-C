@@ -1,5 +1,6 @@
 package com.ballack.com.web.rest;
 
+import com.ballack.com.domain.Article;
 import com.ballack.com.domain.LigneSortieArticle;
 import com.codahale.metrics.annotation.Timed;
 import com.ballack.com.domain.SortieArticle;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -143,7 +146,65 @@ public class SortieArticleResource {
         SortieArticle sortieArticle = sortieArticleService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(sortieArticle));
     }
+    @GetMapping("/stat-produit-vente")
+    @Timed
+    public HashMap getStatVente() {
+        HashMap hashMap=sortieArticleService.statVente();
+        return hashMap;
+    }
+    @GetMapping("/stat-client-vente")
+    @Timed
+    public HashMap getStatVenteClient() {
+        HashMap hashMap=sortieArticleService.statVenteClient();
+        return hashMap;
+    }
+    @GetMapping("/stat-vente-year")
+    @Timed
+    public HashMap getStatVenteyear() {
+        int year =LocalDate.now().getYear();
+        HashMap hashMap=sortieArticleService.statVenteByyear(year);
+        return hashMap;
+    }
+    @GetMapping("/stat-vente-year-param")
+    @Timed
+    public HashMap getStatVenteyearParam(@RequestParam(value = "year")int year) {
 
+        HashMap hashMap=sortieArticleService.statVenteByyear(year);
+        return hashMap;
+    }
+    @GetMapping("/stat-vente-montant-mois")
+    @Timed
+    public HashMap getStatVentemoisEnMomtant() {
+        int monthValue=LocalDate.now().getMonthValue();
+        int year=LocalDate.now().getYear();
+        HashMap hashMap=sortieArticleService.statVenteBymonthMontant(year,monthValue);
+        return hashMap;
+    }
+    @GetMapping("/stat-vente-montant-mois-param")
+    @Timed
+    public HashMap getStatVentemoisEnMomtantParam(@RequestParam(value = "year")int year,@RequestParam(value = "monthValue")int monthValue) {
+
+        HashMap hashMap=sortieArticleService.statVenteBymonthMontant(year,monthValue);
+        return hashMap;
+    }
+    @GetMapping("/stat-vente-montant-year")
+    @Timed
+    public HashMap getStatVenteyearEnMomtant() {
+        HashMap hashMap=sortieArticleService.statVenteByyearMontant(LocalDate.now());
+        return hashMap;
+    }
+    @GetMapping("/stat-vente-montant-year-param")
+    @Timed
+    public HashMap getStatVenteyearEnMomtantParam(@RequestParam(value = "year")int year) {
+        HashMap hashMap=sortieArticleService.statVenteByyearMontantParam(year);
+        return hashMap;
+    }
+    @GetMapping("/stat-produit-ventebydate")
+    @Timed
+    public HashMap getStatVente2(LocalDate datedebut, LocalDate datefin) {
+        HashMap hashMap=sortieArticleService.statVente(datedebut,datefin);
+        return hashMap;
+    }
     /**
      * DELETE  /sortie-articles/:id : delete the "id" sortieArticle.
      *

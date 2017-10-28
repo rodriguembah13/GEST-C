@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <h3 class="center-block text-center">Statistiques Sur les Produits </h3>
+    <uib-tabset active="activeJustified" justified="true" style="background-color: #FFFFF5;color: #333000">
+        <uib-tab index="0" heading="Produits Vendus (quantite)">
+            <div class="row"><h4 data-translate="" class="text-success">Courbes montrant la quantité des produits les
+                plus vendus dans une periode donnée </h4>
+                <div class="col-md-5">
+
+                    <p class="input-group">
+                        <span class="input-group-addon" data-translate="audits.filter.from">from</span>
+                        <input type="date" class="input-sm form-control" name="start" ng-model="vm.fromDate"
+                               ng-change="vm.onChangeDate()" required/>
+                        <span class="input-group-addon" data-translate="audits.filter.to">to</span>
+                        <input type="date" class="input-sm form-control" name="end" ng-model="vm.toDate"
+                               ng-change="vm.onChangeDate()" required/>
+                    </p>
+                </div>
+            </div>
+            <div class="panel panel-default col-lg-6">
+                <div class="panel-body">
+                    <canvas id="pie" class="chart chart-pie ng-isolate-scope" chart-data="data"
+                            chart-options="options" chart-labels="labels"></canvas>
+                </div>
+            </div>
+            <div class="panel panel-default col-lg-6">
+                <div class="panel-body">
+                    <canvas id="bar" class="chart chart-bar ng-isolate-scope" chart-data="data"
+                            chart-options="options" chart-labels="labels"></canvas>
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab index="1" heading="produits commandés">
+            <div class="row">
+                <h5 data-translate="" class="text-success">Courbes montrant les produits les plus commandés dans une
+                    periode donnée </h5>
+                <div class="col-md-5">
+
+                    <p class="input-group">
+                        <span class="input-group-addon" data-translate="audits.filter.from">from</span>
+                        <input type="date" class="input-sm form-control" name="start" ng-model="vm.fromDate"
+                               ng-change="vm.onChangeDate()" required/>
+                        <span class="input-group-addon" data-translate="audits.filter.to">to</span>
+                        <input type="date" class="input-sm form-control" name="end" ng-model="vm.toDate"
+                               ng-change="vm.onChangeDate()" required/>
+                    </p>
+                </div>
+            </div>
+            <div class="panel panel-default col-lg-6">
+                <div class="panel-body">
+                    <canvas id="doughnut" class="chart chart-doughnut ng-isolate-scope" chart-data="data1"
+                            chart-options="options" chart-labels="labels1"></canvas>
+                </div>
+            </div>
+            <div class="panel panel-default col-lg-6">
+                <div class="panel-body">
+                    <canvas id="line" class="chart chart-line ng-isolate-scope" chart-data="data1"
+                            chart-options="options" chart-labels="labels1"></canvas>
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab index="2" heading="Produits en Stock">
+            <div class="row">
+                <h5 data-translate="" class="text-success">Courbes montrant les produits en Stock </h5>
+                <!--         <div class="col-md-5">
+                            <h4 data-translate="audits.filter.title">Filter by date</h4>
+                            <p class="input-group">
+                                <span class="input-group-addon" data-translate="audits.filter.from">from</span>
+                                <input type="date" class="input-sm form-control" name="start" ng-model="vm.fromDate" ng-change="vm.onChangeDate()" required/>
+                                <span class="input-group-addon" data-translate="audits.filter.to">to</span>
+                                <input type="date" class="input-sm form-control" name="end" ng-model="vm.toDate" ng-change="vm.onChangeDate()" required/>
+                            </p>
+                        </div> -->
+            </div>
+            <div class="panel panel-default col-lg-6">
+                <div class="panel-body">
+                    <canvas id="radar" class="chart chart-radar ng-isolate-scope" chart-data="data2"
+                            chart-options="options" chart-labels="labels2"></canvas>
+                </div>
+            </div>
+            <div class="panel panel-default col-lg-6">
+                <div class="panel-body">
+                    <canvas id="polarArea" class="chart chart-polarArea ng-isolate-scope" chart-data="data2"
+                            chart-options="options" chart-labels="labels2"></canvas>
+                </div>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+
+
+</div>

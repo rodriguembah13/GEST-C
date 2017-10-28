@@ -130,8 +130,7 @@
                                 marque: null,
                                 datecreation: null,
                                 nomarticle: null,
-                                prixCourant: null,
-                                id: null
+                                prixCourant: null
                             };
                         }
                     }

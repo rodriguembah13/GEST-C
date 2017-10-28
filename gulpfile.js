@@ -58,7 +58,12 @@ gulp.task('images', function () {
         .pipe(gulp.dest(config.dist))
         .pipe(browserSync.reload({stream: true}));
 });
-
+// Fonts
+gulp.task('fonts', function() {
+    return gulp.src([
+                    'app/bower_components/font-awesome/fonts/fontawesome-webfont.*'])
+            .pipe(gulp.dest(config.dist + 'content/fonts'));
+});
 
 gulp.task('styles', [], function () {
     return gulp.src(config.app + 'content/css')
@@ -79,7 +84,7 @@ gulp.task('inject:test', inject.test);
 
 gulp.task('inject:troubleshoot', inject.troubleshoot);
 
-gulp.task('assets:prod', ['images', 'styles', 'html', 'copy:swagger', 'copy:images'], build);
+gulp.task('assets:prod', ['images', 'styles', 'html','fonts', 'copy:swagger', 'copy:images'], build);
 
 gulp.task('html', function () {
     return gulp.src(config.app + 'app/**/*.html')

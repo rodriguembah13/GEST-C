@@ -5,9 +5,11 @@
         .module('gestCApp')
         .controller('StockController', StockController);
 
-    StockController.$inject = ['$state', 'Stock', 'StockSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','$http','$scope','Decomposition'];
+    StockController.$inject = ['$state', 'Stock', 'StockSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 
+    'pagingParams','$http','$scope','Decomposition','Stockclosed','StockA'];
 
-    function StockController($state, Stock, StockSearch, ParseLinks, AlertService, paginationConstants, pagingParams,$http,$scope,Decomposition) {
+    function StockController($state, Stock, StockSearch, ParseLinks, AlertService, paginationConstants, pagingParams,
+      $http,$scope,Decomposition,Stockclosed,StockA) {
 
         var vm = this;
 
@@ -26,35 +28,29 @@
         vm.currentSearch = pagingParams.search;
 
         loadAll();
-                function save1 (article) {
+                function save (article) {
 
-                Decomposition.save(article);
-    
-        }
-        function save (article) {$http.post('/api/decompositions',article)
-                      .success(function(data){
-                         vm.stockDecomp=data;
+                Decomposition.save(article,onSaveSuccess);
+                  function onSaveSuccess(data){
+                    vm.stockDecomp=data;
                           loadAll();
-                      })
-                      .error(function(err){
-                      console.log(err);
-                      });}
-        function active(st){ $http.put('/api/stocksA',st)
-                      .success(function(data){
-                         vm.stockActif=data;
+                  }
+                }
+
+        function active(st){ 
+          StockA.update(st,onUpdateSuccess);
+           function onUpdateSuccess(data){
+                 vm.stockActif=data;
                           vm.loadAll();
-                      })
-                      .error(function(err){
-                      console.log(err);
-                      });}
-            function closed(st){ $http.put('/api/stocksC',st)
-                      .success(function(data){
-                         vm.stockClosed=data;
+                            }
+}
+            function closed(st){ 
+              Stockclosed.update(st,onUpdateSuccess)
+              function onUpdateSuccess(data){
+                vm.stockClosed=data;
                           vm.loadAll();
-                      })
-                      .error(function(err){
-                      console.log(err);
-                      });}
+              }
+}
         function loadAll () {
             if (pagingParams.search) {
                 StockSearch.query({

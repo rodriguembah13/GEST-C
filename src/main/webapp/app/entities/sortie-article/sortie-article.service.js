@@ -33,7 +33,7 @@
                 method: 'POST',
                 transformRequest: function (data) {
                     var copy = angular.copy(data);
-                    copy.datesortie = DateUtils.convertLocalDateToServer(copy.datesortie);
+                    /*copy.datesortie = DateUtils.convertLocalDateToServer(copy.datesortie);*/
                     return angular.toJson(copy);
                 }
             }
@@ -56,3 +56,21 @@
         });
     }
 })();
+(function() {
+    'use strict';
+    angular
+        .module('gestCApp')
+        .factory('SortieArticlePrint', SortieArticlePrint);
+
+    SortieArticlePrint.$inject = ['$resource', 'DateUtils'];
+
+    function SortieArticlePrint ($resource, DateUtils) {
+        var resourceUrl =  'api/PrintFacture/:id';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET',responseType:'arraybuffer'
+              }
+        });
+    }
+})();
+

@@ -5,9 +5,9 @@
         .module('gestCApp')
         .controller('CommandeController', CommandeController);
 
-    CommandeController.$inject = ['$scope','$state', 'Commande', 'CommandeSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','$http','$q'];
+    CommandeController.$inject = ['$scope','$state', 'Commande', 'CommandeSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','$http','$q','SortieArticlePrint'];
 
-    function CommandeController($scope,$state, Commande, CommandeSearch, ParseLinks, AlertService, paginationConstants, pagingParams,$http,$q) {
+    function CommandeController($scope,$state, Commande, CommandeSearch, ParseLinks, AlertService, paginationConstants, pagingParams,$http,$q,SortieArticlePrint) {
 
         var vm = this;
 
@@ -90,16 +90,23 @@
             vm.reverse = true;
             vm.currentSearch = null;
             vm.transition();
-        }
+        }       function PFSuccess (result) {
+           var file=new Blob([data],{type:'application/pdf'});
+          var fileUrl=URL.createObjectURL(file);
+          var des = window.open(fileUrl,'_blank','');
+          $scope.paie = false;
+                    } 
         $scope.PrintBordoreau=function(cmd){
       //$scope.clas=$scope.venteE.id;
-        $http.get("/api/printBdCmde/"+cmd.id,{responseType:'arraybuffer'})
-        .success(function(data){
+        //$http.get("/api/printBdCmde/"+cmd.id,{responseType:'arraybuffer'})
+        SortieArticlePrint.query({id:cmd.id,
+            responseType:'arraybuffer'},PFSuccess)
+       /*.success(function(data){
           var file=new Blob([data],{type:'application/pdf'});
           var fileUrl=URL.createObjectURL(file);
           var des = window.open(fileUrl,'_blank','');
          // $scope.paie = false;
-        })
+        }) */
         .error(function(err){
           AlertService.error(err.message);
         });             

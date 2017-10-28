@@ -1,6 +1,7 @@
 package com.ballack.com.service;
 
 import com.ballack.com.domain.Article;
+import com.ballack.com.domain.LigneSortieArticle;
 import com.ballack.com.domain.Stock;
 import com.ballack.com.repository.StockRepository;
 import com.ballack.com.repository.search.StockSearchRepository;
@@ -13,9 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.time.LocalDate;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -49,7 +48,35 @@ public class StockService {
         stockSearchRepository.save(result);
         return result;
     }
+    @Transactional(readOnly = true)
+    public HashMap statStock() {
+        HashMap<String,Integer> hashMap=new HashMap();
+        log.debug("Request to get all SortieArticles");
+        List<Stock> stockList=stockRepository.findAll();
 
+        List<HashMap<String,Integer>>hashMapList=new ArrayList<>();
+        Comparator<Integer> valueComparator = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer s1, Integer s2) {
+                return s1.compareTo(s2);
+            }
+        };
+
+        for (Stock stock:stockList){
+            if (!hashMap.containsKey(stock.getArticle().getNomarticle())){
+                hashMap.putIfAbsent(stock.getArticle().getNomarticle(),stock.getQuantite());
+                hashMapList.add(hashMap);
+            }else {
+
+                hashMap.replace(stock.getArticle().getNomarticle(),hashMap.get(stock.getArticle().getNomarticle())+stock.getQuantite());
+            }
+
+        }
+        //MapValueComparator<Article,Integer> mapComparator = new MapValueComparator<Article, Integer>(hashMap, valueComparator);
+
+
+        return hashMap;
+    }
     /**
      *  Get all the stocks.
      *

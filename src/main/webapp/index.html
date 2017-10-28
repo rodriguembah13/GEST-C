@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css">
     <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css">
     <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css">
-     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
     <!-- endinject -->
     <!-- endbuild -->
     <!-- build:css content/css/main.css -->
@@ -32,16 +31,21 @@
     <![endif]-->
     <page-ribbon></page-ribbon>
     <div ui-view="navbar" ng-cloak></div>
-    <div ui-view="menubar" class="container-fluid"></div>
+    <div ui-view="menubar" class="container-fluid" ng-cloak></div>
     <div class="container-fluid">
         <div class="well" ui-view="content">
             <!-- Angular views -->
         </div>
+<footer class="footer" >
+        <div style="">
+            <div style="background-color:#212121;height: 30px;color: #ECEFF1">
 
-        <div class="footer" ng-cloak>
-            <p data-translate="footer">This is your footer</p>
+                <p class="text-center pagefoot">All rights reserve <span class="cCercle">©</span> BALLACK 2017</p>
+
+            </div>
         </div>
-    </div>
+    </footer>
+    </div>       
     <noscript>
         <h1>You must enable javascript to view this page.</h1>
     </noscript>

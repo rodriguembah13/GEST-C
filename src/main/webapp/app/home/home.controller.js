@@ -42,13 +42,45 @@
             vm.page = page;
             vm.transition();
         }
+/*  $scope.myInterval = 3000;
+  $scope.slides = [
+    {
+      image: 'http://lorempixel.com/400/200/'
+    },
+    {
+      image: 'http://lorempixel.com/400/200/food'
+    },
+    {
+      image: 'http://lorempixel.com/400/200/sports'
+    },
+    {
+      image: 'http://lorempixel.com/400/200/people'
+    }
+  ];*/
+  $scope.myInterval = 5000;
+  $scope.noWrapSlides = false;
+  $scope.active = 0;
+  var slides = $scope.slides = [];
+  var currIndex = 0;
 
-        function transition() {
+  $scope.addSlide = function() {
+    var newWidth = 600 + slides.length + 1;
+    slides.push({
+      image: '//unsplash.it/' + newWidth + '/300',
+      text: ['Nice image','Awesome photograph','That is so cool','I love that'][slides.length % 4],
+      id: currIndex++
+    });
+  };
+  for (var i = 0; i < 4; i++) {
+    $scope.addSlide();
+  }
+
+         function transition() {
             $state.transitionTo($state.$current, {
                 page: vm.page,
                 sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
                 search: vm.currentSearch
             });
-        }
+        } 
     }
 })();

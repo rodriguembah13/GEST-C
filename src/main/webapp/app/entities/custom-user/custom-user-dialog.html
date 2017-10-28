@@ -52,13 +52,13 @@
             <label class="control-label" data-translate="gestCApp.customUser.photo" for="field_photo">Photo</label>
             <div>
                 <div ng-if="vm.customUser.photo" class="help-block clearfix">
-                    <a class="pull-left" ng-click="vm.openFile(vm.customUser.photoContentType, vm.customUser.photo)" data-translate="entity.action.open">open</a><br>
+                    <button class="btn btn-default pull-left" ng-click="vm.openFile(vm.customUser.photoContentType, vm.customUser.photo)" data-translate="entity.action.open">open</button><br>
                     <span class="pull-left">{{vm.customUser.photoContentType}}, {{vm.byteSize(vm.customUser.photo)}}</span>
                     <button type="button" ng-click="vm.customUser.photo=null;vm.customUser.photoContentType=null;"
-                            class="btn btn-default btn-xs pull-right">
+                            class="btn-raised btn btn-default btn-xs pull-right">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
-                </div>
+                </div><img src="{{vm.customUser.photo}}">
                 <button type="button" ngf-select class="btn btn-default btn-block"
                         ngf-change="vm.setPhoto($file, vm.customUser)" data-translate="entity.action.addblob">
                     Add blob

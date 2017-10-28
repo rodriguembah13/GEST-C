@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -84,6 +85,13 @@ public class StockResource {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, stock.getId().toString()))
             .body(result);
+    }
+    /*Statistique sur les stocks*/
+    @GetMapping("/stat-stock")
+    @Timed
+    public HashMap getStatstock() {
+        HashMap hashMap=stockService.statStock();
+        return hashMap;
     }
     /**
      * PUT  /stocks : Updates an existing stock.

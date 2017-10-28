@@ -1,8 +1,95 @@
-<div class="container"> 
-  <uib-tabset active="activeJustified" justified="true">
-    <uib-tab index="0" heading="Justified">Justified content</uib-tab>
-    <uib-tab index="1" heading="SJ">Short Labeled Justified content</uib-tab>
-    <uib-tab index="2" heading="Long Justified">Long Labeled Justified content</uib-tab>
-  </uib-tabset>
-                  
+<div class="container-fluid">
+    <h3>Statistiques Sur les ventes </h3>{{ttc}}
+    <uib-tabset active="active" justified="true" class="tab-style">
+        <uib-tab index="0" heading="Vente Produits(montant) par Mois">
+            <div class="row"><h4 data-translate="" class="text-success text-center">Courbes montrant les Ventes dans une
+                periode donnée </h4>
+                <div class="col-md-5">
+                    <p class="input-group">
+                <label class="control-label ">Annee :</label>
+                    <select name="repeatSelect" id="repeatSelect" ng-model="fromyear">
+                        <option ng-repeat="option in listyear" value="{{option.text}}">{{option.text}}</option>
+                        </select>
+                        <label class="control-label ">Mois :</label>
+                        <select name="repeatSelect2" id="repeatSelect2" ng-model="fromMonth">
+                            <option ng-repeat="option in listmois" value="{{option.value}}">{{option.text}}</option>
+                        </select>
+                        <button type="submit" class="btn btn-danger"
+                                ng-click="vm.loadStatVenteMonthParam(fromyear,fromMonth)">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    </p>
+                </div>
+            </div>
+            <div class="panel panel-default col-lg-6">
+                <div class="panel-body">
+                    <canvas id="pie" class="chart chart-pie ng-isolate-scope" chart-data="dataVenteMois"
+                            chart-options="options" chart-labels="labelsVenteMois"></canvas>
+                </div>
+            </div>
+            <div class="panel panel-default col-lg-6">
+                <div class="panel-body">
+                    <canvas id="bar" class="chart chart-bar ng-isolate-scope" chart-data="dataVenteMois"
+                            chart-options="options" chart-labels="labelsVenteMois"></canvas>
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab index="1" heading="Vente Produits(montant) par annee">
+            <div class="row"><h4 data-translate="" class="text-success text-center">Courbes montrant les Montant de
+                Ventes Par annee </h4>
+                <div class="col-md-5">
+                    <p class="input-group">
+                        <select name="repeatSelect" id="repeatSelect" ng-model="fromDate">
+                            <option ng-repeat="option in listyear" value="{{option.text}}">{{option.text}}</option>
+                        </select>
+                        <button type="submit" class="btn btn-danger"
+                                ng-click="vm.loadStatVenteEnMomtantyearParam(fromDate)">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    </p>
+                </div>
+            </div>
+            <div class="panel panel-default col-lg-6">
+                <div class="panel-body">
+                    <canvas id="doughnut" class="chart chart-doughnut ng-isolate-scope" chart-data="dataclientM"
+                            chart-options="options" chart-labels="labelsclientM"></canvas>
+                </div>
+            </div>
+            <div class="panel panel-default col-lg-6">
+                <div class="panel-body">
+                    <canvas id="line" class="chart chart-line ng-isolate-scope" chart-data="dataclientM"
+                            chart-options="options" chart-labels="labelsclientM"></canvas>
+                </div>
+            </div>
+        </uib-tab>
+        <uib-tab index="2" heading="Vente Produits(quantite) par annee">
+            <div class="row"><h4 data-translate="" class="text-success text-center">Courbes montrant les Quantites des
+                Produits Vendus par annee </h4>
+                <div class="col-md-5">
+                    <p class="input-group">
+                        <select name="repeatSelect" id="repeatSelect" ng-model="fromDate">
+                            <option ng-repeat="option in listyear" value="{{option.text}}">{{option.text}}</option>
+                        </select>
+                        <button type="submit" class="btn btn-danger" ng-click="vm.loadStatVenteYearParam(fromDate)">
+                            <span class="glyphicon glyphicon-ok"></span>
+                        </button>
+                    </p>
+                </div>
+            </div>
+            <div class="panel panel-default col-lg-6">
+                <div class="panel-body">
+                    <canvas id="bar" class="chart chart-bar ng-isolate-scope" chart-data="dataVyear"
+                            chart-options="options" chart-labels="labelsVyear"></canvas>
+                </div>
+            </div>
+            <div class="panel panel-default col-lg-6">
+                <div class="panel-body">
+                    <canvas id="polarArea" class="chart chart-polarArea ng-isolate-scope" chart-data="dataVyear"
+                            chart-options="options" chart-labels="labelsVyear"></canvas>
+                </div>
+            </div>
+        </uib-tab>
+    </uib-tabset>
+
+
 </div>

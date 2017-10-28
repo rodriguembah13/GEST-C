@@ -87,7 +87,7 @@ public class DecompositionService {
         }
         decomposition.setArticlefin("Art/FIN" + article.getNomarticle() + "/" + (stock.getQuantite() + nbre) + "/" + (stock.getQuantiteGros() - 1) + "/");
         Decomposition result = decompositionRepository.save(decomposition);
-        decompositionSearchRepository.save(result);
+        //decompositionSearchRepository.save(result);
         return result;
     }
 

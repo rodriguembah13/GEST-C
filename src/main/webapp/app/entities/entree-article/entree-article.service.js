@@ -2,10 +2,11 @@
     'use strict';
     angular
         .module('gestCApp')
-        .factory('EntreeArticle', EntreeArticle);
+        .factory('EntreeArticle', EntreeArticle)
+        .factory('EntreeArticleCom', EntreeArticleCom);
 
     EntreeArticle.$inject = ['$resource', 'DateUtils'];
-
+    EntreeArticleCom.$inject = ['$resource', 'DateUtils'];
     function EntreeArticle ($resource, DateUtils) {
         var resourceUrl =  'api/entree-articles/:id';
 
@@ -34,6 +35,20 @@
                 transformRequest: function (data) {
                     var copy = angular.copy(data);
                     copy.dateentre = DateUtils.convertLocalDateToServer(copy.dateentre);
+                    return angular.toJson(copy);
+                }
+            }
+        });
+    }function EntreeArticleCom ($resource, DateUtils) {
+        var resourceUrl =  'api/commandes/:id';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET', isArray: true},
+            'save': {
+                method: 'POST',
+                transformRequest: function (data) {
+                    var copy = angular.copy(data);
+                   // copy.dateentre = DateUtils.convertLocalDateToServer(copy.dateentre);
                     return angular.toJson(copy);
                 }
             }

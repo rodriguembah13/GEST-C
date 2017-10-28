@@ -3,6 +3,25 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
 }
+li.active a.ng-binding {
+  color: #000 !important;
+    background-color: #01579B !important;
+    text-decoration: none;
+}
+
+li a.ng-binding {
+  color: #777777;
+    background-color: #00B8D4;
+    text-decoration: none;
+}
+    .uib-tab {
+       border-right: 1px solid #333;
+       background-color: #00B8D4 !important;
+       color: #777777;text-decoration: none;
+    }
+.nav-tabs > li > a {
+    border: 1px solid #000;
+} 
 
 /* ==========================================================================
 Hide ng-cloak on page load, https://docs.angularjs.org/api/ng/directive/ngCloak

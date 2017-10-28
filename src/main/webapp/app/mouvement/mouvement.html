@@ -1,6 +1,9 @@
 <div ng-cloak>
     <!-- table -->
     <h3> Approvisionnement Stock</h3>
+    <button type="button" ng-disabled="tableform.$waiting" ng-click="addLine()"
+            class="btn btn-default btn-raised pull-right">add row
+    </button>
     <table class="table table-hover table-condensed">
  <tr style="font-weight: bold">
                 <td >Article</td>
@@ -38,7 +41,7 @@
           <span editable-text="user.prixAchat" e-form="tableform" >
             {{ user.prixAchat}}
           </span>
-                </td> 
+                </td>
                            <td>
 
                           <span editable-text="user.taxeTVA" e-form="tableform" >
@@ -51,12 +54,12 @@
              e-datepicker-popup="dd-MMMM-yyyy"
              e-show-calendar-button="true"
              id="hideCalendarButton">
- 
+
     {{ (user.dateperemption | date:"dd-MM-yyyy") || 'empty' }}
           </span>
                 </td>
                 <td >
-                   
+
                     <form editable-form name="tableform" onaftersave="saveUser($data)" ng-show="tableform.$visible"
                           class="form-buttons form-inline" shown="inserted == user">
                         <button type="submit" ng-disabled="tableform$waiting" class="btn-sm btn-primary">
@@ -75,22 +78,25 @@
       </tr>
     </table>
 
-    <!-- buttons 
+    <!-- buttons
     <div class="btn-edit">
       <button type="button" class="btn btn-default" ng-show="!tableform.$visible" ng-click="tableform.$show()">
         edit
       </button>
-    </div>-->
-    
-      <button type="button" ng-disabled="tableform.$waiting" ng-click="addLine()" class="btn btn-default btn-raised">add row</button>
+    </div>
+
+      <button type="button" ng-disabled="tableform.$waiting" ng-click="addLine()" class="btn btn-default btn-raised">add row</button>-->
+    <h4>TOTAL HT:<span class="badge btn-danger">{{getTotal()}}</span> TOTAL TTC:<span class="badge btn-danger">{{getTotalTTC()}}</span>
+    </h4>
       <div class="btn-form pull-right">
                 <button type="button" class="btn btn-primary btn-raised" ng-click="saveTable()">Valider</button>
                 <button type="button" class="btn btn-danger btn-raised" ng-click="cancel()">cancel</button>
-    </div> 
+      </div>
+    <br><br><br>
    <!--  <div class="row">
 <div class="col-lg-10" style="border: 2px">
         <div class="panel">
-           
+
             <div class="panel-body">
         <table class="table table-hover table-condensed">
             <tr style="font-weight: bold">
@@ -138,7 +144,7 @@
              e-datepicker-popup="dd-MMMM-yyyy"
              e-show-calendar-button="true"
              id="hideCalendarButton">
- 
+
     {{ (user.dateperemption | date:"dd-MM-yyyy") || 'empty' }}
           </span>
                 </td>
@@ -149,7 +155,7 @@
                           </span>
                         </td>
                 <td >
-                   
+
                     <form editable-form name="tableform" onaftersave="saveUser($data,user.medicament,user.quantite)" ng-show="tableform.$visible"
                           class="form-buttons form-inline" shown="inserted == user">
                         <button type="submit" ng-disabled="tableform$waiting" class="btn-sm btn-primary">
@@ -167,7 +173,7 @@
                 </td>
             </tr>
         </table><button class="btn-sm btn-success"	ng-click="addLine()">Add</md-button>
-       
+
     </div>
     </div>
     </div> </div>
@@ -175,7 +181,7 @@
     <div class="col-lg-10" style="border: 2px">
         <jhi-alert></jhi-alert>
         <div class="panel">
-           
+
             <div class="panel-body">
                 <table class="table table-striped">
                     <thead>

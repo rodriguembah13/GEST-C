@@ -5,9 +5,11 @@
         .module('gestCApp')
         .controller('MouvementController',MouvementController);
 
-    MouvementController.$inject = ['$scope', 'Principal', 'LoginService', '$state','Article','$http','$q','Fournisseur','Magasin'];
+    MouvementController.$inject = ['$scope', 'Principal', 'LoginService', '$state','Article','$http','$q','Fournisseur',
+    'Magasin','EntreeArticleCom','EntreeArticle'];
 
-    function MouvementController ($scope, Principal, LoginService, $state,Article,$http,$q,Fournisseur,Magasin) {
+    function MouvementController ($scope, Principal, LoginService, $state,Article,$http,$q,Fournisseur,Magasin,
+      EntreeArticleCom,EntreeArticle) {
         var vm = this;
         $scope.lines=[];
         $scope.commandes=[];
@@ -35,7 +37,7 @@
       $scope.commandes.splice(index, 1);
     };
      $scope.cancelC = function() {
-      for (var i = $scope.lines.length; i--;) {
+      for (var i = $scope.commandes.length; i--;) {
             $scope.commandes.splice(i, 1);
             
       };
@@ -86,9 +88,17 @@
       return total;
   }
     $scope.venteE=null;
-  $scope.venteR=null;
+    $scope.venteR=null;
     // save edits
-    $scope.saveTable = function() {
+      $scope.saveTable = function() {
+            EntreeArticle.save($scope.lines, onSaveSuccess);
+
+    }; 
+function onSaveSuccess (result) {
+           $scope.venteE=result;
+           $scope.PrintBordoreauR($scope.venteE);
+                    }
+/*    $scope.saveTable = function() {
       var results = [];
       results.push($http.post('/api/entree-articles',$scope.lines)
       	 .success(function(data){
@@ -103,10 +113,16 @@
                         );
       return $q.all(results);
     };
-
+*/
         $scope.saveCommande = function() {
       var results = [];
-      results.push($http.post('/api/commandes',$scope.commandes)
+      EntreeArticleCom.save($scope.commandes,onSuccess)
+      function onSuccess (result) {
+           $scope.venteR=result;
+                          
+                          $scope.PrintBordoreau($scope.venteR);
+                    }
+     /* results.push($http.post('/api/commandes',$scope.commandes)
          .success(function(data){
                           $scope.venteR=data;
                           // $scope.PrintRecu($scope.venteE);
@@ -117,7 +133,7 @@
                         //AlertService.error(err.message);
                         })
                         );
-      return $q.all(results);
+      return $q.all(results);*/
     };
 /*popdate xedit*/
 	$scope.getMinDate = function() {

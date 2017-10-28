@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -79,7 +80,12 @@ public class CommandeResource {
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, commande.getId().toString()))
             .body(result);
     }
-
+    @GetMapping("/stat-commande")
+    @Timed
+    public HashMap getStatCommande() {
+        HashMap hashMap=commandeService.statCommande();
+        return hashMap;
+    }
     /**
      * GET  /commandes : get all the commandes.
      *

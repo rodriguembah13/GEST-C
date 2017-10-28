@@ -1,18 +1,39 @@
+    <style>
+        .select2 > .select2-choice.ui-select-match {
+            /* Because of the inclusion of Bootstrap */
+            height: 29px;
+        }
+
+        .selectize-control > .selectize-dropdown {
+            top: 36px;
+        }
+        /* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
+        .select-box {
+          background: #fff;
+          position: relative;
+          z-index: 1;
+        }
+        .alert-info.positioned {
+          margin-top: 1em;
+          position: relative;
+          z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
+        }
+    </style>
 <div ng-cloak>
 
-    <div class="well">
-        <h2>Comptoir Vente en detail</h2>
+    <div class="well-sm">
+        <h3>Comptoir Vente en detail</h3>
         <div class="btn-group" uib-dropdown>
             <!--          <button type="button" class="btn dropdown pointer"uib-dropdown-toggle style="background-color: #00897B">Caisse</button> -->
-            <button class="btn btn-primary" uib-dropdown-toggle>Caisse</button>
+            <button class="btn btn-primary" uib-dropdown-toggle>Caisse<b class="caret"></b></button>
             <ul class="dropdown-menu" uib-dropdown-menu>
                 <li><a ng-click="vm.active()">Ouverture</a></li>
                 <li><a ng-click="vm.desactive()">Fermeture</a></li>
             </ul>
         </div>
-        <uib-alert type="{{alert.type}}" class="col-lg-4" ng-show="vm.caisseatif.active" close="closeAlert()"
+        <uib-alert type="{{alert.type}}" class="col-lg-6" ng-show="vm.caisseatif.active" close="closeAlert()"
                    ng-if="show">
-            {{vm.caisseatif.numcaisse}} ouvert: date ouverture: "{{vm.caisseatif.dateOuverture| date:'medium'}}", Fonds de caisse :{{vm.caisseatif.fondcaisse}}.
+          <p>  {{vm.caisseatif.numcaisse}} ouvert: date ouverture: "{{vm.caisseatif.dateOuverture| date:'medium'}}", Fonds de caisse :{{vm.caisseatif.fondcaisse}}.</p>
         </uib-alert>
         <uib-alert class="col-lg-3" ng-show="!vm.caisseatif.active" close="closeAlert()" ng-if="show">
             Caisse Ferme.
@@ -61,7 +82,7 @@
         {{$select.selected.nomarticle}}
       </editable-ui-select-match>
       <editable-ui-select-choices repeat="state in vm.articles | filter: $select.search track by $index">
-        <div ng-bind-html="state.nomarticle" class="bmd-collapse-inline">{{state.nomarticle}}</div>
+        <div class="bmd-collapse-inline">{{state.nomarticle}}</div>
       <small>
         prix: {{state.prixCourant}}
       </small>
@@ -79,20 +100,20 @@
                                     <form editable-form name="tableform" onaftersave="saveUser($data)"
                                           ng-show="tableform.$visible"
                                           class="form-buttons form-inline" shown="inserted == user">
-                                        <button type="submit" ng-disabled="tableform$waiting" class="btn btn-primary">
+                                        <button type="submit" ng-disabled="tableform$waiting" class="btn btn-primary btn-sm">
                                             <span class="glyphicon glyphicon-plus"></span>
                                         </button>
                                         <button type="button" ng-disabled="tableform.$waiting"
                                                 ng-click="tableform.$cancel()"
-                                                class="btn btn-default">
+                                                class="btn btn-default btn-sm">
                                             <span class="glyphicon glyphicon-move"></span>
                                         </button>
                                     </form>
                                     <div class="buttons" ng-show="!tableform.$visible">
-                                        <button type="button" class="btn btn-primary" ng-click="tableform.$show()">
+                                        <button type="button" class="btn btn-primary btn-raised btn-sm" ng-click="tableform.$show()">
                                             edit
                                         </button>
-                                        <button type="button" class="btn btn-danger" ng-click="removeUser($index)">del
+                                        <button type="button" class="btn btn-danger btn-raised btn-sm" ng-click="removeUser($index)">del
                                         </button>
                                     </div>
                                 </td>
@@ -145,12 +166,12 @@
                     <div class="panel-body">
                         <form class="form-inline" role="form" ng-submit="PrintFacture(facture)">
                         <fieldset>
-                            <legend>Paiement</legend>
+                            <legend>Paiement/Facture</legend>
                             <div class="form-group">
                                 <!-- <label>Mode Payement:</label> -->
                                 <select id="mode" class="form-control" required ng-model="mode">
                                     <option value="">Mode Payement:</option>
-                                    <option value="caisse">Caisse</option>
+                                    <option value="caisse">Espece</option>
                                     <option value="cheque">Cheque</option>
                                     <option value="mtn">MTN/ORANGE</option>
                                 </select>
