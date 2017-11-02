@@ -5,7 +5,9 @@
                 "title": "SortieArticles",
                 "createLabel": "Créer un nouveau Sortie Article",
                 "createOrEditLabel": "Créer ou éditer un Sortie Article",
-                "search": "Recherche pour Sortie Article"
+                "search": "Recherche pour Sortie Article",
+                "from": "De",
+                "to": "à","myvente":"Mes Ventes"
             },
             "created": "Un nouveau Sortie Article a été créé avec l'identifiant {{ param }}",
             "updated": "Le Sortie Article avec l'identifiant {{ param }} a été mis à jour",

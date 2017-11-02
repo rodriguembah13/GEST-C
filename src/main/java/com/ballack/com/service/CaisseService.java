@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -47,7 +48,7 @@ public class CaisseService {
         caisse.setDateOuverture(Instant.now());
 
         Caisse result = caisseRepository.save(caisse);
-        caisseSearchRepository.save(result);
+        //caisseSearchRepository.save(result);
         return result;
     }
     /**
@@ -56,6 +57,8 @@ public class CaisseService {
      * @return the persisted entity
      */
     public Caisse create() {
+        UUID uuid = UUID.randomUUID();
+        int index=1000;
         User user=userService.getUserWithAuthorities();
         log.debug("Request to save Caisse : {}", user);
         int te=0;//compte les caisse de l'user actif
@@ -71,12 +74,13 @@ public class CaisseService {
             caisse.setUser(user);
             caisse.setFondcaisse(0.0);
             caisse.setDateOuverture(Instant.now());
-            caisse.setNumcaisse("CAISSE_"+arrondi2(Math.random(),4));
+            //caisse.setNumcaisse("CAISSE_"+arrondi2(Math.random(),4));
             caisse.setActive(true);
             result = caisseRepository.save(caisse);
-            caisseSearchRepository.save(result);
+            result.setNumcaisse("CAISSE_"+index+result.getId());
+            //caisseSearchRepository.save(result);
         }
-        return result;
+        return caisseRepository.saveAndFlush(result);
     }
     public Caisse ferme() {
 
@@ -84,7 +88,7 @@ public class CaisseService {
         caisse.setDateFermeture(Instant.now());
         caisse.setActive(false);
         Caisse result = caisseRepository.saveAndFlush(caisse);
-        caisseSearchRepository.save(result);
+        //caisseSearchRepository.save(result);
         return result;
     }
     public static int arrondi2(double A, int B) {

@@ -66,7 +66,7 @@ public class EntreeArticleService {
         entreeArticle1.setMontant_ttc(montantttc);
         entreeArticle1.setTitre("BD/EA"+entreeArticle.getId());
         EntreeArticle result = entreeArticleRepository.save(entreeArticle1);
-        entreeArticleSearchRepository.save(result);
+        //entreeArticleSearchRepository.save(result);
         return result;
     }
     /**
@@ -78,7 +78,7 @@ public class EntreeArticleService {
     public EntreeArticle save(EntreeArticle entreeArticle) {
         log.debug("Request to save EntreeArticle : {}", entreeArticle);
         EntreeArticle result = entreeArticleRepository.save(entreeArticle);
-        entreeArticleSearchRepository.save(result);
+       // entreeArticleSearchRepository.save(result);
         return result;
     }
     /**
@@ -113,7 +113,7 @@ public class EntreeArticleService {
     public void delete(Long id) {
         log.debug("Request to delete EntreeArticle : {}", id);
         entreeArticleRepository.delete(id);
-        entreeArticleSearchRepository.delete(id);
+        //entreeArticleSearchRepository.delete(id);
     }
 
     /**

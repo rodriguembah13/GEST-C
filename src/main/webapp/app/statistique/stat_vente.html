@@ -1,6 +1,6 @@
 <div class="container-fluid">
-    <h3>Statistiques Sur les ventes </h3>{{ttc}}
-    <uib-tabset active="active" justified="true" class="tab-style">
+    <h3>Statistiques Sur les ventes </h3>
+    <uib-tabset active="index" justified="true" >
         <uib-tab index="0" heading="Vente Produits(montant) par Mois">
             <div class="row"><h4 data-translate="" class="text-success text-center">Courbes montrant les Ventes dans une
                 periode donnée </h4>
@@ -39,7 +39,7 @@
                 Ventes Par annee </h4>
                 <div class="col-md-5">
                     <p class="input-group">
-                        <select name="repeatSelect" id="repeatSelect" ng-model="fromDate">
+                        <select name="repeatSelect1" id="repeatSelect1" ng-model="fromDate">
                             <option ng-repeat="option in listyear" value="{{option.text}}">{{option.text}}</option>
                         </select>
                         <button type="submit" class="btn btn-danger"
@@ -67,7 +67,7 @@
                 Produits Vendus par annee </h4>
                 <div class="col-md-5">
                     <p class="input-group">
-                        <select name="repeatSelect" id="repeatSelect" ng-model="fromDate">
+                        <select name="repeatSelect2" id="repeatSelect2" ng-model="fromDate">
                             <option ng-repeat="option in listyear" value="{{option.text}}">{{option.text}}</option>
                         </select>
                         <button type="submit" class="btn btn-danger" ng-click="vm.loadStatVenteYearParam(fromDate)">

@@ -62,7 +62,7 @@ public class LigneEntreeArticleService {
         ligneEntreeArticle.setMontanttotalttc(ligneEntreeArticle.getTaxeTVA()*ligneEntreeArticle.getPrix_unitaire()*0.01+ligneEntreeArticle.getMontanttotalht());
         stockRepository.save(stock);
         LigneEntreeArticle result = ligneEntreeArticleRepository.save(ligneEntreeArticle);
-        ligneEntreeArticleSearchRepository.save(result);
+        //ligneEntreeArticleSearchRepository.save(result);
         return result;
     }
 
@@ -98,7 +98,7 @@ public class LigneEntreeArticleService {
     public void delete(Long id) {
         log.debug("Request to delete LigneEntreeArticle : {}", id);
         ligneEntreeArticleRepository.delete(id);
-        ligneEntreeArticleSearchRepository.delete(id);
+        //ligneEntreeArticleSearchRepository.delete(id);
     }
 
     /**

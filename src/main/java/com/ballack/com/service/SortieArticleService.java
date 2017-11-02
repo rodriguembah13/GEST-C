@@ -79,7 +79,7 @@ public class SortieArticleService {
         sortieArticle1.setLibelle("OPÉRATION VENTE"+sortieArticle1.getId());
         sortieArticle1.setNumsortie("N°VM/"+sortieArticle1.getId());
         SortieArticle result = sortieArticleRepository.saveAndFlush(sortieArticle1);
-        sortieArticleSearchRepository.save(result);
+       // sortieArticleSearchRepository.save(result);
         caisseService.update(montantttc);
         factureService.saveFactureSortie(result);
         return result;
@@ -93,7 +93,7 @@ public class SortieArticleService {
     public SortieArticle save(SortieArticle sortieArticle) {
         log.debug("Request to save SortieArticle : {}", sortieArticle);
         SortieArticle result = sortieArticleRepository.save(sortieArticle);
-        sortieArticleSearchRepository.save(result);
+        //sortieArticleSearchRepository.save(result);
         return result;
     }
     /**
@@ -106,6 +106,22 @@ public class SortieArticleService {
     public Page<SortieArticle> findAll(Pageable pageable) {
         log.debug("Request to get all SortieArticles");
         return sortieArticleRepository.findAll(pageable);
+    }
+    /**
+     *  Get all the sortieArticles.
+     *
+     *  @param pageable the pagination information
+     *  @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public Page<SortieArticle> findAllByDate(Pageable pageable,LocalDate dateDebut,LocalDate dateFin) {
+        log.debug("Request to get all SortieArticles");
+        return sortieArticleRepository.findByDate(pageable, dateDebut, dateFin);
+    }
+    @Transactional(readOnly = true)
+    public Page<SortieArticle> findAllByDateByuser(Pageable pageable,LocalDate dateDebut,LocalDate dateFin) {
+        log.debug("Request to get all SortieArticles");
+        return sortieArticleRepository.findByDateByAgentIsCurrentUser(pageable, dateDebut, dateFin);
     }
     /**
      *  Get all the sortieArticles by user.
@@ -134,7 +150,7 @@ public class SortieArticleService {
     public void delete(Long id) {
         log.debug("Request to delete SortieArticle : {}", id);
         sortieArticleRepository.delete(id);
-        sortieArticleSearchRepository.delete(id);
+        //sortieArticleSearchRepository.delete(id);
     }
 
     /**

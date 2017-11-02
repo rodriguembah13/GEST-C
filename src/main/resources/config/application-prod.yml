@@ -42,8 +42,10 @@ spring:
             hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.NoDefaultJCacheRegionFactory
     data:
         elasticsearch:
-            cluster-name:
+            cluster-name: elasticsearch
             cluster-nodes: localhost:9300
+            host: localhost
+            port: 9300
 
     mail:
         host: localhost
@@ -134,3 +136,6 @@ jhipster:
 application:
        commande:
                 datelimite: 2
+       facture:
+                cheminJasper: C:\Users\ballack\JaspersoftWorkspace\gest-c
+                cheminImage: C:\TempJasper\imageCom

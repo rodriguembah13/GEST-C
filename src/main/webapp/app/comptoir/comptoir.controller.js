@@ -6,19 +6,21 @@
   .controller('ComptoirController', ComptoirController);
 
   ComptoirController.$inject = ['$scope', 'Principal', 'LoginService','AlertService', '$state','Article','$http','$q',
-  'Caisse','CaisseA','Client','SortieArticle','SortieArticlePrint','CaisseActived','CaisseDesactived'];
+  'Caisse','CaisseA','Client','SortieArticle','SortieArticlePrint','CaisseActived','CaisseDesactived','StockActifByNum','StockGActifByNum'];
 
   function ComptoirController ($scope, Principal, LoginService,AlertService, $state,Article,$http,$q,Caisse,
-    CaisseA,Client,SortieArticle,SortieArticlePrint,CaisseActived,CaisseDesactived) {
+    CaisseA,Client,SortieArticle,SortieArticlePrint,CaisseActived,CaisseDesactived,StockActifByNum,StockGActifByNum) {
     var vm = this;
-    $scope.lines=[];
+    $scope.lines=[];$scope.linesCode=[];
     vm.$state = $state;
     vm.active=active;
+    vm.validLine=validLine;
     vm.desactive=desactive;
     vm.caisseatif=CaisseA.query();
     vm.clients=Client.query();
+    vm.validLineGros=validLineGros;vm.validLineDetail=validLineDetail;
     loadAllArticle ();
-    vm.client = {}; 
+    vm.client = {}; vm.article = {}; 
         //loadCaisse ();
         function loadAllArticle () {
           Article.query({
@@ -28,16 +30,54 @@
           }function onError(error) {
                   //AlertService.error(error.data.message);
                 }
-              } 
-/*         function loadCaisse () {
-              CaisseA.query({
-              }, onSuccess, onError);
+              }
+             function validLineDetail (qte) {
+                  var num=vm.article.numArticle;
+              StockActifByNum.query({num_article: num,quantite:qte}
+              , onSuccess, onError);
               function onSuccess(data) {
-                vm.caisseatif = data;
+                 $scope.lines.push({
+              article: data.article,
+              quantite: qte,
+              prix:data.article.prixCourant,
+              tva: data.article.taxeTva,
+              client: vm.client,
+            })
+              }function onError(error) {
+                  AlertService.error(error.data.message);
+              }
+            } 
+                function validLineGros (qte) {
+                  var num=vm.article.numArticle;
+              StockGActifByNum.query({num_article: num,quantite:qte}
+              , onSuccess, onError);
+              function onSuccess(data) {
+                 $scope.linesCode.push({
+              article: data.article,
+              quantite: qte,
+              prix:data.article.prixCourant,
+              tva: data.article.taxeTva,
+              client: vm.client,
+            })
               }function onError(error) {
                   //AlertService.error(error.data.message);
               }
-            } */
+            } 
+       function validLine (num,qte) {
+              StockActifByNum.query({num_article: num,quantite:qte}
+              , onSuccess, onError);
+              function onSuccess(data) {
+                 $scope.linesCode.push({
+              article: data.article,
+              quantite: qte,
+              prix:data.article.prixCourant,
+              tva: data.article.taxeTva,
+              client: vm.client,
+            })
+              }function onError(error) {
+                  //AlertService.error(error.data.message);
+              }
+            } 
             $scope.show = true;
             $scope.paie = false;
             $scope.closeAlert = function() {
@@ -68,8 +108,18 @@
             for (var i = $scope.lines.length; i--;) {
               $scope.lines.splice(i, 1);
 
+            };};
+             $scope.cancelCode = function() {
+            for (var i = $scope.linesCode.length; i--;) {
+              $scope.linesCode.splice(i, 1);
+
             };
-          };  $scope.removeUser = function(index) {
+          }; 
+  $scope.removec = function(index) {
+            $scope.linesCode.splice(index, 1);
+          };
+
+           $scope.removeUser = function(index) {
             $scope.lines.splice(index, 1);
           };
           $scope.addLine=function () {
@@ -98,8 +148,13 @@
             SortieArticle.save($scope.lines, onSaveSuccess);
 
     }; 
+     $scope.saveTableCode = function() {
+            SortieArticle.save($scope.linesCode, onSaveSuccess);
+
+    };
 function onSaveSuccess (result) {
-           $scope.venteE=result;$scope.paie = true;
+           $scope.venteE=result;
+           $scope.paie = true;
                     } 
 
     $scope.getTotal = function(){
@@ -141,8 +196,8 @@ function onSaveSuccess (result) {
       $scope.clas=$scope.venteE.id;
 
       if (etat=="fact1") {
-         SortieArticlePrint.query({id: $scope.clas},PFSuccess)
-/*       $http.get("/api/PrintFacture/"+$scope.clas,{responseType:'arraybuffer'})
+        // SortieArticlePrint.query({id: $scope.clas},PFSuccess)
+		$http.get("/api/PrintFacture/"+$scope.clas,{responseType:'arraybuffer'})
         .success(function(data){
           var file=new Blob([data],{type:'application/pdf'});
           var fileUrl=URL.createObjectURL(file);
@@ -151,7 +206,7 @@ function onSaveSuccess (result) {
         })
         .error(function(err){
           AlertService.error(err.message);
-        });*/
+        });
       }else{
 
        $http.get("/api/PrintTicket/"+$scope.clas,{responseType:'arraybuffer'})

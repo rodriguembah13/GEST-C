@@ -207,6 +207,22 @@ public class StockResource {
         Stock stock = stockService.findOneArticleActif(article);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(stock));
     }
+    @GetMapping("/stocksActifByNum")
+    @Timed
+    public ResponseEntity<Stock> getStockActivebyNum(@RequestParam(value = "num_article")String num_article,
+                                                     @RequestParam(value = "quantite")int qte) {
+        log.debug("REST request to get Stock : {}", num_article);
+        Stock stock = stockService.findOneArticleActif(num_article,qte);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(stock));
+    }
+    @GetMapping("/stocksGActifByNum")
+    @Timed
+    public ResponseEntity<Stock> getStockGActivebyNum(@RequestParam(value = "num_article")String num_article,
+                                                     @RequestParam(value = "quantite")int qte) {
+        log.debug("REST request to get Stock : {}", num_article);
+        Stock stock = stockService.findOneArticleActif(num_article,qte);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(stock));
+    }
 
     /**
      * DELETE  /stocks/:id : delete the "id" stock.

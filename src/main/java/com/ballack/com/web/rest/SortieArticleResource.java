@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -116,6 +117,32 @@ public class SortieArticleResource {
         log.debug("REST request to get a page of SortieArticles");
         Page<SortieArticle> page = sortieArticleService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/sortie-articles");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    /**
+     * GET  /sortie-articles-bydate : get all the sortieArticles bybdate.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of sortieArticles in body
+     */
+    @GetMapping("/sortie-articles-bydate")
+    @Timed
+    public ResponseEntity<List<SortieArticle>> getAllSortieArticlesByDate(@ApiParam Pageable pageable,
+                                                                          @RequestParam(value = "dateDebut")LocalDate dateDebut,
+                                                                          @RequestParam(value = "dateFin")LocalDate dateFin) {
+        log.debug("REST request to get a page of SortieArticles");
+        Page<SortieArticle> page = sortieArticleService.findAllByDate(pageable, dateDebut, dateFin);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/sortie-articles-bydate");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    @GetMapping("/sortie-articles-bydate-user")
+    @Timed
+    public ResponseEntity<List<SortieArticle>> getAllSortieArticlesByDateByUser(@ApiParam Pageable pageable,
+                                                                          @RequestParam(value = "dateDebut")LocalDate dateDebut,
+                                                                          @RequestParam(value = "dateFin")LocalDate dateFin) {
+        log.debug("REST request to get a page of SortieArticles");
+        Page<SortieArticle> page = sortieArticleService.findAllByDateByuser(pageable, dateDebut, dateFin);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/sortie-articles-bydate-user");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
     /**

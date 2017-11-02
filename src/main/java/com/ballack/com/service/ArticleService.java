@@ -41,17 +41,19 @@ public class ArticleService {
      * @return the persisted entity
      */
     public Article save(Article article) {
+        int index=1000;
         log.debug("Request to save Article : {}", article);
         article.setDatecreation(LocalDate.now());
-        article.setNumArticle("ART");
+
         Article result = articleRepository.save(article);
-        articleSearchRepository.save(result);
-        return result;
+        result.setNumArticle(""+index+result.getId());
+        //articleSearchRepository.save(result);
+        return articleRepository.saveAndFlush(result);
     }
     public Article saveAndFluch(Article article) {
         log.debug("Request to save Article : {}", article);
         Article result = articleRepository.saveAndFlush(article);
-        articleSearchRepository.save(result);
+        //articleSearchRepository.save(result);
         return result;
     }
 

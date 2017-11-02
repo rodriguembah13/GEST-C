@@ -20,6 +20,8 @@ import java.time.LocalDate;
 public interface StockRepository extends JpaRepository<Stock, Long> {
     @Query("select p from Stock p where p.article =:x and p.actif =1")
     public Stock findStockactif(@Param("x") Article article);
+    @Query("select p from Stock p where p.article.numArticle =:x and p.actif =1")
+    public Stock findStockactifbynum(@Param("x") String num_article);
     @Query("select st from Stock st where st.quantite <= st.quantiteAlerte and st.closed=0")
     Page<Stock> findStockAlerte(Pageable pageable);
     @Query("select st from Stock st where st.dateperemption <=:x and st.closed=0")

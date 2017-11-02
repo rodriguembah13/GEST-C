@@ -88,7 +88,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li ng-class="" uib-dropdown dropdown>
+                    <li ng-class="{active: vm.$state.includes('comptoir')}" uib-dropdown dropdown>
                         <a class="dropdown-toggle" uib-dropdown-toggle href="" id="vente-menu">
                         <span>
                            <i class="fa fa-shopping-basket" aria-hidden="true"></i>
@@ -99,21 +99,34 @@
                         </span>
                         </a>
                         <ul class="dropdown-menu" uib-dropdown-menu>
-                            <li ui-sref-active="active">
-                                <a ui-sref="comptoir" ng-click="vm.collapseNavbar()">
-                                    <i class="fa fa-desktop" aria-hidden="true"></i>
-                                    <span data-translate="">Comptoir Détail </span>
-                                </a>
-                                <div class="divider"></div>
-                            </li>
+                            <!--     <li ui-sref-active="active">
+                                    <a ui-sref="comptoir" ng-click="vm.collapseNavbar()">
+                                        <i class="fa fa-desktop" aria-hidden="true"></i>
+                                        <span data-translate="">Comptoir Détail </span>
+                                    </a>
+                                    <div class="divider"></div>
+                                </li> -->
                             <li ui-sref-active="active">
                                 <a ui-sref="facture-user" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="">Mes Factures</span>
                                 </a>
+
+                            </li>
+                            <div class="divider"></div>
+                            <li class="dropdown-submenu">
+                                <a tabindex="-1" href="#">Comptoir</a>
+                                <ul class="dropdown-menu">
+                                    <li><a ui-sref="comptoir" ui-sref-active="active" ng-click="vm.collapseNavbar()">Détail</a>
+                                    </li>
+                                    <div class="divider"></div>
+                                    <li><a ui-sref="comptoirGros" ui-sref-active="active"
+                                           ng-click="vm.collapseNavbar()">Gros</a></li>
+                                    <li><a ui-sref="codebarre" ui-sref-active="active" ng-click="vm.collapseNavbar()">Vente
+                                        avec Code barre</a></li>
+                                </ul>
                                 <div class="divider"></div>
                             </li>
-
                             <li ui-sref-active="active">
                                 <a ui-sref="sortie-article-user" ng-click="vm.collapseNavbar()">
                                     <i class="fa fa-cart-plus" aria-hidden="true"></i>
@@ -145,7 +158,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li ng-class="" uib-dropdown dropdown>
+                    <li ng-class="{active: vm.$state.includes('stock')}" uib-dropdown dropdown>
                         <a class="dropdown-toggle" uib-dropdown-toggle href="" id="st-menu">
                         <span>
                             <i class="fa fa-database" aria-hidden="true"></i>
@@ -187,7 +200,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li ng-class="" uib-dropdown dropdown>
+                    <li ng-class="{active: vm.$state.includes('caisse')}" uib-dropdown dropdown>
                         <a class="dropdown-toggle" uib-dropdown-toggle href="" id="rapp-menu">
                         <span>
                            <i class="fa fa-archive" aria-hidden="true"></i>

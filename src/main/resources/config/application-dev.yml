@@ -147,3 +147,6 @@ application:
        # path.reports: resources/jasper/
        commande:
                 datelimite: 2
+       facture:
+                cheminJasper: C:\Users\ballack\JaspersoftWorkspace\gest-c
+                cheminImage: C:\TempJasper\imageCom

@@ -224,8 +224,8 @@ public class DecompositionResourceIntTest {
         assertThat(testDecomposition.isEtat()).isEqualTo(UPDATED_ETAT);
 
         // Validate the Decomposition in Elasticsearch
-        Decomposition decompositionEs = decompositionSearchRepository.findOne(testDecomposition.getId());
-        assertThat(decompositionEs).isEqualToComparingFieldByField(testDecomposition);
+        //Decomposition decompositionEs = decompositionSearchRepository.findOne(testDecomposition.getId());
+       // assertThat(decompositionEs).isEqualToComparingFieldByField(testDecomposition);
     }
 
     @Test
@@ -260,8 +260,8 @@ public class DecompositionResourceIntTest {
             .andExpect(status().isOk());
 
         // Validate Elasticsearch is empty
-        boolean decompositionExistsInEs = decompositionSearchRepository.exists(decomposition.getId());
-        assertThat(decompositionExistsInEs).isFalse();
+        //boolean decompositionExistsInEs = decompositionSearchRepository.exists(decomposition.getId());
+        //assertThat(decompositionExistsInEs).isFalse();
 
         // Validate the database is empty
         List<Decomposition> decompositionList = decompositionRepository.findAll();

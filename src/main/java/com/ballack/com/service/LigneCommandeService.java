@@ -43,7 +43,7 @@ public class LigneCommandeService {
         ligneCommande.setAgent(userService.getUserWithAuthorities());
         log.debug("Request to save LigneCommande : {}", ligneCommande);
         LigneCommande result = ligneCommandeRepository.save(ligneCommande);
-        ligneCommandeSearchRepository.save(result);
+        //ligneCommandeSearchRepository.save(result);
         return result;
     }
 
@@ -79,7 +79,7 @@ public class LigneCommandeService {
     public void delete(Long id) {
         log.debug("Request to delete LigneCommande : {}", id);
         ligneCommandeRepository.delete(id);
-        ligneCommandeSearchRepository.delete(id);
+        //ligneCommandeSearchRepository.delete(id);
     }
 
     /**

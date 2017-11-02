@@ -60,9 +60,16 @@ gulp.task('images', function () {
 });
 // Fonts
 gulp.task('fonts', function() {
-    return gulp.src([
-                    'app/bower_components/font-awesome/fonts/fontawesome-webfont.*'])
-            .pipe(gulp.dest(config.dist + 'content/fonts'));
+    return gulp.src(config.bower + 'font-awesome/fonts/**.*')
+                   .pipe(plumber({errorHandler: handleErrors}))
+                   .pipe(changed(config.dist + 'content/fonts/'))
+                   .pipe(rev())
+                   .pipe(gulp.dest(config.dist + 'content/fonts/'))
+                   .pipe(rev.manifest(config.revManifest, {
+                       base: config.dist,
+                       merge: true
+                   }))
+                   .pipe(gulp.dest(config.dist));
 });
 
 gulp.task('styles', [], function () {

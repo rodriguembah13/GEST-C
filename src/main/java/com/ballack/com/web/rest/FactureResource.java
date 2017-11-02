@@ -1,6 +1,6 @@
 package com.ballack.com.web.rest;
 
-import com.ballack.com.domain.SortieArticle;
+import com.ballack.com.config.ApplicationProperties;
 import com.codahale.metrics.annotation.Timed;
 import com.ballack.com.domain.Facture;
 import com.ballack.com.service.FactureService;
@@ -14,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -33,9 +32,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Facture.
@@ -49,10 +45,12 @@ public class FactureResource {
     private static final String ENTITY_NAME = "facture";
 
     private final FactureService factureService;
+    private final ApplicationProperties applicationProperties;
     @Autowired
     ApplicationContext context;
-    public FactureResource(FactureService factureService) {
+    public FactureResource(FactureService factureService, ApplicationProperties applicationProperties) {
         this.factureService = factureService;
+        this.applicationProperties = applicationProperties;
     }
 
     /**
@@ -180,12 +178,13 @@ public class FactureResource {
             String url1 =context.getEnvironment().getProperty("spring.datasource.url");
             String login1 =context.getEnvironment().getProperty("spring.datasource.username");
             String password1 =context.getEnvironment().getProperty("spring.datasource.password");
-            String lg="C:\\TempJasper\\imageCom";
+            //context.getEnvironment().getProperty("");
+            String lg=applicationProperties.getFacture().getCheminImage();
             //Resource jasper=context.getResource("application.path.reports");
             connection = DriverManager.getConnection(url1, login1, password1);
             //InputStream inputStream= new FileInputStream(new File("C:\\TempJasper\\bulletinT.jrxml"));
 
-            File file = new File("C:\\Users\\ballack\\JaspersoftWorkspace\\gest-c");
+            File file = new File(applicationProperties.getFacture().getCheminJasper());
             FileInputStream fis = new FileInputStream(new File(file, "facture_A4.jasper"));
 
             Map<String,Object> parameterMap= new HashedMap();
@@ -220,11 +219,11 @@ public class FactureResource {
             String url1 =context.getEnvironment().getProperty("spring.datasource.url");
             String login1 =context.getEnvironment().getProperty("spring.datasource.username");
             String password1 =context.getEnvironment().getProperty("spring.datasource.password");
-            String lg="C:\\TempJasper\\imageCom";
+            String lg=applicationProperties.getFacture().getCheminImage();
             connection = DriverManager.getConnection(url1, login1, password1);
             //InputStream inputStream= new FileInputStream(new File("C:\\TempJasper\\bulletinT.jrxml"));
 
-            File file = new File("C:\\Users\\ballack\\JaspersoftWorkspace\\gest-c");
+            File file = new File(applicationProperties.getFacture().getCheminJasper());
             FileInputStream fis = new FileInputStream(new File(file, "tickect.jasper"));
 
             Map<String,Object> parameterMap= new HashedMap();

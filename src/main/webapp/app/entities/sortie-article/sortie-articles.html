@@ -10,10 +10,31 @@
                         Create new Sortie Article
                     </span>
                 </button>
-            </div> -->
-            <div class="col-xs-8 no-padding-right">
+            </div> --> 
+                <div class="col-md-5">
+
+                    <p class="input-group">
+                        <span class="input-group-addon" data-translate="gestCApp.sortieArticle.home.from">from</span>
+                        <input type="date" class="input-sm form-control" name="start" ng-model="fromDate"
+                               ng-change="vm.onChangeDate()" uib-datepicker-popup="{{dateformat}}" is-open="vm.datePickerOpenStatus.fromDate" required/>  <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('fromDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                        <span class="input-group-addon" data-translate="gestCApp.sortieArticle.home.to">to</span>
+                        <input type="date" class="input-sm form-control" name="end" ng-model="toDate"
+                               uib-datepicker-popup="{{dateformat}}" is-open="vm.datePickerOpenStatus.toDate" required/>  <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="vm.openCalendar('toDate')"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                     <span  class="input-group-btn width-min" >
+                            <button class="btn btn-info" ng-click="vm.loadAllByDate(fromDate,toDate)">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </p>
+            
+            </div>
+            <div class="col-md-6 pull-right">
                 <form name="searchForm" class="form-inline">
-                    <div class="input-group pull-right" >
+                    <div class="input-group" >
                         <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'gestCApp.sortieArticle.home.search' | translate }}">
                         <span  class="input-group-btn width-min" >
                             <button class="btn btn-info" ng-click="vm.search(vm.searchQuery)">
@@ -95,7 +116,7 @@
         </table>
     </div>
     <div class="text-center">
-        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
-        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+        <jhi-item-count page="vm.page1" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page1" ng-change="vm.transition1()"></uib-pagination>
     </div>
 </div>

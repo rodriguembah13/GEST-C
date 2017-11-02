@@ -138,8 +138,8 @@ public class EntreeArticleResourceIntTest {
         //assertThat(testEntreeArticle.getObservation()).isEqualTo(DEFAULT_OBSERVATION);
 
         // Validate the EntreeArticle in Elasticsearch
-        EntreeArticle entreeArticleEs = entreeArticleSearchRepository.findOne(testEntreeArticle.getId());
-        assertThat(entreeArticleEs).isEqualToComparingFieldByField(testEntreeArticle);
+        //EntreeArticle entreeArticleEs = entreeArticleSearchRepository.findOne(testEntreeArticle.getId());
+        //assertThat(entreeArticleEs).isEqualToComparingFieldByField(testEntreeArticle);
     }
 /*
 
@@ -240,8 +240,8 @@ public class EntreeArticleResourceIntTest {
         assertThat(testEntreeArticle.getObservation()).isEqualTo(UPDATED_OBSERVATION);
 
         // Validate the EntreeArticle in Elasticsearch
-        EntreeArticle entreeArticleEs = entreeArticleSearchRepository.findOne(testEntreeArticle.getId());
-        assertThat(entreeArticleEs).isEqualToComparingFieldByField(testEntreeArticle);
+       // EntreeArticle entreeArticleEs = entreeArticleSearchRepository.findOne(testEntreeArticle.getId());
+        //assertThat(entreeArticleEs).isEqualToComparingFieldByField(testEntreeArticle);
     }
 /*
 
@@ -286,7 +286,7 @@ public class EntreeArticleResourceIntTest {
         assertThat(entreeArticleList).hasSize(databaseSizeBeforeDelete - 1);
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void searchEntreeArticle() throws Exception {
         // Initialize the database
@@ -303,7 +303,7 @@ public class EntreeArticleResourceIntTest {
             .andExpect(jsonPath("$.[*].montant_ttc").value(hasItem(DEFAULT_MONTANT_TTC.doubleValue())))
             .andExpect(jsonPath("$.[*].observation").value(hasItem(DEFAULT_OBSERVATION.toString())));
     }
-
+*/
     @Test
     @Transactional
     public void equalsVerifier() throws Exception {

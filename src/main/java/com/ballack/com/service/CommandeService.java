@@ -91,7 +91,7 @@ public class CommandeService {
 public Commande save(Commande commande){
 
     Commande result = commandeRepository.save(commande);
-    commandeSearchRepository.save(result);
+    //commandeSearchRepository.save(result);
     return result;
 }
     /**
@@ -152,7 +152,7 @@ public Commande save(Commande commande){
     public void delete(Long id) {
         log.debug("Request to delete Commande : {}", id);
         commandeRepository.delete(id);
-        commandeSearchRepository.delete(id);
+        //commandeSearchRepository.delete(id);
     }
 
     /**

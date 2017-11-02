@@ -57,7 +57,7 @@ public class LigneSortieArticleService {
             ligneSortieArticle.setMontantttc((stock.getTaxeTVA() * ligneSortieArticle.getMontantht())*0.01 + ligneSortieArticle.getMontantht());
             ligneSortieArticle.setMontanttva(stock.getTaxeTVA());
             result = ligneSortieArticleRepository.save(ligneSortieArticle);
-            ligneSortieArticleSearchRepository.save(result);
+            //ligneSortieArticleSearchRepository.save(result);
         } else {
             result = null;
         }
@@ -97,7 +97,7 @@ public class LigneSortieArticleService {
     public void delete(Long id) {
         log.debug("Request to delete LigneSortieArticle : {}", id);
         ligneSortieArticleRepository.delete(id);
-        ligneSortieArticleSearchRepository.delete(id);
+        //ligneSortieArticleSearchRepository.delete(id);
     }
 
     /**

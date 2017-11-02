@@ -22,6 +22,32 @@
                     controllerAs: 'vm'
                 }
             }
+        }). state('comptoirGros', {
+            parent: 'app',
+            url: '/comptoirGros',
+            data: {
+                authorities: []
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/comptoir/comptoirGros.html',
+                    controller: 'ComptoirController',
+                    controllerAs: 'vm'
+                }
+            }
+        })    .state('codebarre', {
+            parent: 'app',
+            url: '/codebarre',
+            data: {
+                authorities: []
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/comptoir/codebarre.html',
+                    controller: 'ComptoirController',
+                    controllerAs: 'vm'
+                }
+            }
         }).state('clientcomptoir.new', {
             parent: 'comptoir',
             url: '/new',

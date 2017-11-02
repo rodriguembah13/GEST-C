@@ -44,15 +44,34 @@
     'use strict';
     angular
         .module('gestCApp')
-        .factory('SortieArticleU', SortieArticleU);
+        .factory('SortieArticleU', SortieArticleU)
+        .factory('SortieArticleByDate', SortieArticleByDate)
+        .factory('SortieArticleByDateUser', SortieArticleByDateUser);
 
     SortieArticleU.$inject = ['$resource', 'DateUtils'];
-
+    SortieArticleByDate.$inject = ['$resource', 'DateUtils'];
+    SortieArticleByDateUser.$inject = ['$resource', 'DateUtils'];
     function SortieArticleU ($resource, DateUtils) {
         var resourceUrl =  'api/sortie-articleuser/:id';
 
         return $resource(resourceUrl, {}, {
             'query': { method: 'GET', isArray: true}
+        });
+    }
+        function SortieArticleByDate ($resource, DateUtils) {
+        var resourceUrl =  'api/sortie-articles-bydate/:id';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET', isArray: true,
+                        params: {dateDebut: null,dateDebut: null}}
+        });
+    }
+            function SortieArticleByDateUser ($resource, DateUtils) {
+        var resourceUrl =  'api/sortie-articles-bydate-user/:id';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET', isArray: true,
+                        params: {dateDebut: null,dateDebut: null}}
         });
     }
 })();

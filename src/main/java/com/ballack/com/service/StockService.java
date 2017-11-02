@@ -184,6 +184,33 @@ public class StockService {
         return stockRepository.findStockactif(article);
     }
     /**
+     *  Get one stock by article where active by num_article.
+     *
+     *  @param num_article the num of the entity
+     *  @return the entity
+     */
+    @Transactional(readOnly = true)
+    public Stock findOneArticleActif(String num_article,int qte) {
+        log.debug("Request to get Stock : {}", num_article);
+        Stock stock=stockRepository.findStockactifbynum(num_article);
+        if(stock.getQuantite()>=qte){
+            return stock;
+        }else {
+            return null;
+        }
+
+    }    @Transactional(readOnly = true)
+    public Stock findOneArticleGActif(String num_article,int qte) {
+        log.debug("Request to get Stock : {}", num_article);
+        Stock stock=stockRepository.findStockactifbynum(num_article);
+        if(stock.getQuantiteGros()>=qte){
+            return stock;
+        }else {
+            return null;
+        }
+
+    }
+    /**
      *  Delete the  stock by id.
      *
      *  @param id the id of the entity
@@ -191,7 +218,7 @@ public class StockService {
     public void delete(Long id) {
         log.debug("Request to delete Stock : {}", id);
         stockRepository.delete(id);
-        stockSearchRepository.delete(id);
+        //stockSearchRepository.delete(id);
     }
 
     /**

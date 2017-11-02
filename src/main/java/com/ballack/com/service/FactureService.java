@@ -44,7 +44,7 @@ public class FactureService {
     public Facture save(Facture facture) {
         log.debug("Request to save Facture : {}", facture);
         Facture result = factureRepository.save(facture);
-        factureSearchRepository.save(result);
+        //factureSearchRepository.save(result);
         return result;
     }
     /**
@@ -65,7 +65,7 @@ public class FactureService {
         facture.setMontanttotalht(sortieArticle.getMontanttotal());
         facture.setMagasin(sortieArticle.getMagasin());
         Facture result = factureRepository.save(facture);
-        factureSearchRepository.save(result);
+        //factureSearchRepository.save(result);
         return result;
     }
 
@@ -111,7 +111,7 @@ public class FactureService {
     public void delete(Long id) {
         log.debug("Request to delete Facture : {}", id);
         factureRepository.delete(id);
-        factureSearchRepository.delete(id);
+        //factureSearchRepository.delete(id);
     }
 
     /**

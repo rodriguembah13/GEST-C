@@ -123,7 +123,7 @@ public class DecompositionService {
     public void delete(Long id) {
         log.debug("Request to delete Decomposition : {}", id);
         decompositionRepository.delete(id);
-        decompositionSearchRepository.delete(id);
+       // decompositionSearchRepository.delete(id);
     }
 
     /**

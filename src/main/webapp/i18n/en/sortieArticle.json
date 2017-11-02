@@ -5,7 +5,10 @@
                 "title": "Sortie Articles",
                 "createLabel": "Create a new Sortie Article",
                 "createOrEditLabel": "Create or edit a Sortie Article",
-                "search": "Search for Sortie Article"
+                "search": "Search for Sortie Article",
+                "from": "from",
+                "to": "to",
+                "myvente":"My sellers"
             },
             "created": "A new Sortie Article is created with identifier {{ param }}",
             "updated": "A Sortie Article is updated with identifier {{ param }}",

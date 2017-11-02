@@ -3,6 +3,27 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
 }
+/*.well {
+    background: #EEEEEE;
+}*/
+body .container .well,
+body .container-fluid .well,
+body .container .jumbotron,
+body .container-fluid .jumbotron {
+  background-color: #fff;
+  padding: 19px;
+  margin-bottom: 20px;
+  -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 2px;
+  border: 0;
+}
+.navbar {
+  background-color: #1B5E20;
+  border: 0;
+  border-radius: 0;
+  color: #000 !important;
+}
 li.active a.ng-binding {
   color: #000 !important;
     background-color: #01579B !important;
@@ -14,13 +35,13 @@ li a.ng-binding {
     background-color: #00B8D4;
     text-decoration: none;
 }
-    .uib-tab {
+/*    .uib-tab {
        border-right: 1px solid #333;
        background-color: #00B8D4 !important;
        color: #777777;text-decoration: none;
     }
 .nav-tabs > li > a {
-    border: 1px solid #000;
+    border: 1px solid #000;background-color: #00AAA4;
 } 
 
 /* ==========================================================================
@@ -372,6 +393,21 @@ Fix error field display
   font-size: 14px;
   padding: 10px 10px;
 }
+.dropdown-submenu{position:relative;}
+.dropdown-submenu>.dropdown-menu{top:0;left:100%;
+    margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;
+    -moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+.dropdown-submenu:hover>.dropdown-menu{display:block;}
+.dropdown-submenu>a:after{display:block;content:" ";
+float:right;width:0;height:0;border-color:transparent;border-style:solid;
+border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;
+}
+.dropdown-submenu:hover>a:after{border-left-color:#ffffff;}
+.dropdown-submenu.pull-left{float:none;}
+.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;
+    -moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;
+}
+
 .dropdown-menu .divider {
   height: 1px;
   margin: 3px 0;
