@@ -16,7 +16,7 @@
         vm.loadPage = loadPage;
         vm.predicate = pagingParams.predicate;
         vm.reverse = pagingParams.ascending;
-        vm.transition = transition;vm.transition1 = transition1;
+        vm.transition = transition;
         vm.itemsPerPage = paginationConstants.itemsPerPage;
         vm.clear = clear;
         vm.search = search;
@@ -33,7 +33,7 @@
                     page: pagingParams.page - 1,
                     size: vm.itemsPerPage
                 });
-                        function loadAllByDateUser (dateDeb,dateF) {
+         function loadAllByDateUser (dateDeb,dateF) {
              var dateFormat = 'yyyy-MM-dd';
             var fromDate = $filter('date')(dateDeb, dateFormat);
             var toDate = $filter('date')(dateF, dateFormat);
@@ -110,7 +110,7 @@
             }
          
             function sort() {
-                var result = [vm.predicate + ',' + (vm.reverse ? 'desc' : 'asc')];
+                var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
                 if (vm.predicate !== 'id') {
                     result.push('id');
                 }
@@ -129,8 +129,8 @@
         }
 
         function loadPage(page) {
-            vm.page = page;vm.page1 = page;
-            vm.transition();vm.transition1();
+            vm.page = page;
+            vm.transition();
         }
         vm.datePickerOpenStatus.fromDate = false;
         vm.datePickerOpenStatus.toDate = false;
@@ -145,13 +145,13 @@
                 search: vm.currentSearch
             });
         }
-  function transition1() {
+ /* function transition1() {
             $state.transitionTo($state.$current, {
                 page: vm.page1,
                 sort: vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc'),
                 search: vm.currentSearch
             });
-        }
+        }*/
         function search(searchQuery) {
             if (!searchQuery){
                 return vm.clear();

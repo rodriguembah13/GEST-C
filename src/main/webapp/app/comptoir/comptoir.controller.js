@@ -44,7 +44,7 @@
               client: vm.client,
             })
               }function onError(error) {
-                  AlertService.error(error.data.message);
+                  AlertService.error("Stock insuffisant ,veuillez ravitailler le stock");
               }
             } 
                 function validLineGros (qte) {
@@ -75,7 +75,7 @@
               client: vm.client,
             })
               }function onError(error) {
-                  //AlertService.error(error.data.message);
+                  AlertService.error(error.data.message);
               }
             } 
             $scope.show = true;
@@ -145,9 +145,12 @@
     $scope.venteE=null;
     $scope.venteR=null;
   $scope.saveTable = function() {
-            SortieArticle.save($scope.lines, onSaveSuccess);
+            SortieArticle.save($scope.lines, onSaveSuccess,onSaveError);
 
     }; 
+    function onSaveError (error) {
+          AlertService.error(error.data.message,"vérifier le client");
+                    }
      $scope.saveTableCode = function() {
             SortieArticle.save($scope.linesCode, onSaveSuccess);
 

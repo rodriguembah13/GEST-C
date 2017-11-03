@@ -3,6 +3,7 @@
     angular
         .module('gestCApp')
         .factory('LigneSortieArticle', LigneSortieArticle)
+        .factory('LigneBySortieArticle', LigneBySortieArticle)
         .factory('LigneSortieStat', LigneSortieStat)
         .factory('LigneSortieStats', LigneSortieStats)
         .factory('LigneSortieStatAchatClient',LigneSortieStatAchatClient)
@@ -10,14 +11,32 @@
         .factory('LigneSortieStatmonthParam',LigneSortieStatmonthParam)
         .factory('LigneSortieStatmonth',LigneSortieStatmonth);
 
-    LigneSortieArticle.$inject = ['$resource'];
+    LigneSortieArticle.$inject = ['$resource'];LigneBySortieArticle.$inject = ['$resource'];
     LigneSortieStat.$inject = ['$resource'];
     LigneSortieStats.$inject = ['$resource'];
     LigneSortieStatAchatClient.$inject = ['$resource'];
     LigneSortieStatyearParam.$inject = ['$resource'];
     LigneSortieStatmonthParam.$inject = ['$resource'];
     LigneSortieStatmonth.$inject = ['$resource'];
-    function LigneSortieArticle ($resource) {
+    function LigneBySortieArticle ($resource) {
+        var resourceUrl =  'api/ligne-by-sortie-articles/:id';
+
+        return $resource(resourceUrl, {}, {
+            'query': { method: 'GET', isArray: true,
+                        params: {sortie: null}},
+            'get': {
+                method: 'GET',
+                transformResponse: function (data) {
+                    if (data) {
+                        data = angular.fromJson(data);
+                    }
+                    return data;
+                }
+            },
+            'update': { method:'PUT' }
+        });
+    }
+        function LigneSortieArticle ($resource) {
         var resourceUrl =  'api/ligne-sortie-articles/:id';
 
         return $resource(resourceUrl, {}, {

@@ -1,55 +1,58 @@
 <div ng-cloak>
     <!-- table -->
-    <h3> Commande Fournisseur </h3>
-                            <div class="form-group col-lg-3">
-                            <fieldset>
-                       <legend>Chosir Fournisseur</legend>
-                            <div class="input-group bmd-collapse-inline">
-                                <ui-select  ng-model="vm.fournisseur">
-                                    <ui-select-match placeholder="Select or search a fournisseur  in the list...">
-                                        {{$select.selected.nomcomplet}}
-                                    </ui-select-match>
-                                    <ui-select-choices repeat="item in vm.fournisseurs | filter: $select.search">
-                                        <span>{{item.nomcomplet }}</span>
+    <h3 class="text-center"> Commande Fournisseur </h3>
+   <div class="container"> <div class="form-group col-lg-3">
+        <fieldset>
+            <legend>Chosir Fournisseur</legend>
+            <div class="input-group bmd-collapse-inline">
+                <ui-select ng-model="vm.fournisseur">
+                    <ui-select-match placeholder="Select or search a fournisseur  in the list...">
+                        {{$select.selected.nomcomplet}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="item in vm.fournisseurs | filter: $select.search">
+                        <span>{{item.nomcomplet }}</span>
 
-                                    </ui-select-choices>
-                                </ui-select>
-<!--                                 <span class="input-group-btn">
-              <button type="button" ui-sref="fournisseur.new" class="btn btn-default" uib-tooltip="new fournisseur">
-                <span class="glyphicon glyphicon-plus"></span>
-              </button>
-            </span> -->
-                            </div></fieldset>
-                        </div>
-                       <div class="form-group col-lg-3">
-                       <fieldset>
-                       <legend>Chosir Magasin</legend>
-                            <div class="input-group bmd-collapse-inline">
-                                <ui-select  ng-model="vm.magasin">
-                                    <ui-select-match placeholder="Select or search a Magasin  in the list...">
-                                        {{$select.selected.nomMagasin}}
-                                    </ui-select-match>
-                                    <ui-select-choices repeat="item in vm.magasins | filter: $select.search">
-                                        <span>{{item.nomMagasin }}</span>
+                    </ui-select-choices>
+                </ui-select>
+                <!--                                 <span class="input-group-btn">
+                              <button type="button" ui-sref="fournisseur.new" class="btn btn-default" uib-tooltip="new fournisseur">
+                                <span class="glyphicon glyphicon-plus"></span>
+                              </button>
+                            </span> -->
+            </div>
+        </fieldset>
+    </div>
+    <div class="form-group col-lg-3">
+        <fieldset>
+            <legend>Chosir Magasin</legend>
+            <div class="input-group bmd-collapse-inline">
+                <ui-select ng-model="vm.magasin">
+                    <ui-select-match placeholder="Select or search a Magasin  in the list...">
+                        {{$select.selected.nomMagasin}}
+                    </ui-select-match>
+                    <ui-select-choices repeat="item in vm.magasins | filter: $select.search">
+                        <span>{{item.nomMagasin }}</span>
 
-                                    </ui-select-choices>
-                                </ui-select>
-                            </div></fieldset>
-                        </div>
+                    </ui-select-choices>
+                </ui-select>
+            </div>
+        </fieldset>
+    </div>
     <table class="table table-hover table-condensed">
- <tr style="font-weight: bold">
-                <td >Article</td>
-                <td>Prix</td>
-                <td >Quantite</td>
-                
-                <td>TaxeTVA</td>
-                
-                <td ><span ng-show="tableform.$visible">Action</span></td>
-            </tr>
-      </tr>
-      <tr ng-repeat="user in commandes | filter:filterUser">
-        <td>
-          <span editable-ui-select="user.article" data-e-ng-model="state" e-form="tableform" data-e-style="min-width:240px;max-height:22px">
+        <tr style="font-weight: bold">
+            <td>Article</td>
+            <td>Prix</td>
+            <td>Quantite</td>
+
+            <td>TaxeTVA</td>
+
+            <td><span ng-show="tableform.$visible">Action</span></td>
+        </tr>
+        </tr>
+        <tr ng-repeat="user in commandes | filter:filterUser">
+            <td>
+          <span editable-ui-select="user.article" data-e-ng-model="state" e-form="tableform"
+                data-e-style="min-width:240px;max-height:22px">
             {{user.article.nomarticle}}
             <editable-ui-select-match placeholder="Choisir Article">
               {{$select.selected.nomarticle}}
@@ -58,75 +61,77 @@
               <div>{{state.nomarticle}}</div>
             </editable-ui-select-choices>
           </span>
-        </td>
-                <td>
-                  <span editable-text="user.prix " e-form="tableform" edit-disabled="true" >
+            </td>
+            <td>
+                  <span editable-text="user.prix " e-form="tableform" edit-disabled="true">
                     {{user.prix}}
                   </span>
-                </td>
-                <td>
-                  <span editable-text="user.quantite" e-form="tableform" >
+            </td>
+            <td>
+                  <span editable-text="user.quantite" e-form="tableform">
                     {{ user.quantite}}
                   </span>
-                </td>
-                <td>
+            </td>
+            <td>
 
-                  <span editable-text="user.taxeTva" e-form="tableform" >
+                  <span editable-text="user.taxeTva" e-form="tableform">
                     {{user.taxeTva}}
                   </span>
-                </td> 
-                <td >
-                   
-                    <form editable-form name="tableform" onaftersave="saveUser($data)" ng-show="tableform.$visible"
-                          class="form-buttons form-inline" shown="inserted == user">
-                        <button type="submit" ng-disabled="tableform$waiting" class="btn-sm btn-primary">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </button>
-                        <button type="button" ng-disabled="tableform.$waiting" ng-click="tableform.$cancel()"
-                                class="btn-sm btn-default">
-                            <span class="glyphicon glyphicon-move"></span>
-                        </button>
-                    </form>
-                    <div class="buttons" ng-show="!tableform.$visible">
-                        <button type="button" class="btn-sm btn-info" ng-click="tableform.$show()">edit</button>
-                        <button type="button" class="btn-sm btn-danger" ng-click="removeCommande($index)">del</button>
-                    </div>
-                </td>
-      </tr>
-    </table>
-      <button type="button" ng-disabled="tableform.$waiting" ng-click="addLineCommande()" class="btn btn-default btn-raised">add row</button>
-      <div class="btn-form pull-right">
-                <button type="button" class="btn btn-primary btn-raised" ng-click="saveCommande()">Valider</button>
-                <button type="button" class="btn btn-danger btn-raised" ng-click="cancelC()">cancel</button>
-    </div> 
+            </td>
+            <td>
 
-                  <div class="panel" ng-if="cmde">
-                    <div class="panel-body">
-                        <form class="form-inline" role="form" ng-submit="PrintFacture(facture)">
-
-                            <div class="form-group">
-                                <!-- <label>Mode Payement:</label> -->
-                                <select id="mode" class="form-control" required ng-model="mode">
-                                    <option value="">Mode Payement:</option>
-                                    <option value="caisse">Caisse</option>
-                                    <option value="cheque">Cheque</option>
-                                    <option value="mtn">MTN/ORANGE</option>
-                                </select>
-                            </div>
-                            <div class="form-group" ng-if="mode=='caisse'">
-                                <label for="pwd">Montant:</label>
-                                <input type="number" class="form-control" id="mtn">
-                            </div>
-                            <div class="form-group">
-                                <!--  <label>Facture:</label> -->
-                                <select id="facture" class="form-control" required ng-model="facture">
-                                    <option value="">Facture:</option>
-                                    <option value="fact1">FactureA4</option>
-                                    <option value="fact2">Tichet</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
-                        </form>
-                    </div>
+                <form editable-form name="tableform" onaftersave="saveUser($data)" ng-show="tableform.$visible"
+                      class="form-buttons form-inline" shown="inserted == user">
+                    <button type="submit" ng-disabled="tableform$waiting" class="btn-sm btn-primary">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </button>
+                    <button type="button" ng-disabled="tableform.$waiting" ng-click="tableform.$cancel()"
+                            class="btn-sm btn-default">
+                        <span class="glyphicon glyphicon-move"></span>
+                    </button>
+                </form>
+                <div class="buttons" ng-show="!tableform.$visible">
+                    <button type="button" class="btn-sm btn-info" ng-click="tableform.$show()">edit</button>
+                    <button type="button" class="btn-sm btn-danger" ng-click="removeCommande($index)">del</button>
                 </div>
+            </td>
+        </tr>
+    </table>
+    <button type="button" ng-disabled="tableform.$waiting" ng-click="addLineCommande()"
+            class="btn btn-default btn-raised">add row
+    </button>
+    <div class="btn-form pull-right">
+        <button type="button" class="btn btn-primary btn-raised" ng-click="saveCommande()">Valider</button>
+        <button type="button" class="btn btn-danger btn-raised" ng-click="cancelC()">cancel</button>
+    </div>
+
+    <div class="panel" ng-if="cmde">
+        <div class="panel-body">
+            <form class="form-inline" role="form" ng-submit="PrintFacture(facture)">
+
+                <div class="form-group">
+                    <!-- <label>Mode Payement:</label> -->
+                    <select id="mode" class="form-control" required ng-model="mode">
+                        <option value="">Mode Payement:</option>
+                        <option value="caisse">Caisse</option>
+                        <option value="cheque">Cheque</option>
+                        <option value="mtn">MTN/ORANGE</option>
+                    </select>
+                </div>
+                <div class="form-group" ng-if="mode=='caisse'">
+                    <label for="pwd">Montant:</label>
+                    <input type="number" class="form-control" id="mtn">
+                </div>
+                <div class="form-group">
+                    <!--  <label>Facture:</label> -->
+                    <select id="facture" class="form-control" required ng-model="facture">
+                        <option value="">Facture:</option>
+                        <option value="fact1">FactureA4</option>
+                        <option value="fact2">Tichet</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+    </div></div>
 </div>

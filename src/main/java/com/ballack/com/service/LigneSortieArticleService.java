@@ -1,6 +1,7 @@
 package com.ballack.com.service;
 
 import com.ballack.com.domain.LigneSortieArticle;
+import com.ballack.com.domain.SortieArticle;
 import com.ballack.com.domain.Stock;
 import com.ballack.com.repository.LigneSortieArticleRepository;
 import com.ballack.com.repository.StockRepository;
@@ -75,6 +76,17 @@ public class LigneSortieArticleService {
     public Page<LigneSortieArticle> findAll(Pageable pageable) {
         log.debug("Request to get all LigneSortieArticles");
         return ligneSortieArticleRepository.findAll(pageable);
+    }
+    /**
+     * Get all the ligneSortieArticles.
+     *
+     * @param pageable the pagination information
+     * @return the list of entities
+     */
+    @Transactional(readOnly = true)
+    public Page<LigneSortieArticle> findAllbysortie(Pageable pageable, Long id) {
+        log.debug("Request to get all LigneSortieArticles");
+        return ligneSortieArticleRepository.findLineBySortie(pageable, id);
     }
 
     /**

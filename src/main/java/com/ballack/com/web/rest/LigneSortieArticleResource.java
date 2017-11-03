@@ -1,5 +1,6 @@
 package com.ballack.com.web.rest;
 
+import com.ballack.com.domain.SortieArticle;
 import com.codahale.metrics.annotation.Timed;
 import com.ballack.com.domain.LigneSortieArticle;
 import com.ballack.com.service.LigneSortieArticleService;
@@ -96,6 +97,20 @@ public class LigneSortieArticleResource {
         log.debug("REST request to get a page of LigneSortieArticles");
         Page<LigneSortieArticle> page = ligneSortieArticleService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/ligne-sortie-articles");
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+    }
+    /**
+     * GET  /ligne-sortie-articles : get all the ligneSortieArticles.
+     *
+     * @param pageable the pagination information
+     * @return the ResponseEntity with status 200 (OK) and the list of ligneSortieArticles in body
+     */
+    @GetMapping("/ligne-by-sortie-articles")
+    @Timed
+    public ResponseEntity<List<LigneSortieArticle>> getAllLigneSortieArticlesbySortie(@ApiParam Pageable pageable,@RequestParam(value = "sortie") Long id) {
+        log.debug("REST request to get a page of LigneSortieArticles");
+        Page<LigneSortieArticle> page = ligneSortieArticleService.findAllbysortie(pageable,id);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/ligne-by-sortie-articles");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
 

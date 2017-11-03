@@ -77,7 +77,7 @@ public class CaisseService {
             //caisse.setNumcaisse("CAISSE_"+arrondi2(Math.random(),4));
             caisse.setActive(true);
             result = caisseRepository.save(caisse);
-            result.setNumcaisse("CAISSE_"+index+result.getId());
+            result.setNumcaisse("CAISSE_"+(index+result.getId()));
             //caisseSearchRepository.save(result);
         }
         return caisseRepository.saveAndFlush(result);

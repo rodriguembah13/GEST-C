@@ -2,8 +2,74 @@
 <div>
     <h2><span data-translate="gestCApp.sortieArticle.detail.title">Sortie Article</span> {{vm.sortieArticle.id}}</h2>
     <hr>
-    <jhi-alert-error></jhi-alert-error>
-    <dl class="dl-horizontal jh-entity-details">
+    <jhi-alert-error></jhi-alert-error><div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.transition()">
+                    <th jh-sort-by="id"><span data-translate="global.field.id">ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="designation"><span data-translate="">Designation</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="quantite"><span data-translate="">Quantite</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="montantht"><span data-translate="">Montantht</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="montanttva"><span data-translate="">Montanttva</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="montantttc"><span data-translate="">Montantttc</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="sortieArticle.id"><span data-translate="">Sortie Article</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="article.id"><span data-translate="">Article</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="client.id"><span data-translate="">Client</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="typeSortieArticle.id"><span data-translate="">Type Sortie Article</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="ligneSortieArticle in vm.sortieArticles track by ligneSortieArticle.id">
+                    <td><a ui-sref="ligne-sortie-article-detail({id:ligneSortieArticle.id})">{{ligneSortieArticle.id}}</a></td>
+                    <td>{{ligneSortieArticle.designation}}</td>
+                    <td>{{ligneSortieArticle.quantite}}</td>
+                    <td>{{ligneSortieArticle.montantht}}</td>
+                    <td>{{ligneSortieArticle.montanttva}}</td>
+                    <td>{{ligneSortieArticle.montantttc}}</td>
+                    <td>
+                        <a ui-sref="sortie-article-detail({id:ligneSortieArticle.sortieArticle.id})">{{ligneSortieArticle.sortieArticle.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="article-detail({id:ligneSortieArticle.article.id})">{{ligneSortieArticle.article.nomarticle}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="client-detail({id:ligneSortieArticle.client.id})">{{ligneSortieArticle.client.id}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="type-sortie-article-detail({id:ligneSortieArticle.typeSortieArticle.id})">{{ligneSortieArticle.typeSortieArticle.id}}</a>
+                    </td>
+                    <td class="text-right" has-authority="ROLE_ADMIN" >
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="ligne-sortie-article-detail({id:ligneSortieArticle.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.view"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="ligne-sortie-article.edit({id:ligneSortieArticle.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="ligne-sortie-article.delete({id:ligneSortieArticle.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down" data-translate="entity.action.delete"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center">
+        <jhi-item-count page="vm.page" total="vm.queryCount" items-per-page="vm.itemsPerPage"></jhi-item-count>
+        <uib-pagination class="pagination-sm" total-items="vm.totalItems" items-per-page="vm.itemsPerPage" ng-model="vm.page" ng-change="vm.transition()"></uib-pagination>
+    </div>
+    <!-- <dl class="dl-horizontal jh-entity-details">
         <dt><span data-translate="gestCApp.sortieArticle.numsortie">Numsortie</span></dt>
         <dd>
             <span>{{vm.sortieArticle.numsortie}}</span>
@@ -44,7 +110,7 @@
         <dd>
             <a ui-sref="client-detail({id:vm.sortieArticle.client.id})">{{vm.sortieArticle.client.id}}</a>
         </dd>
-    </dl>
+    </dl> -->
 
     <button type="submit"
             ui-sref="{{ vm.previousState }}"

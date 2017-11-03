@@ -42,10 +42,12 @@ spring:
             hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.NoDefaultJCacheRegionFactory
     data:
         elasticsearch:
-            cluster-name: elasticsearch
-            cluster-nodes: localhost:9300
-            host: localhost
-            port: 9300
+            cluster-name:
+            cluster-nodes:
+            properties:
+                path:
+                    logs: target/elasticsearch/log
+                    data: target/elasticsearch/data
 
     mail:
         host: localhost

@@ -44,9 +44,9 @@ public class ArticleService {
         int index=1000;
         log.debug("Request to save Article : {}", article);
         article.setDatecreation(LocalDate.now());
-
+        article.setNumArticle("");
         Article result = articleRepository.save(article);
-        result.setNumArticle(""+index+result.getId());
+        result.setNumArticle(""+(index+result.getId()));
         //articleSearchRepository.save(result);
         return articleRepository.saveAndFlush(result);
     }
