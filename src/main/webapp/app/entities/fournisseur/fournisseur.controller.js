@@ -5,9 +5,9 @@
         .module('gestCApp')
         .controller('FournisseurController', FournisseurController);
 
-    FournisseurController.$inject = ['$state', 'Fournisseur', 'FournisseurSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    FournisseurController.$inject = ['$scope','$http','$state', 'Fournisseur', 'FournisseurSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function FournisseurController($state, Fournisseur, FournisseurSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function FournisseurController($scope,$http,$state, Fournisseur, FournisseurSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
 
         var vm = this;
 
@@ -91,5 +91,33 @@
             vm.currentSearch = null;
             vm.transition();
         }
+         $scope.printListeFounisseur=function(){
+        
+       $http.get("/api/printListefournisseursPdf/",{responseType:'arraybuffer'})
+        .success(function(data){
+          var file=new Blob([data],{type:'application/pdf'});
+          var fileUrl=URL.createObjectURL(file);
+          var des = window.open(fileUrl,'_blank','');
+
+        })
+        .error(function(err){
+          AlertService.error(err.message);
+        });            
+
+   };
+            $scope.printListeFounisseurXls=function(){
+        
+       $http.get("/api/printListefournisseursXls/",{responseType:'arraybuffer'})
+        .success(function(data){
+          var file=new Blob([data],{type:'application/vnd.ms-excel'});
+          var fileUrl=URL.createObjectURL(file);
+          var des = window.open(fileUrl,'_blank','');
+
+        })
+        .error(function(err){
+          AlertService.error(err.message);
+        });            
+
+   }
     }
 })();

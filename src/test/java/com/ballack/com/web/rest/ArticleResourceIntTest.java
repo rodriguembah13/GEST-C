@@ -2,6 +2,7 @@ package com.ballack.com.web.rest;
 
 import com.ballack.com.GestCApp;
 
+import com.ballack.com.config.ApplicationProperties;
 import com.ballack.com.domain.Article;
 import com.ballack.com.repository.ArticleRepository;
 import com.ballack.com.service.ArticleService;
@@ -64,7 +65,8 @@ public class ArticleResourceIntTest {
 
     @Autowired
     private ArticleRepository articleRepository;
-
+    @Autowired
+    private ApplicationProperties applicationProperties;
     @Autowired
     private ArticleService articleService;
 
@@ -90,7 +92,7 @@ public class ArticleResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ArticleResource articleResource = new ArticleResource(articleService);
+        final ArticleResource articleResource = new ArticleResource(articleService, applicationProperties);
         this.restArticleMockMvc = MockMvcBuilders.standaloneSetup(articleResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

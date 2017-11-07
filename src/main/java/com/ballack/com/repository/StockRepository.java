@@ -22,7 +22,9 @@ public interface StockRepository extends JpaRepository<Stock, Long> {
     public Stock findStockactif(@Param("x") Article article);
     @Query("select p from Stock p where p.article.numArticle =:x and p.actif =1")
     public Stock findStockactifbynum(@Param("x") String num_article);
-    @Query("select st from Stock st where st.quantite <= st.quantiteAlerte and st.closed=0")
+    @Query("select p from Stock p where p.article.codebarre =:x and p.actif =1")
+    public Stock findStockactifbycode(@Param("x") String codebarre);
+    @Query("select st from Stock st where st.quantite <= st.quantiteAlerte and st.closed=0 and st.actif =1")
     Page<Stock> findStockAlerte(Pageable pageable);
     @Query("select st from Stock st where st.dateperemption <=:x and st.closed=0")
     Page<Stock> findStockPeremp(Pageable pageable, @Param("x") LocalDate x);

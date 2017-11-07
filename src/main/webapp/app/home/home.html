@@ -1,16 +1,12 @@
-<div ng-cloak>
+<div class="container" ng-cloak>
     <div class="row">
 
         <div class="col-md-8">
-            <h1 data-translate="home.title">Welcome, Gest-c!</h1>
+            <h2 data-translate="home.title">Welcome, Gest-c!</h2>
             <p class="lead" data-translate="home.subtitle">This is your homepage</p>
 
-            <div ng-switch="vm.isAuthenticated()">
-                <div class="alert alert-success" ng-switch-when="true" data-translate="home.logged.message" translate-values="{username: '{{vm.account.login}}'}">
-                    You are logged in as user "{{vm.account.login}}".
-                </div>
-            </div>
-            <div style="height: 305px">
+
+            <div style="height: 205px">
                 <!--     <div uib-carousel active="actived" interval="myInterval" no-wrap="noWrapSlides">
                       <div uib-slide ng-repeat="slide in slides">
                         <img ng-src="content/images/logo.png" style="margin:auto;">
@@ -19,40 +15,96 @@
                     </div>
                         <img ng-src="content/images/logo.png" style="margin:auto;">-->
 
-                <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
-                    <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-                        <img ng-src="{{slide.image}}" style="margin:auto;">
-                        <div class="carousel-caption">
-                            <h4>Slide {{slide.id}}</h4>
-                            <p>{{slide.text}}</p>
-                        </div>
-                    </div>
+                <!--                 <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                                    <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+                                        <img ng-src="{{slide.image}}" style="margin:auto;">
+                                        <div class="carousel-caption">
+                                            <h4>Slide {{slide.id}}</h4>
+                                            <p>{{slide.text}}</p>
+                                        </div>
+                                    </div>
+                                </div> -->
+                <img ng-src="content/images/logo.png" style="margin:auto;">
+            </div>
+            <div ng-switch="vm.isAuthenticated()">
+                <div class="alert alert-success" ng-switch-when="true" data-translate="home.logged.message"
+                     translate-values="{username: '{{vm.account.login}}'}">
+                    You are logged in as user "{{vm.account.login}}".
                 </div>
             </div>
-
             <div class="row">
-                <ul>
-                <li><a rel="noopener" data-translate="home.link.stackoverflow">JHipster on Stack Overflw</a></li>
-                <li><a target="_blank" rel="noopener" data-translate="home.link.bugtracker">JHipster bug tracker</a></li>
-                <li><a  target="_blank" rel="noopener" data-translate="home.link.chat">JHipster public chat room</a></li>
-                <li><a  target="_blank" rel="noopener" data-translate="home.link.follow">follow @java_hipster on Twitter</a></li>
-            </ul>
+                <div class="panel x_panel">
+                    <div class="panel-body">
+                        <ul class="list-inline">
+                            <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                            <li class="item"><a data-translate="home.link.stackoverflow">JHipster on Stack Overflw</a>
+                            </li>
+                            <br>
+                            <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                            <li class="item"><a data-translate="home.link.bugtracker">JHipster bug tracker</a></li>
+                            <br>
+                            <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                            <li class="item"><a target="_blank" rel="noopener" data-translate="home.link.chat">JHipster
+                                public chat room</a></li>
+                            <br>
+                            <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+                            <li class="item"><a target="_blank" rel="noopener" data-translate="home.link.follow">follow
+                                @java_hipster on Twitter</a></li>
+                            <br>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <br><br><br><br>
 
 
-        <div class="col-md-4"><div ng-switch="vm.isAuthenticated()">
- <div class="panel pull-right" ng-switch-when="true">
-     <div class="panel-body">
-         <ul class="list-inline"><li class="item" ><a ui-sref="rupstock"><span class=" label label-danger">Produits en  stock critique</span>&nbsp;<span class="badge label-info">{{vm.stockAlerte.length}}</span></a></li><br>
-    <li class="item" ><a ui-sref="rupstock"><span class=" label label-danger">Produits en rupture de stock</span>&nbsp;<span class="badge label-info">{{vm.stockAlerte.length}}</span></a></li><br>
-    <li class="item"><span class=" label label-danger">Produits Périmés </span>&nbsp;<span class="badge label-danger">{{vm.stockPerem.length}}</span></li>
-    <br>
-    <li class="item"><span class=" label label-warning">Produits en voix de péremption</span>&nbsp;<span class="badge label-info">{{vm.stockPerem2.length}}</span></li>
-</ul>
-     </div>
- </div>
+        <div class="col-md-4">
+            <div ng-switch="vm.isAuthenticated()">
+                <div class="panel pull-right x_panel" ng-switch-when="true">
+                    <div class="panel-body">
+                        <ul class="list-inline">
+                            <li class="item"><a ui-sref="rupstock"><span class=" label label-danger">Produits en  stock critique</span>&nbsp;<span
+                                class="badge label-info">{{vm.stockAlerte.length}}</span></a></li>
+                            <br>
+                            <li class="item"><a ui-sref="rupstock"><span class=" label label-danger">Produits en rupture de stock</span>&nbsp;<span
+                                class="badge label-info">{{vm.stockAlerte.length}}</span></a></li>
+                            <br>
+                            <li class="item"><span class=" label label-danger">Produits Périmés </span>&nbsp;<span
+                                class="badge label-danger">{{vm.stockPerem.length}}</span></li>
+                            <br>
+                            <li class="item"><span class=" label label-warning">Produits en voix de péremption</span>&nbsp;<span
+                                class="badge label-info">{{vm.stockPerem2.length}}</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel x_panel" ng-switch-when="true">
+                    <div class="panel-body">
+                        <ul class="list-inline">
+                            <li class="item"><a ui-sref="client"><span
+                                class=" label label-success">Nombre de Client</span>&nbsp;<span
+                                class="badge label-info">{{vm.stockAlerte.length}}</span></a>
+                            </li>
+                            <br>
+                              <li class="item"><a ui-sref="fournisseur"><span
+                                class=" label label-primary">Nombre de Fournisseurs </span>&nbsp;<span
+                                class="badge label-info">{{vm.stockAlerte.length}}</span></a>
+                            </li>
+                            <br>
+                              <li class="item"><a ui-sref="rupstock"><span
+                                class=" label label-danger">Client insolvable</span>&nbsp;<span
+                                class="badge label-info">{{vm.stockAlerte.length}}</span></a>
+                            </li>
+                            <br>
+                            <li class="item"><a ui-sref="rupstock"><span
+                                class=" label label-danger">Factures Impayées </span>&nbsp;<span
+                                class="badge label-info">{{vm.stockAlerte.length}}</span></a>
+                            </li>
+                            <br>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div></div>
+    </div>
 </div>

@@ -81,7 +81,7 @@ public class CommandeService {
                 commande1.setMagasin(ligneCommande1.getMagasin());
             }
         }
-        commande1.setNumcommande("CMD"+commande1.getId());
+        commande1.setNumcommande("CMD_"+(applicationProperties.getFacture().getIndice()+commande1.getId()));
         commande1.setMontanttotalttc(montantttc);
         commande1.setMontanttotalht(montantht);
         Commande result = commandeRepository.save(commande);

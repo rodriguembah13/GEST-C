@@ -210,6 +210,17 @@ public class StockService {
         }
 
     }
+    @Transactional(readOnly = true)
+    public Stock findOneArticleActifbyCodeBarre(String codebarre,int qte) {
+        log.debug("Request to get Stock : {}", codebarre);
+        Stock stock=stockRepository.findStockactifbycode(codebarre);
+        if(stock.getQuantite()>=qte){
+            return stock;
+        }else {
+            return null;
+        }
+
+    }
     /**
      *  Delete the  stock by id.
      *

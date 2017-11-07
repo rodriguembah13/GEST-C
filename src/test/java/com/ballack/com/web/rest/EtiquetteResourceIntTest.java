@@ -5,6 +5,7 @@ import com.ballack.com.GestCApp;
 import com.ballack.com.domain.Etiquette;
 import com.ballack.com.repository.EtiquetteRepository;
 import com.ballack.com.repository.search.EtiquetteSearchRepository;
+import com.ballack.com.service.EtiquetteService;
 import com.ballack.com.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -58,7 +59,8 @@ public class EtiquetteResourceIntTest {
 
     @Autowired
     private EtiquetteRepository etiquetteRepository;
-
+    @Autowired
+    private EtiquetteService etiquetteService;
     @Autowired
     private EtiquetteSearchRepository etiquetteSearchRepository;
 
@@ -81,7 +83,7 @@ public class EtiquetteResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final EtiquetteResource etiquetteResource = new EtiquetteResource(etiquetteRepository, etiquetteSearchRepository);
+        final EtiquetteResource etiquetteResource = new EtiquetteResource(etiquetteRepository, etiquetteService, etiquetteSearchRepository);
         this.restEtiquetteMockMvc = MockMvcBuilders.standaloneSetup(etiquetteResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

@@ -12,9 +12,10 @@
       .Green {
        background-color: Green;
      }
-     .Gray {
-       background-color: Gray;
+     .White {
+       background-color: #FFF;
        color: black;
+       border: 1px solid #faa;
      }
       .b{
         font-weight: bold;
@@ -34,8 +35,8 @@
             </div> -->
                <div class="col-xs-6 ">
                 <div class="btn-group">
-                <span class="label">stock actif</span>
-                     <span class="label Green">stock inactif</span> <span class="label Red">stock cloture</span>          
+                <span class="label White">stock actif</span>
+                     <span class="label Green">stock inactif</span> <span class="label Red">stock cloture</span>
                 </div>
             </div>
             <div class="col-xs-6">
@@ -79,20 +80,24 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="stock in vm.stocks track by stock.id" ng-class="[getClass(stock.actif,stock.closed), 'b']">
-                    <td><a ui-sref="stock-detail({id:stock.id})">{{stock.id}}</a></td>
-                    <td >{{stock.quantite}}</td>
-                    <td>{{stock.quantiteAlerte}}</td>
-                    <td>{{stock.prixArticle}}</td>
-                        <td>{{stock.dateperemption | date:'mediumDate'}}</td>
+            <tr ng-repeat="stock in vm.stocks track by stock.id">
+                <td ng-class="[getClass(stock.actif,stock.closed), 'b']"><a ui-sref="stock-detail({id:stock.id})">{{stock.id}}</a>
+                </td>
+                <td ng-class="[getClass(stock.actif,stock.closed), 'b']">{{stock.quantite}}</td>
+                <td ng-class="[getClass(stock.actif,stock.closed), 'b']">{{stock.quantiteAlerte}}</td>
+                <td ng-class="[getClass(stock.actif,stock.closed), 'b']">{{stock.prixArticle}}</td>
+                <td ng-class="[getClass(stock.actif,stock.closed), 'b']">{{stock.dateperemption | date:'mediumDate'}}
+                </td>
                    <!--  <td ng-class="[getClass(stock.actif,stock.closed), 'b']">{{stock.actif}}</td>
- -->                    <td>{{stock.prixAchat}}</td>
+ -->
+                <td ng-class="[getClass(stock.actif,stock.closed), 'b']">{{stock.prixAchat}}</td>
                    <!--  <td>{{stock.observation}}</td>
- -->                    <td>{{stock.taxeTVA}}</td>
-                    <td>{{stock.quantiteGros}}</td>
-                    <td>{{stock.quantiteAlerteGros}}</td>
+ -->
+                <td ng-class="[getClass(stock.actif,stock.closed), 'b']">{{stock.taxeTVA}}</td>
+                <td ng-class="[getClass(stock.actif,stock.closed), 'b']">{{stock.quantiteGros}}</td>
+                <td ng-class="[getClass(stock.actif,stock.closed), 'b']">{{stock.quantiteAlerteGros}}</td>
                    <!--  <td>{{stock.closed}}</td> -->
-                    <td>
+                <td ng-class="[getClass(stock.actif,stock.closed), 'b']">
                         <a ui-sref="article-detail({id:stock.article.id})">{{stock.article.nomarticle}}</a>
                     </td>
                     <td class="text-right">

@@ -10,7 +10,7 @@
     function stateConfig($stateProvider) {
         $stateProvider
         .state('entree-article', {
-            parent: 'entity',
+            parent: 'stock',
             url: '/entree-article?page&sort&search',
             data: {
                 authorities: ['ROLE_USER'],

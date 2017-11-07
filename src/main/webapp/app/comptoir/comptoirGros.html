@@ -1,6 +1,6 @@
 <div ng-cloak>
     <!-- table -->
-    <h3 class="text-center"> Vente gros </h3>
+    <div class="row x_title"><h3 class="text-center"> Vente gros </h3></div>
     <div class="container" style="margin-bottom: 15px">
         <fieldset>
             <legend>Choisir Client</legend>
@@ -42,8 +42,9 @@
                            ng-model="qte"
                     />
                 </div>
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.validLineGros(qte)">
-                    <span class="glyphicon glyphicon-share"></span>&nbsp;<span data-translate=""></span>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.validLineGros(qte)"><i
+                    class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    <span data-translate=""></span>
                 </button>
             </fieldset>
         </div>

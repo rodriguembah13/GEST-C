@@ -60,7 +60,7 @@ gulp.task('images', function () {
 });
 // Fonts
 gulp.task('fonts', function() {
-    return gulp.src(config.bower + 'font-awesome/fonts/**.*')
+    return gulp.src(config.bower + 'components-font-awesome/fonts/**.*')
                    .pipe(plumber({errorHandler: handleErrors}))
                    .pipe(changed(config.dist + 'content/fonts/'))
                    .pipe(rev())

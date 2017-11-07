@@ -1,5 +1,6 @@
 package com.ballack.com.web.rest;
 
+import com.ballack.com.config.ApplicationProperties;
 import com.codahale.metrics.annotation.Timed;
 import com.ballack.com.domain.Article;
 import com.ballack.com.service.ArticleService;
@@ -7,8 +8,14 @@ import com.ballack.com.web.rest.util.HeaderUtil;
 import com.ballack.com.web.rest.util.PaginationUtil;
 import io.swagger.annotations.ApiParam;
 import io.github.jhipster.web.util.ResponseUtil;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.export.JRXlsExporter;
+import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
+import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -16,15 +23,18 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
-
-import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Article.
@@ -38,9 +48,12 @@ public class ArticleResource {
     private static final String ENTITY_NAME = "article";
 
     private final ArticleService articleService;
-
-    public ArticleResource(ArticleService articleService) {
+    private final ApplicationProperties applicationProperties;
+    @Autowired
+    ApplicationContext context;
+    public ArticleResource(ArticleService articleService, ApplicationProperties applicationProperties) {
         this.articleService = articleService;
+        this.applicationProperties = applicationProperties;
     }
 
     /**
@@ -80,6 +93,18 @@ public class ArticleResource {
             return createArticle(article);
         }
         Article result = articleService.save(article);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, article.getId().toString()))
+            .body(result);
+    }
+    @PutMapping("/genererCodeArticle")
+    @Timed
+    public ResponseEntity<Article> genererCodeArticle(@Valid @RequestBody Article article) throws URISyntaxException {
+        log.debug("REST request to update Article : {}", article);
+        if (article.getId() == null) {
+            return createArticle(article);
+        }
+        Article result = articleService.generecode(article);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, article.getId().toString()))
             .body(result);
@@ -150,5 +175,146 @@ public class ArticleResource {
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/articles");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
+    @GetMapping(value = "/printListeArticlePdf")
+    @Timed
+    void printListePdf(HttpServletResponse httpServletResponse) throws SQLException, FileNotFoundException {
+        Connection connection = null;
+        try {
+            // - Connexion à la base grace au fichier properties
 
+            String url1 =context.getEnvironment().getProperty("spring.datasource.url");
+            String login1 =context.getEnvironment().getProperty("spring.datasource.username");
+            String password1 =context.getEnvironment().getProperty("spring.datasource.password");
+
+            String lg=applicationProperties.getFacture().getCheminImage();
+            connection = DriverManager.getConnection(url1, login1, password1);
+            File file = new File(applicationProperties.getFacture().getCheminJasper());
+            FileInputStream fis = new FileInputStream(new File(file, "listeArticle.jasper"));
+            Map<String,Object> parameterMap= new HashedMap();
+            parameterMap.put("logo",lg);
+            JasperPrint jasperPrint= JasperFillManager.fillReport(fis,parameterMap,connection);
+            httpServletResponse.setContentType("application/pdf");
+            httpServletResponse.setHeader("Content-Disposition","inline:filename=liste.pdf");
+            httpServletResponse.getStatus();
+            final OutputStream outputStream=httpServletResponse.getOutputStream();
+            JasperExportManager.exportReportToPdfStream(jasperPrint,outputStream);
+        } catch (JRException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    @GetMapping(value = "/printListeArticleXls")
+    @Timed
+    public void printListeVenteXls(HttpServletResponse httpServletResponse) throws SQLException, FileNotFoundException {
+        Connection connection = null;
+        JRXlsExporter exporter = new JRXlsExporter();
+        try {
+            // - Connexion à la base grace au fichier properties
+
+            String url1 = context.getEnvironment().getProperty("spring.datasource.url");
+            String login1 = context.getEnvironment().getProperty("spring.datasource.username");
+            String password1 = context.getEnvironment().getProperty("spring.datasource.password");
+
+            String lg = applicationProperties.getFacture().getCheminImage();
+            connection = DriverManager.getConnection(url1, login1, password1);
+            File file = new File(applicationProperties.getFacture().getCheminJasper());
+            FileInputStream fis = new FileInputStream(new File(file, "listeArticle.jasper"));
+            Map<String, Object> parameterMap = new HashedMap();
+            parameterMap.put("logo", lg);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(fis, parameterMap, connection);
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+            exporter.setParameter(JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET, Boolean.TRUE);
+            exporter.setParameter(JRXlsExporterParameter.IS_DETECT_CELL_TYPE, java.lang.Boolean.TRUE);
+            exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, java.lang.Boolean.FALSE);
+
+            httpServletResponse.setContentType("application/ms-excel");
+
+            httpServletResponse.setHeader("Content-Disposition", "inline:filename=liste.xsls");
+            httpServletResponse.getStatus();
+            final OutputStream outputStream = httpServletResponse.getOutputStream();
+            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
+            exporter.exportReport();
+        } catch (JRException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    @GetMapping(value = "/printListeArticleFamillePdf")
+    @Timed
+    void printListeFamillePdf(HttpServletResponse httpServletResponse) throws SQLException, FileNotFoundException {
+        Connection connection = null;
+        try {
+            // - Connexion à la base grace au fichier properties
+
+            String url1 =context.getEnvironment().getProperty("spring.datasource.url");
+            String login1 =context.getEnvironment().getProperty("spring.datasource.username");
+            String password1 =context.getEnvironment().getProperty("spring.datasource.password");
+
+            String lg=applicationProperties.getFacture().getCheminImage();
+            connection = DriverManager.getConnection(url1, login1, password1);
+            File file = new File(applicationProperties.getFacture().getCheminJasper());
+            FileInputStream fis = new FileInputStream(new File(file, "listeArticleByFamille.jasper"));
+            Map<String,Object> parameterMap= new HashedMap();
+            parameterMap.put("logo",lg);
+            JasperPrint jasperPrint= JasperFillManager.fillReport(fis,parameterMap,connection);
+            httpServletResponse.setContentType("application/pdf");
+            httpServletResponse.setHeader("Content-Disposition","inline:filename=liste.pdf");
+            httpServletResponse.getStatus();
+            final OutputStream outputStream=httpServletResponse.getOutputStream();
+            JasperExportManager.exportReportToPdfStream(jasperPrint,outputStream);
+        } catch (JRException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    @GetMapping(value = "/printListeArticleFamilleXls")
+    @Timed
+    public void printListeArticleFamilleXls(HttpServletResponse httpServletResponse) throws SQLException, FileNotFoundException {
+        Connection connection = null;
+        JRXlsExporter exporter = new JRXlsExporter();
+        try {
+            // - Connexion à la base grace au fichier properties
+
+            String url1 = context.getEnvironment().getProperty("spring.datasource.url");
+            String login1 = context.getEnvironment().getProperty("spring.datasource.username");
+            String password1 = context.getEnvironment().getProperty("spring.datasource.password");
+
+            String lg = applicationProperties.getFacture().getCheminImage();
+            connection = DriverManager.getConnection(url1, login1, password1);
+            File file = new File(applicationProperties.getFacture().getCheminJasper());
+            FileInputStream fis = new FileInputStream(new File(file, "listeArticleByFamille.jasper"));
+            Map<String, Object> parameterMap = new HashedMap();
+            parameterMap.put("logo", lg);
+            JasperPrint jasperPrint = JasperFillManager.fillReport(fis, parameterMap, connection);
+            exporter.setParameter(JRExporterParameter.JASPER_PRINT, jasperPrint);
+            exporter.setParameter(JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET, Boolean.TRUE);
+            exporter.setParameter(JRXlsExporterParameter.IS_DETECT_CELL_TYPE, java.lang.Boolean.TRUE);
+            exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, java.lang.Boolean.FALSE);
+
+            httpServletResponse.setContentType("application/ms-excel");
+
+            httpServletResponse.setHeader("Content-Disposition", "inline:filename=liste.xsls");
+            httpServletResponse.getStatus();
+            final OutputStream outputStream = httpServletResponse.getOutputStream();
+            exporter.setParameter(JRExporterParameter.OUTPUT_STREAM, outputStream);
+            exporter.exportReport();
+        } catch (JRException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package com.ballack.com.web.rest;
 
+import com.ballack.com.service.EtiquetteService;
 import com.codahale.metrics.annotation.Timed;
 import com.ballack.com.domain.Etiquette;
 
@@ -24,8 +25,6 @@ import java.net.URISyntaxException;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -41,10 +40,11 @@ public class EtiquetteResource {
     private static final String ENTITY_NAME = "etiquette";
 
     private final EtiquetteRepository etiquetteRepository;
-
+private final EtiquetteService etiquetteService;
     private final EtiquetteSearchRepository etiquetteSearchRepository;
-    public EtiquetteResource(EtiquetteRepository etiquetteRepository, EtiquetteSearchRepository etiquetteSearchRepository) {
+    public EtiquetteResource(EtiquetteRepository etiquetteRepository, EtiquetteService etiquetteService, EtiquetteSearchRepository etiquetteSearchRepository) {
         this.etiquetteRepository = etiquetteRepository;
+        this.etiquetteService = etiquetteService;
         this.etiquetteSearchRepository = etiquetteSearchRepository;
     }
 
@@ -62,9 +62,9 @@ public class EtiquetteResource {
         if (etiquette.getId() != null) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new etiquette cannot already have an ID")).body(null);
         }
-        etiquette.setDateCreation(Instant.now());
-        Etiquette result = etiquetteRepository.save(etiquette);
-        etiquetteSearchRepository.save(result);
+        //etiquette.setDateCreation(Instant.now());
+        Etiquette result = etiquetteService.save(etiquette);
+        //etiquetteSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/etiquettes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -86,8 +86,8 @@ public class EtiquetteResource {
         if (etiquette.getId() == null) {
             return createEtiquette(etiquette);
         }
-        Etiquette result = etiquetteRepository.save(etiquette);
-        etiquetteSearchRepository.save(result);
+        Etiquette result = etiquetteService.save(etiquette);
+        //etiquetteSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, etiquette.getId().toString()))
             .body(result);
@@ -103,7 +103,12 @@ public class EtiquetteResource {
     @Timed
     public ResponseEntity<List<Etiquette>> getAllEtiquettes(@ApiParam Pageable pageable) {
         log.debug("REST request to get a page of Etiquettes");
-        Page<Etiquette> page = etiquetteRepository.findAll(pageable);
+        Page<Etiquette> page = null;
+        try {
+            page = etiquetteService.findAll(pageable);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/etiquettes");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

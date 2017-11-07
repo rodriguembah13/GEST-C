@@ -2,7 +2,7 @@ package com.ballack.com.web.rest;
 
 import com.ballack.com.GestCApp;
 
-import com.ballack.com.domain.LigneSortieArticle;
+import com.ballack.com.config.ApplicationProperties;
 import com.ballack.com.domain.SortieArticle;
 import com.ballack.com.repository.SortieArticleRepository;
 import com.ballack.com.service.SortieArticleService;
@@ -26,9 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -85,7 +83,8 @@ public class SortieArticleResourceIntTest {
 
     @Autowired
     private EntityManager em;
-
+    @Autowired
+    private ApplicationProperties applicationProperties;
     private MockMvc restSortieArticleMockMvc;
 
     private SortieArticle sortieArticle;
@@ -93,7 +92,7 @@ public class SortieArticleResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final SortieArticleResource sortieArticleResource = new SortieArticleResource(sortieArticleService);
+        final SortieArticleResource sortieArticleResource = new SortieArticleResource(sortieArticleService, applicationProperties);
         this.restSortieArticleMockMvc = MockMvcBuilders.standaloneSetup(sortieArticleResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

@@ -11,7 +11,7 @@
                     </span>
                 </button>
             </div>
-            <div class="col-xs-8 no-padding-right">
+            <div class="col-xs-5 no-padding-right">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group" >
                         <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'gestCApp.article.home.search' | translate }}"/>
@@ -27,6 +27,20 @@
                         </span>
                     </div>
                 </form>
+            </div>
+            <div class="btn-group col-xs-3"> 
+                       <a ng-click="PrintArticle()"><img src="content/images/pdf.png "/></a>
+            <a href="#"><img src="content/images/exel.jpeg "/></a>
+            <a ng-click="printListeArticleFamille()"><img src="content/images/pdf.png "/></a>
+               <!--  <a class="btn btn-default" href="#">
+                    <i class="fa fa-file-excel-o" title="Align Left"></i>
+                </a>
+                <a class="btn btn-default" href="#">
+                    <i class="fa fa-file-pdf-o" title="Align Center"></i>
+                </a>
+                <a class="btn btn-default" href="#">
+                    <i class="fa fa-file-code-o" title="Align Right"></i>
+                </a> -->
             </div>
         </div>
     </div>
@@ -72,12 +86,21 @@
                                 <span class="glyphicon glyphicon-eye-open"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.view"></span>
                             </button>
-                            <button type="submit"
+                            <div class="btn-group" uib-dropdown>
+                                <button type="button" class="btn dropdown pointer"uib-dropdown-toggle style="background-color: #00897B" has-authority="ROLE_ADMIN" >Action</button>
+                                <ul class="dropdown-menu" uib-dropdown-menu>
+                                    <li><a ui-sref="article.edit({id:article.id})">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                        <span class="hidden-sm-down" data-translate="entity.action.edit"></span></a></li>
+                                    <li><a  ng-click="vm.genererCode(article)">Generer CodeBarre</a></li>
+
+                                </ul></div>
+<!--                            <button type="submit"
                                     ui-sref="article.edit({id:article.id})"
                                     class="btn-raised btn btn-primary btn-sm" >
                                 <span class="glyphicon glyphicon-pencil"></span>
                                 <span class="hidden-sm-down" data-translate="entity.action.edit"></span>
-                            </button>
+                            </button>-->
                             <button type="submit"
                                     ui-sref="article.delete({id:article.id})"
                                     class="btn-raised btn btn-danger btn-sm">

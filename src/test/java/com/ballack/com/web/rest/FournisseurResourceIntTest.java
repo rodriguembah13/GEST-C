@@ -2,6 +2,7 @@ package com.ballack.com.web.rest;
 
 import com.ballack.com.GestCApp;
 
+import com.ballack.com.config.ApplicationProperties;
 import com.ballack.com.domain.Fournisseur;
 import com.ballack.com.repository.FournisseurRepository;
 import com.ballack.com.repository.search.FournisseurSearchRepository;
@@ -58,7 +59,8 @@ public class FournisseurResourceIntTest {
 
     @Autowired
     private FournisseurSearchRepository fournisseurSearchRepository;
-
+    @Autowired
+    private ApplicationProperties applicationProperties;
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
@@ -78,7 +80,7 @@ public class FournisseurResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final FournisseurResource fournisseurResource = new FournisseurResource(fournisseurRepository, fournisseurSearchRepository);
+        final FournisseurResource fournisseurResource = new FournisseurResource(fournisseurRepository, applicationProperties, fournisseurSearchRepository);
         this.restFournisseurMockMvc = MockMvcBuilders.standaloneSetup(fournisseurResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

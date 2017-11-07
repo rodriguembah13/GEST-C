@@ -5,9 +5,9 @@
         .module('gestCApp')
         .controller('ArticleDialogController', ArticleDialogController);
 
-    ArticleDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Article', 'FamilleArticle', 'FormeArticle', 'Etiquette'];
+    ArticleDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Article', 'FamilleArticle', 'FormeArticle', 'Etiquette','GenererCodeArticle'];
 
-    function ArticleDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Article, FamilleArticle, FormeArticle, Etiquette) {
+    function ArticleDialogController ($timeout, $scope, $stateParams, $uibModalInstance, entity, Article, FamilleArticle, FormeArticle, Etiquette,GenererCodeArticle) {
         var vm = this;
 
         vm.article = entity;
@@ -35,7 +35,11 @@
                 Article.save(vm.article, onSaveSuccess, onSaveError);
             }
         }
+        function genererCode () {
 
+                GenererCodeArticle.update(vm.article, onSaveSuccess, onSaveError);
+
+        }
         function onSaveSuccess (result) {
             $scope.$emit('gestCApp:articleUpdate', result);
             $uibModalInstance.close(result);

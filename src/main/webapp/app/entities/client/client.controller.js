@@ -5,9 +5,9 @@
         .module('gestCApp')
         .controller('ClientController', ClientController);
 
-    ClientController.$inject = ['$state', 'Client', 'ClientSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    ClientController.$inject = ['$scope','$http','$state', 'Client', 'ClientSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
 
-    function ClientController($state, Client, ClientSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function ClientController($scope,$http,$state, Client, ClientSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
 
         var vm = this;
 
@@ -91,5 +91,33 @@
             vm.currentSearch = null;
             vm.transition();
         }
+             $scope.printListeClient=function(){
+        
+       $http.get("/api/printListeclientPdf/",{responseType:'arraybuffer'})
+        .success(function(data){
+          var file=new Blob([data],{type:'application/pdf'});
+          var fileUrl=URL.createObjectURL(file);
+          var des = window.open(fileUrl,'_blank','');
+                //fileUrl.print();
+        })
+        .error(function(err){
+          AlertService.error(err.message);
+        });            
+
+   };
+                $scope.printListeClientXls=function(){
+        
+       $http.get("/api/printListeclientXls/",{responseType:'arraybuffer'})
+        .success(function(data){
+          var file=new Blob([data],{type:'application/vnd.ms-excel'});
+          var fileUrl=URL.createObjectURL(file);
+          var des = window.open(fileUrl,'_blank','');
+                //fileUrl.print();
+        })
+        .error(function(err){
+          AlertService.error(err.message);
+        });            
+
+   }
     }
 })();

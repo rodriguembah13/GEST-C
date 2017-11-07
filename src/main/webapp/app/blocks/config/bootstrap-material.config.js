@@ -5,10 +5,11 @@
         .module('gestCApp')
         .config(bootstrapMaterialDesignConfig);
 
-    /*compileServiceConfig.$inject = [];*/bootstrapMaterialDesignConfig.$inject = [];
+    /*compileServiceConfig.$inject = [];*/
+    //bootstrapMaterialDesignConfig.$inject = [];
 
     function bootstrapMaterialDesignConfig() {
-        $.material.init();
+        //$.material.init();
 
     }
 })();

@@ -46,7 +46,7 @@
                 }, onSuccess, onError);
             
             function sort() {
-                var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+                var result = [vm.predicate + ',' + (vm.reverse ? 'desc' : 'asc')];
                 if (vm.predicate !== 'id') {
                     result.push('id');
                 }
@@ -76,7 +76,7 @@
                 }, onSuccess, onError);
           
             function sort() {
-                var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+                var result = [vm.predicate + ',' + (vm.reverse ? 'desc' : 'asc')];
                 if (vm.predicate !== 'id') {
                     result.push('id');
                 }
@@ -110,7 +110,7 @@
             }
          
             function sort() {
-                var result = [vm.predicate + ',' + (vm.reverse ? 'asc' : 'desc')];
+                var result = [vm.predicate + ',' + (vm.reverse ? 'desc' : 'asc')];
                 if (vm.predicate !== 'id') {
                     result.push('id');
                 }
@@ -177,6 +177,34 @@
        $http.get("/api/PrintFacture/"+$scope.clas,{responseType:'arraybuffer'})
         .success(function(data){
           var file=new Blob([data],{type:'application/pdf'});
+          var fileUrl=URL.createObjectURL(file);
+          var des = window.open(fileUrl,'_blank','');
+
+        })
+        .error(function(err){
+          AlertService.error(err.message);
+        });            
+
+   }  ;
+     $scope.printListeVente=function(){
+        
+       $http.get("/api/printListeVentePdf/",{responseType:'arraybuffer'})
+        .success(function(data){
+          var file=new Blob([data],{type:'application/pdf'});
+          var fileUrl=URL.createObjectURL(file);
+          var des = window.open(fileUrl,'_blank','');
+
+        })
+        .error(function(err){
+          AlertService.error(err.message);
+        });            
+
+   }
+        $scope.printListeVenteXls=function(){
+        
+       $http.get("/api/printListeVenteXls/",{responseType:'arraybuffer'})
+        .success(function(data){
+          var file=new Blob([data],{type:'application/vnd.ms-excel'});
           var fileUrl=URL.createObjectURL(file);
           var des = window.open(fileUrl,'_blank','');
 

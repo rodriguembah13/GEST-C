@@ -20,8 +20,17 @@ public final commande commande= new commande();
     public static class facture{
         private String cheminJasper;
         private String cheminImage;
+        private int indice;
 
         public facture() {
+        }
+
+        public int getIndice() {
+            return indice;
+        }
+
+        public void setIndice(int indice) {
+            this.indice = indice;
         }
 
         public String getCheminJasper() {

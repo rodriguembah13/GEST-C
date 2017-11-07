@@ -9,7 +9,7 @@
 
     function stateConfig($stateProvider) {
         $stateProvider.state('mouvement', {
-            parent: 'app',
+            parent: 'stock',
             url: '/mouvement',
             data: {
                 authorities: []

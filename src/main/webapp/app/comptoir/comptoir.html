@@ -1,13 +1,14 @@
 <div ng-cloak>
-    <h3 class="text-center"><u>Comptoir Vente En Détail </u></h3>
+    <div class="row x_title"><h3 class="text-center"><u>Comptoir Vente En Détail </u></h3></div>
     <jhi-alert></jhi-alert>
     <div class="container">
         <div class="row">
             <div class="btn-group" uib-dropdown>
                 <button class="btn btn-primary" uib-dropdown-toggle>Caisse<b class="caret"></b></button>
                 <ul class="dropdown-menu" uib-dropdown-menu>
-                    <li><a ng-click="vm.active()">Ouverture</a></li>
-                    <li><a ng-click="vm.desactive()">Fermeture</a></li>
+                    <li><a ng-click="vm.active()"><i class="fa fa-unlock"></i>Ouverture</a></li>
+                    <li><a ng-click="vm.desactive()"><i class="fa fa-lock" aria-hidden="true"></i>
+                        Fermeture</a></li>
                 </ul>
             </div>
         </div>
@@ -67,8 +68,9 @@
                            ng-model="qte"
                     />
                 </div>
-                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.validLineDetail(qte)">
-                    <span class="glyphicon glyphicon-share"></span>&nbsp;<span data-translate=""></span>
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.validLineDetail(qte)"><i
+                    class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                    <span data-translate=""></span>
                 </button>
             </fieldset>
         </div>

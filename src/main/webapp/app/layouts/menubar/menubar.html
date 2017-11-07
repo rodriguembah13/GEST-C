@@ -1,5 +1,5 @@
 <div ng-switch="vm.isAuthenticated()">
-    <nav class="navbar navbar-default" role="navigation" ng-switch-when="true">
+    <nav class="navbar navbar-inverse" role="navigation" ng-switch-when="true">
         <div class="container-fluid">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" ng-click="vm.toggleNavbar()">
@@ -23,8 +23,8 @@
                         </a>
                         <ul class="dropdown-menu" uib-dropdown-menu>
                             <li ui-sref-active="active">
-                                <a ui-sref="article" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                <a ui-sref="article" ng-click="vm.collapseNavbar()"><i class="fa fa-list" aria-hidden="true"></i>
+
                                     <span data-translate="">Articles</span>
                                 </a>
                                 <div class="divider"></div>
@@ -88,6 +88,7 @@
                             </li>
                         </ul>
                     </li>
+
                     <li ng-class="{active: vm.$state.includes('comptoir')}" uib-dropdown dropdown>
                         <a class="dropdown-toggle" uib-dropdown-toggle href="" id="vente-menu">
                         <span>
@@ -107,22 +108,26 @@
                                     <div class="divider"></div>
                                 </li> -->
                             <li ui-sref-active="active">
-                                <a ui-sref="facture-user" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                <a ui-sref="facture-user" ng-click="vm.collapseNavbar()"><i class="fa fa-list" aria-hidden="true"></i>
+
                                     <span data-translate="">Mes Factures</span>
                                 </a>
 
                             </li>
-                            <div class="divider"></div>
+                            <div class="nav-divider"></div>
                             <li class="dropdown-submenu">
-                                <a tabindex="-1" href="#">Comptoir</a>
+                                <a tabindex="-1" href="#"><i class="fa fa-laptop" aria-hidden="true"></i>
+Comptoir</a>
                                 <ul class="dropdown-menu">
-                                    <li><a ui-sref="comptoir" ui-sref-active="active" ng-click="vm.collapseNavbar()">Détail</a>
+                                    <li><a ui-sref="comptoir" ui-sref-active="active" ng-click="vm.collapseNavbar()"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+Détail</a>
                                     </li>
                                     <div class="divider"></div>
                                     <li><a ui-sref="comptoirGros" ui-sref-active="active"
-                                           ng-click="vm.collapseNavbar()">Gros</a></li>
-                                    <li><a ui-sref="codebarre" ui-sref-active="active" ng-click="vm.collapseNavbar()">Vente
+                                           ng-click="vm.collapseNavbar()"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+Gros</a></li>
+                                    <li><a ui-sref="codebarre" ui-sref-active="active" ng-click="vm.collapseNavbar()"><i class="fa fa-barcode" aria-hidden="true"></i>
+Vente
                                         avec Code barre</a></li>
                                 </ul>
                                 <div class="divider"></div>
@@ -314,15 +319,15 @@
                         </a>
                         <ul class="dropdown-menu" uib-dropdown-menu>
                             <li ui-sref-active="active">
-                                <a ui-sref="decomposition" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                <a ui-sref="decomposition" ng-click="vm.collapseNavbar()"><i class="fa fa-sitemap" aria-hidden="true"></i>
+
                                     <span data-translate="">Decomposition</span>
                                 </a>
                                 <div class="divider"></div>
                             </li>
                             <li ui-sref-active="active">
-                                <a ui-sref="etiquette" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                <a ui-sref="etiquette" ng-click="vm.collapseNavbar()"><i class="fa fa-imdb" aria-hidden="true"></i>
+
                                     <span data-translate="">Etiquette</span>
                                 </a>
                                 <div class="divider"></div>
@@ -335,8 +340,8 @@
                                 <div class="divider"></div>
                             </li>
                             <li ui-sref-active="active">
-                                <a ui-sref="magasin" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                <a ui-sref="magasin" ng-click="vm.collapseNavbar()"><i class="fa fa-industry" aria-hidden="true"></i>
+
                                     <span data-translate="global.menu.entities.magasin">Magasin</span>
                                 </a>
                             </li>

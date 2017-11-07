@@ -100,10 +100,14 @@ function Stockclosed ($resource, DateUtils) {
     angular
         .module('gestCApp')
         .factory('StockP2', StockP2)
-        .factory('StockActifByNum', StockActifByNum).factory('StockGActifByNum', StockGActifByNum);
+        .factory('StockActifByNum', StockActifByNum)
+        .factory('StockGActifByNum', StockGActifByNum)
+        .factory('StockActifByCode', StockActifByCode);
 
     StockP2.$inject = ['$resource', 'DateUtils'];
-    StockActifByNum.$inject = ['$resource', 'DateUtils'];StockGActifByNum.$inject = ['$resource', 'DateUtils'];
+    StockActifByNum.$inject = ['$resource', 'DateUtils'];
+    StockGActifByNum.$inject = ['$resource', 'DateUtils'];
+    StockActifByCode.$inject = ['$resource', 'DateUtils'];
     function StockActifByNum ($resource, DateUtils) {
         var resourceUrl =  'api/stocksActifByNum/:id';
 
@@ -111,7 +115,16 @@ function Stockclosed ($resource, DateUtils) {
             'query': { method: 'GET', isArray: false,
                 params: {num_article: null,quantite: null}}
         });
-    }   function StockGActifByNum ($resource, DateUtils) {
+    }
+         function StockActifByCode ($resource, DateUtils) {
+             var resourceUrl =  'api/stocksActifByCode/:id';
+
+             return $resource(resourceUrl, {}, {
+                 'query': { method: 'GET', isArray: false,
+                     params: {num_article: null,quantite: null}}
+             });
+         }
+     function StockGActifByNum ($resource, DateUtils) {
         var resourceUrl =  'api/stocksGActifByNum/:id';
 
         return $resource(resourceUrl, {}, {

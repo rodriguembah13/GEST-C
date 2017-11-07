@@ -26,7 +26,7 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/GestC?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://localhost:3306/gest-c2?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: root
         password: ballack
         hikari:
@@ -150,3 +150,4 @@ application:
        facture:
                 cheminJasper: C:\Users\ballack\JaspersoftWorkspace\gest-c
                 cheminImage: C:\TempJasper\imageCom
+                indice: 1000

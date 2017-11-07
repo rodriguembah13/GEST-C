@@ -2,6 +2,7 @@ package com.ballack.com.web.rest;
 
 import com.ballack.com.GestCApp;
 
+import com.ballack.com.config.ApplicationProperties;
 import com.ballack.com.domain.Client;
 import com.ballack.com.repository.ClientRepository;
 import com.ballack.com.repository.search.ClientSearchRepository;
@@ -58,6 +59,8 @@ public class ClientResourceIntTest {
 
     @Autowired
     private ClientSearchRepository clientSearchRepository;
+    @Autowired
+    private ApplicationProperties applicationProperties;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -78,7 +81,7 @@ public class ClientResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ClientResource clientResource = new ClientResource(clientRepository, clientSearchRepository);
+        final ClientResource clientResource = new ClientResource(clientRepository, applicationProperties, clientSearchRepository);
         this.restClientMockMvc = MockMvcBuilders.standaloneSetup(clientResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

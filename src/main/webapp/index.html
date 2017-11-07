@@ -12,9 +12,9 @@
     <!-- build:css content/css/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css"> -->
+    <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.css">
-    <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/bootstrap-material-design.css">
-    <link rel="stylesheet" href="bower_components/bootstrap-material-design/dist/css/ripples.css">
     <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.css">
     <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css">
     <!-- endinject -->
@@ -45,7 +45,7 @@
             </div>
         </div>
     </footer>
-    </div>       
+    </div>
     <noscript>
         <h1>You must enable javascript to view this page.</h1>
     </noscript>
@@ -74,7 +74,6 @@
     <script src="bower_components/messageformat/messageformat.js"></script>
     <script src="bower_components/json3/lib/json3.js"></script>
     <script src="bower_components/arrive/src/arrive.js"></script>
-    <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
     <script src="bower_components/chart.js/dist/Chart.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
@@ -94,8 +93,6 @@
     <script src="bower_components/bootstrap-ui-datetime-picker/dist/datetime-picker.js"></script>
     <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
     <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
-    <script src="bower_components/bootstrap-material-design/dist/js/material.js"></script>
-    <script src="bower_components/bootstrap-material-design/dist/js/ripples.js"></script>
     <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
     <script src="bower_components/angular-ui-select/dist/select.js"></script>
     <script src="bower_components/angular-chart.js/dist/angular-chart.js"></script>
@@ -360,8 +357,8 @@ $(document).ready(function(){
   (function($){
     $(document).ready(function(){
         $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
-            event.preventDefault(); 
-            event.stopPropagation(); 
+            event.preventDefault();
+            event.stopPropagation();
             $(this).parent().siblings().removeClass('open');
             $(this).parent().toggleClass('open');
         });

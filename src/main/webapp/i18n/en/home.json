@@ -1,6 +1,6 @@
 {
     "home": {
-        "title": "Welcome to Gest-c, Business Management Application!",
+        "title": "Welcome to Gest-c, <small>Business Management Application!</small>",
         "subtitle": "",
         "logged": {
             "message": "You are logged in as user \"{{username}}\"."
@@ -8,10 +8,10 @@
         "question": "Grace a Gest-c You can now:",
         "link": {
             "homepage": "",
-            "stackoverflow": "Optimize your inventory and supplies(stock mini/maxi, cost of production, management of multiple deposits…)",
-            "bugtracker": "Reduce customer risk",
-            "chat": "Guarantee the traceability of your products",
-            "follow": "Calculate your tariffs as accurately as possible"
+            "stackoverflow": "<span>Optimize your inventory and supplies(stock mini/maxi, cost of production, management of multiple deposits…)</span>",
+            "bugtracker": "<span>Reduce customer risk</span>",
+            "chat": "<span>Guarantee the traceability of your products</span>",
+            "follow": "<span>Calculate your tariffs as accurately as possible</span>"
         },
         "like": "",
         "github": ""

@@ -6,10 +6,10 @@
   .controller('ComptoirController', ComptoirController);
 
   ComptoirController.$inject = ['$scope', 'Principal', 'LoginService','AlertService', '$state','Article','$http','$q',
-  'Caisse','CaisseA','Client','SortieArticle','SortieArticlePrint','CaisseActived','CaisseDesactived','StockActifByNum','StockGActifByNum'];
+  'Caisse','CaisseA','Client','SortieArticle','SortieArticlePrint','CaisseActived','CaisseDesactived','StockActifByNum','StockGActifByNum','StockActifByCode'];
 
   function ComptoirController ($scope, Principal, LoginService,AlertService, $state,Article,$http,$q,Caisse,
-    CaisseA,Client,SortieArticle,SortieArticlePrint,CaisseActived,CaisseDesactived,StockActifByNum,StockGActifByNum) {
+    CaisseA,Client,SortieArticle,SortieArticlePrint,CaisseActived,CaisseDesactived,StockActifByNum,StockGActifByNum,StockActifByCode) {
     var vm = this;
     $scope.lines=[];$scope.linesCode=[];
     vm.$state = $state;
@@ -20,7 +20,7 @@
     vm.clients=Client.query();
     vm.validLineGros=validLineGros;vm.validLineDetail=validLineDetail;
     loadAllArticle ();
-    vm.client = {}; vm.article = {}; 
+    vm.client = {}; vm.article = {};
         //loadCaisse ();
         function loadAllArticle () {
           Article.query({
@@ -46,7 +46,7 @@
               }function onError(error) {
                   AlertService.error("Stock insuffisant ,veuillez ravitailler le stock");
               }
-            } 
+            }
                 function validLineGros (qte) {
                   var num=vm.article.numArticle;
               StockGActifByNum.query({num_article: num,quantite:qte}
@@ -62,9 +62,9 @@
               }function onError(error) {
                   //AlertService.error(error.data.message);
               }
-            } 
+            }
        function validLine (num,qte) {
-              StockActifByNum.query({num_article: num,quantite:qte}
+              StockActifByCode.query({num_article: num,quantite:qte}
               , onSuccess, onError);
               function onSuccess(data) {
                  $scope.linesCode.push({
@@ -73,11 +73,11 @@
               prix:data.article.prixCourant,
               tva: data.article.taxeTva,
               client: vm.client,
-            })
+            });$scope.code=null;$scope.qte=null;
               }function onError(error) {
                   AlertService.error(error.data.message);
               }
-            } 
+            }
             $scope.show = true;
             $scope.paie = false;
             $scope.closeAlert = function() {
@@ -86,7 +86,7 @@
 
            $scope.alert = {type: 'success', msg: 'Something gone wrong'};
 
-           function active(){ 
+           function active(){
             CaisseActived.save({},onSuccess,onError);
             function onSuccess(data) {
             vm.caisse=data;
@@ -95,7 +95,7 @@
                console.log(err);
                 }
            }
-           function desactive(){ 
+           function desactive(){
               CaisseDesactived.save({},onSuccess,onError)
               function onSuccess(data) {
            vm.caisse2=data;
@@ -114,7 +114,7 @@
               $scope.linesCode.splice(i, 1);
 
             };
-          }; 
+          };
   $scope.removec = function(index) {
             $scope.linesCode.splice(index, 1);
           };
@@ -140,14 +140,14 @@
           });}
           $scope.saveUser = function(data, idL) {
       //getStockActif(idL);
-      
+
     }
     $scope.venteE=null;
     $scope.venteR=null;
   $scope.saveTable = function() {
             SortieArticle.save($scope.lines, onSaveSuccess,onSaveError);
 
-    }; 
+    };
     function onSaveError (error) {
           AlertService.error(error.data.message,"vérifier le client");
                     }
@@ -158,7 +158,7 @@
 function onSaveSuccess (result) {
            $scope.venteE=result;
            $scope.paie = true;
-                    } 
+                    }
 
     $scope.getTotal = function(){
       var total = 0;
@@ -177,13 +177,13 @@ function onSaveSuccess (result) {
       }
       return total;
   }
-    $scope.mode = null;  
+    $scope.mode = null;
        function PFSuccess (data) {
            var file=new Blob([data],{type:'application/pdf'});
           var fileUrl=URL.createObjectURL(file);
           var des = window.open(fileUrl,'_blank','');
           $scope.paie = false;
-                    } 
+                    }
 /*    var PrintF = $resource('/api/PrintFacture/':id,
              {
             'query': { method: 'GET', isArray: true,
@@ -221,9 +221,9 @@ function onSaveSuccess (result) {
        .error(function(err){
         AlertService.error(err.message);
       });
-     }             
+     }
 
    }
-  
+
   }
 })();

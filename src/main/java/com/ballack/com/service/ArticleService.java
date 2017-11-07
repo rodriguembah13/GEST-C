@@ -1,8 +1,10 @@
 package com.ballack.com.service;
 
+import com.ballack.com.config.ApplicationProperties;
 import com.ballack.com.domain.Article;
 import com.ballack.com.repository.ArticleRepository;
 import com.ballack.com.repository.search.ArticleSearchRepository;
+import com.ballack.com.service.util.StringTab;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -27,10 +29,11 @@ public class ArticleService {
     private final Logger log = LoggerFactory.getLogger(ArticleService.class);
 
     private final ArticleRepository articleRepository;
-
+    private final ApplicationProperties applicationProperties;
     private final ArticleSearchRepository articleSearchRepository;
-    public ArticleService(ArticleRepository articleRepository, ArticleSearchRepository articleSearchRepository) {
+    public ArticleService(ArticleRepository articleRepository, ApplicationProperties applicationProperties, ArticleSearchRepository articleSearchRepository) {
         this.articleRepository = articleRepository;
+        this.applicationProperties = applicationProperties;
         this.articleSearchRepository = articleSearchRepository;
     }
 
@@ -41,12 +44,12 @@ public class ArticleService {
      * @return the persisted entity
      */
     public Article save(Article article) {
-        int index=1000;
+
         log.debug("Request to save Article : {}", article);
         article.setDatecreation(LocalDate.now());
         article.setNumArticle("");
         Article result = articleRepository.save(article);
-        result.setNumArticle(""+(index+result.getId()));
+        result.setNumArticle(""+(applicationProperties.getFacture().getIndice()+result.getId()));
         //articleSearchRepository.save(result);
         return articleRepository.saveAndFlush(result);
     }
@@ -56,7 +59,14 @@ public class ArticleService {
         //articleSearchRepository.save(result);
         return result;
     }
-
+    public Article generecode(Article article) {
+        StringTab stringTab = new StringTab();
+        log.debug("Request to save Article : {}", article);
+        article.setCodebarre(stringTab.getString(article.getNomarticle(),12));
+        Article result = articleRepository.saveAndFlush(article);
+        //articleSearchRepository.save(result);
+        return result;
+    }
     /**
      *  Get all the articles.
      *

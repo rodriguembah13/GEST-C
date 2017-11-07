@@ -8,7 +8,7 @@
                 "search": "Search for Sortie Article",
                 "from": "from",
                 "to": "to",
-                "myvente":"My sellers"
+                "myvente":"My Sales"
             },
             "created": "A new Sortie Article is created with identifier {{ param }}",
             "updated": "A Sortie Article is updated with identifier {{ param }}",
@@ -17,11 +17,11 @@
                 "question": "Are you sure you want to delete Sortie Article {{ id }}?"
             },
             "detail": {
-                "title": "Sortie Article"
+                "title": "Article Output"
             },
             "numsortie": "Numsortie",
-            "libelle": "Libelle",
-            "datesortie": "Datesortie",
+            "libelle": "Wording",
+            "datesortie": "Date sortie",
             "montanttotal": "Montanttotal",
             "montanttva": "Montanttva",
             "montantttc": "Montantttc",

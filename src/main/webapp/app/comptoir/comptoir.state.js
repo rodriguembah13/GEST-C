@@ -23,7 +23,7 @@
                 }
             }
         }). state('comptoirGros', {
-            parent: 'app',
+            parent: 'comptoir',
             url: '/comptoirGros',
             data: {
                 authorities: []
@@ -36,7 +36,7 @@
                 }
             }
         })    .state('codebarre', {
-            parent: 'app',
+            parent: 'comptoir',
             url: '/codebarre',
             data: {
                 authorities: []

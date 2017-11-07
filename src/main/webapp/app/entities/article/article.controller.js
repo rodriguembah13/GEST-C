@@ -5,9 +5,9 @@
         .module('gestCApp')
         .controller('ArticleController', ArticleController);
 
-    ArticleController.$inject = ['$state', 'Article', 'ArticleSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];
+    ArticleController.$inject = ['$scope','$http','$state', 'Article', 'ArticleSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','GenererCodeArticle'];
 
-    function ArticleController($state, Article, ArticleSearch, ParseLinks, AlertService, paginationConstants, pagingParams) {
+    function ArticleController($scope,$http,$state, Article, ArticleSearch, ParseLinks, AlertService, paginationConstants, pagingParams,GenererCodeArticle) {
 
         var vm = this;
 
@@ -21,9 +21,20 @@
         vm.loadAll = loadAll;
         vm.searchQuery = pagingParams.search;
         vm.currentSearch = pagingParams.search;
+        vm.genererCode=genererCode;
 
         loadAll();
-
+        function genererCode (article) {
+                GenererCodeArticle.update(article,onSuccess, onError);
+                function onSuccess(data) {
+                
+                loadAll();
+               
+            }
+            function onError(error) {
+                AlertService.error(error.data.message);
+            }
+        }
         function loadAll () {
             if (pagingParams.search) {
                 ArticleSearch.query({
@@ -90,6 +101,35 @@
             vm.reverse = true;
             vm.currentSearch = null;
             vm.transition();
-        }
+        } 
+          $scope.PrintArticle=function(){
+        
+       $http.get("/api/printListeArticlePdf/",{responseType:'arraybuffer'})
+        .success(function(data){
+          var file=new Blob([data],{type:'application/pdf'});
+          var fileUrl=URL.createObjectURL(file);
+          var des = window.open(fileUrl,'_blank','');
+
+        })
+        .error(function(err){
+          AlertService.error(err.message);
+        });            
+
+   }
+    $scope.printListeArticleFamille=function(){
+        
+       $http.get("/api/printListeArticleFamillePdf/",{responseType:'arraybuffer'})
+        .success(function(data){
+          var file=new Blob([data],{type:'application/pdf'});
+          var fileUrl=URL.createObjectURL(file);
+          var des = window.open(fileUrl,'_blank','');
+
+        })
+        .error(function(err){
+          AlertService.error(err.message);
+        });            
+
+   }
     }
+
 })();

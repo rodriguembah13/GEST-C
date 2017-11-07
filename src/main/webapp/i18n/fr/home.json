@@ -1,6 +1,6 @@
 {
     "home": {
-        "title": "Bienvenue Sur Gest-c, Application de Gestion de commerce !",
+        "title": "Bienvenue Sur Gest-c,<small> Application de Gestion de commerce !</small>",
         "subtitle": "",
         "logged": {
             "message": "Vous êtes connecté en tant que \"{{username}}\"."

@@ -1,5 +1,6 @@
 package com.ballack.com.service;
 
+import com.ballack.com.config.ApplicationProperties;
 import com.ballack.com.domain.Facture;
 import com.ballack.com.domain.SortieArticle;
 import com.ballack.com.repository.CaisseRepository;
@@ -14,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -27,11 +29,13 @@ public class FactureService {
     private final Logger log = LoggerFactory.getLogger(FactureService.class);
     private final CaisseRepository caisseRepository;
     private final FactureRepository factureRepository;
+    private final ApplicationProperties applicationProperties;
 
     private final FactureSearchRepository factureSearchRepository;
-    public FactureService(CaisseRepository caisseRepository, FactureRepository factureRepository, FactureSearchRepository factureSearchRepository) {
+    public FactureService(CaisseRepository caisseRepository, FactureRepository factureRepository, ApplicationProperties applicationProperties, FactureSearchRepository factureSearchRepository) {
         this.caisseRepository = caisseRepository;
         this.factureRepository = factureRepository;
+        this.applicationProperties = applicationProperties;
         this.factureSearchRepository = factureSearchRepository;
     }
 
@@ -55,7 +59,11 @@ public class FactureService {
      */
     public Facture saveFactureSortie(SortieArticle sortieArticle) {
         log.debug("Request to save Facture : {}", sortieArticle);
+        UUID uuid = UUID.randomUUID();
         Facture facture=new Facture();
+        facture.setCodebarre(""+uuid.getMostSignificantBits());
+        facture.setLibellefacture("Facture_Vente_"+applicationProperties.getFacture().getIndice()+sortieArticle.getId());
+        facture.setNumfacture(""+(applicationProperties.getFacture().getIndice()+sortieArticle.getId()));
         facture.datefacturation(LocalDate.now());
         facture.setMagasin(sortieArticle.getMagasin());
         facture.setUser(sortieArticle.getAgent());
@@ -63,7 +71,8 @@ public class FactureService {
         facture.setCaisse(caisseRepository.findByUserIsCurrentActif());
         facture.setMontanttotalttc(sortieArticle.getMontantttc());
         facture.setMontanttotalht(sortieArticle.getMontanttotal());
-        facture.setMagasin(sortieArticle.getMagasin());
+        facture.setMontanttva(sortieArticle.getMontantttc()-sortieArticle.getMontanttotal());
+
         Facture result = factureRepository.save(facture);
         //factureSearchRepository.save(result);
         return result;

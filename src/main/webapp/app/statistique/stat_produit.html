@@ -2,8 +2,9 @@
     <h3 class="center-block text-center">Statistiques Sur les Produits </h3>
     <uib-tabset active="activeJustified" justified="true" style="background-color: #FFFFF5;color: #333000">
         <uib-tab index="0" heading="Produits Vendus (quantite)">
-            <div class="row"><h4 data-translate="" class="text-success">Courbes montrant la quantité des produits les
-                plus vendus dans une periode donnée </h4>
+            <div class="row x_title"><h4 data-translate="" class="text-success">Courbes montrant la quantité des
+                produits les
+                plus vendus dans une periode donnée </h4></div>
                 <div class="col-md-5">
 
                     <p class="input-group">
@@ -15,7 +16,7 @@
                                ng-change="vm.onChangeDate()" required/>
                     </p>
                 </div>
-            </div>
+            
             <div class="panel panel-default col-lg-6">
                 <div class="panel-body">
                     <canvas id="pie" class="chart chart-pie ng-isolate-scope" chart-data="data"

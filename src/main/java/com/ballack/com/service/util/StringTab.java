@@ -35,4 +35,43 @@ public class StringTab {
         }
         return resp;
     }
+    public String getString(int[] entre){
+         String retour="";
+        for (int anEntre : entre) {
+            retour += anEntre;
+            //System.out.println(retour);
+        }
+        return retour;
+    }
+    public String getString(String s,int t){
+        int[] tab = new int [t];
+        char [] tabchar=getTabString(s.toLowerCase().trim());
+        int taille=tabchar.length;
+        int[] tabtemp = new int [taille];
+        if(taille<t){
+            int temp=t-taille;
+            int[] tabtemp2 = new int [temp];
+            for (int i = 0; i < taille; i++) {
+                tabtemp[i] = getIntTab(tabchar[i]);
+                //System.out.println(tab[i]);
+            }
+            for (int i = 0; i < temp; i++) {
+                tabtemp2[i] = 0;
+
+            }
+            //copie du premier tableau
+            System.arraycopy(tabtemp, 0, tab, 0, tabtemp.length);
+            //copie du deuxième tableau tableau
+            System.arraycopy(tabtemp2, 0, tab, tabtemp.length, tabtemp2.length);
+            return getString(tab);
+        }else {
+            for (int i = 0; i < t; i++) {
+                tab[i] = getIntTab(tabchar[i]);
+                //System.out.println(tab[i]);
+            }
+            return getString(tab);
+        }
+
+
+    }
 }
