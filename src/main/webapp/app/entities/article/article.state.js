@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/article?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_USER','ROLE_CAISSE'],
                 pageTitle: 'gestCApp.article.home.title'
             },
             views: {

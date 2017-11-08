@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/commande?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_USER','ROLE_CAISSE'],
                 pageTitle: 'gestCApp.commande.home.title'
             },
             views: {

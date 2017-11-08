@@ -52,7 +52,7 @@
               StockGActifByNum.query({num_article: num,quantite:qte}
               , onSuccess, onError);
               function onSuccess(data) {
-                 $scope.linesCode.push({
+              $scope.linesCode.push({
               article: data.article,
               quantite: qte,
               prix:data.article.prixCourant,
@@ -60,7 +60,7 @@
               client: vm.client,
             })
               }function onError(error) {
-                  //AlertService.error(error.data.message);
+                  AlertService.error("Stock insuffisant ,veuillez ravitailler le stock");
               }
             }
        function validLine (num,qte) {
@@ -167,13 +167,31 @@ function onSaveSuccess (result) {
           total += (user.article.prixCourant * user.quantite);
       }
       return total;
+  } 
+    $scope.getTotalGros = function(){
+      var total = 0;
+      for(var i = 0; i < $scope.linesCode.length; i++){
+          var user = $scope.linesCode[i];
+          total += (user.article.prixCourant * (user.article.formeArticle.quantite)*user.quantite);
+      }
+      return total;
   }
+
       $scope.getTotalTTC = function(){
       var total = 0;
       for(var i = 0; i < $scope.lines.length; i++){
           var user = $scope.lines[i];
           var st=(user.article.prixCourant*user.article.taxeTva)*0.01
           total += (st+user.quantite*user.article.prixCourant);
+      }
+      return total;
+  }  
+    $scope.getTotalTTCGros = function(){
+      var total = 0;
+      for(var i = 0; i < $scope.linesCode.length; i++){
+          var user = $scope.linesCode[i];
+          var st=(user.article.prixCourant*user.article.taxeTva)*0.01
+          total += (st+((user.article.formeArticle.quantite)*user.quantite)*user.article.prixCourant);
       }
       return total;
   }

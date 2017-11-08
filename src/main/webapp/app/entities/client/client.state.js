@@ -13,7 +13,7 @@
             parent: 'entity',
             url: '/client?page&sort&search',
             data: {
-                authorities: ['ROLE_USER'],
+                authorities: ['ROLE_USER','ROLE_CAISSE'],
                 pageTitle: 'gestCApp.client.home.title'
             },
             views: {

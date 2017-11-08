@@ -1,6 +1,6 @@
 <div ng-cloak>
     <!-- table -->
-    <div class="row x_title"><h3 class="text-center"> Vente gros </h3></div>
+    <div class="row x_title"><h3 class="text-center"> Vente gros </h3></div><jhi-alert></jhi-alert>
     <div class="container" style="margin-bottom: 15px">
         <fieldset>
             <legend>Choisir Client</legend>
@@ -54,7 +54,7 @@
         <table class="table table-striped table-bordered">
             <tr style="font-weight: bold">
                 <td>Article</td>
-                <td>Prix</td>
+                <td>Nombre Piéces</td><td>Prix</td>
                 <td>Quantite</td>
                 <td>TaxeTVA</td>
                 <td>Prix HT</td>
@@ -67,8 +67,11 @@
                     {{user.article.nomarticle}}
                 </td>
                 <td>
+                    {{user.article.formeArticle.quantite}}
+                </td>
+                <td>
 
-                    {{user.prix}}
+                    {{(user.prix)*(user.article.formeArticle.quantite)}}
 
                 </td>
                 <td>
@@ -79,10 +82,10 @@
                     {{user.tva}}
                 </td>
                 <td>
-                    {{user.prix*user.quantite}}
+                    {{(user.prix)*(user.article.formeArticle.quantite)*user.quantite}}
                 </td>
                 <td>
-                    {{(user.prix*user.quantite)*user.tva*0.01+(user.prix*user.quantite)}}
+                    {{((user.prix)*(user.article.formeArticle.quantite)*user.quantite)*user.tva*0.01+((user.prix)*(user.article.formeArticle.quantite)*user.quantite)}}
                 </td>
                 <td>
                     <div class="buttons" ng-show="!tableform.$visible">
@@ -92,7 +95,8 @@
                 </td>
             </tr>
         </table>
-
+  <u>TOTAL HT:</u><span class="badge btn-danger">{{getTotalGros()}}</span> <u>TOTAL TTC :</u><span
+        class="badge btn-danger">{{getTotalTTCGros()}}</span>
         <div class="btn-form pull-right">
             <button type="button" class="btn btn-primary" ng-click="saveTableCode()">Valider</button>
             <button type="button" class="btn btn-danger" ng-click="cancelCode()">cancel</button>

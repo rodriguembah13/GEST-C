@@ -112,7 +112,7 @@ public class UserService {
         authorities.add(authority);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
-        userSearchRepository.save(newUser);
+        //userSearchRepository.save(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
     }
@@ -136,13 +136,14 @@ public class UserService {
             );
             user.setAuthorities(authorities);
         }
-        String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
+        //String encryptedPassword = passwordEncoder.encode(RandomUtil.generatePassword());
+        String encryptedPassword = passwordEncoder.encode("12345");
         user.setPassword(encryptedPassword);
         user.setResetKey(RandomUtil.generateResetKey());
         user.setResetDate(Instant.now());
         user.setActivated(true);
         userRepository.save(user);
-        userSearchRepository.save(user);
+        //userSearchRepository.save(user);
         log.debug("Created Information for User: {}", user);
         return user;
     }
@@ -163,7 +164,7 @@ public class UserService {
             user.setEmail(email);
             user.setLangKey(langKey);
             user.setImageUrl(imageUrl);
-            userSearchRepository.save(user);
+            //userSearchRepository.save(user);
             log.debug("Changed Information for User: {}", user);
         });
     }
@@ -190,7 +191,7 @@ public class UserService {
                 userDTO.getAuthorities().stream()
                     .map(authorityRepository::findOne)
                     .forEach(managedAuthorities::add);
-                userSearchRepository.save(user);
+                //userSearchRepository.save(user);
                 log.debug("Changed Information for User: {}", user);
                 return user;
             })
