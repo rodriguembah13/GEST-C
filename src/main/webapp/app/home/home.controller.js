@@ -5,9 +5,9 @@
         .module('gestCApp')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state','StockA','StockP','StockP2'];
+    HomeController.$inject = ['$scope', 'Principal', 'LoginService', '$state','StockA','StockP','StockP2','Client','Fournisseur'];
 
-    function HomeController ($scope, Principal, LoginService, $state,StockA,StockP,StockP2) {
+    function HomeController ($scope, Principal, LoginService, $state,StockA,StockP,StockP2,Client,Fournisseur) {
         var vm = this;
         vm.account = null;
         vm.isAuthenticated = null;
@@ -16,6 +16,8 @@
         vm.stockAlerte=StockA.query();
         vm.stockPerem=StockP.query();
         vm.stockPerem2=StockP2.query();
+        vm.clients= Client.query();
+        vm.fournisseurs=Fournisseur.query();
         $scope.$on('authenticationSuccess', function() {
             getAccount();
         });

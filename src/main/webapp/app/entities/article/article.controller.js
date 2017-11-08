@@ -5,9 +5,11 @@
         .module('gestCApp')
         .controller('ArticleController', ArticleController);
 
-    ArticleController.$inject = ['$scope','$http','$state', 'Article', 'ArticleSearch', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams','GenererCodeArticle'];
+    ArticleController.$inject = ['$scope','$http','$state', 'Article', 'ArticleSearch', 'ParseLinks',
+     'AlertService', 'paginationConstants', 'pagingParams','GenererCodeArticle','ImporterArticle'];
 
-    function ArticleController($scope,$http,$state, Article, ArticleSearch, ParseLinks, AlertService, paginationConstants, pagingParams,GenererCodeArticle) {
+    function ArticleController($scope,$http,$state, Article, ArticleSearch, ParseLinks, AlertService, 
+        paginationConstants, pagingParams,GenererCodeArticle,ImporterArticle) {
 
         var vm = this;
 
@@ -22,6 +24,7 @@
         vm.searchQuery = pagingParams.search;
         vm.currentSearch = pagingParams.search;
         vm.genererCode=genererCode;
+        vm.importerArticle=importerArticle;
 
         loadAll();
         function genererCode (article) {
@@ -130,6 +133,41 @@
         });            
 
    }
+   $scope.importerArtic=function(){
+
+                            var file = $scope.File;
+                            var formdata=new FormData();
+                            formdata.append('file',$scope.File)
+
+                             $http.get('/api/importerArticleExel',formdata,{
+                             transformRequest:angular.identity,
+                             headers:{'Content-Type':undefined},file:formdata
+                             })
+                             .success(function(data){
+                                    alert("Le Fichier  a bien été enregistre");
+                              })
+                              .error(function(err){
+                              alert("Désolé un problème est survenu lors de l 'enregistrement");
+                              console.log(err);
+
+                              })
+                              };
+      function importerArticle () {
+        var file = $scope.File;
+                            var formdata=new FormData();
+                            formdata.append('file',$scope.File)
+                ImporterArticle.get({
+                    file:$scope.File},
+                    onSuccess, onError);
+                function onSuccess(data) {
+                alert("Le Fichier  a bien été enregistre");
+
+               
+            }
+            function onError(error) {
+                alert("Désolé un problème est survenu lors de l 'enregistrement");
+                              console.log(err);            }
+        }
     }
 
 })();

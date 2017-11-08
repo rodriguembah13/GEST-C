@@ -12,6 +12,13 @@ import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.engine.export.JRXlsExporter;
 import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 import org.apache.commons.collections.map.HashedMap;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.FormulaEvaluator;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +29,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -316,5 +324,15 @@ public class ArticleResource {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+    @RequestMapping(value = "/traitementNoteExel1",method = RequestMethod.GET)
+    public void traitementNoteExel() throws IOException {
+        String fileName1 = "C:\\Users\\ballack\\Documents\\article.xlsx";
+        articleService.traitementArticleExel(new File(fileName1));
+    }
+    @RequestMapping(value = "/importerArticleExel",method = RequestMethod.GET)
+    public void importerArticleExel(@RequestParam  File file) throws IOException {
+        String fileName1 = "C:\\Users\\ballack\\Documents\\article.xlsx";
+        articleService.traitementArticleExel(file);
     }
 }

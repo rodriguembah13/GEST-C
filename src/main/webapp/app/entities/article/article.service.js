@@ -2,9 +2,12 @@
     'use strict';
     angular
         .module('gestCApp')
-        .factory('Article', Article).factory('GenererCodeArticle', GenererCodeArticle);
+        .factory('Article', Article)
+        .factory('GenererCodeArticle', GenererCodeArticle)
+        .factory('ImporterArticle', ImporterArticle);
 
     Article.$inject = ['$resource', 'DateUtils'];
+    ImporterArticle.$inject = ['$resource', 'DateUtils'];
     GenererCodeArticle.$inject = ['$resource', 'DateUtils'];
     function Article ($resource, DateUtils) {
         var resourceUrl =  'api/articles/:id';
@@ -36,6 +39,16 @@
                     copy.datecreation = DateUtils.convertLocalDateToServer(copy.datecreation);
                     return angular.toJson(copy);
                 }
+            }
+        });
+    }
+        function ImporterArticle ($resource, DateUtils) {
+        var resourceUrl =  'api/importerArticleExel/:id';
+
+        return $resource(resourceUrl, {}, {
+            'get': {
+                method: 'GET',
+                params: {file: null}
             }
         });
     }

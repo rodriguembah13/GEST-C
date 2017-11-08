@@ -23,7 +23,8 @@
                         </a>
                         <ul class="dropdown-menu" uib-dropdown-menu>
                             <li ui-sref-active="active">
-                                <a ui-sref="article" ng-click="vm.collapseNavbar()"><i class="fa fa-list" aria-hidden="true"></i>
+                                <a ui-sref="article" ng-click="vm.collapseNavbar()"><i class="fa fa-list"
+                                                                                       aria-hidden="true"></i>
 
                                     <span data-translate="">Articles</span>
                                 </a>
@@ -46,7 +47,7 @@
 
                         </ul>
                     </li>
-                    <li ng-class="{active: vm.$state.includes('commande')}" uib-dropdown dropdown>
+                    <li ng-class="{active: vm.$state.includes('commande')}" has-authority="ROLE_ADMIN" uib-dropdown dropdown>
                         <a class="dropdown-toggle" uib-dropdown-toggle href="" id="achat-menu">
                         <span>
                            <i class="fa fa-credit-card" aria-hidden="true"></i>
@@ -108,7 +109,8 @@
                                     <div class="divider"></div>
                                 </li> -->
                             <li ui-sref-active="active">
-                                <a ui-sref="facture-user" ng-click="vm.collapseNavbar()"><i class="fa fa-list" aria-hidden="true"></i>
+                                <a ui-sref="facture-user" ng-click="vm.collapseNavbar()"><i class="fa fa-list"
+                                                                                            aria-hidden="true"></i>
 
                                     <span data-translate="">Mes Factures</span>
                                 </a>
@@ -117,17 +119,20 @@
                             <div class="nav-divider"></div>
                             <li class="dropdown-submenu">
                                 <a tabindex="-1" href="#"><i class="fa fa-laptop" aria-hidden="true"></i>
-Comptoir</a>
+                                    Comptoir</a>
                                 <ul class="dropdown-menu">
-                                    <li><a ui-sref="comptoir" ui-sref-active="active" ng-click="vm.collapseNavbar()"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-Détail</a>
+                                    <li><a ui-sref="comptoir" ui-sref-active="active" ng-click="vm.collapseNavbar()"><i
+                                        class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                        Détail</a>
                                     </li>
                                     <div class="divider"></div>
                                     <li><a ui-sref="comptoirGros" ui-sref-active="active"
-                                           ng-click="vm.collapseNavbar()"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-Gros</a></li>
-                                    <li><a ui-sref="codebarre" ui-sref-active="active" ng-click="vm.collapseNavbar()"><i class="fa fa-barcode" aria-hidden="true"></i>
-Vente
+                                           ng-click="vm.collapseNavbar()"><i class="fa fa-cart-arrow-down"
+                                                                             aria-hidden="true"></i>
+                                        Gros</a></li>
+                                    <li><a ui-sref="codebarre" ui-sref-active="active" ng-click="vm.collapseNavbar()"><i
+                                        class="fa fa-barcode" aria-hidden="true"></i>
+                                        Vente
                                         avec Code barre</a></li>
                                 </ul>
                                 <div class="divider"></div>
@@ -139,22 +144,22 @@ Vente
                                 </a>
                                 <div class="divider"></div>
                             </li>
-                            <li ui-sref-active="active">
+                            <li ui-sref-active="active" has-authority="ROLE_ADMIN">
                                 <a ui-sref="facture" ng-click="vm.collapseNavbar()">
                                     <i class="fa fa-building" aria-hidden="true"></i>
                                     <span data-translate="">Liste des Factures</span>
                                 </a>
                                 <div class="divider"></div>
                             </li>
-<!--                             <li ui-sref-active="active">
-                                <a ui-sref="ligne-sortie-article" ng-click="vm.collapseNavbar()">
-                                    <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
-                                    <span data-translate="">Ligne-Sortie</span>
-                                </a>
-                                <div class="divider"></div>
-                            </li> -->
+                            <!--                             <li ui-sref-active="active">
+                                                            <a ui-sref="ligne-sortie-article" ng-click="vm.collapseNavbar()">
+                                                                <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
+                                                                <span data-translate="">Ligne-Sortie</span>
+                                                            </a>
+                                                            <div class="divider"></div>
+                                                        </li> -->
 
-                            <li ui-sref-active="active">
+                            <li ui-sref-active="active" has-authority="ROLE_ADMIN">
                                 <a ui-sref="sortie-article" ng-click="vm.collapseNavbar()">
                                     <span class="glyphicon glyphicon-asterisk"></span>&nbsp;
                                     <span data-translate="">Liste des ventes </span>
@@ -163,7 +168,7 @@ Vente
                             </li>
                         </ul>
                     </li>
-                    <li ng-class="{active: vm.$state.includes('stock')}" uib-dropdown dropdown>
+                    <li ng-class="{active: vm.$state.includes('stock')}" has-authority="ROLE_ADMIN" uib-dropdown dropdown>
                         <a class="dropdown-toggle" uib-dropdown-toggle href="" id="st-menu">
                         <span>
                             <i class="fa fa-database" aria-hidden="true"></i>
@@ -273,7 +278,7 @@ Vente
                             </li>
                         </ul>
                     </li>
-                    <li ng-class="" uib-dropdown dropdown>
+                    <li ng-class="" has-authority="ROLE_ADMIN" uib-dropdown dropdown>
                         <a class="dropdown-toggle" uib-dropdown-toggle href="" id="stat-menu">
                         <span>
                             <i class="fa fa-area-chart" aria-hidden="true"></i>
@@ -286,7 +291,7 @@ Vente
                         <ul class="dropdown-menu" uib-dropdown-menu>
                             <li ui-sref-active="active">
                                 <a ui-sref="stat_produit" ng-click="vm.collapseNavbar()"><i class="fa fa-pie-chart"
-                                                                                          aria-hidden="true"></i>
+                                                                                            aria-hidden="true"></i>
                                     <span data-translate="">Statistique Produit</span>
                                 </a>
                                 <div class="divider"></div>
@@ -307,7 +312,7 @@ Vente
                             </li>
                         </ul>
                     </li>
-                    <li ng-class="" uib-dropdown dropdown>
+                    <li ng-class="" has-authority="ROLE_ADMIN" uib-dropdown dropdown>
                         <a class="dropdown-toggle" uib-dropdown-toggle href="" id="param-menu">
                         <span>
                            <i class="fa fa-cogs" aria-hidden="true"></i>
@@ -319,14 +324,16 @@ Vente
                         </a>
                         <ul class="dropdown-menu" uib-dropdown-menu>
                             <li ui-sref-active="active">
-                                <a ui-sref="decomposition" ng-click="vm.collapseNavbar()"><i class="fa fa-sitemap" aria-hidden="true"></i>
+                                <a ui-sref="decomposition" ng-click="vm.collapseNavbar()"><i class="fa fa-sitemap"
+                                                                                             aria-hidden="true"></i>
 
                                     <span data-translate="">Decomposition</span>
                                 </a>
                                 <div class="divider"></div>
                             </li>
                             <li ui-sref-active="active">
-                                <a ui-sref="etiquette" ng-click="vm.collapseNavbar()"><i class="fa fa-imdb" aria-hidden="true"></i>
+                                <a ui-sref="etiquette" ng-click="vm.collapseNavbar()"><i class="fa fa-imdb"
+                                                                                         aria-hidden="true"></i>
 
                                     <span data-translate="">Etiquette</span>
                                 </a>
@@ -340,7 +347,8 @@ Vente
                                 <div class="divider"></div>
                             </li>
                             <li ui-sref-active="active">
-                                <a ui-sref="magasin" ng-click="vm.collapseNavbar()"><i class="fa fa-industry" aria-hidden="true"></i>
+                                <a ui-sref="magasin" ng-click="vm.collapseNavbar()"><i class="fa fa-industry"
+                                                                                       aria-hidden="true"></i>
 
                                     <span data-translate="global.menu.entities.magasin">Magasin</span>
                                 </a>

@@ -3,7 +3,7 @@
     <jhi-alert></jhi-alert>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xs-4 no-padding-left">
+            <div class="col-xs-2 no-padding-left">
                 <button class="btn-raised btn btn-primary" ui-sref="article.new" >
                     <span class="glyphicon glyphicon-plus"></span>
                     <span class="hidden-xs-down"  data-translate="gestCApp.article.home.createLabel">
@@ -11,7 +11,7 @@
                     </span>
                 </button>
             </div>
-            <div class="col-xs-5 no-padding-right">
+            <div class="col-xs-3 no-padding-right">
                 <form name="searchForm" class="form-inline">
                     <div class="input-group" >
                         <input type="text" class="form-control" ng-model="vm.searchQuery" id="searchQuery" placeholder="{{ 'gestCApp.article.home.search' | translate }}"/>
@@ -28,6 +28,18 @@
                     </div>
                 </form>
             </div>
+<!--             <div class="col-xs-2">
+                <form class="form" role="form" ENCTYPE="text/plain" name="form.proForm" ng-submit="vm.importerArticle()" ENCTYPE="multipart/form-data" id="fileUploadForm">
+
+                    <div class="form-group">
+                        <label>Importer</label>
+                        <input type="file"  ng-model="File" name="file" >
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" ng-disabled="form.proForm.$invalid"><span class="glyphicon glyphicon-save"></span>&nbsp;Enregistrer</button>
+                </form>
+
+            </div> -->
             <div class="btn-group col-xs-3"> 
                        <a ng-click="PrintArticle()"><img src="content/images/pdf.png "/></a>
             <a href="#"><img src="content/images/exel.jpeg "/></a>
