@@ -43,6 +43,9 @@ public class LigneEntreeArticleService {
      */
     public LigneEntreeArticle save(LigneEntreeArticle ligneEntreeArticle) {
         log.debug("Request to save LigneEntreeArticle : {}", ligneEntreeArticle);
+        if(ligneEntreeArticle.getTaxeTVA()==null){
+            ligneEntreeArticle.setTaxeTVA(0.0);
+        }
         ligneEntreeArticle.setAgent(userService.getUserWithAuthorities());
         Stock stock=new Stock();
         stock.setQuantite(0);
