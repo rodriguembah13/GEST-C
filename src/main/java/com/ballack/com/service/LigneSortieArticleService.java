@@ -45,7 +45,7 @@ public class LigneSortieArticleService {
      * @return the persisted entity
      */
     public LigneSortieArticle save(LigneSortieArticle ligneSortieArticle) {
-        log.debug("Request to save LigneSortieArticle : {}", ligneSortieArticle);
+        log.debug("Request to save LigneSortieArticl : {}", ligneSortieArticle);
         Stock stock = stockRepository.findStockactif(ligneSortieArticle.getArticle());
         LigneSortieArticle result;
         if (stock.getQuantite() >= ligneSortieArticle.getQuantite()) {
