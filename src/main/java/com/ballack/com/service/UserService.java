@@ -1,8 +1,10 @@
 package com.ballack.com.service;
 
 import com.ballack.com.domain.Authority;
+import com.ballack.com.domain.CustomUser;
 import com.ballack.com.domain.User;
 import com.ballack.com.repository.AuthorityRepository;
+import com.ballack.com.repository.CustomUserRepository;
 import com.ballack.com.repository.PersistentTokenRepository;
 import com.ballack.com.config.Constants;
 import com.ballack.com.repository.UserRepository;
@@ -17,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,13 +48,16 @@ public class UserService {
     private final PersistentTokenRepository persistentTokenRepository;
 
     private final AuthorityRepository authorityRepository;
-
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserSearchRepository userSearchRepository, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository) {
+    private final CustomUserService customUserService;
+    private final CustomUserRepository customUserRepository;
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, UserSearchRepository userSearchRepository, PersistentTokenRepository persistentTokenRepository, AuthorityRepository authorityRepository, CustomUserService customUserService, CustomUserRepository customUserRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.userSearchRepository = userSearchRepository;
         this.persistentTokenRepository = persistentTokenRepository;
         this.authorityRepository = authorityRepository;
+        this.customUserService = customUserService;
+        this.customUserRepository = customUserRepository;
     }
 
     public Optional<User> activateRegistration(String key) {
@@ -68,16 +74,16 @@ public class UserService {
     }
 
     public Optional<User> completePasswordReset(String newPassword, String key) {
-       log.debug("Reset user password for reset key {}", key);
+        log.debug("Reset user password for reset key {}", key);
 
-       return userRepository.findOneByResetKey(key)
-           .filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400)))
-           .map(user -> {
+        return userRepository.findOneByResetKey(key)
+            .filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400)))
+            .map(user -> {
                 user.setPassword(passwordEncoder.encode(newPassword));
                 user.setResetKey(null);
                 user.setResetDate(null);
                 return user;
-           });
+            });
     }
 
     public Optional<User> requestPasswordReset(String mail) {
@@ -91,11 +97,14 @@ public class UserService {
     }
 
     public User createUser(String login, String password, String firstName, String lastName, String email,
-        String imageUrl, String langKey) {
+                           String imageUrl, String langKey) {
 
         User newUser = new User();
+        CustomUser customUser=new CustomUser();
         Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
         Set<Authority> authorities = new HashSet<>();
+        String crypt = BCrypt.hashpw(password, BCrypt.gensalt());
+        customUser.setPasswordApi(crypt);
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(login);
         // new user gets initially a generated password
@@ -111,14 +120,41 @@ public class UserService {
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         authorities.add(authority);
         newUser.setAuthorities(authorities);
+
         userRepository.save(newUser);
+        customUserService.save(customUser);
         //userSearchRepository.save(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;
     }
 
+    @Transactional(readOnly = true)
+    public Boolean easylogin(String login, String password) {
+        Optional<User> optionalUser = userRepository.findOneByLogin(login);
+        User user = null;
+        String rPass = null;
+        String BPass = optionalUser.get().getPassword();
+        Boolean rep;
+        if (optionalUser.isPresent()) {
+            user = optionalUser.get();
+            user.getAuthorities().size(); // eagerly load the association
+          rPass=  user.setPasswordL(passwordEncoder.encode(password));
+        }
+        System.out.println(rPass);System.out.println(BPass);
+        if(Objects.equals(BPass, rPass))
+        {
+            System.out.println("trouve");
+            rep=true;
+        }else {
+            System.out.println("passe");
+            rep=false;
+        }
+        return rep;
+    }
+
     public User createUser(UserDTO userDTO) {
         User user = new User();
+        CustomUser customUser=new CustomUser();
         user.setLogin(userDTO.getLogin());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
@@ -143,6 +179,9 @@ public class UserService {
         user.setResetDate(Instant.now());
         user.setActivated(true);
         userRepository.save(user);
+        String crypt = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+        customUser.setPasswordApi(crypt);
+        customUserService.save(customUser);
         //userSearchRepository.save(user);
         log.debug("Created Information for User: {}", user);
         return user;
@@ -152,10 +191,10 @@ public class UserService {
      * Update basic information (first name, last name, email, language) for the current user.
      *
      * @param firstName first name of user
-     * @param lastName last name of user
-     * @param email email id of user
-     * @param langKey language key
-     * @param imageUrl image URL of user
+     * @param lastName  last name of user
+     * @param email     email id of user
+     * @param langKey   language key
+     * @param imageUrl  image URL of user
      */
     public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {
@@ -176,6 +215,7 @@ public class UserService {
      * @return updated user
      */
     public Optional<UserDTO> updateUser(UserDTO userDTO) {
+
         return Optional.of(userRepository
             .findOne(userDTO.getId()))
             .map(user -> {
@@ -207,6 +247,9 @@ public class UserService {
     }
 
     public void changePassword(String password) {
+        CustomUser customUser =customUserService.findOne(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).get().getId());
+       customUser.setPasswordApi(password);
+        customUserRepository.save(customUser);
         userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {
             String encryptedPassword = passwordEncoder.encode(password);
             user.setPassword(encryptedPassword);

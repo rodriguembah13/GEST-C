@@ -60,6 +60,9 @@ public class CustomUser implements Serializable {
     @Column(name = "view_cmde")
     private Boolean viewCmde;
 
+    @Column(name = "password_api")
+    private String passwordApi;
+
     @OneToOne
     @JoinColumn(unique = true)
     private User user;
@@ -229,6 +232,19 @@ public class CustomUser implements Serializable {
         this.viewCmde = viewCmde;
     }
 
+    public String getPasswordApi() {
+        return passwordApi;
+    }
+
+    public CustomUser passwordApi(String passwordApi) {
+        this.passwordApi = passwordApi;
+        return this;
+    }
+
+    public void setPasswordApi(String passwordApi) {
+        this.passwordApi = passwordApi;
+    }
+
     public User getUser() {
         return user;
     }
@@ -279,6 +295,7 @@ public class CustomUser implements Serializable {
             ", telephone='" + getTelephone() + "'" +
             ", viewVente='" + isViewVente() + "'" +
             ", viewCmde='" + isViewCmde() + "'" +
+            ", passwordApi='" + getPasswordApi() + "'" +
             "}";
     }
 }

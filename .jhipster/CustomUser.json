@@ -55,6 +55,10 @@
         {
             "fieldName": "viewCmde",
             "fieldType": "Boolean"
+        },
+        {
+            "fieldName": "passwordApi",
+            "fieldType": "String"
         }
     ],
     "changelogDate": "20171023121425",

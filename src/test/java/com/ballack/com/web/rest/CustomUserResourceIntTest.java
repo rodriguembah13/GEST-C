@@ -75,6 +75,9 @@ public class CustomUserResourceIntTest {
     private static final Boolean DEFAULT_VIEW_CMDE = false;
     private static final Boolean UPDATED_VIEW_CMDE = true;
 
+    private static final String DEFAULT_PASSWORD_API = "AAAAAAAAAA";
+    private static final String UPDATED_PASSWORD_API = "BBBBBBBBBB";
+
     @Autowired
     private CustomUserRepository customUserRepository;
 
@@ -129,7 +132,8 @@ public class CustomUserResourceIntTest {
             .photoContentType(DEFAULT_PHOTO_CONTENT_TYPE)
             .telephone(DEFAULT_TELEPHONE)
             .viewVente(DEFAULT_VIEW_VENTE)
-            .viewCmde(DEFAULT_VIEW_CMDE);
+            .viewCmde(DEFAULT_VIEW_CMDE)
+            .passwordApi(DEFAULT_PASSWORD_API);
         return customUser;
     }
 
@@ -166,6 +170,7 @@ public class CustomUserResourceIntTest {
         assertThat(testCustomUser.getTelephone()).isEqualTo(DEFAULT_TELEPHONE);
         assertThat(testCustomUser.isViewVente()).isEqualTo(DEFAULT_VIEW_VENTE);
         assertThat(testCustomUser.isViewCmde()).isEqualTo(DEFAULT_VIEW_CMDE);
+        assertThat(testCustomUser.getPasswordApi()).isEqualTo(DEFAULT_PASSWORD_API);
 
         // Validate the CustomUser in Elasticsearch
         CustomUser customUserEs = customUserSearchRepository.findOne(testCustomUser.getId());
@@ -213,7 +218,8 @@ public class CustomUserResourceIntTest {
             .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
             .andExpect(jsonPath("$.[*].viewVente").value(hasItem(DEFAULT_VIEW_VENTE.booleanValue())))
-            .andExpect(jsonPath("$.[*].viewCmde").value(hasItem(DEFAULT_VIEW_CMDE.booleanValue())));
+            .andExpect(jsonPath("$.[*].viewCmde").value(hasItem(DEFAULT_VIEW_CMDE.booleanValue())))
+            .andExpect(jsonPath("$.[*].passwordApi").value(hasItem(DEFAULT_PASSWORD_API.toString())));
     }
 
     @Test
@@ -238,7 +244,8 @@ public class CustomUserResourceIntTest {
             .andExpect(jsonPath("$.photo").value(Base64Utils.encodeToString(DEFAULT_PHOTO)))
             .andExpect(jsonPath("$.telephone").value(DEFAULT_TELEPHONE.toString()))
             .andExpect(jsonPath("$.viewVente").value(DEFAULT_VIEW_VENTE.booleanValue()))
-            .andExpect(jsonPath("$.viewCmde").value(DEFAULT_VIEW_CMDE.booleanValue()));
+            .andExpect(jsonPath("$.viewCmde").value(DEFAULT_VIEW_CMDE.booleanValue()))
+            .andExpect(jsonPath("$.passwordApi").value(DEFAULT_PASSWORD_API.toString()));
     }
 
     @Test
@@ -271,7 +278,8 @@ public class CustomUserResourceIntTest {
             .photoContentType(UPDATED_PHOTO_CONTENT_TYPE)
             .telephone(UPDATED_TELEPHONE)
             .viewVente(UPDATED_VIEW_VENTE)
-            .viewCmde(UPDATED_VIEW_CMDE);
+            .viewCmde(UPDATED_VIEW_CMDE)
+            .passwordApi(UPDATED_PASSWORD_API);
 
         restCustomUserMockMvc.perform(put("/api/custom-users")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -294,6 +302,7 @@ public class CustomUserResourceIntTest {
         assertThat(testCustomUser.getTelephone()).isEqualTo(UPDATED_TELEPHONE);
         assertThat(testCustomUser.isViewVente()).isEqualTo(UPDATED_VIEW_VENTE);
         assertThat(testCustomUser.isViewCmde()).isEqualTo(UPDATED_VIEW_CMDE);
+        assertThat(testCustomUser.getPasswordApi()).isEqualTo(UPDATED_PASSWORD_API);
 
         // Validate the CustomUser in Elasticsearch
         CustomUser customUserEs = customUserSearchRepository.findOne(testCustomUser.getId());
@@ -362,7 +371,8 @@ public class CustomUserResourceIntTest {
             .andExpect(jsonPath("$.[*].photo").value(hasItem(Base64Utils.encodeToString(DEFAULT_PHOTO))))
             .andExpect(jsonPath("$.[*].telephone").value(hasItem(DEFAULT_TELEPHONE.toString())))
             .andExpect(jsonPath("$.[*].viewVente").value(hasItem(DEFAULT_VIEW_VENTE.booleanValue())))
-            .andExpect(jsonPath("$.[*].viewCmde").value(hasItem(DEFAULT_VIEW_CMDE.booleanValue())));
+            .andExpect(jsonPath("$.[*].viewCmde").value(hasItem(DEFAULT_VIEW_CMDE.booleanValue())))
+            .andExpect(jsonPath("$.[*].passwordApi").value(hasItem(DEFAULT_PASSWORD_API.toString())));
     }
 
     @Test

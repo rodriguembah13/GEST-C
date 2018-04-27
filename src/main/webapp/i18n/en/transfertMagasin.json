@@ -1,0 +1,27 @@
+{
+    "gestCApp": {
+        "transfertMagasin" : {
+            "home": {
+                "title": "Transfert Magasins",
+                "createLabel": "Create a new Transfert Magasin",
+                "createOrEditLabel": "Create or edit a Transfert Magasin",
+                "search": "Search for Transfert Magasin"
+            },
+            "created": "A new Transfert Magasin is created with identifier {{ param }}",
+            "updated": "A Transfert Magasin is updated with identifier {{ param }}",
+            "deleted": "A Transfert Magasin is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Transfert Magasin {{ id }}?"
+            },
+            "detail": {
+                "title": "Transfert Magasin"
+            },
+            "libelle": "Libelle",
+            "quantite": "Quantite",
+            "date_tranfert": "Date Tranfert",
+            "magasin1": "Magasin 1",
+            "magasin2": "Magasin 2",
+            "user": "User"
+        }
+    }
+}

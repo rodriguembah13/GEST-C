@@ -1,0 +1,48 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "magasin1",
+            "otherEntityName": "magasin",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "magasin2",
+            "otherEntityName": "magasin",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "user",
+            "otherEntityName": "user",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "login",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "transfertMagasin"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "libelle",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "quantite",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "date_tranfert",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20180406205810",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "transfert_magasin",
+    "jpaMetamodelFiltering": false,
+    "pagination": "pagination"
+}

@@ -61,6 +61,7 @@ public class CacheConfiguration {
             cm.createCache(com.ballack.com.domain.Stock.class.getName(), jcacheConfiguration);
             cm.createCache(com.ballack.com.domain.TypeSortieArticle.class.getName(), jcacheConfiguration);
             cm.createCache(com.ballack.com.domain.CustomUser.class.getName(), jcacheConfiguration);
+            cm.createCache(com.ballack.com.domain.TransfertMagasin.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

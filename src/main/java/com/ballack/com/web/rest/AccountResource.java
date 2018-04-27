@@ -14,6 +14,7 @@ import com.ballack.com.web.rest.vm.KeyAndPasswordVM;
 import com.ballack.com.web.rest.vm.ManagedUserVM;
 import com.ballack.com.web.rest.util.HeaderUtil;
 
+import io.github.jhipster.web.util.ResponseUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -253,5 +254,18 @@ public class AccountResource {
         return !StringUtils.isEmpty(password) &&
             password.length() >= ManagedUserVM.PASSWORD_MIN_LENGTH &&
             password.length() <= ManagedUserVM.PASSWORD_MAX_LENGTH;
+    }
+    /**
+     * GET  /auth/{login}/{password} : get the user by login and Password.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the current open sessions in body,
+     *  or status 500 (Internal Server Error) if the current open sessions couldn't be retrieved
+     */
+    //@GetMapping("/auth/{login}/{password}")
+   // @Timed
+    @RequestMapping(value = "/auth/{login}/{password}", method = RequestMethod.GET)
+    public Boolean esaylogin(@PathVariable String login,@PathVariable String password) {
+        //User user=userService.easylogin(login,password);
+        return userService.easylogin(login,password);
     }
 }
